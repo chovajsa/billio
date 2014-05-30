@@ -1,11 +1,14 @@
 <?php 
 use yii\helpers\Html;
+
 use yii\helpers\VarDumper;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use frontend\widgets\Alert;
+use yii\helpers\Url;
+
 /**
  * @var \yii\web\View $this
  * @var string $content
@@ -20,6 +23,13 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    
+    <script type="text/javascript">
+        var yiiApp = {
+            url : '<?=Url::base();?>'
+        }
+    </script>
+
 </head>
 <body>
 
@@ -30,11 +40,11 @@ AppAsset::register($this);
                 'brandLabel' => 'Invoice Processing',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
-                    'class' => 'navbar-default navbar-fixed-top',
+                    'class' => 'navbar-special navbar-fixed-top',
                 ],
             ]);
             $menuItems = [
-                ['label' => 'Invoices', 'url' => ['/site/index']],
+                ['label' => 'Invoices', 'url' => ['/invoiceIn/index']],
             ];
             if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];

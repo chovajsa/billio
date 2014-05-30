@@ -6,5 +6,17 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+
+        'urlManager' => [
+			'class'=>'common\components\UrlManager',
+		    'enablePrettyUrl' => true,
+            // 'enableStrictParsing' => true,
+            'showScriptName' => false,
+		    // 'enableStrictParsing'=>false,
+		    'rules' => [
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
+		        // your rules go here
+		    ],
+		]
     ],
 ];

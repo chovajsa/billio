@@ -5,13 +5,13 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use frontend\widgets\Alert;
+use yii\helpers\Url;
 /**
  * @var \yii\web\View $this
  * @var string $content
  */
 AppAsset::register($this);
 ?>
-
         </div>
     </div>
 
@@ -23,6 +23,7 @@ AppAsset::register($this);
     </footer>
 
     <?php $this->endBody() ?>
+   <script src="<?=Url::base();?>/js/main.js" type="text/javascript"></script>
 </body>
 </html>
 <?php $this->endPage() ?>
