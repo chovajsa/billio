@@ -12,18 +12,16 @@ use yii\helpers\Url;
  */
 AppAsset::register($this);
 ?>
-        </div>
-    </div>
-
-    <footer class="footer">
-        <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-        <p class="pull-right"><?= Yii::powered() ?></p>
-        </div>
-    </footer>
 
     <?php $this->endBody() ?>
    <script src="<?=Url::base();?>/js/main.js" type="text/javascript"></script>
+
+   <script>
+		$(document).ready(function() {
+			App.init();
+		});
+	</script>
+	
 </body>
 </html>
 <?php $this->endPage() ?>

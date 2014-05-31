@@ -1,4 +1,4 @@
-var app = angular.module('invoiceIn', ['ngResource','mgcrea.ngStrap']);
+var app = angular.module('invoiceIn', ['ngResource','mgcrea.ngStrap', 'ngRoute']);
 
 app.factory('InvoicesIn', function ($resource) {
     return $resource(yiiApp.url + '/api/invoiceIn/:id', {
@@ -35,8 +35,18 @@ app.factory('Supplier', function ($resource) {
     })
 });
 
+app .config(['$routeProvider',
+  function($routeProvider) {
+    $routeProvider.
+      when('/new', {
+        event: 'InvoiceInController.newInvoice',
+        controller: 'InvoiceInController'
+      })
+  }]);
+
 app.controller('InvoiceInController', ['$scope', 'InvoicesIn', 'Supplier', function (scope, AI, SI) {
 
+    
 
     scope.suppliers = [];
     
@@ -89,6 +99,7 @@ app.controller('InvoiceInController', ['$scope', 'InvoicesIn', 'Supplier', funct
         }
     }
 
+
     scope.setCurrentInvoice = function (id) {
         scope.mode = 'update';
         AI.getInvoice({
@@ -98,6 +109,10 @@ app.controller('InvoiceInController', ['$scope', 'InvoicesIn', 'Supplier', funct
             scope.myData.currentInvoice.supplierId = parseInt(data.supplierId);
         });
     };
+
+    scope.addSupplier = function() {
+
+    }
 
     scope.showAll = function () {
         scope.myData.currentInvoice = null;

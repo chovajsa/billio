@@ -1,0 +1,27 @@
+todo
+
+# InvoiceIn 
+
+create update supplier
+ukladanie riadkov
+datepicker
+datumy v eu formate
+pocitanie sumy
+dph
+filtre all, paid, ..
+pagination, ordering
+priloha
+
+
+# Users
+
+meno, heslo, session, role
+
+# Outgoing orders
+
+# Incoming orders
+
+# Outgoing invoices
+  - emailovanie
+  - tlac a generovanie pdf
+  - 

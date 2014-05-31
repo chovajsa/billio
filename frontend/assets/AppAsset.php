@@ -28,5 +28,6 @@ class AppAsset extends AssetBundle
         'yii\bootstrap\BootstrapAsset',
         'vendor\angular\AngularAsset',
         'vendor\angularstrap\AngularstrapAsset',
+        'vendor\admintemplate\AdminAsset'
     ];
 }
