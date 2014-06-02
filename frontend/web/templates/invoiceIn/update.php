@@ -1,7 +1,7 @@
 <?php
-use yii\helpers\Url;
+	include_once(__DIR__.'/listSmall.php');
 ?>
-<div class="col-md-8 ui-sortable" ng-show="myData.currentInvoice != null">
+<div class="col-md-8 ui-sortable">
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
 			<h4 class="panel-title" ng-show="mode == 'create'"> 
@@ -50,7 +50,7 @@ use yii\helpers\Url;
 								<option value=""> Please select </option>
 							</select>
 							<span class="input-group-btn add-on">
-					  	  		<button type="button" class="btn btn-success" data-animation="am-fade-and-scale" data-placement="center" bs-modal="modal" data-template="<?=Url::base();?>/templates/invoiceIn/test.php"><i class="fa fa-plus"></i></button>
+					  	  		<!-- <button type="button" class="btn btn-success" data-animation="am-fade-and-scale" data-placement="center" bs-modal="modal" data-template="/templates/invoiceIn/test.php"><i class="fa fa-plus"></i></button> -->
 						  	</span>
 							
 						</p>

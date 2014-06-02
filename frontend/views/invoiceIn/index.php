@@ -1,6 +1,17 @@
+<?php 
+use vendor\angular;
+?>
+
+<?php $this->registerJsFile('@web/js/invoiceIn/app.js',['vendor\angular\AngularAsset']); ?>
+<?php $this->registerJsFile('@web/js/invoiceIn/providers.js',['vendor\angular\AngularAsset']); ?>
+<?php $this->registerJsFile('@web/js/invoiceIn/list.js',['vendor\angular\AngularAsset']); ?>
+<?php $this->registerJsFile('@web/js/invoiceIn/create.js',['vendor\angular\AngularAsset']); ?>
+<?php $this->registerJsFile('@web/js/invoiceIn/routes.js',['vendor\angular\AngularAsset']); ?>
+
+
 <div ng-app="invoiceIn">
 
-<div ng-controller="InvoiceInController">
+<div>
 
 	<?php echo $this->context->renderPartial('sidebar'); ?>
 
@@ -23,6 +34,7 @@
 
 			<div class="col-md-8 ui-sortable">
 				<div class="email-btn-row hidden-xs">
+
 		    	    <a href="#/new" class="btn btn-sm btn-success"><i class="fa fa-plus m-r-5"></i> New</a>
 
 		    	    <a ng-click="filterAll()" class="btn btn-sm btn-inverse"><i class="fa m-r-5"></i> All </a>
@@ -34,10 +46,7 @@
 			</div>
 		</div>
 
-		<div class="row">
-			<?php echo $this->context->renderPartial('list'); ?>
-			<?php echo $this->context->renderPartial('listSmall'); ?>
-			<?php echo $this->context->renderPartial('update'); ?>
+		<div class="row" ng-view>
 		</div>
 
 	</div>

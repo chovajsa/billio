@@ -14,7 +14,6 @@ AppAsset::register($this);
 ?>
 
     <?php $this->endBody() ?>
-   <script src="<?=Url::base();?>/js/main.js" type="text/javascript"></script>
 
    <script>
 		$(document).ready(function() {

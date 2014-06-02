@@ -35,18 +35,22 @@ app.factory('Supplier', function ($resource) {
     })
 });
 
-app .config(['$routeProvider',
-  function($routeProvider) {
+app .config(['$routeProvider', 
+  function($routeProvider, InvoiceInController) {
     $routeProvider.
       when('/new', {
-        event: 'InvoiceInController.newInvoice',
-        controller: 'InvoiceInController'
+        'templateUrl' : yiiApp.url + '/templates/invoiceIn/update'
       })
   }]);
 
-app.controller('InvoiceInController', ['$scope', 'InvoicesIn', 'Supplier', function (scope, AI, SI) {
+app.controller('InvoiceInController', ['$scope', 'InvoicesIn', 'Supplier', '$routeParams', function (scope, AI, SI, routeParams) {
 
-    
+    var init = function () {
+        console.log(routeParams);
+    };
+
+    // fire on controller loaded
+    init();
 
     scope.suppliers = [];
     
@@ -118,10 +122,10 @@ app.controller('InvoiceInController', ['$scope', 'InvoicesIn', 'Supplier', funct
         scope.myData.currentInvoice = null;
     };
 
-    scope.newInvoice = function() {
-        scope.mode = 'create';
-        scope.myData.currentInvoice = {};
-    }
+    // scope.newInvoice = function() {
+    //     scope.mode = 'create';
+    //     scope.myData.currentInvoice = {};
+    // }
 
     scope.setInvoiceList();
     scope.setSuppliers();

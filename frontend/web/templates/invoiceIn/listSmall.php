@@ -1,4 +1,4 @@
-<div class="col-md-4 ui-sortable" ng-show="myData.currentInvoice != null">
+<div class="col-md-4 ui-sortable">
 
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
