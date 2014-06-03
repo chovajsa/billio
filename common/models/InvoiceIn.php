@@ -30,6 +30,10 @@ class InvoiceIn extends ActiveRecord
         return $this->hasOne(Supplier::className(), ['id' => 'supplierId']);
     }
 
+    public function getRows() {
+        return $this->hasMany(InvoiceInRow::className(), ['invoiceInId' => 'id']);   
+    }
+
     /**
       * @inheritdoc
       */

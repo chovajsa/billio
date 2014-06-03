@@ -18,7 +18,11 @@ AppAsset::register($this);
    <script>
 		$(document).ready(function() {
 			App.init();
+		
 		});
+
+		
+
 	</script>
 	
 </body>

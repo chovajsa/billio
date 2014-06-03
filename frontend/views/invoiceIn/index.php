@@ -1,12 +1,22 @@
 <?php 
 use vendor\angular;
+
+$depends = [
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapAsset',
+        'vendor\admintemplate\AdminAsset',
+        'vendor\angular\AngularAsset',
+        'vendor\angularstrap\AngularstrapAsset',
+    ];
+
 ?>
 
-<?php $this->registerJsFile('@web/js/invoiceIn/app.js',['vendor\angular\AngularAsset']); ?>
-<?php $this->registerJsFile('@web/js/invoiceIn/providers.js',['vendor\angular\AngularAsset']); ?>
-<?php $this->registerJsFile('@web/js/invoiceIn/list.js',['vendor\angular\AngularAsset']); ?>
-<?php $this->registerJsFile('@web/js/invoiceIn/create.js',['vendor\angular\AngularAsset']); ?>
-<?php $this->registerJsFile('@web/js/invoiceIn/routes.js',['vendor\angular\AngularAsset']); ?>
+<?php $this->registerJsFile('@web/js/invoiceIn/app.js', $depends);?>
+<?php $this->registerJsFile('@web/js/invoiceIn/providers.js', $depends);?>
+<?php $this->registerJsFile('@web/js/invoiceIn/list.js', $depends);?>
+<?php $this->registerJsFile('@web/js/invoiceIn/create.js', $depends);?>
+<?php $this->registerJsFile('@web/js/invoiceIn/update.js', $depends);?>
+<?php $this->registerJsFile('@web/js/invoiceIn/routes.js', $depends);?>
 
 
 <div ng-app="invoiceIn">
@@ -19,7 +29,12 @@ use vendor\angular;
 	<div id="content" class="content">
 
 		<h1 class="page-header"> Incoming Invoices <!-- <small>header small text goes here...</small> --></h1>
-		  
+	  
+	  	<div class="alert alert-success fade in m-b-15" id="notify-success" style="display:none">
+			<span class="msg"></span>
+			<span data-dismiss="alert" class="close">×</span>
+		</div>
+
 		<div class="row">
 			<div class="col-md-4 ui-sortable">
 				<form>

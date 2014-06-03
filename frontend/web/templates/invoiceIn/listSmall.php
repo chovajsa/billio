@@ -26,10 +26,10 @@
 				<tbody>
 		            <tr ng-repeat="invoice in myData.invoiceList | filter:filterText">
 		                <td>
-							<a ng-click="setCurrentInvoice(invoice.id)">{{invoice.id}}</a>
+							<a href="#update/{{invoice.id}}">{{invoice.id}}</a>
 		                </td>
 		                <td>
-							1.5.2014
+							{{invoice.date | dateFromDb}}
 						</td>
 		                <td>
 		                    {{invoice.supplier.address.name}}

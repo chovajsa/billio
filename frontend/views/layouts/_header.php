@@ -70,7 +70,6 @@ AppAsset::register($this);
       </li>
       <li class="dropdown navbar-user">
         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-          <img src="assets/img/user-11.jpg" alt="" /> 
           <span class="hidden-xs">Jozef Mrkva</span> <b class="caret"></b>
         </a>
         <ul class="dropdown-menu animated fadeInLeft">

@@ -19,9 +19,6 @@
 				<div class="col-sm-6">
 				<ul class="media-list media-list-with-divider">
 					<li class="media">
-						<a class="pull-left" href="javascript:;">
-						    <img src="assets/img/user-5.jpg" alt="" class="media-object media-object-sm rounded-corner">
-						</a>
 						<div class="media-body">
 							<h4 class="media-heading">Created by : Jozef Mrkva </h4>
 							<p>
@@ -50,9 +47,8 @@
 								<option value=""> Please select </option>
 							</select>
 							<span class="input-group-btn add-on">
-					  	  		<!-- <button type="button" class="btn btn-success" data-animation="am-fade-and-scale" data-placement="center" bs-modal="modal" data-template="/templates/invoiceIn/test.php"><i class="fa fa-plus"></i></button> -->
+				  	  		<button type="button" class="btn btn-success" ng-click="showModal()"><i class="fa fa-plus"></i></button>
 						  	</span>
-							
 						</p>
 					</div>
 				</div>
@@ -75,7 +71,7 @@
 					<label for="date" class="col-sm-2 control-label">Date</label>
 					<div class="col-sm-10 input-append">
 					  <p class="input-group">
-					  	<input class="form-control" ng-model="myData.currentInvoice.date" type="text" id="date" name="input1"></input>
+					  	<input class="form-control datepicker" ng-model="myData.currentInvoice.date" type="text" id="date" name="input1"></input>
 					  	<span class="input-group-btn add-on">
 					  	  <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
 					  	</span>
@@ -91,7 +87,7 @@
 					<label for="dueDate" class="col-sm-2 control-label">Due Date</label>
 					<div class="col-sm-10 input-append">
 					  <p class="input-group">
-					  	<input class="form-control" ng-model="myData.currentInvoice.dueDate" bs-datepicker type="text" id="dueDate" name="input1"></input>
+					  	<input class="form-control datepicker" ng-model="myData.currentInvoice.dueDate" type="text" id="dueDate" name="input1"></input>
 					  	<span class="input-group-btn add-on">
 					  	  <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
 					  	</span>
@@ -136,24 +132,25 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
+					<tr ng-repeat="row in myData.currentInvoice.rows">
 						<td>
-							1
+							{{$index + 1}}
+							<input type="hidden" ng-model="myData.currentInvoice.rows[$index].id">
 						</td> 
 						<td>
-							<input style="width:100%" type="text">
+							<input style="width:100%" ng-model="myData.currentInvoice.rows[$index].description" type="text">
 						</td>
 						<td>
-							<input style="width:100%" type="text">
+							<input style="width:100%" ng-model="myData.currentInvoice.rows[$index].pcs" type="text">
 						</td>
 						<td>
-							<input style="width:100%" type="text">
+							<input style="width:100%" ng-model="myData.currentInvoice.rows[$index].amount" type="text">
 						</td>
 						<td>
-							<input style="width:100%" type="text">
+							200,00 
 						</td>
 						<td>
-							<a href="#">
+							<a href="javascript:void(0)" ng-click="unsetRow($index)">
 							<span class="fa-stack fa-sm text-danger">
 								<i class="fa fa-circle fa-stack-2x"></i>
 								<i class="fa fa-minus fa-stack-1x fa-inverse"></i>
@@ -186,9 +183,17 @@
 			</table>
 
 			<p>
-		        <a href="javascript:;" class="btn btn-sm btn-success m-r-5"> <i class="fa fa-plus-circle"></i> Add row </a>
+		        <a href="javascript:;" ng-click="addRow()" class="btn btn-sm btn-success m-r-5"> <i class="fa fa-plus-circle"></i> Add row </a>
 		    </p>
 		</div>
 	</div>
 	<input type="button" ng-click="update()" class="btn btn-success" value="Save">	
 </div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+	$('.datepicker').datepicker({
+		format:"dd.mm.yyyy"
+	});
+})
+</script>

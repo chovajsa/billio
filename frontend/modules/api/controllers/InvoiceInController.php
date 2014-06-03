@@ -54,23 +54,23 @@ class InvoiceInController extends ActiveController
     {
         return [
             
-            'view' => [
-                'class' => 'yii\rest\ViewAction',
-                'modelClass' => $this->modelClass,
-                'checkAccess' => [$this, 'checkAccess'],
-            ],
+            // 'view' => [
+                // 'class' => 'yii\rest\ViewAction',
+                // 'modelClass' => $this->modelClass,
+                // 'checkAccess' => [$this, 'checkAccess'],
+            // ],
             'create' => [
                 'class' => 'yii\rest\CreateAction',
                 'modelClass' => $this->modelClass,
                 'checkAccess' => [$this, 'checkAccess'],
                 'scenario' => $this->createScenario,
             ],
-            'update' => [
-                'class' => 'yii\rest\UpdateAction',
-                'modelClass' => $this->modelClass,
-                'checkAccess' => [$this, 'checkAccess'],
-                'scenario' => $this->updateScenario,
-            ],
+            // 'update' => [
+            //     'class' => 'yii\rest\UpdateAction',
+            //     'modelClass' => $this->modelClass,
+            //     'checkAccess' => [$this, 'checkAccess'],
+            //     'scenario' => $this->updateScenario,
+            // ],
             'delete' => [
                 'class' => 'yii\rest\DeleteAction',
                 'modelClass' => $this->modelClass,
@@ -81,6 +81,74 @@ class InvoiceInController extends ActiveController
             ],
         ];
     }
+
+    public function actionView($id) {
+        $model = \common\models\InvoiceIn::findOne($id);
+
+        $attributes =  $model->attributes;
+        $rows = $model->rows;
+
+        $rs = [];
+        foreach ($rows as $r) {
+            $rs[] = $r->attributes;
+        }
+
+        $attributes['rows'] = $rs;
+        return $attributes;
+    }
+
+    public function actionUpdate($id) {
+        $p = Yii::$app->getRequest()->getBodyParams();
+        $invoiceIn = \common\models\InvoiceIn::findOne($id);
+        $invoiceIn->load($p, '');
+    
+        $invoiceIn->save();
+
+        if (isset($p['rows']) && !empty($p['rows'])) {
+            foreach ($p['rows'] as $prow) {
+                if (!isset($prow['id']) || !$prow['id']) {
+                    $row = new \common\models\InvoiceInRow();
+                    $row->invoiceInId = $invoiceIn->id;
+                    $row->setAttributes($prow, '');
+                    $row->save();
+                } else 
+                foreach ($invoiceIn->rows as $row) {
+                    if ($prow['id'] == $row->id) {
+                            $row->setAttributes($prow, '');
+                            $row->save();
+                    }
+                }
+            }
+        }
+
+        if (!empty($p['toDelete'])) {
+            foreach ($p['toDelete'] as $x) {
+                $r = \common\models\InvoiceInRow::findOne($x['id']);
+                $r->delete();
+            }
+        }
+
+        $invoiceIn->refresh();
+        $invoiceIn->amount = 0;
+        $invoiceIn->amountVat = 0;
+        $invoiceIn->vat = 0;
+
+        //= amount  pcs vat amountTotal amountTotalVat
+        // amount  decimal(10,2) NULL   
+        // amountVat   decimal(10,2) NULL   
+        // vat
+        
+        foreach ($invoiceIn->rows as $row) {
+            $invoiceIn->amount += $row->amount;
+            $invoiceIn->amountVat += $row->amountVat;
+            $invoiceIn->vat += $row->vat;
+        } 
+
+        $invoiceIn->save();
+
+        return $invoiceIn;
+    }
+
 	public function actionIndex() {
     	$modelClass = $this->modelClass;
 
@@ -93,9 +161,12 @@ class InvoiceInController extends ActiveController
         $r = [];
         foreach($models as $model) {
         	$tmp = $model->attributes;
-        	$tmp['supplier'] = $model->supplier ? $model->supplier->attributes : [];
-            $tmp['supplier']['address'] = $model->supplier->address ? $model->supplier->address->attributes : [];
+        
+        	$tmp['supplier'] = $model->supplier instanceof Supplier ? $model->supplier->attributes : [];
+            $tmp['supplier']['address'] = $model->supplier && $model->supplier->address ? $model->supplier->address->attributes : [];
             
+            $tmp['rows'] = $model->getRows();
+
         	$r[] = $tmp;
         }
 

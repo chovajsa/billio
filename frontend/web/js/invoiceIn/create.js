@@ -39,11 +39,13 @@ app.controller('CreateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
             params = scope.myData.currentInvoice;
             AI.createInvoice(params, function (data) {
                 scope.setInvoiceList();
+                notify('success', 'Invoice added');
             });
         } else if (scope.mode == 'update') {
             params = scope.myData.currentInvoice;
             AI.updateInvoice(params, function (data) {
                 scope.setInvoiceList();
+                notify('success', 'Invoice updated');
             });
         }
     }

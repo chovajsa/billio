@@ -7,12 +7,22 @@ use yii\rest\ActiveController;
 use yii\helpers\ArrayHelper;
 use yii\helpers\VarDumper;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Url;
+
 
 
 class SupplierController extends ActiveController
 {
     public $modelClass = 'common\models\Supplier';
 
+    public function init() {
+
+        Yii::$app->request->parsers = [
+            'application/json' => 'yii\web\JsonParser',
+        ];
+
+        return parent::init();
+    }
 
 	public function behaviors()
 	{
@@ -34,12 +44,12 @@ class SupplierController extends ActiveController
                 'modelClass' => $this->modelClass,
                 'checkAccess' => [$this, 'checkAccess'],
             ],
-            'create' => [
-                'class' => 'yii\rest\CreateAction',
-                'modelClass' => $this->modelClass,
-                'checkAccess' => [$this, 'checkAccess'],
-                'scenario' => $this->createScenario,
-            ],
+            // 'create' => [
+            //     'class' => 'yii\rest\CreateAction',
+            //     'modelClass' => $this->modelClass,
+            //     'checkAccess' => [$this, 'checkAccess'],
+            //     'scenario' => $this->createScenario,
+            // ],
             'update' => [
                 'class' => 'yii\rest\UpdateAction',
                 'modelClass' => $this->modelClass,
@@ -55,6 +65,31 @@ class SupplierController extends ActiveController
                 'class' => 'yii\rest\OptionsAction',
             ],
         ];
+    }
+
+    public function actionCreate() {
+        /**
+         * @var \yii\db\ActiveRecord $model
+         */
+        $supplier = new \common\models\Supplier;
+
+        $p = Yii::$app->getRequest()->getBodyParams();
+
+        $supplier->load($p, '');
+
+        $address = new \common\models\Address;
+        $address->load($p, '');
+        $address->save();
+        $supplier->addressId = $address->id;
+
+        if ($supplier->save()) {
+            $response = Yii::$app->getResponse();
+            $response->setStatusCode(201);
+            $id = implode(',', array_values($supplier->getPrimaryKey(true)));
+            $response->getHeaders()->set('Location', Url::toRoute(['view', 'id' => $id], true));
+        }
+
+        return $supplier;
     }
 
     public function actionIndex() {

@@ -47,8 +47,6 @@ return [
             // 'enableStrictParsing'=>false,
             'rules' => [
 
-                'api/supplier/<id:\d+>' => 'api/supplier/view',
-
                 'PUT,PATCH api/invoicein/<id>' => 'api/invoicein/update',
                 'DELETE api/invoicein/<id>' => 'api/invoicein/delete',
                 'GET,HEAD api/invoicein/<id>' => 'api/invoicein/view',
@@ -56,6 +54,14 @@ return [
                 'GET,HEAD api/invoicein' => 'api/invoicein/index',
                 'api/invoicein/<id>' => 'api/invoicein/options',
                 'api/invoicein' => 'api/invoicein/options',
+
+                'PUT,PATCH api/supplier/<id>' => 'api/supplier/update',
+                'DELETE api/supplier/<id>' => 'api/supplier/delete',
+                'GET,HEAD api/supplier/<id>' => 'api/supplier/view',
+                'POST api/supplier' => 'api/supplier/create',
+                'GET,HEAD api/supplier' => 'api/supplier/index',
+                'api/supplier/<id>' => 'api/supplier/options',
+                'api/supplier' => 'api/supplier/options',
 
                 // ['class' => 'yii\rest\UrlRule', 'controller' => ['invoice-in' => 'invoice-in']] ,
             ],

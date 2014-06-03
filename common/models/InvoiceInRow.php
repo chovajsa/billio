@@ -8,7 +8,7 @@ use yii\db\ActiveRecord;
  * Supplier model
  *
  */
-class Address extends ActiveRecord
+class InvoiceInRow extends ActiveRecord
 {
 
     /**
@@ -21,7 +21,7 @@ class Address extends ActiveRecord
     }
 
     public static function tableName() {
-        return 'address';
+        return 'invoiceInRow';
     }
 
     /**
@@ -35,7 +35,7 @@ class Address extends ActiveRecord
      }
 
     public function safeAttributes() {
-        return ['name', 'surname', 'street', 'city', 'zip'];
+        return ['description', 'amount', 'pcs', 'vat', 'invoiceInId'];
     }
 
     /**
