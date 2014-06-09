@@ -53,6 +53,7 @@ AppAsset::register($this);
     <!-- end mobile sidebar expand / collapse button -->
     
     <!-- begin header navigation right -->
+    <?php if (!Yii::$app->user->isGuest) { ?>
     <ul class="nav navbar-nav navbar-right">
       <li>
         <form class="navbar-form full-width hidden-xs">
@@ -70,7 +71,9 @@ AppAsset::register($this);
       </li>
       <li class="dropdown navbar-user">
         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-          <span class="hidden-xs">Jozef Mrkva</span> <b class="caret"></b>
+          <span class="hidden-xs">
+            <?=Yii::$app->user->getIdentity()->email;?>
+          </span> <b class="caret"></b>
         </a>
         <ul class="dropdown-menu animated fadeInLeft">
           <li class="arrow"></li>
@@ -79,10 +82,11 @@ AppAsset::register($this);
           <li><a href="javascript:;">Calendar</a></li>
           <li><a href="javascript:;">Setting</a></li>
           <li class="divider"></li>
-          <li><a href="javascript:;">Log Out</a></li>
+          <li><a href="<?=Url::to('site/logout');?>">Log Out</a></li>
         </ul>
       </li>
     </ul>
+    <?php } ?>
     <!-- end header navigation right -->
   </div>
   <!-- end container-fluid -->

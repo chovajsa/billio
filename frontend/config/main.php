@@ -25,6 +25,10 @@ return [
             'enableAutoLogin' => true,
         ],
 
+        'request'=> [
+            'enableCsrfValidation' => false,
+        ],
+
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [

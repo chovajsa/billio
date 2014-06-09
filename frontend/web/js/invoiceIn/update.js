@@ -14,6 +14,7 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
         toDelete: []
     };
 
+
     scope.setSuppliers = function () {
         SI.query({
             state: 'open',
@@ -76,6 +77,7 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
 
             AI.updateInvoice(params, function (data) {
                 scope.setInvoiceList();
+                scope.setCurrentInvoice(params.id);
                 notify('success', 'Ivoice updated');
             });
         }
@@ -99,6 +101,8 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
 
             scope.myData.currentInvoice = data;
             scope.myData.currentInvoice.supplierId = parseInt(data.supplierId);
+
+            $('#attachmentsFrame').attr('src', yiiApp.url+'/invoiceIn/attachments?invoiceInId='+data.id);
         });
     };
 
@@ -116,7 +120,7 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
     scope.setInvoiceList();
     scope.setCurrentInvoice(routeParams.id);
 
-    var turl = yiiApp.url+'/templates/supplier/create.php';
+    var turl = yiiApp.url+'/template?route=supplier/create';
 
     var supplierModal = modal({scope: scope, template: turl, show: false});
 
@@ -127,5 +131,5 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
     scope.closeModal = function () {
         supplierModal.$promise.then(supplierModal.hide);   
     }
-    
+
 }]);

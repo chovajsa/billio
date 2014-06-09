@@ -110,11 +110,20 @@ class InvoiceInController extends ActiveController
                     $row = new \common\models\InvoiceInRow();
                     $row->invoiceInId = $invoiceIn->id;
                     $row->setAttributes($prow, '');
+
+                    $row->amountTotal = $row->pcs * $row->amount;
+                    $row->amountTotalVat = $row->amountTotal + $row->vat * $row->pcs;
+
                     $row->save();
                 } else 
                 foreach ($invoiceIn->rows as $row) {
                     if ($prow['id'] == $row->id) {
                             $row->setAttributes($prow, '');
+                       
+                            $row->amountTotal = $row->pcs * $row->amount;
+                            $row->amountTotalVat = $row->amountTotal + $row->vat * $row->pcs;
+                            $row->save();
+
                             $row->save();
                     }
                 }
@@ -139,8 +148,8 @@ class InvoiceInController extends ActiveController
         // vat
         
         foreach ($invoiceIn->rows as $row) {
-            $invoiceIn->amount += $row->amount;
-            $invoiceIn->amountVat += $row->amountVat;
+            $invoiceIn->amount += $row->amountTotal;
+            $invoiceIn->amountVat += ($row->amountTotalVat);
             $invoiceIn->vat += $row->vat;
         } 
 

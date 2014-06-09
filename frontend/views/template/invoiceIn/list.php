@@ -45,7 +45,7 @@
 							1.5.2014
 						</td>
 						<td>
-		                    200,00 EUR {{invoice.amount}}
+		                    {{invoice.amount}}
 						</td>
 					</tr>
 				</tbody>

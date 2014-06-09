@@ -4,12 +4,14 @@ namespace common\models;
 use yii\base\NotSupportedException;
 use yii\db\ActiveRecord;
 
+
 /**
  * Supplier model
  *
  */
-class InvoiceInRow extends ActiveRecord
+class Settings extends ActiveRecord
 {
+
 
     /**
      * @inheritdoc
@@ -21,7 +23,11 @@ class InvoiceInRow extends ActiveRecord
     }
 
     public static function tableName() {
-        return 'invoiceInRow';
+        return 'settings';
+    }
+
+    public static function getFileStoragePath() {
+        return '/data/web/develop/ipt/files';
     }
 
     /**
@@ -30,13 +36,13 @@ class InvoiceInRow extends ActiveRecord
      public function rules()
      {
          return [
-            [$this->safeAttributes(), 'safe'],
          ];
      }
 
-    public function safeAttributes() {
-        return ['description', 'amount', 'pcs', 'vat', 'amountTotal', 'amountTotalVat', 'invoiceInId'];
-    }
+
+     public function safeAttributes() {
+        return [];
+     }
 
     /**
      * @inheritdoc

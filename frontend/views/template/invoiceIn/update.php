@@ -1,7 +1,53 @@
-<?php
-	include_once(__DIR__.'/listSmall.php');
+<?php 
+	use yii\helpers\Url;
 ?>
-<div class="col-md-8 ui-sortable">
+<!-- small list -->
+<div class="col-md-4 ui-sortable smallList">
+	<div class="panel panel-inverse">
+		<div class="panel-heading">
+			<h4 class="panel-title">Invoice List</h4>
+		</div>
+		  
+	    <div class="panel-body">
+	    	<table class="table table-condensed table-hover">
+				<thead>
+					<tr>
+						<th>
+							Number
+						</th>
+						<th>
+							Date
+						</th>
+						<th>
+							Supplier
+						</th>
+						<th>
+							Amount
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+		            <tr ng-repeat="invoice in myData.invoiceList | filter:filterText">
+		                <td>
+							<a href="#update/{{invoice.id}}">{{invoice.id}}</a>
+		                </td>
+		                <td>
+							{{invoice.date | dateFromDb}}
+						</td>
+		                <td>
+		                    {{invoice.supplier.address.name}}
+						</td>
+						<td>
+		                    {{invoice.amount}} &euro;
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div> 
+<!-- /small list -->
+<div class="col-md-8 ui-sortable updateInvoice">
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
 			<h4 class="panel-title" ng-show="mode == 'create'"> 
@@ -70,15 +116,11 @@
 				<div class="form-group">
 					<label for="date" class="col-sm-2 control-label">Date</label>
 					<div class="col-sm-10 input-append">
-					  <p class="input-group">
+					  <!-- <p class="input-group"> -->
 					  	<input class="form-control datepicker" ng-model="myData.currentInvoice.date" type="text" id="date" name="input1"></input>
-					  	<span class="input-group-btn add-on">
-					  	  <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
-					  	</span>
-
-					  	<!-- <span class="add-on">
-					  	  <i data-time-icon="icon-time" data-date-icon="icon-calendar">xx</i>
-					  	</span> -->
+					  	<!-- <span class="input-group-btn add-on"> -->
+					  	  <!-- <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button> -->
+					  	<!-- </span> -->
 					  </p>
 					</div>
 				</div>
@@ -86,16 +128,12 @@
 				<div class="form-group">
 					<label for="dueDate" class="col-sm-2 control-label">Due Date</label>
 					<div class="col-sm-10 input-append">
-					  <p class="input-group">
+					  <!-- <p class="input-group"> -->
 					  	<input class="form-control datepicker" ng-model="myData.currentInvoice.dueDate" type="text" id="dueDate" name="input1"></input>
-					  	<span class="input-group-btn add-on">
-					  	  <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
-					  	</span>
-
-					  	<!-- <span class="add-on">
-					  	  <i data-time-icon="icon-time" data-date-icon="icon-calendar">xx</i>
-					  	</span> -->
-					  </p>
+					  	<!-- <span class="input-group-btn add-on"> -->
+					  	  <!-- <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button> -->
+					  	<!-- </span> -->
+					  <!-- </p> -->
 					</div>
 				</div>
 
@@ -147,7 +185,7 @@
 							<input style="width:100%" ng-model="myData.currentInvoice.rows[$index].amount" type="text">
 						</td>
 						<td>
-							200,00 
+							{{myData.currentInvoice.rows[$index].amountTotalVat}}
 						</td>
 						<td>
 							<a href="javascript:void(0)" ng-click="unsetRow($index)">
@@ -174,7 +212,7 @@
 							&nbsp;
 						</th>
 						<th>
-							250,00 EUR
+							{{myData.currentInvoice.amountVat}}
 						</th>
 						<th>
 						</th>
@@ -187,7 +225,22 @@
 		    </p>
 		</div>
 	</div>
-	<input type="button" ng-click="update()" class="btn btn-success" value="Save">	
+
+	<div class="panel panel-inverse">
+		<div class="panel-heading">
+			<h4 class="panel-title"> Attachments </h4>
+		</div>
+
+		<div class="panel-body">
+			<iframe style="border:0; width:100%" id="attachmentsFrame" src=""></iframe>
+		</div>
+	</div>
+
+	<div class="panel">
+		<div class="panel-body">
+			<input type="button" ng-click="update()" class="btn btn-success" value="Save">	
+		</div>
+	</div>
 </div>
 
 <script type="text/javascript">

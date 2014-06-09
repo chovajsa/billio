@@ -1,4 +1,4 @@
-<div class="col-md-4 ui-sortable">
+<div class="col-md-4 ui-sortable" ng-show="myData.currentInvoice != null">
 
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
@@ -35,7 +35,7 @@
 		                    {{invoice.supplier.address.name}}
 						</td>
 						<td>
-		                    200,00 EUR {{invoice.amount}}
+		                    {{invoice.amount}} EUR
 						</td>
 					</tr>
 				</tbody>

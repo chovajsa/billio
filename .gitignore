@@ -26,6 +26,8 @@ composer.phar
 
 common/config/main-local.php
 
+files/*
+
 # phpunit itself is not needed
 phpunit.phar
 # local phpunit config
