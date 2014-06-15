@@ -1,4 +1,4 @@
-app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeParams', '$modal', function (scope, AI, SI, routeParams, modal) {
+app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeParams', '$modal', '$location', function (scope, AI, SI, routeParams, modal, location) {
 
     scope.suppliers = [];
     scope.mode = 'update';
@@ -102,7 +102,7 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
             scope.myData.currentInvoice = data;
             scope.myData.currentInvoice.supplierId = parseInt(data.supplierId);
 
-            $('#attachmentsFrame').attr('src', yiiApp.url+'/invoiceIn/attachments?invoiceInId='+data.id);
+            angular.element('#attachmentsFrame').attr('src', yiiApp.url+'/invoiceIn/attachments?invoiceInId='+data.id);
         });
     };
 
@@ -120,6 +120,8 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
     scope.setInvoiceList();
     scope.setCurrentInvoice(routeParams.id);
 
+
+    // supplier modal
     var turl = yiiApp.url+'/template?route=supplier/create';
 
     var supplierModal = modal({scope: scope, template: turl, show: false});
@@ -130,6 +132,32 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
 
     scope.closeModal = function () {
         supplierModal.$promise.then(supplierModal.hide);   
+    }
+
+    // delete modal
+    scope.delete = function(id) {
+        scope.toDelete = id;
+        scope.showDeleteModal();
+    }
+
+    scope.deleteReal = function(id) {
+        scope.toDelete = null;
+        AI.deleteInvoice({
+            id: id
+        }, function (data) {
+            scope.setInvoiceList();
+            scope.closeDeleteModal();
+            location.path('/');
+        });
+    }
+
+    // supplier modal
+    var deleteModal = modal({scope: scope, template: yiiApp.url+'/template?route=invoiceIn/sure', show: false});
+    scope.showDeleteModal  = function() {
+        deleteModal.$promise.then(deleteModal.show);
+    }
+    scope.closeDeleteModal = function () {
+        deleteModal.$promise.then(deleteModal.hide);   
     }
 
 }]);

@@ -11,7 +11,7 @@ use yii\helpers\Url;
 
 
 
-class SupplierController extends ActiveController
+class SupplierController extends ActiveRestController
 {
     public $modelClass = 'common\models\Supplier';
 
@@ -93,11 +93,8 @@ class SupplierController extends ActiveController
     }
 
     public function actionIndex() {
-    	$modelClass = $this->modelClass;
-
-    	$dataProvider = new ActiveDataProvider([
-            'query' => $modelClass::find()->with('address'),
-        ]);
+    	
+        $dataProvider = $this->prepareDataProvider();
 
         $models = $dataProvider->getModels();
 

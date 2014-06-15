@@ -27,6 +27,7 @@
 							Amount
 						</th>
 						<th>
+							&nbsp;
 						</th>
 					</tr>
 				</thead>
@@ -46,6 +47,9 @@
 						</td>
 						<td>
 		                    {{invoice.amount}}
+						</td>
+						<td>
+							<button ng-click="delete(invoice.id)" class="btn btn-sm btn-danger">delete</button>
 						</td>
 					</tr>
 				</tbody>

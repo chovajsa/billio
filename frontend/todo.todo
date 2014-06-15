@@ -1,12 +1,19 @@
 todo
 
+#global
+
+ - jazykove mutacie
+ - refaktoring
+ - api security
+
 # InvoiceIn 
 
 filtre all, paid, ..
 - pagination, ordering
-- priloha
-    -critical: dost napicu to je vzhladom na templateovanie
 
+- vat (vat types)
+- paid amount
+- users save, log
 
 # Users
 

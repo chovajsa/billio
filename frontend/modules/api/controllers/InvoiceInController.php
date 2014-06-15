@@ -9,7 +9,7 @@ use yii\data\ActiveDataProvider;
 use Yii;
 
 
-class InvoiceInController extends ActiveController
+class InvoiceInController extends ActiveRestController
 {
     public $modelClass = 'common\models\InvoiceIn';
 
@@ -59,12 +59,12 @@ class InvoiceInController extends ActiveController
                 // 'modelClass' => $this->modelClass,
                 // 'checkAccess' => [$this, 'checkAccess'],
             // ],
-            'create' => [
-                'class' => 'yii\rest\CreateAction',
-                'modelClass' => $this->modelClass,
-                'checkAccess' => [$this, 'checkAccess'],
-                'scenario' => $this->createScenario,
-            ],
+            // 'create' => [
+                // 'class' => 'yii\rest\CreateAction',
+                // 'modelClass' => $this->modelClass,
+                // 'checkAccess' => [$this, 'checkAccess'],
+                // 'scenario' => $this->createScenario,
+            // ],
             // 'update' => [
             //     'class' => 'yii\rest\UpdateAction',
             //     'modelClass' => $this->modelClass,
@@ -94,15 +94,38 @@ class InvoiceInController extends ActiveController
         }
 
         $attributes['rows'] = $rs;
+
+        if ($user = $model->user) {
+            $attributes['createdByUserName'] = $user->username;
+        }
+
         return $attributes;
     }
 
-    public function actionUpdate($id) {
+    public function actionCreate() {
+        $invoiceIn = new \common\models\InvoiceIn;
         $p = Yii::$app->getRequest()->getBodyParams();
-        $invoiceIn = \common\models\InvoiceIn::findOne($id);
         $invoiceIn->load($p, '');
-    
+
+        $invoiceIn->createdBy = Yii::$app->user->id;
+        $invoiceIn->createdDate = date('Y-m-d H:i:s');
+        
         $invoiceIn->save();
+        return $this->update($invoiceIn);
+    }
+
+    public function actionUpdate($id) {
+        $invoiceIn = \common\models\InvoiceIn::findOne($id);
+        return $this->update($invoiceIn);
+    }
+
+    public function update($invoiceIn) {
+        $p = Yii::$app->getRequest()->getBodyParams();
+        
+        $invoiceIn->load($p, '');
+        $invoiceIn->save();
+
+        var_dump($p);
 
         if (isset($p['rows']) && !empty($p['rows'])) {
             foreach ($p['rows'] as $prow) {
@@ -158,12 +181,19 @@ class InvoiceInController extends ActiveController
         return $invoiceIn;
     }
 
-	public function actionIndex() {
-    	$modelClass = $this->modelClass;
 
-    	$dataProvider = new ActiveDataProvider([
-            'query' => $modelClass::find()->with('supplier')->orderBy('id DESC')
-        ]);
+	public function actionIndex() {
+    	
+        $dataProvider = $this->prepareDataProvider('supplier');
+
+        if (isset($_GET['filters'])) {
+            $filters = json_decode($_GET['filters']);
+            if (!empty($filters)) {
+                foreach ($filters as $key=>$value) {
+                    $dataProvider->query->andWhere($key. " = '{$value}'");
+                }
+            }
+        }
 
         $models = $dataProvider->getModels();
 

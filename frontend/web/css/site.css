@@ -7,3 +7,15 @@
     width:100%;
   }
 }
+
+.markan-logo-mini {
+	background-image:url('../images/markan_v1_mini.png');
+	background-repeat:no-repeat;
+	width:136px;
+	height:25px;
+	display:block;
+}
+
+.dropdown-menu ul li {
+	z-index:3 !important;
+}

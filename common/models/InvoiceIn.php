@@ -34,6 +34,10 @@ class InvoiceIn extends ActiveRecord
         return $this->hasMany(InvoiceInRow::className(), ['invoiceInId' => 'id']);   
     }
 
+    public function getUser() {
+        return $this->hasOne(User::className(), ['id' => 'createdBy']);
+    }
+
     /**
       * @inheritdoc
       */
@@ -46,9 +50,9 @@ class InvoiceIn extends ActiveRecord
      }
 
 
-     public function safeAttributes() {
+    public function safeAttributes() {
         return ['supplierId', 'date', 'number', 'dueDate', 'referenceNumber'];
-     }
+    }
 
     /**
      * @inheritdoc
@@ -58,5 +62,22 @@ class InvoiceIn extends ActiveRecord
         return $this->getPrimaryKey();
     }
 
+
+    public function getAttachments() {
+        $entries = array();
+
+        $folder = Settings::getFileStoragePath().'/'.$this->id;
+        if (file_exists($folder))
+        if ($handle = opendir($folder)) {
+            while (false !== ($entry = readdir($handle))) {
+                if ($entry != "." && $entry != "..") {
+                    $entries[] = $entry;
+                }
+            }
+            closedir($handle);
+        }
+
+        return $entries;
+    }
    
 }

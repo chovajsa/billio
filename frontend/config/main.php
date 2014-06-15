@@ -15,7 +15,6 @@ return [
     'modules' => [
         'api' => [
             'class'=>'frontend\modules\api\ApiModule',
-
         ]
     ],
 

@@ -29,7 +29,8 @@ AppAsset::register($this);
     
     <script type="text/javascript">
         var yiiApp = {
-            url : '<?=Url::base();?>'
+            url : '<?=Url::base();?>',
+            userId : <?=Yii::$app->user->isGuest ? 'null' : Yii::$app->user->id;?>
         }
     </script>
 
@@ -42,8 +43,18 @@ AppAsset::register($this);
   <!-- begin container-fluid -->
   <div class="container-fluid">
     <!-- begin mobile sidebar expand / collapse button -->
-    <div class="navbar-header">
-      <a href="javascript:;" class="navbar-brand"><span class="navbar-logo"></span> Jimmy </a>
+    <div class="navbar-header" style="width:200px">
+      <!-- <a href="javascript:;" class="navbar-brand"><span class="markan-logo-mini"></span>  </a> -->
+      
+      <div style="padding-top:8px">
+        <div style="height:40px; border-radius:3px; float:left; width:37px; background-color:#348FE2; color:white; font-size:25px">
+          <span style="margin: 0px 0px 0px 7px; line-height: 36px;">M</span>
+        </div>
+        <div style="float:left; border-radius:3px; box-shadow:inset 2px 2px 3px 3px #DBE2E9; height:40px; width:37px; background-color:#D9E0E7; margin-left:2px; color:white; font-size:25px">
+          <span style="margin: 0px 0px 0px 7px; line-height: 36px;">K</span>
+        </div>
+      </div>
+
       <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>

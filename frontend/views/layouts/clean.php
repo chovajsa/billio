@@ -34,7 +34,7 @@ AppAsset::register($this);
     </script>
 
 </head>
-<body style="background-color:white">
+<body style="background-color:white; padding-top:10px">
 
 <?=$content;?>
 
@@ -43,7 +43,6 @@ AppAsset::register($this);
 <script>
     $(document).ready(function() {
         App.init();
-    
     });
 </script>
 

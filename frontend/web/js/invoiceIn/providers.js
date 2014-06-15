@@ -18,6 +18,11 @@ app.factory('InvoicesIn', function ($resource) {
         updateInvoice: {
             method: 'PUT',
             params: 0  
+        },
+
+        deleteInvoice: {
+            method: 'DELETE',
+            params: 0    
         }
     });
     return data;

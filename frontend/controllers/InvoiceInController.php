@@ -53,7 +53,7 @@ class InvoiceInController extends Controller
     public function actionAttachments() {
         $this->layout = 'clean';
 
-        if (isset($_FILES['attachment'])) {
+        if (isset($_FILES['attachment']) && isset($_GET['invoiceInId'])) {
 
             $fileStoragePath = \common\models\Settings::getFileStoragePath();
 
@@ -68,7 +68,15 @@ class InvoiceInController extends Controller
             move_uploaded_file($_FILES["attachment"]["tmp_name"], $destination);
         }
 
-        return $this->render('attachments', []);
+        $attachments = [];
+        if (isset($_GET['invoiceInId'])) { 
+            $invoiceIn = \common\models\InvoiceIn::findOne($_GET['invoiceInId']);
+            $attachments = $invoiceIn->getAttachments();
+        }
+
+        return $this->render('attachments', [
+            'attachments' => $attachments
+        ]);
     }
 
     public function actionIndex() {

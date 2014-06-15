@@ -66,34 +66,36 @@
 				<ul class="media-list media-list-with-divider">
 					<li class="media">
 						<div class="media-body">
-							<h4 class="media-heading">Created by : Jozef Mrkva </h4>
+							<h4 class="media-heading">Created by : {{myData.currentInvoice.createdByUserName}} </h4>
 							<p>
 								<dl>
 									<dt>Created on : 
-									1.5.2014 16:54 </dt>
+									{{myData.currentInvoice.createdDate | euroDateFilter}} </dt>
 								</dl>
 							</p>
 						</div>
 					</li>
 				</ul>
 				</div>
-				<div class="col-sm-6 text-right">
-					<p>
-				        <a href="javascript:;" class="btn btn-sm btn-success m-r-5">Approve</a>
-				        <a href="javascript:;" class="btn btn-sm btn-danger">Reject</a>
-				    </p>
-				</div>
+					<div class="col-sm-6 text-right" style="padding-right:5px">
+						<p>
+							<a href="javascript:;" ng-click="delete(myData.currentInvoice.id)" class="btn btn-sm btn-danger">Delete</a>
+					  		
+					        <!-- <a href="javascript:;" class="btn btn-sm btn-primary m-r-5">Approve</a> -->
+					        <!-- <a href="javascript:;" class="btn btn-sm btn-danger">Reject</a> -->
+					    </p>
+					</div>
 				</div>
 				
 				<div class="form-group">
 				<label for="supplierId" class="col-sm-2 control-label">Supplier</label>
 					<div class="col-sm-10">
 						<p class="input-group">
-							<select id="supplierId" required class="form-control" ng-model="myData.currentInvoice.supplierId" ng-options="supplier.id as supplier.address.name for supplier in suppliers">
+							<select id="supplierId" required class="form-control selectpicker nyaSelectpicker" data-style="btn-white" data-live-search="true" data-size="10" ng-model="myData.currentInvoice.supplierId" ng-options="supplier.id as supplier.address.name for supplier in suppliers">
 								<option value=""> Please select </option>
 							</select>
 							<span class="input-group-btn add-on">
-				  	  		<button type="button" class="btn btn-success" ng-click="showModal()"><i class="fa fa-plus"></i></button>
+				  	  			<button type="button" class="btn btn-primary" ng-click="showModal()"><i class="fa fa-plus"></i></button>
 						  	</span>
 						</p>
 					</div>
@@ -115,13 +117,14 @@
 
 				<div class="form-group">
 					<label for="date" class="col-sm-2 control-label">Date</label>
-					<div class="col-sm-10 input-append">
-					  <!-- <p class="input-group"> -->
-					  	<input class="form-control datepicker" ng-model="myData.currentInvoice.date" type="text" id="date" name="input1"></input>
-					  	<!-- <span class="input-group-btn add-on"> -->
-					  	  <!-- <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button> -->
-					  	<!-- </span> -->
-					  </p>
+					
+					<div class="col-sm-10 ui-append">
+						<div class="input-group date">
+						<input class="form-control datepicker" ng-model="myData.currentInvoice.date" type="text" id="date" name="input1"/>
+						<span class="input-group-addon">
+							<i class="fa fa-calendar"></i>
+						</span>
+						</div>
 					</div>
 				</div>
 				  
@@ -129,7 +132,7 @@
 					<label for="dueDate" class="col-sm-2 control-label">Due Date</label>
 					<div class="col-sm-10 input-append">
 					  <!-- <p class="input-group"> -->
-					  	<input class="form-control datepicker" ng-model="myData.currentInvoice.dueDate" type="text" id="dueDate" name="input1"></input>
+					  	<input class="form-control datepicker" ng-model="myData.currentInvoice.dueDate" type="text" id="dueDate" name="input1">
 					  	<!-- <span class="input-group-btn add-on"> -->
 					  	  <!-- <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button> -->
 					  	<!-- </span> -->
@@ -221,7 +224,7 @@
 			</table>
 
 			<p>
-		        <a href="javascript:;" ng-click="addRow()" class="btn btn-sm btn-success m-r-5"> <i class="fa fa-plus-circle"></i> Add row </a>
+		        <a href="javascript:;" ng-click="addRow()" class="btn btn-sm btn-primary m-r-5"> <i class="fa fa-plus-circle"></i> Add row </a>
 		    </p>
 		</div>
 	</div>
@@ -238,7 +241,7 @@
 
 	<div class="panel">
 		<div class="panel-body">
-			<input type="button" ng-click="update()" class="btn btn-success" value="Save">	
+			<input type="button" ng-click="update()" class="btn btn-primary" value="Save">	
 		</div>
 	</div>
 </div>
@@ -248,5 +251,6 @@ $(document).ready(function () {
 	$('.datepicker').datepicker({
 		format:"dd.mm.yyyy"
 	});
+	$('.selectpicker').selectpicker({});
 })
 </script>

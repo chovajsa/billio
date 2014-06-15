@@ -2,11 +2,21 @@ app.config(['$routeProvider',
 function($routeProvider) {
 
 $routeProvider.
+  
+  // lists
   when('/', {
     controller: 'ListController',
     templateUrl : yiiApp.url + '/template/?route=invoiceIn/list',
     animation: 'slide'
   }).
+  when('/mine', {
+    controller: 'ListController',
+    templateUrl : yiiApp.url + '/template/?route=invoiceIn/list',
+    animation: 'slide'
+  }).
+
+
+  // actions
   when('/new', {
     controller: 'CreateController',
     templateUrl : yiiApp.url + '/template/?route=invoiceIn/update',
