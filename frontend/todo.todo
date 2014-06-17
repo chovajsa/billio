@@ -10,10 +10,13 @@ todo
 
 filtre all, paid, ..
 - pagination, ordering
+- number neni id
+- delete neni delete ale mark as deleted
+- subjectId pri vytvoreni
+- live reloading
 
 - vat (vat types)
-- paid amount
-- users save, log
+- pay, paid amount
 
 # Users
 

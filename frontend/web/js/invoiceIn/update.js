@@ -140,6 +140,16 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
         scope.showDeleteModal();
     }
 
+    // scope.$watch(
+    //     function () {
+    //         // console.log();
+    //     },
+    //     function(newValue, oldValue) {
+    //     if ( newValue !== oldValue ) {
+    //         console.log(scope);
+    //     }
+    // )
+
     scope.deleteReal = function(id) {
         scope.toDelete = null;
         AI.deleteInvoice({
