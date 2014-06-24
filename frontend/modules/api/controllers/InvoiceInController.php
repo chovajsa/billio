@@ -125,8 +125,6 @@ class InvoiceInController extends ActiveRestController
         $invoiceIn->load($p, '');
         $invoiceIn->save();
 
-        var_dump($p);
-
         if (isset($p['rows']) && !empty($p['rows'])) {
             foreach ($p['rows'] as $prow) {
                 if (!isset($prow['id']) || !$prow['id']) {
