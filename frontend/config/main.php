@@ -49,13 +49,13 @@ return [
             // 'enableStrictParsing'=>false,
             'rules' => [
 
-                'PUT,PATCH api/invoice-in/<id>' => 'api/invoiceIn/update',
-                'DELETE api/invoice-in/<id>'    => 'api/invoiceIn/delete',
-                'GET,HEAD api/invoice-in/<id>'  => 'api/invoiceIn/view',
-                'POST api/invoice-in'           => 'api/invoiceIn/create',
-                'GET,HEAD api/invoice-in'       => 'api/invoiceIn/index',
-                'api/invoice-in/<id>'           => 'api/invoiceIn/options',
-                'api/invoice-in'                => 'api/invoiceIn/options',
+                'PUT,PATCH api/invoice-in/<id>' => 'api/invoice-in/update',
+                'DELETE api/invoice-in/<id>'    => 'api/invoice-in/delete',
+                'GET,HEAD api/invoice-in/<id>'  => 'api/invoice-in/view',
+                'POST api/invoice-in'           => 'api/invoice-in/create',
+                'GET,HEAD api/invoice-in'       => 'api/invoice-in/index',
+                'api/invoice-in/<id>'           => 'api/invoice-in/options',
+                'api/invoice-in'                => 'api/invoice-in/options',
 
                 'PUT,PATCH api/supplier/<id>'   => 'api/supplier/update',
                 'DELETE api/supplier/<id>'  => 'api/supplier/delete',
