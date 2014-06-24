@@ -5,12 +5,19 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
     scope.toDelete = null;
 
     scope.myData = {
-        invoiceList: [],
+        
         invoiceListState: 'open',
         invoiceListSort: 'created',
         invoiceListDirection: 'desc',
         invoiceListPage: 1
     };
+
+    if (scope.myData.invoiceList == undefined) {
+        if (l.length > 0) {
+            scope.myData.invoiceList = l;    
+        }
+        scope.myData.invoiceList = [];
+    }
 
     scope.setSuppliers = function () {
         SI.query({
@@ -25,6 +32,8 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
 
     scope.setInvoiceList = function () {
 
+        if (scope.myData.invoiceList.length > 0) return;
+
         var filters = {};
         if (location.path() == '/mine') {
            filters.createdBy = yiiApp.userId;
@@ -38,6 +47,7 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
             filters:angular.toJson(filters)
         }, function (data) {
             scope.myData.invoiceList = data;
+            l = data;
         });
     };
 
