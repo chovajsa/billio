@@ -10,7 +10,8 @@ class AngularstrapAsset extends AssetBundle
 
     public $js = [
     	'angular-strap.min.js',
-    	'angular-strap.tpl.min.js'
+    	'angular-strap.tpl.min.js',
+    	'bootstrap-select.js'
     ];
 
 }
