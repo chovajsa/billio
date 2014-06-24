@@ -43,20 +43,19 @@ return [
 
     
         'urlManager' => [
-            'class'=>'common\components\UrlManager',
             'enablePrettyUrl' => true,
             // 'enableStrictParsing' => true,
             'showScriptName' => false,
             // 'enableStrictParsing'=>false,
             'rules' => [
 
-                'PUT,PATCH api/invoicein/<id>' => 'api/invoicein/update',
-                'DELETE api/invoicein/<id>' => 'api/invoicein/delete',
-                'GET,HEAD api/invoicein/<id>' => 'api/invoicein/view',
-                'POST api/invoicein' => 'api/invoicein/create',
-                'GET,HEAD api/invoicein' => 'api/invoicein/index',
-                'api/invoicein/<id>' => 'api/invoicein/options',
-                'api/invoicein' => 'api/invoicein/options',
+                'PUT,PATCH api/invoice-in/<id>' => 'api/invoice-in/update',
+                'DELETE api/invoice-in/<id>'    => 'api/invoice-in/delete',
+                'GET,HEAD api/invoice-in/<id>'  => 'api/invoice-in/view',
+                'POST api/invoice-in'           => 'api/invoice-in/create',
+                'GET,HEAD api/invoice-in'       => 'api/invoice-in/index',
+                'api/invoice-in/<id>'           => 'api/invoice-in/options',
+                'api/invoice-in'                => 'api/invoice-in/options',
 
                 'PUT,PATCH api/supplier/<id>' => 'api/supplier/update',
                 'DELETE api/supplier/<id>' => 'api/supplier/delete',
