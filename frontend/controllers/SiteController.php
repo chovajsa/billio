@@ -67,7 +67,7 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-       $this->redirect('invoiceIn/index');
+       $this->redirect('invoice-in/index');
     }
 
     public function actionLogin()
