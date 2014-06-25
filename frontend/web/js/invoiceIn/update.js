@@ -74,7 +74,7 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
             scope.myData.currentInvoice = data;
             scope.myData.currentInvoice.supplierId = parseInt(data.supplierId);
 
-            angular.element('#attachmentsFrame').attr('src', yiiApp.url+'/invoiceIn/attachments?invoiceInId='+data.id);
+            angular.element('#attachmentsFrame').attr('src', yiiApp.url+'/invoice-in/attachments?invoiceInId='+data.id);
         });
     };
 

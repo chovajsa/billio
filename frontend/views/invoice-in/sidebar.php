@@ -20,7 +20,7 @@
         </a>
 
         <ul class="sub-menu">
-          <li class="active"><a href="<?=Url::to('invoiceIn/index');?>">Incoming</a></li>
+          <li class="active"><a href="<?=Url::to('invoice-in/index');?>">Incoming</a></li>
           <li><a href="<?=Url::to('invoiceOut/index');?>">Outgoing</a></li>
         </ul>
       </li>
@@ -32,7 +32,7 @@
         </a>
 
         <ul class="sub-menu">
-          <li><a href="<?=Url::to('invoiceIn/index');?>">Incoming</a></li>
+          <li><a href="<?=Url::to('invoice-in/index');?>">Incoming</a></li>
           <li><a href="<?=Url::to('invoiceOut/index');?>">Outgoing</a></li>
         </ul>
       </li>
