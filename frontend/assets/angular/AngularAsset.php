@@ -1,6 +1,6 @@
 <?php
 
-namespace vendor\angular;
+namespace frontend\assets\angular;
 
 use yii\web\AssetBundle;
 
@@ -9,7 +9,7 @@ use yii\web\AssetBundle;
  */
 class AngularAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/angular/dist';
+    public $sourcePath = '@app/assets/angular/dist';
     public $js = [
     	'angular.js',
     	'angular-route.js',

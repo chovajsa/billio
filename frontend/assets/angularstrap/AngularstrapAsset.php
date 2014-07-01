@@ -1,12 +1,12 @@
 <?php
 
-namespace vendor\angularstrap;
+namespace frontend\assets\angularstrap;
 
 use yii\web\AssetBundle;
 
 class AngularstrapAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/angularstrap/dist';
+    public $sourcePath = '@app/assets/angularstrap/dist';
 
     public $js = [
     	'angular-strap.min.js',

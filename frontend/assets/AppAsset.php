@@ -26,8 +26,8 @@ class AppAsset extends AssetBundle
     public $depends = [
         // 'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
-        'vendor\angularstrap\AngularstrapAsset',
-        'vendor\admintemplate\AdminAsset',
-        'vendor\angular\AngularAsset',
+        '\frontend\assets\angularstrap\AngularstrapAsset',
+        '\frontend\assets\admintemplate\AdminAsset',
+        '\frontend\assets\angular\AngularAsset',
     ];
 }

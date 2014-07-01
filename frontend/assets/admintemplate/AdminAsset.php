@@ -1,6 +1,6 @@
 <?php
 
-namespace vendor\admintemplate;
+namespace frontend\assets\admintemplate;
 
 use yii\web\AssetBundle;
 
@@ -9,7 +9,7 @@ use yii\web\AssetBundle;
  */
 class AdminAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/admintemplate/assets';
+    public $sourcePath = '@app/assets/admintemplate/assets';
 
     // public $js = [
     	// 'angular.js',

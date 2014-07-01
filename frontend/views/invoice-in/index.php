@@ -3,9 +3,9 @@ use vendor\angular;
 
 $depends = [
         'yii\bootstrap\BootstrapAsset',
-        'vendor\admintemplate\AdminAsset',
-        'vendor\angular\AngularAsset',
-        'vendor\angularstrap\AngularstrapAsset',
+        '\frontend\assets\admintemplate\AdminAsset',
+        '\frontend\assets\angular\AngularAsset',
+        '\frontend\assets\angularstrap\AngularstrapAsset',
     ];
 
 ?>
