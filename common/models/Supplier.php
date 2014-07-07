@@ -42,5 +42,11 @@ class Supplier extends ActiveRecord
         return $this->getPrimaryKey();
     }
 
-   
+   public function toArray(array $fields = [], array $expand = [], $recursive = true) {
+        $return = $this->attributes;
+        
+        $return ['address'] = $this->address->attributes;
+        return $return;
+    }
+
 }

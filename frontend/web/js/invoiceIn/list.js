@@ -26,7 +26,7 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
             sort: false,
             direction: 'asc'
         }, function (data) {
-            scope.suppliers = data;
+            scope.suppliers = data.items;
         });
     }
 

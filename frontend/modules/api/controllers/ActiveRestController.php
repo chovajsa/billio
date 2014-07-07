@@ -9,13 +9,36 @@ use yii\rest\ActiveController;
 
 class ActiveRestController extends ActiveController {
 
+    public $serializer = [
+        'class' => 'yii\rest\Serializer',
+        'collectionEnvelope' => 'items',
+    ];
+
+    public function init() {
+
+        Yii::$app->request->parsers = [
+            'application/json' => 'yii\web\JsonParser',
+        ];
+
+        return parent::init();
+    }
+
+    
+    public function behaviors()
+    {
+        $formats = parent::behaviors();
+        $formats['contentNegotiator']['formats'] = array('application/json'=>'json');
+
+        return $formats;
+    }
+
     protected function prepareDataProvider($with = []) {
        	
 
         $modelClass = $this->modelClass;
 
         $orderBy='id';
-        if (isset($_GET['sort'])) $orderBy=$_GET['sort'];
+        if (isset($_GET['sort']) && $_GET['sort'] !== 'false') $orderBy=$_GET['sort'];
 
         $orderByDir='DESC';
         if (isset($_GET['direction'])) $orderByDir=$_GET['direction'];
@@ -32,6 +55,8 @@ class ActiveRestController extends ActiveController {
                 'pageSize' => $limit,
             ],
         ]);
+
+
 
         if (isset($_GET['filters'])) {
             $filters = json_decode($_GET['filters']);
