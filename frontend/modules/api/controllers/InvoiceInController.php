@@ -13,27 +13,7 @@ class InvoiceInController extends ActiveRestController
 {
     public $modelClass = 'common\models\InvoiceIn';
 
-    public $serializer = [
-        'class' => 'yii\rest\Serializer',
-        'collectionEnvelope' => 'items',
-    ];
 
-    public function init() {
-
-    	Yii::$app->request->parsers = [
-        	'application/json' => 'yii\web\JsonParser',
-    	];
-
-    	return parent::init();
-    }
-
-	public function behaviors()
-	{
-	    $formats = parent::behaviors();
-	    $formats['contentNegotiator']['formats'] = array('application/json'=>'json');
-
-		return $formats;
-	}
 
 	/**
      * Checks the privilege of the current user.
@@ -62,11 +42,11 @@ class InvoiceInController extends ActiveRestController
                 // 'class' => 'yii\rest\IndexAction',
                 // 'modelClass'=>$this->modelClass
             // ],
-            // 'view' => [
-                // 'class' => 'yii\rest\ViewAction',
-                // 'modelClass' => $this->modelClass,
-                // 'checkAccess' => [$this, 'checkAccess'],
-            // ],
+            'view' => [
+                'class' => 'yii\rest\ViewAction',
+                'modelClass' => $this->modelClass,
+                'checkAccess' => [$this, 'checkAccess'],
+            ],
             // 'create' => [
                 // 'class' => 'yii\rest\CreateAction',
                 // 'modelClass' => $this->modelClass,

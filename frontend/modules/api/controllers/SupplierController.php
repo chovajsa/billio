@@ -15,23 +15,6 @@ class SupplierController extends ActiveRestController
 {
     public $modelClass = 'common\models\Supplier';
 
-    public function init() {
-
-        Yii::$app->request->parsers = [
-            'application/json' => 'yii\web\JsonParser',
-        ];
-
-        return parent::init();
-    }
-
-	public function behaviors()
-	{
-	    $formats = parent::behaviors();
-	    $formats['contentNegotiator']['formats'] = array('application/json'=>'json');
-
-		return $formats;
-	}
-
 	/**
      * @inheritdoc
      */
@@ -44,12 +27,6 @@ class SupplierController extends ActiveRestController
                 'modelClass' => $this->modelClass,
                 'checkAccess' => [$this, 'checkAccess'],
             ],
-            // 'create' => [
-            //     'class' => 'yii\rest\CreateAction',
-            //     'modelClass' => $this->modelClass,
-            //     'checkAccess' => [$this, 'checkAccess'],
-            //     'scenario' => $this->createScenario,
-            // ],
             'update' => [
                 'class' => 'yii\rest\UpdateAction',
                 'modelClass' => $this->modelClass,
@@ -93,19 +70,7 @@ class SupplierController extends ActiveRestController
     }
 
     public function actionIndex() {
-    	
-        $dataProvider = $this->prepareDataProvider();
-
-        $models = $dataProvider->getModels();
-
-        $r = [];
-        foreach($models as $model) {
-        	$tmp = $model->attributes;
-        	$tmp['address'] = $model->address->attributes;
-        	$r[] = $tmp;
-        }
-
-        return $r;
+        return $dataProvider = $this->prepareDataProvider();
     }
 
 }
