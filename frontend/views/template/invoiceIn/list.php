@@ -10,7 +10,7 @@
 				<thead>
 					<tr>
 						<th>
-							Number
+							<a href="javascript:;" ng-click="setSort('id')">Number</a>
 						</th>
 						<th>
 							Supplier

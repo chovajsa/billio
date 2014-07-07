@@ -79,5 +79,23 @@ class InvoiceIn extends ActiveRecord
 
         return $entries;
     }
+
+    public function toArray(array $fields = [], array $expand = [], $recursive = true) {
+        $return = $this->attributes;
+
+        $return['supplier'] = $this->supplier instanceof Supplier ? $this->supplier->attributes : [];
+        $return['supplier']['address'] = $this->supplier && $this->supplier->address ? $this->supplier->address->attributes : [];
+        $rows = $this->getRows()->all();
+        $return['rows'] = [];
+        foreach ($rows as $row) {
+          $return['rows'] = $row->toArray();  
+        }
+
+        if ($user = $this->user) {
+            $return['createdByUserName'] = $user->username;
+        }
+        
+        return $return;
+    }
    
 }

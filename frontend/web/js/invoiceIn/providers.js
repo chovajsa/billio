@@ -4,6 +4,9 @@ app.factory('InvoicesIn', function ($resource) {
     var data = $resource(yiiApp.url + '/api/invoice-in/:id', {
         id: '@id'
     }, {
+        query: {
+            isArray:false
+        },
         getInvoice: {
             method: 'GET',
             params: {

@@ -7,7 +7,7 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
     scope.myData = {
         
         invoiceListState: 'open',
-        invoiceListSort: 'created',
+        invoiceListSort: 'id',
         invoiceListDirection: 'desc',
         invoiceListPage: 1
     };
@@ -30,9 +30,23 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
         });
     }
 
-    scope.setInvoiceList = function () {
+    scope.setSort = function(sort) {
+        var oldSort = angular.copy(scope.myData.invoiceListSort);
+        scope.myData.invoiceListSort = sort;
 
-        if (scope.myData.invoiceList.length > 0) return;
+        if (oldSort == sort) {
+            scope.setDirection(scope.myData.invoiceListDirection == 'desc' ? 'asc' : 'desc');
+        } else {
+            scope.setDirection('desc');
+        }
+    }
+
+    scope.setDirection = function (direction) {
+        scope.myData.invoiceListDirection = direction;
+        scope.setInvoiceList();
+    };
+
+    scope.setInvoiceList = function () {
 
         var filters = {};
         if (location.path() == '/mine') {
@@ -44,10 +58,11 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
             //labels: scope.myData.labels,
             sort: scope.myData.invoiceListSort,
             direction: scope.myData.invoiceListDirection,
-            filters:angular.toJson(filters)
+            filters:angular.toJson(filters),
         }, function (data) {
-            scope.myData.invoiceList = data;
-            l = data;
+            console.log(data);
+            scope.myData.invoiceList = data.items;
+            l = data.items;
         });
     };
 
