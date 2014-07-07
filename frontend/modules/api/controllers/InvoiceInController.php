@@ -13,6 +13,11 @@ class InvoiceInController extends ActiveRestController
 {
     public $modelClass = 'common\models\InvoiceIn';
 
+    public $serializer = [
+        'class' => 'yii\rest\Serializer',
+        'collectionEnvelope' => 'items',
+    ];
+
     public function init() {
 
     	Yii::$app->request->parsers = [
@@ -53,7 +58,10 @@ class InvoiceInController extends ActiveRestController
     public function actions()
     {
         return [
-            
+            // 'index' => [
+                // 'class' => 'yii\rest\IndexAction',
+                // 'modelClass'=>$this->modelClass
+            // ],
             // 'view' => [
                 // 'class' => 'yii\rest\ViewAction',
                 // 'modelClass' => $this->modelClass,
@@ -82,25 +90,7 @@ class InvoiceInController extends ActiveRestController
         ];
     }
 
-    public function actionView($id) {
-        $model = \common\models\InvoiceIn::findOne($id);
-
-        $attributes =  $model->attributes;
-        $rows = $model->rows;
-
-        $rs = [];
-        foreach ($rows as $r) {
-            $rs[] = $r->attributes;
-        }
-
-        $attributes['rows'] = $rs;
-
-        if ($user = $model->user) {
-            $attributes['createdByUserName'] = $user->username;
-        }
-
-        return $attributes;
-    }
+    
 
     public function actionCreate() {
         $invoiceIn = new \common\models\InvoiceIn;
@@ -184,30 +174,9 @@ class InvoiceInController extends ActiveRestController
     	
         $dataProvider = $this->prepareDataProvider('supplier');
 
-        if (isset($_GET['filters'])) {
-            $filters = json_decode($_GET['filters']);
-            if (!empty($filters)) {
-                foreach ($filters as $key=>$value) {
-                    $dataProvider->query->andWhere($key. " = '{$value}'");
-                }
-            }
-        }
 
-        $models = $dataProvider->getModels();
-
-        $r = [];
-        foreach($models as $model) {
-        	$tmp = $model->attributes;
-        
-        	$tmp['supplier'] = $model->supplier instanceof Supplier ? $model->supplier->attributes : [];
-            $tmp['supplier']['address'] = $model->supplier && $model->supplier->address ? $model->supplier->address->attributes : [];
-            
-            $tmp['rows'] = $model->getRows();
-
-        	$r[] = $tmp;
-        }
-
-        return $r;
+        return $dataProvider;
     }
+
 
 }
