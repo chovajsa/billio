@@ -43,6 +43,20 @@
 					</tr>
 				</tbody>
 			</table>
+			<ul class="pagination m-t-0 m-b-10">
+				<li>
+					<a href="javascript:;" ng-click="updateIncoiceList(1)">«</a>
+				</li>
+				<li 
+					ng-repeat="a in numberOfRepeats(invoiceListPaging.pageCount) track by $index"
+					class="{{(invoiceListPaging.currentPage == $index) ? 'active' : ''}}"
+				>
+					<a href="javascript:;"  ng-click="updateIncoiceList($index+1)">{{$index+1}}</a>
+				</li>
+				<li>
+					<a ng-click="updateIncoiceList(invoiceListPaging.pageCount)" href="javascript:;">»</a>
+				</li>
+			</ul>
 		</div>
 	</div>
 </div> 
