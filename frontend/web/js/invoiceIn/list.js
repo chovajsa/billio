@@ -10,8 +10,13 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
         invoiceListSort: 'id',
         invoiceListDirection: 'desc',
         invoiceListPage: 1
-    
+        
     };
+
+    scope.myData.currentInvoice = {
+        rows:[]
+    };
+
 
 
     if (scope.myData.invoiceList == undefined) {

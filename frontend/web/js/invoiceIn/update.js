@@ -11,6 +11,7 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
     };
 
     scope.addRow = function() {
+        if (scope.myData.currentInvoice.rows === undefined) scope.myData.currentInvoice.rows = [];
         scope.myData.currentInvoice.rows.push({ id: null, amount:null, pcs:null}); 
     }
     
@@ -89,7 +90,6 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
     }
 
     scope.setCurrentInvoice(routeParams.id);
-	
 	scope.setCurrentInvoice;
 
 
@@ -109,11 +109,12 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
 	scope.getTotalAmountForInvoice = function() {
 	
 		var total = 0;
-		
+		if (scope.myData.currentInvoice.rows === undefined) scope.myData.currentInvoice.rows = [];
 		for(var i = 0; i < scope.myData.currentInvoice.rows.length; i++){
 			var row = scope.myData.currentInvoice.rows[i];
 			total += (row.amount * row.pcs);
 		}
+        
 		return total;
 	
 	};

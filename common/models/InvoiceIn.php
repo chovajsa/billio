@@ -91,7 +91,7 @@ class InvoiceIn extends ActiveRecord
         $rows = $this->getRows()->all();
         $return['rows'] = [];
         foreach ($rows as $row) {
-          $return['rows'] = $row->toArray();  
+          $return['rows'][] = $row->toArray();  
         }
 
         if ($user = $this->user) {

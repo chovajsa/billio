@@ -1,5 +1,3 @@
-
-
 app.factory('InvoicesIn', function ($resource) {
     var data = $resource(yiiApp.url + '/api/invoice-in/:id', {
         id: '@id'
