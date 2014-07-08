@@ -6,6 +6,7 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
 
     scope.myData = {
         
+        invoiceList:[],
         invoiceListState: 'open',
         invoiceListSort: 'id',
         invoiceListDirection: 'desc',
@@ -13,18 +14,6 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
         
     };
 
-    scope.myData.currentInvoice = {
-        rows:[]
-    };
-
-
-
-    if (scope.myData.invoiceList == undefined) {
-        if (l.length > 0) {
-            scope.myData.invoiceList = l;    
-        }
-        scope.myData.invoiceList = [];
-    }
 
     scope.setSuppliers = function () {
         SI.query({
@@ -67,10 +56,7 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
             direction: scope.myData.invoiceListDirection,
             filters:angular.toJson(filters),
         }, function (data) {
-            console.log(data);
-			// console.log(JSON.stringify(data));
             scope.myData.invoiceList = data.items;
-            l = data.items;
         });
     };
 
