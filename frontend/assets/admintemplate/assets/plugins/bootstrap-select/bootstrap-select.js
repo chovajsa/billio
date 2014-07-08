@@ -70,7 +70,14 @@
 
             this.checkDisabled();
             this.clickListener();
-            if (this.options.liveSearch) this.liveSearchListener();
+            if (this.options.liveSearch) {
+                if (this.options.ajaxSearch) 
+                {
+                    this.ajaxLiveSearchListener();
+                } else {
+                    this.liveSearchListener();
+                } 
+            }
             this.render();
             this.liHeight();
             this.setStyle();
@@ -692,7 +699,57 @@
             this.$menu.on('mouseleave', 'a', function() {
               that.$menu.find('.active').removeClass('active');
             });
-        },
+        }
+
+        ajaxLiveSearchListener: function() {
+            var that = this,
+                no_results = $('<li class="no-results"></li>');
+
+            this.$newElement.on('click.dropdown.data-api', function() {
+                that.$menu.find('.active').removeClass('active');
+                if (!!that.$searchbox.val()) {
+                    that.$searchbox.val('');
+                    that.$lis.not('.is-hidden').removeClass('hide');
+                    if (!!no_results.parent().length) no_results.remove();
+                }
+                if (!that.multiple) that.$menu.find('.selected').addClass('active');
+                setTimeout(function() {
+                    that.$searchbox.focus();
+                }, 10);
+            });
+
+            this.$searchbox.on('input propertychange', function() {
+                if (that.$searchbox.val()) {
+                    that.$lis.not('.is-hidden').removeClass('hide').find('a').not(':icontains(' + that.$searchbox.val() + ')').parent().addClass('hide');
+                    
+                    if (!that.$menu.find('li').filter(':visible:not(.no-results)').length) {
+                        if (!!no_results.parent().length) no_results.remove();
+                        no_results.html(that.options.noneResultsText + ' "'+ that.$searchbox.val() + '"').show();
+                        that.$menu.find('li').last().after(no_results);
+                    } else if (!!no_results.parent().length) {
+                        no_results.remove();
+                    }
+                    
+                } else {
+                    that.$lis.not('.is-hidden').removeClass('hide');
+                    if (!!no_results.parent().length) no_results.remove();
+                }
+
+                that.$menu.find('li.active').removeClass('active');
+                that.$menu.find('li').filter(':visible:not(.divider)').eq(0).addClass('active').find('a').focus();
+                $(this).focus();
+            });
+            
+            this.$menu.on('mouseenter', 'a', function(e) {
+              that.$menu.find('.active').removeClass('active');
+              $(e.currentTarget).parent().not('.disabled').addClass('active');
+            });
+            
+            this.$menu.on('mouseleave', 'a', function() {
+              that.$menu.find('.active').removeClass('active');
+            });
+        }
+        ,
 
         val: function(value) {
 
