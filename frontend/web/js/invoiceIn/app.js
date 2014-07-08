@@ -1,4 +1,3 @@
-var l = [];
 
 angular.module('euroDate', []).filter('euroDateFilter', function() {
   return function(input) {
