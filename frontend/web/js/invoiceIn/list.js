@@ -61,6 +61,7 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
             filters:angular.toJson(filters),
         }, function (data) {
             console.log(data);
+			// console.log(JSON.stringify(data));
             scope.myData.invoiceList = data.items;
             l = data.items;
         });

@@ -89,6 +89,8 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
     }
 
     scope.setCurrentInvoice(routeParams.id);
+	
+	scope.setCurrentInvoice;
 
 
     // supplier modal
@@ -103,6 +105,22 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
     scope.closeModal = function () {
         supplierModal.$promise.then(supplierModal.hide);   
     }
+	
+	scope.getTotalAmountForInvoice = function() {
+	
+		var total = 0;
+		
+		for(var i = 0; i < scope.myData.currentInvoice.rows.length; i++){
+			var row = scope.myData.currentInvoice.rows[i];
+			total += (row.amount * row.pcs);
+		}
+		return total;
+	
+	};
+	
+	scope.preciseRound = function(num,decimals) {
+		return (Math.round(num * Math.pow(10, decimals)) / Math.pow(10, decimals)).toFixed(decimals);
+	}
 
 
 }]);
