@@ -6,6 +6,7 @@ app.controller('CreateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
     scope.newSupplier = {};
     scope.counter = 0;
 
+  
     $('#attachmentsFrame').attr('src', yiiApp.url+'/invoice-in/attachments');
 
     var turl = yiiApp.url+'/template?route=supplier/create';

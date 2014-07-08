@@ -10,7 +10,9 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
         invoiceListSort: 'id',
         invoiceListDirection: 'desc',
         invoiceListPage: 1
+    
     };
+
 
     if (scope.myData.invoiceList == undefined) {
         if (l.length > 0) {

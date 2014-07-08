@@ -14,3 +14,4 @@ function notify(type, msg) {
 	$('#notify-'+type+' .msg').html(msg);
 	$('#notify-'+type).show();
 }
+ 

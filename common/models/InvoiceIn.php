@@ -6,7 +6,7 @@ use yii\db\ActiveRecord;
 
 
 /**
- * Supplier model
+ * Invoice In model
  *
  */
 class InvoiceIn extends ActiveRecord
@@ -30,13 +30,16 @@ class InvoiceIn extends ActiveRecord
         return $this->hasOne(Supplier::className(), ['id' => 'supplierId']);
     }
 
+
     public function getRows() {
         return $this->hasMany(InvoiceInRow::className(), ['invoiceInId' => 'id']);   
     }
 
+
     public function getUser() {
         return $this->hasOne(User::className(), ['id' => 'createdBy']);
     }
+
 
     /**
       * @inheritdoc
@@ -64,7 +67,7 @@ class InvoiceIn extends ActiveRecord
 
 
     public function getAttachments() {
-        $entries = array();
+        $entries = [];
 
         $folder = Settings::getFileStoragePath().'/'.$this->id;
         if (file_exists($folder))
