@@ -123,5 +123,4 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
 		return (Math.round(num * Math.pow(10, decimals)) / Math.pow(10, decimals)).toFixed(decimals);
 	}
 
-
 }]);
