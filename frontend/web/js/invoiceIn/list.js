@@ -55,8 +55,11 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
             sort: scope.myData.invoiceListSort,
             direction: scope.myData.invoiceListDirection,
             filters:angular.toJson(filters),
+			page: scope.myData.invoiceListPage,
         }, function (data) {
             scope.myData.invoiceList = data.items;
+			scope.invoiceListLinks = data._links;
+			scope.invoiceListPaging = data._meta;
         });
     };
 
@@ -74,6 +77,11 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
             scope.closeDeleteModal();
         });
     }
+	
+	scope.updateIncoiceList = function (index) {
+		scope.myData.invoiceListPage = index;
+		scope.setInvoiceList();
+	}
 
 
     // supplier modal
@@ -88,5 +96,9 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
     scope.setInvoiceList();
     scope.setSuppliers();
 
-    
+    // returns number of elements in parameter for ng-repeat
+	scope.numberOfRepeats = function(n) {
+        return new Array(n);
+    };
+	
 }]);
