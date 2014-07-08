@@ -72,6 +72,19 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
                 }
             }
 
+            if (id) {
+                var found = false;
+                for (var i in scope.suppliers) {
+                    if (scope.suppliers[i].id == data.supplierId) {
+                        found = true;
+                    }
+                }
+
+                if (!found) {
+                    scope.suppliers.push({ id: data.supplierId, address: {name:data.supplier.address.name}}); 
+                }
+            }
+
             scope.myData.currentInvoice = data;
             scope.myData.currentInvoice.supplierId = parseInt(data.supplierId);
 
@@ -109,12 +122,14 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
 	scope.getTotalAmountForInvoice = function() {
 	
 		var total = 0;
-		if (scope.myData.currentInvoice.rows === undefined) scope.myData.currentInvoice.rows = [];
-		for(var i = 0; i < scope.myData.currentInvoice.rows.length; i++){
+		
+        if (scope.myData.currentInvoice.rows === undefined) scope.myData.currentInvoice.rows = [];
+		
+        for(var i = 0; i < scope.myData.currentInvoice.rows.length; i++){
 			var row = scope.myData.currentInvoice.rows[i];
 			total += (row.amount * row.pcs);
 		}
-        
+
 		return total;
 	
 	};

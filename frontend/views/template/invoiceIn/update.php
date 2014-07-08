@@ -91,8 +91,10 @@
 				<label for="supplierId" class="col-sm-2 control-label">Supplier</label>
 					<div class="col-sm-10">
 						<p class="input-group">
-							<select id="supplierId" required class="form-control selectpicker nyaSelectpicker" data-style="btn-white" data-live-search="true" data-size="10" ng-model="myData.currentInvoice.supplierId" ng-options="supplier.id as supplier.address.name for supplier in suppliers">
+							<select id="supplierId" required class="form-control selectpicker nyaSelectpicker" data-style="btn-white" data-live-search="true" data-size="10" ng-model="myData.currentInvoice.supplierId">
+								<!-- ng-options="supplier.id as supplier.address.name for supplier in suppliers" -->
 								<option value=""> Please select </option>
+								<option ng-repeat="s in suppliers" value="{{s.id}}"> {{s.address.name}} </option>
 							</select>
 							<span class="input-group-btn add-on">
 				  	  			<button type="button" class="btn btn-primary" ng-click="showModal()"><i class="fa fa-plus"></i></button>
@@ -118,13 +120,8 @@
 				<div class="form-group">
 					<label for="date" class="col-sm-2 control-label">Date</label>
 					
-					<div class="col-sm-10 ui-append">
-						<div class="input-group date">
+					<div class="col-sm-10">
 						<input class="form-control datepicker" ng-model="myData.currentInvoice.date" type="text" id="date" name="input1"/>
-						<span class="input-group-addon">
-							<i class="fa fa-calendar"></i>
-						</span>
-						</div>
 					</div>
 				</div>
 				  

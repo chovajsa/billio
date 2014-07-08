@@ -57,7 +57,6 @@ class ActiveRestController extends ActiveController {
         ]);
 
 
-
         if (isset($_GET['filters'])) {
             $filters = json_decode($_GET['filters']);
             if (!empty($filters)) {
