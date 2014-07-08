@@ -188,7 +188,7 @@
 							<input style="width:100%" ng-model="myData.currentInvoice.rows[$index].amount" type="text">
 						</td>
 						<td>
-							{{myData.currentInvoice.rows[$index].amountTotalVat}}
+							{{preciseRound((row.amount*row.pcs), 2)}}
 						</td>
 						<td>
 							<a href="javascript:void(0)" ng-click="unsetRow($index)">
@@ -215,7 +215,9 @@
 							&nbsp;
 						</th>
 						<th>
-							{{myData.currentInvoice.amountVat}}
+							{{
+							(myData.currentInvoice.rows.length == 0) ? '0.00' : preciseRound(getTotalAmountForInvoice(), 2)
+							}}
 						</th>
 						<th>
 						</th>
