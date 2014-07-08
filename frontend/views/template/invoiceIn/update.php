@@ -43,26 +43,19 @@
 					</tr>
 				</tbody>
 			</table>
-			<!-- <ul class="pagination m-t-0 m-b-10">
-				<li class="disabled"><a href="javascript:;">«</a></li>
-				<li class="active"><a href="javascript:;">1</a></li>
-				<li><a href="javascript:;">2</a></li>
-				<li><a href="javascript:;">3</a></li>
-				<li><a href="javascript:;">4</a></li>
-				<li><a href="javascript:;">5</a></li>
-				<li><a href="javascript:;">»</a></li>
-			</ul> -->
 			<ul class="pagination m-t-0 m-b-10">
-				<li class="{{(invoiceListPaging.currentPage <= 1) ? 'disabled' : ''}}">
-					<a href="javascript:;">«</a>
+				<li>
+					<a href="javascript:;" ng-click="updateIncoiceList(1)">«</a>
 				</li>
 				<li 
 					ng-repeat="a in numberOfRepeats(invoiceListPaging.pageCount) track by $index"
 					class="{{(invoiceListPaging.currentPage == $index) ? 'active' : ''}}"
 				>
-						<a href="javascript:;"  ng-click="updateIncoiceList($index+1)">{{$index+1}}</a>
+					<a href="javascript:;"  ng-click="updateIncoiceList($index+1)">{{$index+1}}</a>
 				</li>
-				<li class="{{(invoiceListPaging.currentPage == (invoiceListPaging.pageCount-1)) ? 'disabled' : ''}}"><a href="javascript:;">»</a></li>
+				<li>
+					<a ng-click="updateIncoiceList(invoiceListPaging.pageCount)" href="javascript:;">»</a>
+				</li>
 			</ul>
 		</div>
 	</div>
