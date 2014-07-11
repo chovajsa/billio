@@ -105,10 +105,9 @@
 				<label for="supplierId" class="col-sm-2 control-label">Supplier</label>
 					<div class="col-sm-10">
 						<p class="input-group">
-							<select id="supplierId" required class="form-control selectpicker nyaSelectpicker" data-style="btn-white" data-live-search="true" data-size="10" ng-model="myData.currentInvoice.supplierId">
-								<!-- ng-options="supplier.id as supplier.address.name for supplier in suppliers" -->
+							<select id="supplierId" required class="form-control selectpicker nyaSelectpicker" data-style="btn-white" data-ajax-url="<?=Url::base();?>/api/supplier" data-live-search="true" data-ajax-search="true" data-size="10" ng-options="supplier.id as supplier.address.name for supplier in suppliers" ng-model="myData.currentInvoice.supplierId">
+								
 								<option value=""> Please select </option>
-								<option ng-repeat="s in suppliers" value="{{s.id}}"> {{s.address.name}} </option>
 							</select>
 							<span class="input-group-btn add-on">
 				  	  			<button type="button" class="btn btn-primary" ng-click="showModal()"><i class="fa fa-plus"></i></button>
@@ -116,7 +115,7 @@
 						</p>
 					</div>
 				</div>
-
+	
 				<div class="form-group">
 					<label for="number" class="col-sm-2 control-label">Number</label>
 					<div class="col-sm-10">
@@ -264,6 +263,8 @@ $(document).ready(function () {
 	$('.datepicker').datepicker({
 		format:"dd.mm.yyyy"
 	});
-	$('.selectpicker').selectpicker({});
+
+	$('#supplierId').select2({});
+
 })
 </script>

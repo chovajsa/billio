@@ -524,7 +524,7 @@
                 }
             });
 
-            this.$menu.on('click', 'li a', function(e) {
+            this.$menu.delegate('click', 'li a', function(e) {
                 var clickedIndex = $(this).parent().index(),
                     prevValue = that.$element.val(),
                     prevIndex = that.$element.prop('selectedIndex');
@@ -699,7 +699,7 @@
             this.$menu.on('mouseleave', 'a', function() {
               that.$menu.find('.active').removeClass('active');
             });
-        }
+        },
 
         ajaxLiveSearchListener: function() {
             var that = this,
@@ -714,12 +714,29 @@
                 }
                 if (!that.multiple) that.$menu.find('.selected').addClass('active');
                 setTimeout(function() {
-                    that.$searchbox.focus();
+                    that.$lis.remove();
                 }, 10);
             });
 
             this.$searchbox.on('input propertychange', function() {
-                if (that.$searchbox.val()) {
+                var v = that.$searchbox.val();
+
+                if (v) {
+                    $.get(that.options.ajaxUrl, {fulltext:v}, function(j) {
+                        that.$element.find('option').remove();
+                        that.$menu.find('li').remove();
+
+                        for (var i in j.items) {
+                            that.$element.append('<option value="'+j.items[i].id+'"> '+j.items[i].address.name+' </option');
+                        }
+
+                        var li = that.createLi();
+                        that.$menu.append(li);
+                        that.render(true);
+                        that.clickListener();
+
+                    }, 'json');
+
                     that.$lis.not('.is-hidden').removeClass('hide').find('a').not(':icontains(' + that.$searchbox.val() + ')').parent().addClass('hide');
                     
                     if (!that.$menu.find('li').filter(':visible:not(.no-results)').length) {
@@ -729,7 +746,7 @@
                     } else if (!!no_results.parent().length) {
                         no_results.remove();
                     }
-                    
+
                 } else {
                     that.$lis.not('.is-hidden').removeClass('hide');
                     if (!!no_results.parent().length) no_results.remove();
@@ -738,6 +755,7 @@
                 that.$menu.find('li.active').removeClass('active');
                 that.$menu.find('li').filter(':visible:not(.divider)').eq(0).addClass('active').find('a').focus();
                 $(this).focus();
+
             });
             
             this.$menu.on('mouseenter', 'a', function(e) {

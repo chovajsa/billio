@@ -73,4 +73,18 @@ class SupplierController extends ActiveRestController
         return $dataProvider = $this->prepareDataProvider();
     }
 
+    protected function getFulltextCondition($modelClass) {
+        $andWhere = '';
+        
+        if (isset($_GET['fulltext'])) {
+            $andWhere = "supplier.id IN (
+                SELECT s1.id FROM supplier s1 
+                LEFT JOIN address a ON a.id = s1.addressId 
+                WHERE a.name LIKE '%{$_GET['fulltext']}%'
+            )";    
+        }
+
+        return $andWhere;
+    }
+
 }

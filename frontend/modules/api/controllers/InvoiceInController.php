@@ -154,7 +154,6 @@ class InvoiceInController extends ActiveRestController
     	
         $dataProvider = $this->prepareDataProvider('supplier');
 
-
         return $dataProvider;
     }
 

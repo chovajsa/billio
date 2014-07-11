@@ -6,7 +6,7 @@ angular.module('euroDate', []).filter('euroDateFilter', function() {
 });
 
 
-var app = angular.module('invoiceIn', ['ngResource','mgcrea.ngStrap', 'ngRoute','nya.bootstrap.select', 'euroDate']);
+var app = angular.module('invoiceIn', ['ngResource','mgcrea.ngStrap', 'ngRoute', 'euroDate']);
 
 
 function notify(type, msg) {
