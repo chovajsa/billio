@@ -105,10 +105,13 @@
 				<label for="supplierId" class="col-sm-2 control-label">Supplier</label>
 					<div class="col-sm-10">
 						<p class="input-group">
-							<select id="supplierId" required class="form-control selectpicker nyaSelectpicker" data-style="btn-white" data-ajax-url="<?=Url::base();?>/api/supplier" data-live-search="true" data-ajax-search="true" data-size="10" ng-options="supplier.id as supplier.address.name for supplier in suppliers" ng-model="myData.currentInvoice.supplierId">
+							<!-- <select id="supplierId" required class="form-control selectpicker nyaSelectpicker" data-style="btn-white" data-ajax-url="<?=Url::base();?>/api/supplier" data-live-search="true" data-ajax-search="true" data-size="10" ng-options="supplier.id as supplier.address.name for supplier in suppliers" ng-model="myData.currentInvoice.supplierId">
 								
 								<option value=""> Please select </option>
-							</select>
+							</select> -->
+
+							<input type="hidden" class="bigdrop" id="supplierId" style="width:600px" value="16340"/>
+
 							<span class="input-group-btn add-on">
 				  	  			<button type="button" class="btn btn-primary" ng-click="showModal()"><i class="fa fa-plus"></i></button>
 						  	</span>
@@ -264,7 +267,34 @@ $(document).ready(function () {
 		format:"dd.mm.yyyy"
 	});
 
-	$('#supplierId').select2({});
+	$('#supplierId').select2({
+
+		placeholder: "Search for a supplier",
+    	minimumInputLength: 1,
+    	ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+	        url: yiiApp.url + '/api/supplier/',
+	        dataType: 'json',
+	        data: function (term, page) {
+	            return {
+	                fulltext: term, // search term
+	            };
+	        },
+	        results: function(data, page ) {
+	        	var newData = [];
+                var items = data.items;
+
+                for (var i in items) {
+                	newData.push({
+                		id: items[i].id,
+                		text: items[i].address.name
+                	});
+                }
+            	
+            	return {results: newData};
+            }
+	       
+		}
+	});
 
 })
 </script>
