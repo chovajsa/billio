@@ -14,6 +14,37 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
         
     };
 
+    scope.select2Options = 
+     {
+        placeholder: "Search for a supplier",
+        minimumInputLength: 1,
+        ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+            url: yiiApp.url + '/api/supplier/',
+            dataType: 'json',
+            data: function (term, page) {
+                return {
+                    fulltext: term, // search term
+                };
+            },
+            results: function(data, page ) {
+                var newData = [];
+                var items = data.items;
+
+                for (var i in items) {
+                    newData.push({
+                        id: items[i].id,
+                        text: items[i].address.name
+                    });
+                }
+                
+                return {results: newData};
+            }
+           
+        }, 
+        initSelection : function () {
+            
+        }
+    }
 
     scope.setSuppliers = function () {
         SI.query({

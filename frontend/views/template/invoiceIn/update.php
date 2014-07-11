@@ -110,7 +110,7 @@
 								<option value=""> Please select </option>
 							</select> -->
 
-							<input type="hidden" class="bigdrop" id="supplierId" style="width:600px" value="16340"/>
+							<input ui-select2="select2Options" ng-model="myData.currentInvoice.supplierId" required class="form-control selectpicker bigdrop" data-style="btn-white" type="hidden" id="supplierId"/>
 
 							<span class="input-group-btn add-on">
 				  	  			<button type="button" class="btn btn-primary" ng-click="showModal()"><i class="fa fa-plus"></i></button>
@@ -267,34 +267,7 @@ $(document).ready(function () {
 		format:"dd.mm.yyyy"
 	});
 
-	$('#supplierId').select2({
-
-		placeholder: "Search for a supplier",
-    	minimumInputLength: 1,
-    	ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
-	        url: yiiApp.url + '/api/supplier/',
-	        dataType: 'json',
-	        data: function (term, page) {
-	            return {
-	                fulltext: term, // search term
-	            };
-	        },
-	        results: function(data, page ) {
-	        	var newData = [];
-                var items = data.items;
-
-                for (var i in items) {
-                	newData.push({
-                		id: items[i].id,
-                		text: items[i].address.name
-                	});
-                }
-            	
-            	return {results: newData};
-            }
-	       
-		}
-	});
+	// $('#supplierId').select2();
 
 })
 </script>
