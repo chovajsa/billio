@@ -6,7 +6,7 @@ app.controller('CreateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
     scope.newSupplier = {};
     scope.counter = 0;
 
-    scope.myData.currentInvoice = {
+    scope.currentInvoice = {
         rows:[]
     };
 

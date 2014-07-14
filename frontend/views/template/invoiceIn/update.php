@@ -27,7 +27,7 @@
 					</tr>
 				</thead>
 				<tbody>
-		            <tr ng-repeat="invoice in myData.invoiceList | filter:filterText">
+		            <tr ng-repeat="invoice in invoiceList | filter:filterText">
 		                <td>
 							<a href="#update/{{invoice.id}}">{{invoice.id}}</a>
 		                </td>
@@ -68,7 +68,7 @@
 				New Invocie
 			</h4>
 			<h4 class="panel-title" ng-show="mode == 'update'"> 
-				Update Invocie {{myData.currentInvoice.id}}
+				Update Invocie {{currentInvoice.id}}
 			</h4>
 		</div>
 		  
@@ -80,11 +80,11 @@
 				<ul class="media-list media-list-with-divider">
 					<li class="media">
 						<div class="media-body">
-							<h4 class="media-heading">Created by : {{myData.currentInvoice.createdByUserName}} </h4>
+							<h4 class="media-heading">Created by : {{currentInvoice.createdByUserName}} </h4>
 							<p>
 								<dl>
 									<dt>Created on : 
-									{{myData.currentInvoice.createdDate | euroDateFilter}} </dt>
+									{{currentInvoice.createdDate | euroDateFilter}} </dt>
 								</dl>
 							</p>
 						</div>
@@ -93,7 +93,7 @@
 				</div>
 					<div class="col-sm-6 text-right" style="padding-right:5px">
 						<p>
-							<a href="javascript:;" ng-click="delete(myData.currentInvoice.id)" class="btn btn-sm btn-danger">Delete</a>
+							<a href="javascript:;" ng-click="delete(currentInvoice.id)" class="btn btn-sm btn-danger">Delete</a>
 					  		
 					        <!-- <a href="javascript:;" class="btn btn-sm btn-primary m-r-5">Approve</a> -->
 					        <!-- <a href="javascript:;" class="btn btn-sm btn-danger">Reject</a> -->
@@ -105,12 +105,12 @@
 				<label for="supplierId" class="col-sm-2 control-label">Supplier</label>
 					<div class="col-sm-10">
 						<p class="input-group">
-							<!-- <select id="supplierId" required class="form-control selectpicker nyaSelectpicker" data-style="btn-white" data-ajax-url="<?=Url::base();?>/api/supplier" data-live-search="true" data-ajax-search="true" data-size="10" ng-options="supplier.id as supplier.address.name for supplier in suppliers" ng-model="myData.currentInvoice.supplierId">
+							<!-- <select id="supplierId" required class="form-control selectpicker nyaSelectpicker" data-style="btn-white" data-ajax-url="<?=Url::base();?>/api/supplier" data-live-search="true" data-ajax-search="true" data-size="10" ng-options="supplier.id as supplier.address.name for supplier in suppliers" ng-model="currentInvoice.supplierId">
 								
 								<option value=""> Please select </option>
 							</select> -->
 
-							<input ui-select2="select2Options" ng-model="myData.currentInvoice.supplierId" required class="form-control selectpicker bigdrop" data-style="btn-white" type="hidden" id="supplierId"/>
+							<input ui-select2="select2Options" ng-model="currentInvoice.supplierId" required class="form-control selectpicker bigdrop" data-style="btn-white" type="hidden" id="supplierId"/>
 
 							<span class="input-group-btn add-on">
 				  	  			<button type="button" class="btn btn-primary" ng-click="showModal()"><i class="fa fa-plus"></i></button>
@@ -122,14 +122,14 @@
 				<div class="form-group">
 					<label for="number" class="col-sm-2 control-label">Number</label>
 					<div class="col-sm-10">
-					  <input id="number" required ng-model="myData.currentInvoice.number" class="form-control" type="text">
+					  <input id="number" required ng-model="currentInvoice.number" class="form-control" type="text">
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label for="referenceNumber" class="col-sm-2 control-label">Reference Number</label>
 					<div class="col-sm-10">
-					  <input id="referenceNumber" ng-model="myData.currentInvoice.referenceNumber" required class="form-control" type="text">
+					  <input id="referenceNumber" ng-model="currentInvoice.referenceNumber" required class="form-control" type="text">
 					</div>
 				</div>
 
@@ -137,7 +137,7 @@
 					<label for="date" class="col-sm-2 control-label">Date</label>
 					
 					<div class="col-sm-10">
-						<input class="form-control datepicker" ng-model="myData.currentInvoice.date" type="text" id="date" name="input1"/>
+						<input class="form-control datepicker" ng-model="currentInvoice.date" type="text" id="date" name="input1"/>
 					</div>
 				</div>
 				  
@@ -145,7 +145,7 @@
 					<label for="dueDate" class="col-sm-2 control-label">Due Date</label>
 					<div class="col-sm-10 input-append">
 					  <!-- <p class="input-group"> -->
-					  	<input class="form-control datepicker" ng-model="myData.currentInvoice.dueDate" type="text" id="dueDate" name="input1">
+					  	<input class="form-control datepicker" ng-model="currentInvoice.dueDate" type="text" id="dueDate" name="input1">
 					  	<!-- <span class="input-group-btn add-on"> -->
 					  	  <!-- <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button> -->
 					  	<!-- </span> -->
@@ -186,19 +186,19 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="row in myData.currentInvoice.rows">
+					<tr ng-repeat="row in currentInvoice.rows">
 						<td>
 							{{$index + 1}}
-							<input type="hidden" ng-model="myData.currentInvoice.rows[$index].id">
+							<input type="hidden" ng-model="currentInvoice.rows[$index].id">
 						</td> 
 						<td>
-							<input style="width:100%" ng-model="myData.currentInvoice.rows[$index].description" type="text">
+							<input style="width:100%" ng-model="currentInvoice.rows[$index].description" type="text">
 						</td>
 						<td>
-							<input style="width:100%" ng-model="myData.currentInvoice.rows[$index].pcs" type="text">
+							<input style="width:100%" ng-model="currentInvoice.rows[$index].pcs" type="text">
 						</td>
 						<td>
-							<input style="width:100%" ng-model="myData.currentInvoice.rows[$index].amount" type="text">
+							<input style="width:100%" ng-model="currentInvoice.rows[$index].amount" type="text">
 						</td>
 						<td>
 							{{preciseRound((row.amount*row.pcs), 2)}}
@@ -229,7 +229,7 @@
 						</th>
 						<th>
 							{{
-							(myData.currentInvoice.rows.length == 0) ? '0.00' : preciseRound(getTotalAmountForInvoice(), 2)
+							(currentInvoice.rows.length == 0) ? '0.00' : preciseRound(getTotalAmountForInvoice(), 2)
 							}}
 						</th>
 						<th>

@@ -4,15 +4,13 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
     
     scope.toDelete = null;
 
-    scope.myData = {
         
-        invoiceList:[],
-        invoiceListState: 'open',
-        invoiceListSort: 'id',
-        invoiceListDirection: 'desc',
-        invoiceListPage: 1
+    invoiceList = [];
+    invoiceListState = 'open';
+    invoiceListSort = 'id';
+    invoiceListDirection = 'desc';
+    invoiceListPage = 1;
         
-    };
 
     scope.select2Options = 
      {
@@ -49,7 +47,7 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
     scope.setSuppliers = function () {
         SI.query({
             state: 'open',
-            //labels: scope.myData.labels,
+            //labels: scope.labels,
             sort: false,
             direction: 'asc'
         }, function (data) {
@@ -58,18 +56,18 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
     }
 
     scope.setSort = function(sort) {
-        var oldSort = angular.copy(scope.myData.invoiceListSort);
-        scope.myData.invoiceListSort = sort;
+        var oldSort = angular.copy(scope.invoiceListSort);
+        scope.invoiceListSort = sort;
 
         if (oldSort == sort) {
-            scope.setDirection(scope.myData.invoiceListDirection == 'desc' ? 'asc' : 'desc');
+            scope.setDirection(scope.invoiceListDirection == 'desc' ? 'asc' : 'desc');
         } else {
             scope.setDirection('desc');
         }
     }
 
     scope.setDirection = function (direction) {
-        scope.myData.invoiceListDirection = direction;
+        scope.invoiceListDirection = direction;
         scope.setInvoiceList();
     };
 
@@ -81,14 +79,14 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
         }
 
         AI.query({
-            // state: scope.myData.invoiceListState,
-            //labels: scope.myData.labels,
-            sort: scope.myData.invoiceListSort,
-            direction: scope.myData.invoiceListDirection,
+            // state: scope.invoiceListState,
+            //labels: scope.labels,
+            sort: scope.invoiceListSort,
+            direction: scope.invoiceListDirection,
             filters:angular.toJson(filters),
-			page: scope.myData.invoiceListPage,
+			page: scope.invoiceListPage,
         }, function (data) {
-            scope.myData.invoiceList = data.items;
+            scope.invoiceList = data.items;
 			scope.invoiceListLinks = data._links;
 			scope.invoiceListPaging = data._meta;
         });
@@ -110,7 +108,7 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
     }
 	
 	scope.updateIncoiceList = function (index) {
-		scope.myData.invoiceListPage = index;
+		scope.invoiceListPage = index;
 		scope.setInvoiceList();
 	}
 

@@ -6,27 +6,27 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
     scope.newSupplier = {};
     scope.counter = 0;
 
-    scope.myData.currentInvoice = {
+    scope.currentInvoice = {
         rows:[]
     };
 
     scope.addRow = function() {
-        if (scope.myData.currentInvoice.rows === undefined) scope.myData.currentInvoice.rows = [];
-        scope.myData.currentInvoice.rows.push({ id: null, amount:null, pcs:null}); 
+        if (scope.currentInvoice.rows === undefined) scope.currentInvoice.rows = [];
+        scope.currentInvoice.rows.push({ id: null, amount:null, pcs:null}); 
     }
     
     scope.unsetRow = function(i) {
         
-        if (scope.myData.currentInvoice.rows[i].id) {
-            scope.myData.toDelete.push({id:scope.myData.currentInvoice.rows[i].id});
+        if (scope.currentInvoice.rows[i].id) {
+            scope.toDelete.push({id:scope.currentInvoice.rows[i].id});
         }
 
-        scope.myData.currentInvoice.rows.splice(i, 1);
+        scope.currentInvoice.rows.splice(i, 1);
     }
 
     scope.update = function() {
 
-        var params =  jQuery.extend({}, scope.myData.currentInvoice);
+        var params =  jQuery.extend({}, scope.currentInvoice);
      
         var dateFields = ['date', 'dueDate'];
 
@@ -46,7 +46,7 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
             });
         } else if (scope.mode == 'update') {
 
-            params.toDelete = scope.myData.toDelete;
+            params.toDelete = scope.toDelete;
 
             AI.updateInvoice(params, function (data) {
                 scope.setInvoiceList();
@@ -85,8 +85,8 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
                 }
             }
 
-            scope.myData.currentInvoice = data;
-            scope.myData.currentInvoice.supplierId = parseInt(data.supplierId);
+            scope.currentInvoice = data;
+            scope.currentInvoice.supplierId = parseInt(data.supplierId);
 
             angular.element('#attachmentsFrame').attr('src', yiiApp.url+'/invoice-in/attachments?invoiceInId='+data.id);
         });
@@ -97,7 +97,7 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
         SI.createSupplier(params, function (data) {
             scope.setSuppliers();
             scope.closeModal();
-            scope.myData.currentInvoice.supplierId = parseInt(data.id);
+            scope.currentInvoice.supplierId = parseInt(data.id);
             notify('success', 'Supplier added');
         });
     }
@@ -123,10 +123,10 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
 	
 		var total = 0;
 		
-        if (scope.myData.currentInvoice.rows === undefined) scope.myData.currentInvoice.rows = [];
+        if (scope.currentInvoice.rows === undefined) scope.currentInvoice.rows = [];
 		
-        for(var i = 0; i < scope.myData.currentInvoice.rows.length; i++){
-			var row = scope.myData.currentInvoice.rows[i];
+        for(var i = 0; i < scope.currentInvoice.rows.length; i++){
+			var row = scope.currentInvoice.rows[i];
 			total += (row.amount * row.pcs);
 		}
 

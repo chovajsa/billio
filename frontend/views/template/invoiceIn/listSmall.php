@@ -1,4 +1,4 @@
-<div class="col-md-4 ui-sortable" ng-show="myData.currentInvoice != null">
+<div class="col-md-4 ui-sortable" ng-show="currentInvoice != null">
 
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
@@ -24,7 +24,7 @@
 					</tr>
 				</thead>
 				<tbody>
-		            <tr ng-repeat="invoice in myData.invoiceList | filter:filterText">
+		            <tr ng-repeat="invoice in invoiceList | filter:filterText">
 		                <td>
 							<a href="#update/{{invoice.id}}">{{invoice.id}}</a>
 		                </td>
