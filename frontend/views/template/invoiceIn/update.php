@@ -168,17 +168,23 @@
 						<th width="5%">
 							#
 						</th> 
-						<th width="55%">
+						<th width="40%">
 							Text
 						</th>
 						<th width="10%">
 							Amount (Pcs)
 						</th>
-						<th width="15%">
+						<th width="10%">
 							Amount (EUR)
 						</th>
-						<th width="15%">
+						<th width="10%">
 							Amount Total
+						</th>
+						<th width="10%">
+							VAT (%)
+						</th>
+						<th width="15%">
+							Amount Total + VAT
 						</th>
 						<th>
 							&nbsp;
@@ -204,6 +210,12 @@
 							{{preciseRound((row.amount*row.pcs), 2)}}
 						</td>
 						<td>
+							<input style="width:100%" ng-model="myData.currentInvoice.rows[$index].vat" type="text">
+						</td>
+						<td>
+							{{preciseRound(((row.amount*row.pcs)*(row.vat/100))+(row.amount*row.pcs), 2)}}
+						</td>
+						<td>
 							<a href="javascript:void(0)" ng-click="unsetRow($index)">
 							<span class="fa-stack fa-sm text-danger">
 								<i class="fa fa-circle fa-stack-2x"></i>
@@ -215,24 +227,56 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<th>
-							&nbsp;
-						</th> 
-						<th>
+						<th colspan="8">
 							&nbsp;
 						</th>
-						<th>
+					</tr>
+					<tr>
+						<th colspan="4">
 							&nbsp;
 						</th>
-						<th>
-							&nbsp;
+						<th colspan="2">
+							Total amount
 						</th>
 						<th>
 							{{
-							(currentInvoice.rows.length == 0) ? '0.00' : preciseRound(getTotalAmountForInvoice(), 2)
+							(myData.currentInvoice.rows.length == 0) ? '0.00' : preciseRound(getTotalAmountForInvoice(), 2)
 							}}
 						</th>
 						<th>
+							&nbsp;
+						</th>
+					</tr>
+					<tr>
+						<th colspan="4">
+							&nbsp;
+						</th>
+						<th colspan="2">
+							Total VAT
+						</th>
+						<th>
+							{{
+							(myData.currentInvoice.rows.length == 0) ? '0.00' : preciseRound(getTotalVatForInvoice(), 2)
+							}}
+						</th>
+						<th>
+							&nbsp;
+						</th>
+					</tr>
+					<tr>
+						<th colspan="4">
+							&nbsp;
+						</th>
+						<th colspan="2">
+							Total amount + VAT
+						</th>
+						<th>
+							{{
+							(currentInvoice.rows.length == 0) ? '0.00' : preciseRound(getTotalAmountVatForInvoice(), 2)
+							}}
+						</th>
+						<th>
+							&nbsp;
 						</th>
 					</tr>
 				</tfoot>

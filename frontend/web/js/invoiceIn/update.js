@@ -134,6 +134,32 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
 	
 	};
 	
+	scope.getTotalAmountVatForInvoice = function() {
+	
+		var total = 0;
+		if (scope.currentInvoice.rows === undefined) scope.currentInvoice.rows = [];
+		for(var i = 0; i < scope.currentInvoice.rows.length; i++){
+			var row = scope.currentInvoice.rows[i];
+			total += ((row.amount * row.pcs)*(row.vat/100))+(row.amount * row.pcs);
+		}
+        
+		return total;
+	
+	};
+	
+	scope.getTotalVatForInvoice = function() {
+	
+		var total = 0;
+		if (scope.currentInvoice.rows === undefined) scope.currentInvoice.rows = [];
+		for(var i = 0; i < scope.currentInvoice.rows.length; i++){
+			var row = scope.currentInvoice.rows[i];
+			total += (row.amount * row.pcs)*(row.vat/100);
+		}
+        
+		return total;
+	
+	};
+	
 	scope.preciseRound = function(num,decimals) {
 		return (Math.round(num * Math.pow(10, decimals)) / Math.pow(10, decimals)).toFixed(decimals);
 	}
