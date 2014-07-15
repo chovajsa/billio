@@ -1,5 +1,4 @@
 <?php 
-
 use vendor\angular;
 
 $depends = [
@@ -11,15 +10,15 @@ $depends = [
 
 ?>
 
-<?php $this->registerJsFile('@web/js/invoiceIn/app.js', $depends);?>
-<?php $this->registerJsFile('@web/js/invoiceIn/providers.js', $depends);?>
-<?php $this->registerJsFile('@web/js/invoiceIn/list.js', $depends);?>
-<?php $this->registerJsFile('@web/js/invoiceIn/create.js', $depends);?>
-<?php $this->registerJsFile('@web/js/invoiceIn/update.js', $depends);?>
-<?php $this->registerJsFile('@web/js/invoiceIn/routes.js', $depends);?>
+<?php $this->registerJsFile('@web/js/orderIn/app.js', $depends);?>
+<?php $this->registerJsFile('@web/js/orderIn/providers.js', $depends);?>
+<?php $this->registerJsFile('@web/js/orderIn/list.js', $depends);?>
+<?php $this->registerJsFile('@web/js/orderIn/create.js', $depends);?>
+<?php $this->registerJsFile('@web/js/orderIn/update.js', $depends);?>
+<?php $this->registerJsFile('@web/js/orderIn/routes.js', $depends);?>
 
 
-<div ng-app="invoiceIn">
+<div ng-app="orderIn">
 
 <div>
 
@@ -30,7 +29,7 @@ $depends = [
 	<!-- begin #content -->
 	<div id="content" class="content">
 
-		<h1 class="page-header"> Incoming Invoices <!-- <small>header small text goes here...</small> --></h1>
+		<h1 class="page-header"> Incoming Orders <!-- <small>header small text goes here...</small> --></h1>
 	  
 	  	<div class="alert alert-success fade in m-b-15" id="notify-success" style="display:none">
 			<span class="msg"></span>
@@ -41,7 +40,7 @@ $depends = [
 			<div class="col-md-4 ui-sortable">
 				<form>
 		            <div class="input-group m-b-15">
-		                <input type="text" class="form-control input-sm input-white" placeholder="Search Invoices">
+		                <input type="text" class="form-control input-sm input-white" placeholder="Search Orders">
 		                <span class="input-group-btn">
 		                    <button class="btn btn-sm btn-inverse" type="button"><i class="fa fa-search"></i></button>
 		                </span>

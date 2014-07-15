@@ -4,6 +4,11 @@
 
 ?>
 
+<?php 
+  
+
+?>
+
 <!-- begin #sidebar -->
 <div id="sidebar" class="sidebar">
   <!-- begin sidebar scrollbar -->
@@ -13,31 +18,28 @@
     <ul class="nav">
       <li class="nav-header">Navigation</li>
 
-      <li class="has-sub active">
+      <li class="has-sub <?=strpos($route, 'invoice') !== false ? 'active' : '';?>">
         <a href="javascript:;">
           <b class="caret pull-right"></b>
           <span>Invoices</span>
         </a>
 
         <ul class="sub-menu">
-          <li class="active"><a href="<?=Url::to('invoice-in/index');?>">Incoming</a></li>
-          <li><a href="<?=Url::to('invoiceOut/index');?>">Outgoing</a></li>
+          <li <?=$route == 'invoice-in/index' ? 'class="active"' : '';?>><a href="<?=Url::to('invoice-in/index');?>">Incoming</a></li>
         </ul>
       </li>
 
-      <li class="has-sub">
+      <li class="has-sub <?=strpos($route, 'order') !== false ? 'active' : '';?>">
         <a href="javascript:;">
           <b class="caret pull-right"></b>
           <span>Orders</span>
         </a>
 
         <ul class="sub-menu">
-          <li><a href="<?=Url::to('invoice-in/index');?>">Incoming</a></li>
-          <li><a href="<?=Url::to('invoiceOut/index');?>">Outgoing</a></li>
+          <li <?=$route == 'order-in/index' ? 'class="active"' : '';?>><a href="<?=Url::to('order-in/index');?>">Incoming</a></li>
+          <!-- <li><a href="<?=Url::to('invoiceOut/index');?>">Outgoing</a></li> -->
         </ul>
       </li>
-
-      
 
        <li class="has-sub">
         <a href="javascript:;">
