@@ -240,7 +240,7 @@
 						</th>
 						<th>
 							{{
-							(currentInvoice.rows.length == 0) ? '0.00' : preciseRound(getTotalAmountForInvoice(), 2)
+							(currentOrder.rows.length == 0) ? '0.00' : preciseRound(getTotalAmountForOrder(), 2)
 							}}
 						</th>
 						<th>
@@ -256,7 +256,7 @@
 						</th>
 						<th>
 							{{
-							(currentInvoice.rows.length == 0) ? '0.00' : preciseRound(getTotalVatForInvoice(), 2)
+							(currentOrder.rows.length == 0) ? '0.00' : preciseRound(getTotalVatForOrder(), 2)
 							}}
 						</th>
 						<th>
@@ -272,7 +272,7 @@
 						</th>
 						<th>
 							{{
-							(currentInvoice.rows.length == 0) ? '0.00' : preciseRound(getTotalAmountVatForInvoice(), 2)
+							(currentOrder.rows.length == 0) ? '0.00' : preciseRound(getTotalAmountVatForOrder(), 2)
 							}}
 						</th>
 						<th>

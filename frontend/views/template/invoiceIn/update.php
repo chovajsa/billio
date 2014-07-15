@@ -210,7 +210,7 @@
 							{{preciseRound((row.amount*row.pcs), 2)}}
 						</td>
 						<td>
-							<input style="width:100%" ng-model="myData.currentInvoice.rows[$index].vat" type="text">
+							<input style="width:100%" ng-model="currentInvoice.rows[$index].vat" type="text">
 						</td>
 						<td>
 							{{preciseRound(((row.amount*row.pcs)*(row.vat/100))+(row.amount*row.pcs), 2)}}
@@ -240,7 +240,7 @@
 						</th>
 						<th>
 							{{
-							(myData.currentInvoice.rows.length == 0) ? '0.00' : preciseRound(getTotalAmountForInvoice(), 2)
+							(currentInvoice.rows.length == 0) ? '0.00' : preciseRound(getTotalAmountForInvoice(), 2)
 							}}
 						</th>
 						<th>
@@ -256,7 +256,7 @@
 						</th>
 						<th>
 							{{
-							(myData.currentInvoice.rows.length == 0) ? '0.00' : preciseRound(getTotalVatForInvoice(), 2)
+							(currentInvoice.rows.length == 0) ? '0.00' : preciseRound(getTotalVatForInvoice(), 2)
 							}}
 						</th>
 						<th>
