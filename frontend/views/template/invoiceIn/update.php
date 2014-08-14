@@ -73,7 +73,7 @@
 		</div>
 		  
 	    <div class="panel-body">
-			<form class="form-horizontal" role="form">
+			<form class="form-horizontal" role="form" name="form" ng-submit="update(form.$valid)" novalidate>
 
 				<div class="row">
 				<div class="col-sm-6">
@@ -102,7 +102,7 @@
 				</div>
 				
 				<div class="form-group">
-				<label for="supplierId" class="col-sm-2 control-label">Supplier</label>
+					<label for="supplierId" class="col-sm-2 control-label">Supplier</label>
 					<div class="col-sm-10">
 						<p class="input-group">
 							<!-- <select id="supplierId" required class="form-control selectpicker nyaSelectpicker" data-style="btn-white" data-ajax-url="<?=Url::base();?>/api/supplier" data-live-search="true" data-ajax-search="true" data-size="10" ng-options="supplier.id as supplier.address.name for supplier in suppliers" ng-model="currentInvoice.supplierId">
@@ -110,7 +110,7 @@
 								<option value=""> Please select </option>
 							</select> -->
 
-							<input ui-select2="select2Options" ng-model="currentInvoice.supplierId" required class="form-control selectpicker bigdrop" data-style="btn-white" type="hidden" id="supplierId"/>
+							<input ui-select2="select2Options" ng-model="currentInvoice.supplier" required class="form-control selectpicker bigdrop" data-style="btn-white" type="hidden" id="supplierId"/>
 
 							<span class="input-group-btn add-on">
 				  	  			<button type="button" class="btn btn-primary" ng-click="showModal()"><i class="fa fa-plus"></i></button>
@@ -122,14 +122,30 @@
 				<div class="form-group">
 					<label for="number" class="col-sm-2 control-label">Number</label>
 					<div class="col-sm-10">
-					  <input id="number" required ng-model="currentInvoice.number" class="form-control" type="text">
+					  	<input id="number" name="number" required ng-model="currentInvoice.number" class="form-control" type="number">
+					  	
+					  	<ul class="error-list" ng-show="(form.submitted || form.number.$dirty) && form.number.$invalid" style="display: block;">
+					  		
+				  			<li ng-show="form.number.$error.required" class="required"  style="display: list-item;">
+					  			Please enter a valid number.
+				  			</li>
+			  			</ul>
+				
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label for="referenceNumber" class="col-sm-2 control-label">Reference Number</label>
 					<div class="col-sm-10">
-					  <input id="referenceNumber" ng-model="currentInvoice.referenceNumber" required class="form-control" type="text">
+
+					  <input id="referenceNumber" name="referenceNumber" ng-model="currentInvoice.referenceNumber" required class="form-control" type="number">
+
+					  	<ul class="error-list" ng-show="(form.submitted || form.referenceNumber.$dirty) && form.referenceNumber.$invalid" style="display: block;">
+				  			<li ng-show="form.referenceNumber.$error.required" class="required"  style="display: list-item;">
+					  			Please enter a valid number.
+				  			</li>
+			  			</ul>
+
 					</div>
 				</div>
 
@@ -137,7 +153,14 @@
 					<label for="date" class="col-sm-2 control-label">Date</label>
 					
 					<div class="col-sm-10">
-						<input class="form-control datepicker" ng-model="currentInvoice.date" type="text" id="date" name="input1"/>
+						<input class="form-control datepicker" required  ng-model="currentInvoice.date" type="text" id="date" name="date"/>
+
+						<ul class="error-list" ng-show="(form.submitted || form.date.$dirty) && form.date.$invalid" style="display: block;">
+					  		
+				  			<li ng-show="form.date.$error.required" class="required"  style="display: list-item;">
+					  			Please enter a valid date.
+				  			</li>
+			  			</ul>
 					</div>
 				</div>
 				  
@@ -145,7 +168,7 @@
 					<label for="dueDate" class="col-sm-2 control-label">Due Date</label>
 					<div class="col-sm-10 input-append">
 					  <!-- <p class="input-group"> -->
-					  	<input class="form-control datepicker" ng-model="currentInvoice.dueDate" type="text" id="dueDate" name="input1">
+					  	<input class="form-control datepicker" required ng-model="currentInvoice.dueDate" type="text" id="dueDate" name="dueDate">
 					  	<!-- <span class="input-group-btn add-on"> -->
 					  	  <!-- <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button> -->
 					  	<!-- </span> -->
@@ -300,7 +323,7 @@
 
 	<div class="panel">
 		<div class="panel-body">
-			<input type="button" ng-click="update()" class="btn btn-primary" value="Save">	
+			<input type="submit" ng-click="update()" class="btn btn-primary" value="Save">	
 		</div>
 	</div>
 </div>

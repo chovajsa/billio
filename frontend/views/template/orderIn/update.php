@@ -300,7 +300,7 @@
 
 	<div class="panel">
 		<div class="panel-body">
-			<input type="button" ng-click="update()" class="btn btn-primary" value="Save">	
+			<input type="button" ng-click="update() && submitted=true" class="btn btn-primary" value="Save">	
 		</div>
 	</div>
 </div>

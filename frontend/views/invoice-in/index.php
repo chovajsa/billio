@@ -12,10 +12,11 @@ $depends = [
 ?>
 
 <?php $this->registerJsFile('@web/js/invoiceIn/app.js', $depends);?>
-<?php $this->registerJsFile('@web/js/invoiceIn/providers.js', $depends);?>
-<?php $this->registerJsFile('@web/js/invoiceIn/list.js', $depends);?>
-<?php $this->registerJsFile('@web/js/invoiceIn/create.js', $depends);?>
-<?php $this->registerJsFile('@web/js/invoiceIn/update.js', $depends);?>
+<?php $this->registerJsFile('@web/js/invoiceIn/invoiceFactory.js', $depends);?>
+<?php $this->registerJsFile('@web/js/invoiceIn/supplierFactory.js', $depends);?>
+<?php $this->registerJsFile('@web/js/invoiceIn/listController.js', $depends);?>
+<?php $this->registerJsFile('@web/js/invoiceIn/createController.js', $depends);?>
+<?php $this->registerJsFile('@web/js/invoiceIn/updateController.js', $depends);?>
 <?php $this->registerJsFile('@web/js/invoiceIn/routes.js', $depends);?>
 
 
@@ -24,7 +25,7 @@ $depends = [
 <div>
 
 	<?php 
-	echo frontend\widgets\SideBar::widget([]);
+		echo frontend\widgets\SideBar::widget([]);
 	?>
 
 	<!-- begin #content -->

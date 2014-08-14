@@ -2282,6 +2282,7 @@ the specific language governing permissions and limitations under the Apache Lic
                     }
                 });
             }
+            
         },
 
         isPlaceholderOptionSelected: function() {
