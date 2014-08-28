@@ -26,6 +26,7 @@ return [
 
         'request'=> [
             'enableCsrfValidation' => false,
+            'cookieValidationKey' => 'xxx'
         ],
 
         'log' => [
