@@ -109,13 +109,13 @@ class InvoiceInController extends ActiveRestController
                 } else 
                 foreach ($invoiceIn->rows as $row) {
                     if ($prow['id'] == $row->id) {
-                            $row->setAttributes($prow, '');
-                       
-                            $row->amountTotal = $row->pcs * $row->amount;
-                            $row->amountTotalVat = $row->amountTotal + $row->vat * $row->pcs;
-                            $row->save();
+                        $row->setAttributes($prow, '');
+                   
+                        $row->amountTotal = $row->pcs * $row->amount;
+                        $row->amountTotalVat = $row->amountTotal + $row->vat * $row->pcs;
+                        $row->save();
 
-                            $row->save();
+                        $row->save();
                     }
                 }
             }
@@ -153,7 +153,6 @@ class InvoiceInController extends ActiveRestController
 	public function actionIndex() {
     	
         $dataProvider = $this->prepareDataProvider('supplier');
-
 
         return $dataProvider;
     }

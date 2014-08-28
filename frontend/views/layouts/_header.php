@@ -55,11 +55,11 @@ AppAsset::register($this);
         <!-- </div> -->
       </div>
 
-      <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+      <!-- <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-      </button>
+      </button> -->
     </div>
     <!-- end mobile sidebar expand / collapse button -->
     
@@ -74,12 +74,12 @@ AppAsset::register($this);
           </div>
         </form>
       </li>
-      <li class="dropdown">
+<!--       <li class="dropdown">
         <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">
           <i class="fa fa-bell-o"></i>
           <span class="label">5</span>
         </a>
-      </li>
+      </li> -->
       <li class="dropdown navbar-user">
         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
           <span class="hidden-xs">
@@ -88,11 +88,11 @@ AppAsset::register($this);
         </a>
         <ul class="dropdown-menu animated fadeInLeft">
           <li class="arrow"></li>
-          <li><a href="javascript:;">Edit Profile</a></li>
-          <li><a href="javascript:;"><span class="badge badge-danger pull-right">2</span> Inbox</a></li>
-          <li><a href="javascript:;">Calendar</a></li>
-          <li><a href="javascript:;">Setting</a></li>
-          <li class="divider"></li>
+          <!-- <li><a href="javascript:;">Edit Profile</a></li> -->
+          <!-- <li><a href="javascript:;"><span class="badge badge-danger pull-right">2</span> Inbox</a></li> -->
+          <!-- <li><a href="javascript:;">Calendar</a></li> -->
+          <!-- <li><a href="javascript:;">Setting</a></li> -->
+          <!-- <li class="divider"></li> -->
           <li><a href="<?=Url::to('site/logout');?>">Log Out</a></li>
         </ul>
       </li>

@@ -29,5 +29,6 @@ class AppAsset extends AssetBundle
         '\frontend\assets\angularstrap\AngularstrapAsset',
         '\frontend\assets\admintemplate\AdminAsset',
         '\frontend\assets\angular\AngularAsset',
+        '\frontend\assets\select2\SelectAsset',
     ];
 }

@@ -2,22 +2,16 @@
 namespace common\models;
 
 use yii\base\NotSupportedException;
-use yii\db\ActiveRecord;
-
+use common\models\AppActiveRecord;
 /**
  * Supplier model
  *
  */
-class Supplier extends ActiveRecord
+class Supplier extends AppActiveRecord
 {
 
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-        ];
+    public static function getFulltextAttributes() {
+        return ['name'];
     }
 
     /**

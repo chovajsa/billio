@@ -56,7 +56,9 @@ class ActiveRestController extends ActiveController {
             ],
         ]);
 
-
+        if ($andWhere = $this->getFulltextCondition($modelClass)) {
+            $dataProvider->query->andWhere($andWhere);
+        }        
 
         if (isset($_GET['filters'])) {
             $filters = json_decode($_GET['filters']);
@@ -69,6 +71,25 @@ class ActiveRestController extends ActiveController {
         
         return $dataProvider;
     }
+
+    protected function getFulltextCondition($modelClass) {
+        $andWhere = '';
+        if (isset($_GET['fulltext']) && !empty($modelClass::getFulltextAttributes())) {
+            $andWhere = '(';
+
+            $fulltextAttributes = $modelClass::getFulltextAttributes();
+            foreach ($fulltextAttributes as $n=>$attribute) {
+                $andWhere .= "$attribute LIKE '%{$_GET['fulltext']}%'";
+
+                if ($n+1 < count($fulltextAttributes)) $andWhere .= ' OR ';
+            }
+
+            $andWhere .= ')';
+        }
+        return $andWhere;
+    }
+
+
 
 }
 ?>

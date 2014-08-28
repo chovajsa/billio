@@ -70,7 +70,14 @@
 
             this.checkDisabled();
             this.clickListener();
-            if (this.options.liveSearch) this.liveSearchListener();
+            if (this.options.liveSearch) {
+                if (this.options.ajaxSearch) 
+                {
+                    this.ajaxLiveSearchListener();
+                } else {
+                    this.liveSearchListener();
+                } 
+            }
             this.render();
             this.liHeight();
             this.setStyle();
@@ -517,7 +524,7 @@
                 }
             });
 
-            this.$menu.on('click', 'li a', function(e) {
+            this.$menu.delegate('click', 'li a', function(e) {
                 var clickedIndex = $(this).parent().index(),
                     prevValue = that.$element.val(),
                     prevIndex = that.$element.prop('selectedIndex');
@@ -693,6 +700,74 @@
               that.$menu.find('.active').removeClass('active');
             });
         },
+
+        ajaxLiveSearchListener: function() {
+            var that = this,
+                no_results = $('<li class="no-results"></li>');
+
+            this.$newElement.on('click.dropdown.data-api', function() {
+                that.$menu.find('.active').removeClass('active');
+                if (!!that.$searchbox.val()) {
+                    that.$searchbox.val('');
+                    that.$lis.not('.is-hidden').removeClass('hide');
+                    if (!!no_results.parent().length) no_results.remove();
+                }
+                if (!that.multiple) that.$menu.find('.selected').addClass('active');
+                setTimeout(function() {
+                    that.$lis.remove();
+                }, 10);
+            });
+
+            this.$searchbox.on('input propertychange', function() {
+                var v = that.$searchbox.val();
+
+                if (v) {
+                    $.get(that.options.ajaxUrl, {fulltext:v}, function(j) {
+                        that.$element.find('option').remove();
+                        that.$menu.find('li').remove();
+
+                        for (var i in j.items) {
+                            that.$element.append('<option value="'+j.items[i].id+'"> '+j.items[i].address.name+' </option');
+                        }
+
+                        var li = that.createLi();
+                        that.$menu.append(li);
+                        that.render(true);
+                        that.clickListener();
+
+                    }, 'json');
+
+                    that.$lis.not('.is-hidden').removeClass('hide').find('a').not(':icontains(' + that.$searchbox.val() + ')').parent().addClass('hide');
+                    
+                    if (!that.$menu.find('li').filter(':visible:not(.no-results)').length) {
+                        if (!!no_results.parent().length) no_results.remove();
+                        no_results.html(that.options.noneResultsText + ' "'+ that.$searchbox.val() + '"').show();
+                        that.$menu.find('li').last().after(no_results);
+                    } else if (!!no_results.parent().length) {
+                        no_results.remove();
+                    }
+
+                } else {
+                    that.$lis.not('.is-hidden').removeClass('hide');
+                    if (!!no_results.parent().length) no_results.remove();
+                }
+
+                that.$menu.find('li.active').removeClass('active');
+                that.$menu.find('li').filter(':visible:not(.divider)').eq(0).addClass('active').find('a').focus();
+                $(this).focus();
+
+            });
+            
+            this.$menu.on('mouseenter', 'a', function(e) {
+              that.$menu.find('.active').removeClass('active');
+              $(e.currentTarget).parent().not('.disabled').addClass('active');
+            });
+            
+            this.$menu.on('mouseleave', 'a', function() {
+              that.$menu.find('.active').removeClass('active');
+            });
+        }
+        ,
 
         val: function(value) {
 

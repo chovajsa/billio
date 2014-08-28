@@ -2,25 +2,15 @@
 namespace common\models;
 
 use yii\base\NotSupportedException;
-use yii\db\ActiveRecord;
+use common\models\AppActiveRecord;
 
 
 /**
  * Invoice In model
  *
  */
-class InvoiceIn extends ActiveRecord
+class InvoiceIn extends AppActiveRecord
 {
-
-
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-        ];
-    }
 
     public static function tableName() {
         return 'invoiceIn';
@@ -57,14 +47,6 @@ class InvoiceIn extends ActiveRecord
         return ['supplierId', 'date', 'number', 'dueDate', 'referenceNumber'];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getId()
-    {
-        return $this->getPrimaryKey();
-    }
-
 
     public function getAttachments() {
         $entries = [];
@@ -91,7 +73,7 @@ class InvoiceIn extends ActiveRecord
         $rows = $this->getRows()->all();
         $return['rows'] = [];
         foreach ($rows as $row) {
-          $return['rows'] = $row->toArray();  
+          $return['rows'][] = $row->toArray();  
         }
 
         if ($user = $this->user) {

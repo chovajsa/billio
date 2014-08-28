@@ -27,7 +27,7 @@
 					</tr>
 				</thead>
 				<tbody>
-		            <tr ng-repeat="invoice in myData.invoiceList | filter:filterText">
+		            <tr ng-repeat="invoice in invoiceList | filter:filterText">
 		                <td>
 							<a href="#update/{{invoice.id}}">{{invoice.id}}</a>
 		                </td>
@@ -43,6 +43,20 @@
 					</tr>
 				</tbody>
 			</table>
+			<ul class="pagination m-t-0 m-b-10">
+				<li>
+					<a href="javascript:;" ng-click="updateIncoiceList(1)">«</a>
+				</li>
+				<li 
+					ng-repeat="a in numberOfRepeats(invoiceListPaging.pageCount) track by $index"
+					class="{{(invoiceListPaging.currentPage == $index) ? 'active' : ''}}"
+				>
+					<a href="javascript:;"  ng-click="updateIncoiceList($index+1)">{{$index+1}}</a>
+				</li>
+				<li>
+					<a ng-click="updateIncoiceList(invoiceListPaging.pageCount)" href="javascript:;">»</a>
+				</li>
+			</ul>
 		</div>
 	</div>
 </div> 
@@ -54,23 +68,23 @@
 				New Invocie
 			</h4>
 			<h4 class="panel-title" ng-show="mode == 'update'"> 
-				Update Invocie {{myData.currentInvoice.id}}
+				Update Invocie {{currentInvoice.id}}
 			</h4>
 		</div>
 		  
 	    <div class="panel-body">
-			<form class="form-horizontal" role="form">
+			<form class="form-horizontal" role="form" name="form" ng-submit="update(form.$valid)" novalidate>
 
 				<div class="row">
 				<div class="col-sm-6">
 				<ul class="media-list media-list-with-divider">
 					<li class="media">
 						<div class="media-body">
-							<h4 class="media-heading">Created by : {{myData.currentInvoice.createdByUserName}} </h4>
+							<h4 class="media-heading">Created by : {{currentInvoice.createdByUserName}} </h4>
 							<p>
 								<dl>
 									<dt>Created on : 
-									{{myData.currentInvoice.createdDate | euroDateFilter}} </dt>
+									{{currentInvoice.createdDate | euroDateFilter}} </dt>
 								</dl>
 							</p>
 						</div>
@@ -79,7 +93,7 @@
 				</div>
 					<div class="col-sm-6 text-right" style="padding-right:5px">
 						<p>
-							<a href="javascript:;" ng-click="delete(myData.currentInvoice.id)" class="btn btn-sm btn-danger">Delete</a>
+							<a href="javascript:;" ng-click="delete(currentInvoice.id)" class="btn btn-sm btn-danger">Delete</a>
 					  		
 					        <!-- <a href="javascript:;" class="btn btn-sm btn-primary m-r-5">Approve</a> -->
 					        <!-- <a href="javascript:;" class="btn btn-sm btn-danger">Reject</a> -->
@@ -88,43 +102,65 @@
 				</div>
 				
 				<div class="form-group">
-				<label for="supplierId" class="col-sm-2 control-label">Supplier</label>
+					<label for="supplierId" class="col-sm-2 control-label">Supplier</label>
 					<div class="col-sm-10">
 						<p class="input-group">
-							<select id="supplierId" required class="form-control selectpicker nyaSelectpicker" data-style="btn-white" data-live-search="true" data-size="10" ng-model="myData.currentInvoice.supplierId" ng-options="supplier.id as supplier.address.name for supplier in suppliers">
+							<!-- <select id="supplierId" required class="form-control selectpicker nyaSelectpicker" data-style="btn-white" data-ajax-url="<?=Url::base();?>/api/supplier" data-live-search="true" data-ajax-search="true" data-size="10" ng-options="supplier.id as supplier.address.name for supplier in suppliers" ng-model="currentInvoice.supplierId">
+								
 								<option value=""> Please select </option>
-							</select>
+							</select> -->
+
+							<input ui-select2="select2Options" ng-model="currentInvoice.supplier" required class="form-control selectpicker bigdrop" data-style="btn-white" type="hidden" id="supplierId"/>
+
 							<span class="input-group-btn add-on">
 				  	  			<button type="button" class="btn btn-primary" ng-click="showModal()"><i class="fa fa-plus"></i></button>
 						  	</span>
 						</p>
 					</div>
 				</div>
-
+	
 				<div class="form-group">
 					<label for="number" class="col-sm-2 control-label">Number</label>
 					<div class="col-sm-10">
-					  <input id="number" required ng-model="myData.currentInvoice.number" class="form-control" type="text">
+					  	<input id="number" name="number" required ng-model="currentInvoice.number" class="form-control" type="number">
+					  	
+					  	<ul class="error-list" ng-show="(form.submitted || form.number.$dirty) && form.number.$invalid" style="display: block;">
+					  		
+				  			<li ng-show="form.number.$error.required" class="required"  style="display: list-item;">
+					  			Please enter a valid number.
+				  			</li>
+			  			</ul>
+				
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label for="referenceNumber" class="col-sm-2 control-label">Reference Number</label>
 					<div class="col-sm-10">
-					  <input id="referenceNumber" ng-model="myData.currentInvoice.referenceNumber" required class="form-control" type="text">
+
+					  <input id="referenceNumber" name="referenceNumber" ng-model="currentInvoice.referenceNumber" required class="form-control" type="number">
+
+					  	<ul class="error-list" ng-show="(form.submitted || form.referenceNumber.$dirty) && form.referenceNumber.$invalid" style="display: block;">
+				  			<li ng-show="form.referenceNumber.$error.required" class="required"  style="display: list-item;">
+					  			Please enter a valid number.
+				  			</li>
+			  			</ul>
+
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label for="date" class="col-sm-2 control-label">Date</label>
 					
-					<div class="col-sm-10 ui-append">
-						<div class="input-group date">
-						<input class="form-control datepicker" ng-model="myData.currentInvoice.date" type="text" id="date" name="input1"/>
-						<span class="input-group-addon">
-							<i class="fa fa-calendar"></i>
-						</span>
-						</div>
+					<div class="col-sm-10">
+						<input class="form-control datepicker" required  ng-model="currentInvoice.date" type="text" id="date" name="date"/>
+
+						<ul class="error-list" ng-show="(form.submitted || form.date.$dirty) && form.date.$invalid" style="display: block;">
+					  		
+				  			<li ng-show="form.date.$error.required" class="required"  style="display: list-item;">
+					  			Please enter a valid date.
+				  			</li>
+			  			</ul>
 					</div>
 				</div>
 				  
@@ -132,7 +168,7 @@
 					<label for="dueDate" class="col-sm-2 control-label">Due Date</label>
 					<div class="col-sm-10 input-append">
 					  <!-- <p class="input-group"> -->
-					  	<input class="form-control datepicker" ng-model="myData.currentInvoice.dueDate" type="text" id="dueDate" name="input1">
+					  	<input class="form-control datepicker" required ng-model="currentInvoice.dueDate" type="text" id="dueDate" name="dueDate">
 					  	<!-- <span class="input-group-btn add-on"> -->
 					  	  <!-- <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button> -->
 					  	<!-- </span> -->
@@ -155,17 +191,23 @@
 						<th width="5%">
 							#
 						</th> 
-						<th width="55%">
+						<th width="40%">
 							Text
 						</th>
 						<th width="10%">
 							Amount (Pcs)
 						</th>
-						<th width="15%">
+						<th width="10%">
 							Amount (EUR)
 						</th>
-						<th width="15%">
+						<th width="10%">
 							Amount Total
+						</th>
+						<th width="10%">
+							VAT (%)
+						</th>
+						<th width="15%">
+							Amount Total + VAT
 						</th>
 						<th>
 							&nbsp;
@@ -173,22 +215,28 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="row in myData.currentInvoice.rows">
+					<tr ng-repeat="row in currentInvoice.rows">
 						<td>
 							{{$index + 1}}
-							<input type="hidden" ng-model="myData.currentInvoice.rows[$index].id">
+							<input type="hidden" ng-model="currentInvoice.rows[$index].id">
 						</td> 
 						<td>
-							<input style="width:100%" ng-model="myData.currentInvoice.rows[$index].description" type="text">
+							<input style="width:100%" ng-model="currentInvoice.rows[$index].description" type="text">
 						</td>
 						<td>
-							<input style="width:100%" ng-model="myData.currentInvoice.rows[$index].pcs" type="text">
+							<input style="width:100%" ng-model="currentInvoice.rows[$index].pcs" type="text">
 						</td>
 						<td>
-							<input style="width:100%" ng-model="myData.currentInvoice.rows[$index].amount" type="text">
+							<input style="width:100%" ng-model="currentInvoice.rows[$index].amount" type="text">
 						</td>
 						<td>
-							{{myData.currentInvoice.rows[$index].amountTotalVat}}
+							{{preciseRound((row.amount*row.pcs), 2)}}
+						</td>
+						<td>
+							<input style="width:100%" ng-model="currentInvoice.rows[$index].vat" type="text">
+						</td>
+						<td>
+							{{preciseRound(((row.amount*row.pcs)*(row.vat/100))+(row.amount*row.pcs), 2)}}
 						</td>
 						<td>
 							<a href="javascript:void(0)" ng-click="unsetRow($index)">
@@ -202,22 +250,56 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<th>
+						<th colspan="8">
 							&nbsp;
-						</th> 
-						<th>
+						</th>
+					</tr>
+					<tr>
+						<th colspan="4">
 							&nbsp;
+						</th>
+						<th colspan="2">
+							Total amount
+						</th>
+						<th>
+							{{
+							(currentInvoice.rows.length == 0) ? '0.00' : preciseRound(getTotalAmountForInvoice(), 2)
+							}}
 						</th>
 						<th>
 							&nbsp;
 						</th>
+					</tr>
+					<tr>
+						<th colspan="4">
+							&nbsp;
+						</th>
+						<th colspan="2">
+							Total VAT
+						</th>
+						<th>
+							{{
+							(currentInvoice.rows.length == 0) ? '0.00' : preciseRound(getTotalVatForInvoice(), 2)
+							}}
+						</th>
 						<th>
 							&nbsp;
 						</th>
-						<th>
-							{{myData.currentInvoice.amountVat}}
+					</tr>
+					<tr>
+						<th colspan="4">
+							&nbsp;
+						</th>
+						<th colspan="2">
+							Total amount + VAT
 						</th>
 						<th>
+							{{
+							(currentInvoice.rows.length == 0) ? '0.00' : preciseRound(getTotalAmountVatForInvoice(), 2)
+							}}
+						</th>
+						<th>
+							&nbsp;
 						</th>
 					</tr>
 				</tfoot>
@@ -241,7 +323,7 @@
 
 	<div class="panel">
 		<div class="panel-body">
-			<input type="button" ng-click="update()" class="btn btn-primary" value="Save">	
+			<input type="submit" ng-click="update()" class="btn btn-primary" value="Save">	
 		</div>
 	</div>
 </div>
@@ -251,6 +333,8 @@ $(document).ready(function () {
 	$('.datepicker').datepicker({
 		format:"dd.mm.yyyy"
 	});
-	$('.selectpicker').selectpicker({});
+
+	// $('#supplierId').select2();
+
 })
 </script>

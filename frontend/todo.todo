@@ -9,11 +9,9 @@ todo
 # InvoiceIn 
 
 filtre all, paid, ..
-- pagination, ordering
 - number neni id
 - delete neni delete ale mark as deleted
 - subjectId pri vytvoreni
-- live reloading
 
 - vat (vat types)
 - pay, paid amount
@@ -30,25 +28,4 @@ meno, heslo, session, role
   - emailovanie
   - tlac a generovanie pdf
   - 
-
-
-
-#promo web
-
- - hipsterske vieo
- - viac jazykov, picovina.com/en, pl, cz, sk
- - ceny
-     - mojafirma.blabal.com/#invoices/
-     - free
-         - 2 useri, do 5 faktu mesacne
-     - platene
-         - atd
-   - self hosting
-       - cryptovanie php
-       - ako s DB ?
-       -
- - critical
-    - nevieme robit s angular js, kod je zly, vsetko sa copypastuje a trpi zakaznik
-    - neni presne jasne ako funguju role
-    - neni presne jasne ako budu fungovat updaty na vlastnom hostingu
 

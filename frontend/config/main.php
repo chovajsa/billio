@@ -26,6 +26,7 @@ return [
 
         'request'=> [
             'enableCsrfValidation' => false,
+            'cookieValidationKey' => 'xxx'
         ],
 
         'log' => [
@@ -64,6 +65,14 @@ return [
                 'GET,HEAD api/supplier' => 'api/supplier/index',
                 'api/supplier/<id>' => 'api/supplier/options',
                 'api/supplier' => 'api/supplier/options',
+
+                'PUT,PATCH api/order-in/<id>' => 'api/order-in/update',
+                'DELETE api/order-in/<id>'    => 'api/order-in/delete',
+                'GET,HEAD api/order-in/<id>'  => 'api/order-in/view',
+                'POST api/order-in'           => 'api/order-in/create',
+                'GET,HEAD api/order-in'       => 'api/order-in/index',
+                'api/order-in/<id>'           => 'api/order-in/options',
+                'api/order-in'                => 'api/order-in/options',
 
                 // ['class' => 'yii\rest\UrlRule', 'controller' => ['invoice-in' => 'invoice-in']] ,
             ],
