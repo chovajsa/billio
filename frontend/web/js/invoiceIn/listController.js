@@ -2,7 +2,7 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
 
     scope.suppliers = [];
     
-    scope.toDelete = null;
+    scope.toDelete = [];
 
         
     invoiceList = [];

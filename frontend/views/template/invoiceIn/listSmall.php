@@ -26,7 +26,7 @@
 				<tbody>
 		            <tr ng-repeat="invoice in invoiceList | filter:filterText">
 		                <td>
-							<a href="#update/{{invoice.id}}">{{invoice.id}}</a>
+							<a href="#update/{{invoice.id}}">{{invoice.number}}</a>
 		                </td>
 		                <td>
 							{{invoice.date | dateFromDb}}

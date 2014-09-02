@@ -58,11 +58,11 @@ class User extends ActiveRecord implements IdentityInterface
      public function rules()
      {
          return [
-             ['status', 'default', 'value' => self::STATUS_ACTIVE],
-             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+             // ['status', 'default', 'value' => self::STATUS_ACTIVE],
+             // ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
 
-             ['role', 'default', 'value' => self::ROLE_USER],
-             ['role', 'in', 'range' => [self::ROLE_USER]],
+             // ['role', 'default', 'value' => self::ROLE_USER],
+             // ['role', 'in', 'range' => [self::ROLE_USER]],
          ];
      }
 
@@ -113,6 +113,30 @@ class User extends ActiveRecord implements IdentityInterface
             'password_reset_token' => $token,
             'status' => self::STATUS_ACTIVE,
         ]);
+    }
+
+    public function canDo($action) {
+      if (isset(Yii::$app->params['roles'][$action])) {
+            
+            $roles = $this->getGroups();
+            // if (!is_array($roles)) {
+                // Yii::app()->request->redirect(Yii::app()->createUrl('site/index'));
+            // }
+
+            foreach ($roles as $role) {
+                if (in_array($role, Yii::$app->params['roles'][$action])) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public function getGroups() {
+        $meta = json_decode($this->meta, true);
+        if (!isset($meta['groups'])) return [];
+        return $meta['groups'];
     }
 
     /**

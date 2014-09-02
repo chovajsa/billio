@@ -10,7 +10,7 @@
 				<thead>
 					<tr>
 						<th>
-							<a href="javascript:;" ng-click="setSort('id')">Number</a>
+							<a href="javascript:;" ng-click="setSort('number')">Number</a>
 						</th>
 						<th>
 							Supplier
@@ -34,7 +34,7 @@
 				<tbody>
 		            <tr ng-repeat="invoice in invoiceList | filter:filterText">
 		                <td>
-							<a href="#update/{{invoice.id}}">{{invoice.id}}</a>
+							<a href="#update/{{invoice.id}}">{{invoice.number}}</a>
 		                </td>
 		                <td>
 							1.5.2014
