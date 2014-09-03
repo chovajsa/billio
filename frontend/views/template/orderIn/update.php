@@ -2,6 +2,7 @@
 	use yii\helpers\Url;
 ?>
 <!-- small list -->
+
 <div class="col-md-4 ui-sortable smallList">
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
