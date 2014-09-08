@@ -12,7 +12,7 @@ app.controller('UpdateController', ['$scope', 'OrdersIn', 'Supplier', '$routePar
 
     scope.addRow = function() {
         if (scope.currentOrder.rows === undefined) scope.currentOrder.rows = [];
-        scope.currentOrder.rows.push({ id: null, amount:null, pcs:null}); 
+        scope.currentOrder.rows.push({ id: null, amount:0, pcs:1, vat: yiiApp.defaultVat}); 
     }
     
     scope.unsetRow = function(i) {

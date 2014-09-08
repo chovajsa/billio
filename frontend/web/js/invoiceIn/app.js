@@ -1,9 +1,10 @@
 angular.module('euroDate', []).filter('euroDateFilter', function() {
   return function(input) {
-    date = convertDateFromDb(input.substring(0,10));
-	time = input.substring(10);
-    //return date+""+time;
-	return date+""+time;
+	if(typeof input != 'undefined') {
+		date = convertDateFromDb(input.substring(0,10));
+		time = input.substring(10);
+		return date+""+time;
+	}
   };
 });
 

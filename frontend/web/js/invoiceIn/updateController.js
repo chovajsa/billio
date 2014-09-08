@@ -13,7 +13,7 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
 
     scope.addRow = function() {
         if (scope.currentInvoice.rows === undefined) scope.currentInvoice.rows = [];
-        scope.currentInvoice.rows.push({ id: null, amount:null, pcs:null}); 
+        scope.currentInvoice.rows.push({ id: null, amount:'0', pcs:'1', vat:yiiApp.defaultVat});
     }
     
     scope.unsetRow = function(i) {
