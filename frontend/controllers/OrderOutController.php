@@ -11,7 +11,7 @@ use yii\filters\AccessControl;
 /**
  * Invoice In controller
  */
-class InvoiceInController extends Controller
+class OrderOutController extends Controller
 {
  
     /**
@@ -53,11 +53,11 @@ class InvoiceInController extends Controller
     public function actionAttachments() {
         $this->layout = 'clean';
 
-        if (isset($_FILES['attachment']) && isset($_GET['invoiceInId'])) {
+        if (isset($_FILES['attachment']) && isset($_GET['orderOutId'])) {
 
             $fileStoragePath = \common\models\Settings::getFileStoragePath();
 
-            $fileDestination = $fileStoragePath.'/'.$_GET['invoiceInId'];
+            $fileDestination = $fileStoragePath.'/'.$_GET['orderOutId'];
 
             if (!file_exists($fileDestination)) {
                 mkdir($fileDestination);
@@ -69,13 +69,13 @@ class InvoiceInController extends Controller
         }
 
         $attachments = [];
-        if (isset($_GET['invoiceInId'])) { 
-            $invoiceIn = \common\models\InvoiceIn::findOne($_GET['invoiceInId']);
-            $attachments = $invoiceIn->getAttachments();
+        if (isset($_GET['orderOutId'])) { 
+            $orderOut = \common\models\OrderOut::findOne($_GET['orderOutId']);
+            $attachments = $orderOut->getAttachments();
         }
 
         return $this->render('attachments', [
-            'id'=>isset($_GET['invoiceInId']) ? $_GET['invoiceInId'] : null,
+            'id'=>isset($_GET['orderOutId']) ? $_GET['orderOutId'] : null,
             'attachments' => $attachments
         ]);
     }

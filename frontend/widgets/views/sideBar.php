@@ -18,28 +18,8 @@
     <ul class="nav">
       <li class="nav-header">Navigation</li>
 
-      <li class="has-sub <?=strpos($route, 'invoice') !== false ? 'active' : '';?>">
-        <a href="javascript:;">
-          <b class="caret pull-right"></b>
-          <span>Invoices</span>
-        </a>
-
-        <ul class="sub-menu">
-          <li <?=$route == 'invoice-in/index' ? 'class="active"' : '';?>><a href="<?=Url::base();?>/invoice-in/index">Incoming</a></li>
-        </ul>
-      </li>
-
-      <li class="has-sub <?=strpos($route, 'order') !== false ? 'active' : '';?>">
-        <a href="javascript:;">
-          <b class="caret pull-right"></b>
-          <span>Orders</span>
-        </a>
-
-        <ul class="sub-menu">
-          <li <?=$route == 'order-in/index' ? 'class="active"' : '';?>><a href="<?=Url::base();?>/order-in/index">Incoming</a></li>
-          <li <?=$route == 'order-out/index' ? 'class="active"' : '';?>><a href="<?=Url::base();?>/order-out/index">Outgoing</a></li>
-        </ul>
-      </li>
+      <li <?=$route == 'invoice-in/index' ? 'class="active"' : '';?>><a href="<?=Url::base();?>/invoice-in/index">Invoices</a></li>
+      <li <?=$route == 'order-out/index' ? 'class="active"' : '';?>><a href="<?=Url::base();?>/order-out/index">Orders</a></li>
 
       <?php if (Yii::$app->user->identity->canDo('admin')) { ?>
        <li class="has-sub">

@@ -2,7 +2,7 @@
 
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
-			<h4 class="panel-title">Invoice List</h4>
+			<h4 class="panel-title">Order List</h4>
 		</div>
 	  
 	    <div class="panel-body">
@@ -32,40 +32,42 @@
 					</tr>
 				</thead>
 				<tbody>
-		            <tr ng-click="showInvoice(invoice.id)" ng-repeat="invoice in invoiceList | filter:filterText">
-		                <td>
-							<a href="#update/{{invoice.id}}">{{invoice.number}}</a>
+		            <tr ng-repeat="order in orderList | filter:filterText">
+		                <td ng-click="showOrder(order.id)" >
+							<a href="#update/{{order.id}}">{{order.number}}</a>
 		                </td>
-		                <td>
-							{{invoice.supplier.address.name}}
+		                <td ng-click="showOrder(order.id)" >
+							{{order.supplier.address.name}}
 						</td>
-		                <td>
-		                    {{invoice.date | dateFromDb}}
+		                <td ng-click="showOrder(order.id)" >
+		                    {{order.date | dateFromDb}}
 						</td>
-						<td> 
-							{{invoice.dueDate | dateFromDb}}
+						<td ng-click="showOrder(order.id)" > 
+							{{order.dueDate | dateFromDb}}
+						</td>
+						<td ng-click="showOrder(order.id)" >
+		                    {{order.amount}}
 						</td>
 						<td>
-		                    {{invoice.amount}}
-						</td>
-						<td>
-							<button ng-click="delete(invoice.id)" class="btn btn-sm btn-danger">delete</button>
+							<button ng-click="approve(order.id)" class="btn btn-sm btn-info">approve</button>
+							<!-- <button ng-click="delete(order.id)" class="btn btn-sm btn-warning">deny</button> -->
+							<button ng-click="delete(order.id)" class="btn btn-sm btn-danger">delete</button>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 			<ul class="pagination m-t-0 m-b-10">
 				<li>
-					<a href="javascript:;" ng-click="updateIncoiceList(1)">«</a>
+					<a href="javascript:;" ng-click="updateOrderList(1)">«</a>
 				</li>
 				<li 
-					ng-repeat="a in numberOfRepeats(invoiceListPaging.pageCount) track by $index"
-					class="{{(invoiceListPaging.currentPage == $index) ? 'active' : ''}}"
+					ng-repeat="a in numberOfRepeats(orderListPaging.pageCount) track by $index"
+					class="{{(orderListPaging.currentPage == $index) ? 'active' : ''}}"
 				>
 					<a href="javascript:;"  ng-click="updateIncoiceList($index+1)">{{$index+1}}</a>
 				</li>
 				<li>
-					<a ng-click="updateIncoiceList(invoiceListPaging.pageCount)" href="javascript:;">»</a>
+					<a ng-click="updateIncoiceList(orderListPaging.pageCount)" href="javascript:;">»</a>
 				</li>
 			</ul>
 		</div>

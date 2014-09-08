@@ -9,9 +9,9 @@ use yii\data\ActiveDataProvider;
 use Yii;
 
 
-class InvoiceInController extends ActiveRestController
+class OrderOutController extends ActiveRestController
 {
-    public $modelClass = 'common\models\InvoiceIn';
+    public $modelClass = 'common\models\OrderOut';
 
 
 
@@ -71,39 +71,35 @@ class InvoiceInController extends ActiveRestController
     }
 
     
-    public function actionApprove($id) {
-        $invoiceIn = \common\models\InvoiceIn::findOne($id);
-        $invoiceIn->approve();
-    }
 
     public function actionCreate() {
-        $invoiceIn = new \common\models\InvoiceIn;
+        $orderOut = new \common\models\OrderOut;
         $p = Yii::$app->getRequest()->getBodyParams();
-        $invoiceIn->load($p, '');
+        $orderOut->load($p, '');
 
-        $invoiceIn->createdBy = Yii::$app->user->id;
-        $invoiceIn->createdDate = date('Y-m-d H:i:s');
+        $orderOut->createdBy = Yii::$app->user->id;
+        $orderOut->createdDate = date('Y-m-d H:i:s');
         
-        $invoiceIn->save();
-        return $this->update($invoiceIn);
+        $orderOut->save();
+        return $this->update($orderOut);
     }
 
     public function actionUpdate($id) {
-        $invoiceIn = \common\models\InvoiceIn::findOne($id);
-        return $this->update($invoiceIn);
+        $orderOut = \common\models\OrderOut::findOne($id);
+        return $this->update($orderOut);
     }
 
-    public function update($invoiceIn) {
+    public function update($orderOut) {
         $p = Yii::$app->getRequest()->getBodyParams();
         
-        $invoiceIn->load($p, '');
-        $invoiceIn->save();
+        $orderOut->load($p, '');
+        $orderOut->save();
 
         if (isset($p['rows']) && !empty($p['rows'])) {
             foreach ($p['rows'] as $prow) {
                 if (!isset($prow['id']) || !$prow['id']) {
-                    $row = new \common\models\InvoiceInRow();
-                    $row->invoiceInId = $invoiceIn->id;
+                    $row = new \common\models\OrderOutRow();
+                    $row->orderOutId = $orderOut->id;
                     $row->setAttributes($prow, '');
 
                     $row->amountTotal = $row->pcs * $row->amount;
@@ -111,7 +107,7 @@ class InvoiceInController extends ActiveRestController
 
                     $row->save();
                 } else 
-                foreach ($invoiceIn->rows as $row) {
+                foreach ($orderOut->rows as $row) {
                     if ($prow['id'] == $row->id) {
                         $row->setAttributes($prow, '');
                    
@@ -127,30 +123,30 @@ class InvoiceInController extends ActiveRestController
 
         if (!empty($p['toDelete'])) {
             foreach ($p['toDelete'] as $x) {
-                $r = \common\models\InvoiceInRow::findOne($x['id']);
+                $r = \common\models\OrderOutRow::findOne($x['id']);
                 $r->delete();
             }
         }
 
-        $invoiceIn->refresh();
-        $invoiceIn->amount = 0;
-        $invoiceIn->amountVat = 0;
-        $invoiceIn->vat = 0;
+        $orderOut->refresh();
+        $orderOut->amount = 0;
+        $orderOut->amountVat = 0;
+        $orderOut->vat = 0;
 
         //= amount  pcs vat amountTotal amountTotalVat
         // amount  decimal(10,2) NULL   
         // amountVat   decimal(10,2) NULL   
         // vat
         
-        foreach ($invoiceIn->rows as $row) {
-            $invoiceIn->amount += $row->amountTotal;
-            $invoiceIn->amountVat += ($row->amountTotalVat);
-            $invoiceIn->vat += $row->vat;
+        foreach ($orderOut->rows as $row) {
+            $orderOut->amount += $row->amountTotal;
+            $orderOut->amountVat += ($row->amountTotalVat);
+            $orderOut->vat += $row->vat;
         } 
 
-        $invoiceIn->save();
+        $orderOut->save();
 
-        return $invoiceIn;
+        return $orderOut;
     }
 
 
@@ -159,6 +155,11 @@ class InvoiceInController extends ActiveRestController
         $dataProvider = $this->prepareDataProvider('supplier');
 
         return $dataProvider;
+    }
+
+    public function actionApprove($id) {
+        $invoiceIn = \common\models\OrderOut::findOne($id);
+        $invoiceIn->approve();
     }
 
 

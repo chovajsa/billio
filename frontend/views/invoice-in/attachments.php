@@ -4,7 +4,7 @@
 <ul>
 	<?php foreach ($attachments as $attachment) { ?>
 		<li>
-			<a href=""> <?=$attachment;?> </a> <a href=""><i></i></a>
+			<a href="<?=Url::base();?>/files/<?=$id;?>/<?=$attachment;?>"> <?=$attachment;?> </a> <a href=""><i></i></a>
 		</li>
 	<?php } ?>
 </ul>

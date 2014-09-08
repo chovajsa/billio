@@ -320,7 +320,7 @@
 		</div>
 
 		<div class="panel-body">
-			<!-- <iframe style="border:0; width:100%" id="attachmentsFrame" src=""></iframe> -->
+			<iframe style="border:0; width:100%" id="attachmentsFrame" src=""></iframe>
 		</div>
 	</div>
 

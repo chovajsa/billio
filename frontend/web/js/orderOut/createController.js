@@ -1,4 +1,4 @@
-app.controller('CreateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeParams', '$modal', '$controller', function (scope, AI, SI, routeParams, modal, $controller) {
+app.controller('CreateController', ['$scope', 'OrdersOut', 'Supplier', '$routeParams', '$modal', '$controller', function (scope, AI, SI, routeParams, modal, $controller) {
 
     $controller('UpdateController', {$scope:scope});
 
@@ -11,7 +11,7 @@ app.controller('CreateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
         supplier:false
     };
 
-    $('#attachmentsFrame').attr('src', yiiApp.url+'/invoice-in/attachments');
+    $('#attachmentsFrame').attr('src', yiiApp.url+'/order-out/attachments');
 
     var turl = yiiApp.url+'/template?route=supplier/create';
 

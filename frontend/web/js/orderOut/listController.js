@@ -1,15 +1,15 @@
-app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routeParams', '$modal', '$location', function (scope, AI, SI, routeParams, modal, location) {
+app.controller('ListController', ['$scope', 'OrdersOut', 'Supplier', '$routeParams', '$modal', '$location', function (scope, AI, SI, routeParams, modal, location) {
 
     scope.suppliers = [];
     
     scope.toDelete = [];
 
         
-    invoiceList = [];
-    invoiceListState = 'open';
-    invoiceListSort = 'id';
-    invoiceListDirection = 'desc';
-    invoiceListPage = 1;
+    orderList = [];
+    orderListState = 'open';
+    orderListSort = 'id';
+    orderListDirection = 'desc';
+    orderListPage = 1;
         
 
     scope.select2Options = 
@@ -54,22 +54,22 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
     }
 
     scope.setSort = function(sort) {
-        var oldSort = angular.copy(scope.invoiceListSort);
-        scope.invoiceListSort = sort;
+        var oldSort = angular.copy(scope.orderListSort);
+        scope.orderListSort = sort;
 
         if (oldSort == sort) {
-            scope.setDirection(scope.invoiceListDirection == 'desc' ? 'asc' : 'desc');
+            scope.setDirection(scope.orderListDirection == 'desc' ? 'asc' : 'desc');
         } else {
             scope.setDirection('desc');
         }
     }
 
     scope.setDirection = function (direction) {
-        scope.invoiceListDirection = direction;
-        scope.setInvoiceList();
+        scope.orderListDirection = direction;
+        scope.setOrderList();
     };
 
-    scope.setInvoiceList = function () {
+    scope.setOrderList = function () {
 
         var filters = {};
         if (location.path() == '/mine') {
@@ -77,21 +77,27 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
         }
 
         AI.query({
-            // state: scope.invoiceListState,
+            // state: scope.orderListState,
             //labels: scope.labels,
-            sort: scope.invoiceListSort,
-            direction: scope.invoiceListDirection,
+            sort: scope.orderListSort,
+            direction: scope.orderListDirection,
             filters:angular.toJson(filters),
-			page: scope.invoiceListPage,
+			page: scope.orderListPage,
         }, function (data) {
-            scope.invoiceList = data.items;
-			scope.invoiceListLinks = data._links;
-			scope.invoiceListPaging = data._meta;
+            scope.orderList = data.items;
+			scope.orderListLinks = data._links;
+			scope.orderListPaging = data._meta;
         });
     };
 
-    scope.showInvoice = function(id) {
+    scope.showOrder = function(id) {
         location.path('/update/' + id);
+    }
+
+    scope.approve = function(id) {
+        AI.approveOrder({id:id}, function(data){
+
+        });
     }
 
     scope.delete = function(id) {
@@ -101,22 +107,22 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
 
     scope.deleteReal = function(id) {
         scope.toDelete = null;
-        AI.deleteInvoice({
+        AI.deleteOrder({
             id: id
         }, function (data) {
-            scope.setInvoiceList();
+            scope.setOrderList();
             scope.closeDeleteModal();
         });
     }
 	
-	scope.updateIncoiceList = function (index) {
-		scope.invoiceListPage = index;
-		scope.setInvoiceList();
+	scope.updateOrderList = function (index) {
+		scope.orderListPage = index;
+		scope.setOrderList();
 	}
 
 
     // supplier modal
-    var deleteModal = modal({scope: scope, template: yiiApp.url+'/template?route=invoiceIn/sure', show: false});
+    var deleteModal = modal({scope: scope, template: yiiApp.url+'/template?route=orderOut/sure', show: false});
     scope.showDeleteModal  = function() {
         deleteModal.$promise.then(deleteModal.show);
     }
@@ -124,7 +130,7 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
         deleteModal.$promise.then(deleteModal.hide);   
     }
 
-    scope.setInvoiceList();
+    scope.setOrderList();
     scope.setSuppliers();
 
     // returns number of elements in parameter for ng-repeat

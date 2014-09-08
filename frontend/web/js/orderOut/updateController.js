@@ -1,4 +1,4 @@
-app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeParams', '$modal', '$location', '$controller', function (scope, AI, SI, routeParams, modal, location, $controller) {
+app.controller('UpdateController', ['$scope', 'OrdersOut', 'Supplier', '$routeParams', '$modal', '$location', '$controller', function (scope, AI, SI, routeParams, modal, location, $controller) {
 
     $controller('ListController', {$scope:scope});
 
@@ -6,23 +6,23 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
     scope.newSupplier = {};
     scope.counter = 0;
 
-    scope.currentInvoice = {
+    scope.currentOrder = {
         rows:[],
         supplier:false
     };
 
     scope.addRow = function() {
-        if (scope.currentInvoice.rows === undefined) scope.currentInvoice.rows = [];
-        scope.currentInvoice.rows.push({ id: null, amount:null, pcs:null}); 
+        if (scope.currentOrder.rows === undefined) scope.currentOrder.rows = [];
+        scope.currentOrder.rows.push({ id: null, amount:null, pcs:null}); 
     }
     
     scope.unsetRow = function(i) {
         
-        if (scope.currentInvoice.rows[i].id) {
-            scope.toDelete.push({id:scope.currentInvoice.rows[i].id});
+        if (scope.currentOrder.rows[i].id) {
+            scope.toDelete.push({id:scope.currentOrder.rows[i].id});
         }
 
-        scope.currentInvoice.rows.splice(i, 1);
+        scope.currentOrder.rows.splice(i, 1);
     }
 
     scope.update = function() {
@@ -31,7 +31,7 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
         scope.form.submitted = true;
         if (!scope.form.$valid) return false;
 
-        var params =  jQuery.extend({}, scope.currentInvoice);
+        var params =  jQuery.extend({}, scope.currentOrder);
      
         var dateFields = ['date', 'dueDate'];
 
@@ -47,9 +47,9 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
         params.supplierId = parseInt(params.supplier.id);
 
         if (scope.mode == 'create') {
-            AI.createInvoice(params, function (data) {
-                scope.setInvoiceList();
-                notify('success', 'Invoice added');
+            AI.createOrder(params, function (data) {
+                scope.setOrderList();
+                notify('success', 'Order added');
                 
                 $("html, body").animate({
                     scrollTop: 0
@@ -60,9 +60,9 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
 
             params.toDelete = scope.toDelete;
 
-            AI.updateInvoice(params, function (data) {
-                scope.setInvoiceList();
-                scope.setCurrentInvoice(params.id);
+            AI.updateOrder(params, function (data) {
+                scope.setOrderList();
+                scope.setCurrentOrder(params.id);
                 notify('success', 'Ivoice updated');
 
                 $("html, body").animate({
@@ -74,9 +74,9 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
     }
 
 
-    scope.setCurrentInvoice = function (id) {
+    scope.setCurrentOrder = function (id) {
         scope.mode = 'update';
-        AI.getInvoice({
+        AI.getOrder({
             id: id  
         }, function (data) {
             var dateFields = ['date', 'dueDate'];
@@ -103,20 +103,20 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
             //     }
             // }
 
-            scope.currentInvoice = data;
-            scope.currentInvoice.number = parseInt(scope.currentInvoice.number);
-            scope.currentInvoice.referenceNumber = parseInt(scope.currentInvoice.referenceNumber);
+            scope.currentOrder = data;
+            scope.currentOrder.number = parseInt(scope.currentOrder.number);
+            scope.currentOrder.referenceNumber = parseInt(scope.currentOrder.referenceNumber);
 
-            scope.currentInvoice.supplierId = parseInt(data.supplierId);
+            scope.currentOrder.supplierId = parseInt(data.supplierId);
 
-            if (scope.currentInvoice.supplierId)
-            scope.currentInvoice.supplier = {
+            if (scope.currentOrder.supplierId)
+            scope.currentOrder.supplier = {
                 id: data.supplierId,
                 name: data.supplier.address.name,
                 text: data.supplier.address.name
             }
 
-            angular.element('#attachmentsFrame').attr('src', yiiApp.url+'/invoice-in/attachments?invoiceInId='+data.id);
+            angular.element('#attachmentsFrame').attr('src', yiiApp.url+'/order-out/attachments?orderOutId='+data.id);
         });
     };
 
@@ -125,14 +125,14 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
         SI.createSupplier(params, function (data) {
             scope.setSuppliers();
             scope.closeModal();
-            scope.currentInvoice.supplierId = parseInt(data.id);
+            scope.currentOrder.supplierId = parseInt(data.id);
             notify('success', 'Supplier added');
         });
     }
 
 
     if (routeParams.id) {
-        scope.setCurrentInvoice(routeParams.id);
+        scope.setCurrentOrder(routeParams.id);
     }
 
     // supplier modal
@@ -148,14 +148,14 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
         supplierModal.$promise.then(supplierModal.hide);   
     }
 	
-	scope.getTotalAmountForInvoice = function() {
+	scope.getTotalAmountForOrder = function() {
 	
 		var total = 0;
 		
-        if (scope.currentInvoice.rows === undefined) scope.currentInvoice.rows = [];
+        if (scope.currentOrder.rows === undefined) scope.currentOrder.rows = [];
 		
-        for(var i = 0; i < scope.currentInvoice.rows.length; i++){
-			var row = scope.currentInvoice.rows[i];
+        for(var i = 0; i < scope.currentOrder.rows.length; i++){
+			var row = scope.currentOrder.rows[i];
 			total += (row.amount * row.pcs);
 		}
 
@@ -163,11 +163,11 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
 	
 	};
 	
-	scope.getTotalAmountVatForInvoice = function() {
+	scope.getTotalAmountVatForOrder = function() {
 		var total = 0;
-		if (scope.currentInvoice.rows === undefined) scope.currentInvoice.rows = [];
-		for(var i = 0; i < scope.currentInvoice.rows.length; i++){
-			var row = scope.currentInvoice.rows[i];
+		if (scope.currentOrder.rows === undefined) scope.currentOrder.rows = [];
+		for(var i = 0; i < scope.currentOrder.rows.length; i++){
+			var row = scope.currentOrder.rows[i];
 			total += ((row.amount * row.pcs)*(row.vat/100))+(row.amount * row.pcs);
 		}
         
@@ -175,12 +175,12 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
 	
 	};
 	
-	scope.getTotalVatForInvoice = function() {
+	scope.getTotalVatForOrder = function() {
 	
 		var total = 0;
-		if (scope.currentInvoice.rows === undefined) scope.currentInvoice.rows = [];
-		for(var i = 0; i < scope.currentInvoice.rows.length; i++){
-			var row = scope.currentInvoice.rows[i];
+		if (scope.currentOrder.rows === undefined) scope.currentOrder.rows = [];
+		for(var i = 0; i < scope.currentOrder.rows.length; i++){
+			var row = scope.currentOrder.rows[i];
 			total += (row.amount * row.pcs)*(row.vat/100);
 		}
         

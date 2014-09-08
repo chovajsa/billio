@@ -8,7 +8,7 @@
 
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
-			<h4 class="panel-title">Invoice List</h4>
+			<h4 class="panel-title">Order List</h4>
 		</div>
 		  
 	    <div class="panel-body">
@@ -30,74 +30,76 @@
 					</tr>
 				</thead>
 				<tbody>
-		            <tr ng-click="showInvoice(invoice.id)" ng-repeat="invoice in invoiceList | filter:filterText">
+		            <tr ng-click="showOrder(order.id)" ng-repeat="order in orderList | filter:filterText">
 		                <td>
-							<a href="#update/{{invoice.id}}">{{invoice.number}}</a>
+							<a href="#update/{{order.id}}">{{order.number}}</a>
 		                </td>
 		                <td>
-							{{invoice.date | dateFromDb}}
+							{{order.date | dateFromDb}}
 						</td>
 		                <td>
-		                    {{invoice.supplier.address.name}}
+		                    {{order.supplier.address.name}}
 						</td>
 						<td>
-		                    {{invoice.amount}} &euro;
+		                    {{order.amount}} &euro;
 						</td>
 					</tr>
 				</tbody>
 			</table>
 			<ul class="pagination m-t-0 m-b-10">
 				<li>
-					<a href="javascript:;" ng-click="updateIncoiceList(1)">«</a>
+					<a href="javascript:;" ng-click="updateOrderList(1)">«</a>
 				</li>
 				<li 
-					ng-repeat="a in numberOfRepeats(invoiceListPaging.pageCount) track by $index"
-					class="{{(invoiceListPaging.currentPage == $index) ? 'active' : ''}}"
+					ng-repeat="a in numberOfRepeats(orderListPaging.pageCount) track by $index"
+					class="{{(orderListPaging.currentPage == $index) ? 'active' : ''}}"
 				>
-					<a href="javascript:;"  ng-click="updateIncoiceList($index+1)">{{$index+1}}</a>
+					<a href="javascript:;"  ng-click="updateOrderList($index+1)">{{$index+1}}</a>
 				</li>
 				<li>
-					<a ng-click="updateIncoiceList(invoiceListPaging.pageCount)" href="javascript:;">»</a>
+					<a ng-click="updateOrderList(orderListPaging.pageCount)" href="javascript:;">»</a>
 				</li>
 			</ul>
 		</div>
 	</div>
 </div> 
 <!-- /small list -->
-<div class="col-md-8 ui-sortable updateInvoice">
+<div class="col-md-8 ui-sortable updateOrder">
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
 			<h4 class="panel-title" ng-show="mode == 'create'"> 
-				New Invocie
+				New Order
 			</h4>
 			<h4 class="panel-title" ng-show="mode == 'update'"> 
-				Update Invocie {{currentInvoice.id}}
+				Update Order {{currentOrder.id}}
 			</h4>
 		</div>
 		  
 	    <div class="panel-body">
 			<form class="form-horizontal" role="form" name="form" ng-submit="update(form.$valid)" novalidate>
 
-				<div class="row">
-				<div class="col-sm-6">
-				<ul class="media-list media-list-with-divider">
-					<li class="media">
-						<div class="media-body">
-							<h4 class="media-heading">Created by : {{currentInvoice.createdByUserName}} </h4>
-							<p>
-								<dl>
-									<dt>Created on : 
-									{{currentInvoice.createdDate | euroDateFilter}} </dt>
-								</dl>
-							</p>
-						</div>
-					</li>
-				</ul>
-				</div>
-					<div class="col-sm-6 text-right" style="padding-right:5px">
+				<div class="row" style="margin-right:-15px">
+					<div class="col-sm-6">
+					<ul class="media-list media-list-with-divider">
+						<li class="media">
+							<div class="media-body">
+								<h4 class="media-heading">Created by : {{currentOrder.createdByUserName}} </h4>
+								<p>
+									<dl>
+										<dt>Created on : 
+										{{currentOrder.createdDate | euroDateFilter}} </dt>
+									</dl>
+								</p>
+							</div>
+						</li>
+					</ul>
+					</div>
+					<div class="col-sm-6 text-right">
 						<p>
-							<a href="javascript:;" ng-click="delete(currentInvoice.id)" class="btn btn-sm btn-danger">Delete</a>
-					  		
+							<!-- <a href="javascript:;" ng-click="delete(currentOrder.id)" class="btn btn-sm btn-danger">Delete</a> -->
+					  		<button ng-click="delete(order.id)" class="btn btn-sm btn-info">approve</button>
+							<button ng-click="delete(order.id)" class="btn btn-sm btn-warning">deny</button>
+							<button ng-click="delete(order.id)" class="btn btn-sm btn-danger">delete</button>
 					        <!-- <a href="javascript:;" class="btn btn-sm btn-primary m-r-5">Approve</a> -->
 					        <!-- <a href="javascript:;" class="btn btn-sm btn-danger">Reject</a> -->
 					    </p>
@@ -108,12 +110,12 @@
 					<label for="supplierId" class="col-sm-2 control-label">Supplier</label>
 					<div class="col-sm-10">
 						<p class="input-group">
-							<!-- <select id="supplierId" required class="form-control selectpicker nyaSelectpicker" data-style="btn-white" data-ajax-url="<?=Url::base();?>/api/supplier" data-live-search="true" data-ajax-search="true" data-size="10" ng-options="supplier.id as supplier.address.name for supplier in suppliers" ng-model="currentInvoice.supplierId">
+							<!-- <select id="supplierId" required class="form-control selectpicker nyaSelectpicker" data-style="btn-white" data-ajax-url="<?=Url::base();?>/api/supplier" data-live-search="true" data-ajax-search="true" data-size="10" ng-options="supplier.id as supplier.address.name for supplier in suppliers" ng-model="currentOrder.supplierId">
 								
 								<option value=""> Please select </option>
 							</select> -->
 
-							<input ui-select2="select2Options" ng-model="currentInvoice.supplier" required class="form-control selectpicker bigdrop" data-style="btn-white" type="hidden" id="supplierId"/>
+							<input ui-select2="select2Options" ng-model="currentOrder.supplier" required class="form-control selectpicker bigdrop" data-style="btn-white" type="hidden" id="supplierId"/>
 
 							<span class="input-group-btn add-on">
 				  	  			<button type="button" class="btn btn-primary" ng-click="showModal()"><i class="fa fa-plus"></i></button>
@@ -125,7 +127,7 @@
 				<div class="form-group">
 					<label for="number" class="col-sm-2 control-label">Number</label>
 					<div class="col-sm-10">
-					  	<input id="number" name="number" required ng-model="currentInvoice.number" class="form-control" type="number">
+					  	<input id="number" name="number" required ng-model="currentOrder.number" class="form-control" type="number">
 					  	
 					  	<ul class="error-list" ng-show="(form.submitted || form.number.$dirty) && form.number.$invalid" style="display: block;">
 					  		
@@ -141,7 +143,7 @@
 					<label for="referenceNumber" class="col-sm-2 control-label">Reference Number</label>
 					<div class="col-sm-10">
 
-					  <input id="referenceNumber" name="referenceNumber" ng-model="currentInvoice.referenceNumber" required class="form-control" type="number">
+					  <input id="referenceNumber" name="referenceNumber" ng-model="currentOrder.referenceNumber" required class="form-control" type="number">
 
 					  	<ul class="error-list" ng-show="(form.submitted || form.referenceNumber.$dirty) && form.referenceNumber.$invalid" style="display: block;">
 				  			<li ng-show="form.referenceNumber.$error.required" class="required"  style="display: list-item;">
@@ -156,7 +158,7 @@
 					<label for="date" class="col-sm-2 control-label">Date</label>
 					
 					<div class="col-sm-10">
-						<input class="form-control datepicker" required  ng-model="currentInvoice.date" type="text" id="date" name="date"/>
+						<input class="form-control datepicker" required  ng-model="currentOrder.date" type="text" id="date" name="date"/>
 
 						<ul class="error-list" ng-show="(form.submitted || form.date.$dirty) && form.date.$invalid" style="display: block;">
 					  		
@@ -171,7 +173,7 @@
 					<label for="dueDate" class="col-sm-2 control-label">Due Date</label>
 					<div class="col-sm-10 input-append">
 					  <!-- <p class="input-group"> -->
-					  	<input class="form-control datepicker" required ng-model="currentInvoice.dueDate" type="text" id="dueDate" name="dueDate">
+					  	<input class="form-control datepicker" required ng-model="currentOrder.dueDate" type="text" id="dueDate" name="dueDate">
 					  	<!-- <span class="input-group-btn add-on"> -->
 					  	  <!-- <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button> -->
 					  	<!-- </span> -->
@@ -185,7 +187,7 @@
 
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
-			<h4 class="panel-title"> Invoice Contents </h4>
+			<h4 class="panel-title"> Order Contents </h4>
 		</div>
 		<div class="panel-body">
 			<table class="table table-hover">
@@ -218,25 +220,25 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="row in currentInvoice.rows">
+					<tr ng-repeat="row in currentOrder.rows">
 						<td>
 							{{$index + 1}}
-							<input type="hidden" ng-model="currentInvoice.rows[$index].id">
+							<input type="hidden" ng-model="currentOrder.rows[$index].id">
 						</td> 
 						<td>
-							<input style="width:100%" ng-model="currentInvoice.rows[$index].description" type="text">
+							<input style="width:100%" ng-model="currentOrder.rows[$index].description" type="text">
 						</td>
 						<td>
-							<input style="width:100%" ng-model="currentInvoice.rows[$index].pcs" type="text">
+							<input style="width:100%" ng-model="currentOrder.rows[$index].pcs" type="text">
 						</td>
 						<td>
-							<input style="width:100%" ng-model="currentInvoice.rows[$index].amount" type="text">
+							<input style="width:100%" ng-model="currentOrder.rows[$index].amount" type="text">
 						</td>
 						<td>
 							{{preciseRound((row.amount*row.pcs), 2)}}
 						</td>
 						<td>
-							<input style="width:100%" ng-model="currentInvoice.rows[$index].vat" type="text">
+							<input style="width:100%" ng-model="currentOrder.rows[$index].vat" type="text">
 						</td>
 						<td>
 							{{preciseRound(((row.amount*row.pcs)*(row.vat/100))+(row.amount*row.pcs), 2)}}
@@ -266,7 +268,7 @@
 						</th>
 						<th>
 							{{
-							(currentInvoice.rows.length == 0) ? '0.00' : preciseRound(getTotalAmountForInvoice(), 2)
+							(currentOrder.rows.length == 0) ? '0.00' : preciseRound(getTotalAmountForOrder(), 2)
 							}}
 						</th>
 						<th>
@@ -282,7 +284,7 @@
 						</th>
 						<th>
 							{{
-							(currentInvoice.rows.length == 0) ? '0.00' : preciseRound(getTotalVatForInvoice(), 2)
+							(currentOrder.rows.length == 0) ? '0.00' : preciseRound(getTotalVatForOrder(), 2)
 							}}
 						</th>
 						<th>
@@ -298,7 +300,7 @@
 						</th>
 						<th>
 							{{
-							(currentInvoice.rows.length == 0) ? '0.00' : preciseRound(getTotalAmountVatForInvoice(), 2)
+							(currentOrder.rows.length == 0) ? '0.00' : preciseRound(getTotalAmountVatForOrder(), 2)
 							}}
 						</th>
 						<th>

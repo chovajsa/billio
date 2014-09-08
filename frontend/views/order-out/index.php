@@ -11,17 +11,17 @@ $depends = [
 
 ?>
 
-<?php $this->registerJsFile('@web/js/invoiceIn/app.js', $depends);?>
-<?php $this->registerJsFile('@web/js/invoiceIn/invoiceFactory.js', $depends);?>
-<?php $this->registerJsFile('@web/js/invoiceIn/supplierFactory.js', $depends);?>
-<?php $this->registerJsFile('@web/js/invoiceIn/listController.js', $depends);?>
-<?php $this->registerJsFile('@web/js/invoiceIn/createController.js', $depends);?>
-<?php $this->registerJsFile('@web/js/invoiceIn/updateController.js', $depends);?>
-<?php $this->registerJsFile('@web/js/invoiceIn/routes.js', $depends);?>
+<?php $this->registerJsFile('@web/js/orderOut/app.js', $depends);?>
+<?php $this->registerJsFile('@web/js/orderOut/orderFactory.js', $depends);?>
+<?php $this->registerJsFile('@web/js/orderOut/supplierFactory.js', $depends);?>
+<?php $this->registerJsFile('@web/js/orderOut/listController.js', $depends);?>
+<?php $this->registerJsFile('@web/js/orderOut/createController.js', $depends);?>
+<?php $this->registerJsFile('@web/js/orderOut/updateController.js', $depends);?>
+<?php $this->registerJsFile('@web/js/orderOut/routes.js', $depends);?>
 
 
 
-<div ng-app="invoiceIn">
+<div ng-app="orderOut">
 
 	<div>
 
@@ -32,7 +32,7 @@ $depends = [
 		<!-- begin #content -->
 		<div id="content" class="content">
 
-			<h1 class="page-header"> Incoming Invoices <!-- <small>header small text goes here...</small> --></h1>
+			<h1 class="page-header"> Incoming Orders <!-- <small>header small text goes here...</small> --></h1>
 		  
 		  	<div class="alert alert-success fade in m-b-15" id="notify-success" style="display:none">
 				<span class="msg"></span>

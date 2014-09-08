@@ -35,9 +35,8 @@ function notify(type, msg) {
 		+type+' .msg').html(msg);
 	$('#notify-'+type).show();
 }
- 
 
- app.config(function ($httpProvider) {
+app.config(function ($httpProvider) {
   $httpProvider.responseInterceptors.push('myHttpInterceptor');
 
   var spinnerFunction = function spinnerFunction(data, headersGetter) {
