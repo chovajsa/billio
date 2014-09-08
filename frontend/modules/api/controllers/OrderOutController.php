@@ -158,8 +158,9 @@ class OrderOutController extends ActiveRestController
     }
 
     public function actionApprove($id) {
-        $invoiceIn = \common\models\OrderOut::findOne($id);
-        $invoiceIn->approve();
+        $orderOut = \common\models\OrderOut::findOne($id);
+        $orderOut->approve();
+        return $orderOut;
     }
 
 
