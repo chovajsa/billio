@@ -30,7 +30,8 @@ AppAsset::register($this);
     <script type="text/javascript">
         var yiiApp = {
             url : '<?=Url::base();?>',
-            userId : <?=Yii::$app->user->isGuest ? 'null' : Yii::$app->user->id;?>
+            userId : <?=Yii::$app->user->isGuest ? 'null' : Yii::$app->user->id;?>,
+			defaultVat: 20,
         }
     </script>
 
