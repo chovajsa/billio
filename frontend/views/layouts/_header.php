@@ -104,3 +104,5 @@ AppAsset::register($this);
   <!-- end container-fluid -->
 </div>
 <!-- end #header -->
+
+<div id="spinner" style="display:none" class="loading">Loading&#8230;</div>

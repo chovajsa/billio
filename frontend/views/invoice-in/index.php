@@ -19,6 +19,8 @@ $depends = [
 <?php $this->registerJsFile('@web/js/invoiceIn/updateController.js', $depends);?>
 <?php $this->registerJsFile('@web/js/invoiceIn/routes.js', $depends);?>
 
+<?php $this->registerJsFile('@web/js/filters.js', $depends);?>
+
 
 
 <div ng-app="invoiceIn">

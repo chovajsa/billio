@@ -19,6 +19,7 @@ $depends = [
 <?php $this->registerJsFile('@web/js/orderOut/updateController.js', $depends);?>
 <?php $this->registerJsFile('@web/js/orderOut/routes.js', $depends);?>
 
+<?php $this->registerJsFile('@web/js/filters.js', $depends);?>
 
 
 <div ng-app="orderOut">

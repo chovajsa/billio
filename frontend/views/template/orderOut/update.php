@@ -4,8 +4,6 @@
 <!-- small list -->
 <div class="col-md-4 ui-sortable smallList">
 
-<div id="spinner" style="display:none" class="loading">Loading&#8230;</div>
-
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
 			<h4 class="panel-title">Order List</h4>
