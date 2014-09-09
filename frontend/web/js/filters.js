@@ -29,7 +29,9 @@ app.filter('preciseRound', function() {
 			var x = (Math.round(input * Math.pow(10, decimals)) / Math.pow(10, decimals)).toFixed(decimals);
 			if (isNaN(x)) return "0.00";
 			return x;
-		};
+		} else {
+			return "0.00";
+		}
 	};
 });
 

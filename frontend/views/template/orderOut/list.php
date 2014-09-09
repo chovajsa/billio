@@ -49,7 +49,7 @@
 							{{order.dueDate | dateFromDb}}
 						</td>
 						<td ng-click="showOrder(order.id)" >
-		                    {{order.amount}}
+		                    {{order.amount | preciseRound}}
 						</td>
 						<td class="{{order.approved ? 'success' : ''}}">
 							{{order.approved ? 'approved' : 'waiting'}}
