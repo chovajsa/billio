@@ -51,8 +51,8 @@
 						<td ng-click="showOrder(order.id)" >
 		                    {{order.amount}}
 						</td>
-						<td class="{{order.approved ? 'success' : ''}}">
-							{{order.approved ? 'approved' : 'waiting'}}
+						<td ng-click="showOrder(order.id)" style="padding-top:15px">
+							<span class="label label-{{order.approved ? 'success' : 'default'}}">{{order.approved ? 'approved' : 'pending'}}</span>
 						</td>
 						<td>
 							<button ng-click="approve(order.id)" class="btn btn-sm btn-info">approve</button>
