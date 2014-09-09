@@ -46,7 +46,7 @@
 							1.5.2014
 						</td>
 						<td>
-		                    {{order.amount}}
+		                    {{order.amount | preciseRound}}
 						</td>
 						<td>
 							<button ng-click="delete(order.id)" class="btn btn-sm btn-danger">delete</button>

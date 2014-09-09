@@ -35,7 +35,7 @@
 		                    {{order.supplier.address.name}}
 						</td>
 						<td>
-		                    {{order.amount}} EUR
+		                    {{order.amount | preciseRound}} EUR
 						</td>
 					</tr>
 				</tbody>

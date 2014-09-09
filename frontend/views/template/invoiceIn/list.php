@@ -46,7 +46,7 @@
 							{{invoice.dueDate | dateFromDb}}
 						</td>
 						<td>
-		                    {{invoice.amount}}
+		                    {{invoice.amount | preciseRound}}
 						</td>
 						<td>
 							<button ng-click="delete(invoice.id)" class="btn btn-sm btn-danger">delete</button>
