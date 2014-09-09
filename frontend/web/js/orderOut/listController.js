@@ -96,7 +96,7 @@ app.controller('ListController', ['$scope', 'OrdersOut', 'Supplier', '$routePara
 
     scope.approve = function(id) {
         AI.approveOrder({id:id}, function(data){
-
+            scope.setOrderList();
         });
     }
 

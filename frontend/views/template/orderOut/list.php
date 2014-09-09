@@ -27,6 +27,9 @@
 							Amount
 						</th>
 						<th>
+							Status
+						</th>
+						<th>
 							&nbsp;
 						</th>
 					</tr>
@@ -47,6 +50,9 @@
 						</td>
 						<td ng-click="showOrder(order.id)" >
 		                    {{order.amount}}
+						</td>
+						<td class="{{order.approved ? 'success' : ''}}">
+							{{order.approved ? 'approved' : 'waiting'}}
 						</td>
 						<td>
 							<button ng-click="approve(order.id)" class="btn btn-sm btn-info">approve</button>
