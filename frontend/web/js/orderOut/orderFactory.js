@@ -33,7 +33,14 @@ app.factory('OrdersOut', function ($resource) {
             params: {
                 method: 'approve'
             }
-        }
+        },
+        unapproveOrder: {
+            method: 'PUT',
+            params: {
+                method: 'unapprove'
+            }
+        },
+
     });
     return data;
 });

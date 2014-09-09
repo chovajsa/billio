@@ -163,5 +163,13 @@ class OrderOutController extends ActiveRestController
         return $orderOut;
     }
 
+    public function actionUnapprove($id) {
+        $orderOut = \common\models\OrderOut::findOne($id);
+        $orderOut->unapprove();
+        return $orderOut;
+    }
+
+
+
 
 }

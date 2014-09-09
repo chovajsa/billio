@@ -100,6 +100,12 @@ app.controller('ListController', ['$scope', 'OrdersOut', 'Supplier', '$routePara
         });
     }
 
+    scope.unapprove = function(id) {
+        AI.unapproveOrder({id:id}, function(data){
+            scope.setOrderList();
+        });   
+    }
+
     scope.delete = function(id) {
         scope.toDelete = id;
         scope.showDeleteModal();

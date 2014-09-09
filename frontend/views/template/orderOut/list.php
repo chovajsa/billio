@@ -55,7 +55,9 @@
 							<span class="label label-{{order.approved ? 'success' : 'default'}}">{{order.approved ? 'approved' : 'pending'}}</span>
 						</td>
 						<td>
-							<button ng-click="approve(order.id)" class="btn btn-sm btn-info">approve</button>
+							<button ng-show="!order.approved" ng-click="approve(order.id)" class="btn btn-sm btn-info">approve</button>
+							<button ng-show="order.approved" ng-click="unapprove(order.id)" class="btn btn-sm btn-warning">unapprove</button>
+							
 							<!-- <button ng-click="delete(order.id)" class="btn btn-sm btn-warning">deny</button> -->
 							<button ng-click="delete(order.id)" class="btn btn-sm btn-danger">delete</button>
 						</td>

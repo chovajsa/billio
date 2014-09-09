@@ -49,11 +49,21 @@ class InvoiceIn extends AppActiveRecord
     }
 
     public function approve() {
-        $approved = new \common\models\Approved;
-        $approved->model = \common\components\Helpers::get_real_class($this);
-        $approved->modelId = $this->id;
-        $approved->userName = Yii::$app->user->identity->username;
-        return $approved->save();
+        $approved = \common\models\Approved::findOne(['model'=>\common\components\Helpers::get_real_class($this), 'modelId'=>$this->id, 'userName'=>Yii::$app->user->identity->username]);
+        if (!$approved) {
+            $approved = new \common\models\Approved;
+            $approved->model = \common\components\Helpers::get_real_class($this);
+            $approved->modelId = $this->id;
+            $approved->userName = Yii::$app->user->identity->username;
+            return $approved->save();
+        }
+        return true;
+    }
+
+    public function unapprove() {
+        $approved = \common\models\Approved::findOne(['model'=>\common\components\Helpers::get_real_class($this), 'modelId'=>$this->id, 'userName'=>Yii::$app->user->identity->username]);
+        if ($approved) return $approved->delete(); 
+        return false;
     }
 
     public function safeAttributes() {

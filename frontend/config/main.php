@@ -58,7 +58,8 @@ return [
                 'api/invoice-in/<id>'           => 'api/invoice-in/options',
                 'api/invoice-in'                => 'api/invoice-in/options',
                 'PUT api/invoice-in/<id>/approve' => 'api/invoice-in/approve',
-                
+                'PUT api/invoice-in/<id>/unapprove' => 'api/invoice-in/unapprove',
+                               
 
                 'PUT,PATCH api/supplier/<id>'   => 'api/supplier/update',
                 'DELETE api/supplier/<id>'  => 'api/supplier/delete',
@@ -84,6 +85,7 @@ return [
                 'api/order-out/<id>'           => 'api/order-out/options',
                 'api/order-out'                => 'api/order-out/options',
                 'PUT api/order-out/<id>/approve' => 'api/order-out/approve',
+                'PUT api/order-out/<id>/unapprove' => 'api/order-out/unapprove',
                 
                 // ['class' => 'yii\rest\UrlRule', 'controller' => ['invoice-in' => 'invoice-in']] ,
             ],
