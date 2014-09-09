@@ -233,13 +233,13 @@
 							<input style="width:100%" ng-model="currentOrder.rows[$index].amount" type="text">
 						</td>
 						<td>
-							{{preciseRound((row.amount*row.pcs), 2)}}
+							{{row.amount*row.pcs | preciseRound}}
 						</td>
 						<td>
 							<input style="width:100%" ng-model="currentOrder.rows[$index].vat" type="text">
 						</td>
 						<td>
-							{{preciseRound(((row.amount*row.pcs)*(row.vat/100))+(row.amount*row.pcs), 2)}}
+							{{((row.amount*row.pcs)*(row.vat/100))+(row.amount*row.pcs) | preciseRound}}
 						</td>
 						<td>
 							<a href="javascript:void(0)" ng-click="unsetRow($index)">
@@ -265,9 +265,7 @@
 							Total amount
 						</th>
 						<th>
-							{{
-							(currentOrder.rows.length == 0) ? '0.00' : preciseRound(getTotalAmountForOrder(), 2)
-							}}
+							{{getTotalAmountForOrder() | preciseRound}}
 						</th>
 						<th>
 							&nbsp;
@@ -281,9 +279,7 @@
 							Total VAT
 						</th>
 						<th>
-							{{
-							(currentOrder.rows.length == 0) ? '0.00' : preciseRound(getTotalVatForOrder(), 2)
-							}}
+							{{getTotalVatForOrder() | preciseRound}}
 						</th>
 						<th>
 							&nbsp;
@@ -297,9 +293,7 @@
 							Total amount + VAT
 						</th>
 						<th>
-							{{
-							(currentOrder.rows.length == 0) ? '0.00' : preciseRound(getTotalAmountVatForOrder(), 2)
-							}}
+							{{getTotalAmountVatForOrder() | preciseRound}}
 						</th>
 						<th>
 							&nbsp;
