@@ -94,12 +94,9 @@
 					</div>
 					<div class="col-sm-6 text-right">
 						<p>
-							<!-- <a href="javascript:;" ng-click="delete(currentOrder.id)" class="btn btn-sm btn-danger">Delete</a> -->
-					  		<button ng-click="delete(order.id)" class="btn btn-sm btn-info">approve</button>
-							<button ng-click="delete(order.id)" class="btn btn-sm btn-warning">deny</button>
-							<button ng-click="delete(order.id)" class="btn btn-sm btn-danger">delete</button>
-					        <!-- <a href="javascript:;" class="btn btn-sm btn-primary m-r-5">Approve</a> -->
-					        <!-- <a href="javascript:;" class="btn btn-sm btn-danger">Reject</a> -->
+							<button ng-show="!currentOrder.approved" ng-click="approve(currentOrder.id)" class="btn btn-sm btn-info">approve</button>
+							<button ng-show="currentOrder.approved" ng-click="unapprove(currentOrder.id)" class="btn btn-sm btn-warning">unapprove</button>
+							<button ng-click="delete(currentOrder.id)" class="btn btn-sm btn-danger">delete</button>
 					    </p>
 					</div>
 				</div>
