@@ -6,8 +6,7 @@ function notify(type, msg) {
 	$('#notify-'+type).show();
 }
  
-
- app.config(function ($httpProvider) {
+app.config(function ($httpProvider) {
   $httpProvider.responseInterceptors.push('myHttpInterceptor');
 
   var spinnerFunction = function spinnerFunction(data, headersGetter) {
