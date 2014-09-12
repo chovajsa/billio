@@ -1,5 +1,5 @@
 app.factory('InvoicesIn', function ($resource) {
-    var data = $resource(yiiApp.url + '/api/invoice-in/:id', {
+    var data = $resource(yiiApp.url + '/api/invoice-in/:id/:method', {
         id: '@id'
     }, {
         query: {
@@ -24,6 +24,20 @@ app.factory('InvoicesIn', function ($resource) {
         deleteInvoice: {
             method: 'DELETE',
             params: 0    
+        },
+
+        approveInvoice: {
+            method: 'PUT',
+            params: {
+                method:'approve'
+            }
+        },
+
+        unapproveInvoice: {
+            method: 'PUT',
+            params: {
+                method:'unapprove'
+            }
         }
     });
     return data;

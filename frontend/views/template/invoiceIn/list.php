@@ -27,28 +27,37 @@
 							Amount
 						</th>
 						<th>
+							Approved
+						</th>
+						<th>
 							&nbsp;
 						</th>
 					</tr>
 				</thead>
 				<tbody>
-		            <tr ng-click="showInvoice(invoice.id)" ng-repeat="invoice in invoiceList | filter:filterText">
-		                <td>
+		            <tr ng-repeat="invoice in invoiceList | filter:filterText">
+		                <td ng-click="showInvoice(invoice.id)">
 							<a href="#update/{{invoice.id}}">{{invoice.number}}</a>
 		                </td>
-		                <td>
+		                <td ng-click="showInvoice(invoice.id)">
 							{{invoice.supplier.address.name}}
 						</td>
-		                <td>
+		                <td ng-click="showInvoice(invoice.id)">
 		                    {{invoice.date | dateFromDb}}
-						</td>
-						<td> 
+						</td ng-click="showInvoice(invoice.id)">
+						<td ng-click="showInvoice(invoice.id)"> 
 							{{invoice.dueDate | dateFromDb}}
 						</td>
-						<td>
+						<td ng-click="showInvoice(invoice.id)">
 		                    {{invoice.amount | preciseRound}}
 						</td>
+						<td ng-click="showInvoice(invoice.id)">
+							{{invoice.approved ? 'approved' : 'pending'}}
+						</td>
 						<td>
+							<button ng-click="approve(invoice.id)" class="btn btn-sm btn-success">approve</button>
+							<button ng-click="unapprove(invoice.id)" class="btn btn-sm btn-warning">unapprove</button>
+							
 							<button ng-click="delete(invoice.id)" class="btn btn-sm btn-danger">delete</button>
 						</td>
 					</tr>

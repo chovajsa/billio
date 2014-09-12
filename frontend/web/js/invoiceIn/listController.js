@@ -69,6 +69,20 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
         scope.setInvoiceList();
     };
 
+    scope.approve = function(id) {
+        AI.approveInvoice({
+            id:id
+        });
+        scope.setInvoiceList();
+    } 
+
+    scope.unapprove = function(id) {
+        AI.unapproveInvoice({
+            id:id
+        }); 
+        scope.setInvoiceList(); 
+    }
+
     scope.setInvoiceList = function () {
 
         var filters = {};

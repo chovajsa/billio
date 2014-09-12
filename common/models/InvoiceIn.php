@@ -41,11 +41,11 @@ class InvoiceIn extends AppActiveRecord
     }
 
     public function isApprovedBy() {
-       return \common\models\Approved::findAll(['model'=>\common\components\Helpers::get_real_class($this), 'modelId'=>$this->id]);
+        return \common\models\Approved::findAll(['model'=>\common\components\Helpers::get_real_class($this), 'modelId'=>$this->id]);
     }
 
     public function isApproved() {
-        return !!$this->isApprovedBy();
+        $this->isApprovedBy();
     }
 
     public function approve() {
