@@ -73,7 +73,8 @@ class InvoiceInController extends ActiveRestController
     
     public function actionApprove($id) {
         $invoiceIn = \common\models\InvoiceIn::findOne($id);
-        $invoiceIn->approve();
+        $approved = $invoiceIn->approve();
+       
         return $invoiceIn;
     }
 

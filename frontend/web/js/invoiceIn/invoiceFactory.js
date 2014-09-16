@@ -40,6 +40,7 @@ app.factory('InvoicesIn', function ($resource) {
             }
         }
     });
+
     return data;
 });
 

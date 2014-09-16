@@ -104,6 +104,16 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
         });
     };
 
+
+    scope.invoiceApprovedByUser = function(invoice, name) {
+
+        for (var i in invoice.approvedBy) {
+            if (invoice.approvedBy[i].userName == name) return true;
+        }
+        return false;
+    
+    }
+
     scope.showInvoice = function(id) {
         location.path('/update/' + id);
     }

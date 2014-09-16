@@ -45,18 +45,34 @@ class InvoiceIn extends AppActiveRecord
     }
 
     public function isApproved() {
-        $this->isApprovedBy();
-    }
+        $w1 = \common\models\Approved::findOne(['model'=>\common\components\Helpers::get_real_class($this), 'modelId'=>$this->id, 'weight'=>1]);
+        $w2 = \common\models\Approved::findOne(['model'=>\common\components\Helpers::get_real_class($this), 'modelId'=>$this->id, 'weight'=>2]);
+        return $w1 && $w2;
+    }   
 
     public function approve() {
+        
+        $weight = 0;
+
+        if (Yii::$app->user->identity->canDo('admin')) $weight = 2;
+        if (Yii::$app->user->identity->canDo('strongApprove')) $weight = 2;
+        if (Yii::$app->user->identity->canDo('lightApprove')) $weight = 1;
+
+        if (!$weight) {
+            throw new \yii\web\ForbiddenHttpException('Not allowed');
+        }
+
         $approved = \common\models\Approved::findOne(['model'=>\common\components\Helpers::get_real_class($this), 'modelId'=>$this->id, 'userName'=>Yii::$app->user->identity->username]);
+
         if (!$approved) {
             $approved = new \common\models\Approved;
             $approved->model = \common\components\Helpers::get_real_class($this);
             $approved->modelId = $this->id;
             $approved->userName = Yii::$app->user->identity->username;
+            $approved->weight = $weight;
             return $approved->save();
         }
+
         return true;
     }
 

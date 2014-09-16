@@ -52,13 +52,25 @@
 		                    {{invoice.amount | preciseRound}}
 						</td>
 						<td ng-click="showInvoice(invoice.id)">
-							{{invoice.approved ? 'approved' : 'pending'}}
+							{{invoice.approvedBy ? '' : 'pending'}}
+							<span ng-repeat="ab in invoice.approvedBy">
+								<span class="label label-success">{{ab.userName}}</span>&nbsp;
+							</span>
 						</td>
 						<td>
-							<button ng-click="approve(invoice.id)" class="btn btn-sm btn-success">approve</button>
-							<button ng-click="unapprove(invoice.id)" class="btn btn-sm btn-warning">unapprove</button>
 							
-							<button ng-click="delete(invoice.id)" class="btn btn-sm btn-danger">delete</button>
+							<?php if (Yii::$app->user->identity->canDo('pay')|| Yii::$app->user->identity->canDo('admin')) { ?>
+								<button ng-show="invoice.approved" ng-click="approve(invoice.id)" class="btn btn-sm btn-info">pay</button>
+							<?php } ?>
+
+							<?php if (Yii::$app->user->identity->canDo('strongApprove') || Yii::$app->user->identity->canDo('lightApprove') || Yii::$app->user->identity->canDo('admin')) { ?>
+								<button ng-show="!invoiceApprovedByUser(invoice,'<?=Yii::$app->user->identity->username;?>')" ng-click="approve(invoice.id)" class="btn btn-sm btn-success">approve</button>
+								<button ng-show="invoiceApprovedByUser(invoice,'<?=Yii::$app->user->identity->username;?>')" ng-click="unapprove(invoice.id)" class="btn btn-sm btn-warning">unapprove</button>
+							<?php } ?>
+							
+							<?php if (Yii::$app->user->identity->canDo('admin')) { ?>
+								<button ng-click="delete(invoice.id)" class="btn btn-sm btn-danger">delete</button>
+							<?php } ?>
 						</td>
 					</tr>
 				</tbody>
