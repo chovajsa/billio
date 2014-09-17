@@ -112,8 +112,8 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
             if (scope.currentInvoice.supplierId)
             scope.currentInvoice.supplier = {
                 id: data.supplierId,
-                name: data.supplier.address.name,
-                text: data.supplier.address.name
+                name: data.supplier.name,
+                text: data.supplier.name
             }
 
             angular.element('#attachmentsFrame').attr('src', yiiApp.url+'/invoice-in/attachments?invoiceInId='+data.id);
@@ -121,7 +121,7 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
     };
 
     scope.createSupplier = function() {
-        params = scope.newSupplier;
+        params = scope.supplier;
         SI.createSupplier(params, function (data) {
             scope.setSuppliers();
             scope.closeModal();

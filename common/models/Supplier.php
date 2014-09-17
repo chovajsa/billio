@@ -11,17 +11,22 @@ class Supplier extends AppActiveRecord
 {
 
     public static function getFulltextAttributes() {
-        return ['name'];
+        return ['name', 'surname', 'companyName'];
     }
 
     /**
-      * @inheritdoc
-      */
-     public function rules()
-     {
-         return [
-         ];
-     }
+    * @inheritdoc
+    */
+    public function rules()
+    {
+        return [
+        ];
+    }
+
+    public function getBankAccounts() {
+        return $this->hasMany(BankAccount::className(), ['supplierId' => 'id']);   
+    }
+
 
     public function getAddress()
     {
@@ -39,7 +44,9 @@ class Supplier extends AppActiveRecord
    public function toArray(array $fields = [], array $expand = [], $recursive = true) {
         $return = $this->attributes;
         
-        $return ['address'] = $this->address->attributes;
+        $return['address'] = $this->address->attributes;
+        $return['bankAccounts'] = $this->bankAccounts;
+
         return $return;
     }
 

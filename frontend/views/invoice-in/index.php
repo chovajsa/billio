@@ -13,7 +13,7 @@ $depends = [
 
 <?php $this->registerJsFile('@web/js/invoiceIn/app.js', $depends);?>
 <?php $this->registerJsFile('@web/js/invoiceIn/invoiceFactory.js', $depends);?>
-<?php $this->registerJsFile('@web/js/invoiceIn/supplierFactory.js', $depends);?>
+<?php $this->registerJsFile('@web/js/supplier/supplierFactory.js', $depends);?>
 <?php $this->registerJsFile('@web/js/invoiceIn/listController.js', $depends);?>
 <?php $this->registerJsFile('@web/js/invoiceIn/createController.js', $depends);?>
 <?php $this->registerJsFile('@web/js/invoiceIn/updateController.js', $depends);?>

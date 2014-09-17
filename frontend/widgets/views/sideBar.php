@@ -19,6 +19,7 @@
       <li class="nav-header">Navigation</li>
 
       <li <?=$route == 'invoice-in/index' ? 'class="active"' : '';?>><a href="<?=Url::base();?>/invoice-in/index">Invoices</a></li>
+      <li <?=$route == 'supplier/index' ? 'class="active"' : '';?>><a href="<?=Url::base();?>/supplier/index">Suppliers</a></li>
 
       <?php if (Yii::$app->user->identity->canDo('admin')) { ?>
        <li class="has-sub">

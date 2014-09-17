@@ -139,7 +139,7 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
 	}
 
 
-    // supplier modal
+    // delete modal
     var deleteModal = modal({scope: scope, template: yiiApp.url+'/template?route=invoiceIn/sure', show: false});
     scope.showDeleteModal  = function() {
         deleteModal.$promise.then(deleteModal.show);

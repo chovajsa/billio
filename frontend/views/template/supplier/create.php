@@ -1,5 +1,5 @@
-<div class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog">
+<div  class="modal" tabindex="-1" role="dialog">
+  <div style="width:1000px" class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" ng-click="$hide()">&times;</button>
@@ -13,18 +13,34 @@
             
             <fieldset>
               <legend style="font-size:13px"> Basic Info </legend>
-            <div class="form-group">
-                <label class="col-md-3 control-label ui-sortable">Name</label>
-                <div class="col-md-9 ui-sortable">
-                    <input type="text" ng-model="newSupplier.name" class="form-control" placeholder="Name">
-                </div>
-            </div>          
-            <div class="form-group">
-                <label class="col-md-3 control-label ui-sortable">Surname</label>
-                <div class="col-md-9 ui-sortable">
-                    <input type="text" ng-model="newSupplier.surname" class="form-control" placeholder="Surname">
-                </div>
-            </div>          
+
+              <div class="form-group">
+                  <label class="col-md-3 control-label ui-sortable">Company Name</label>
+                  <div class="col-md-9 ui-sortable">
+                      <input type="text" ng-model="supplier.customerName" class="form-control" placeholder="Name">
+                  </div>
+              </div>            
+
+              <div class="form-group">
+                  <label class="col-md-3 control-label ui-sortable">Name</label>
+                  <div class="col-md-9 ui-sortable">
+                      <input type="text" ng-model="supplier.name" class="form-control" placeholder="Name">
+                  </div>
+              </div>          
+              <div class="form-group">
+                  <label class="col-md-3 control-label ui-sortable">Surname</label>
+                  <div class="col-md-9 ui-sortable">
+                      <input type="text" ng-model="supplier.surname" class="form-control" placeholder="Surname">
+                  </div>
+              </div>          
+
+              <div class="form-group">
+                  <label class="col-md-3 control-label ui-sortable">Vat</label>
+                  <div class="col-md-9 ui-sortable">
+                      <input type="checkbox" ng-model="supplier.vat">
+                  </div>
+              </div>          
+
             </fieldset>
   
             
@@ -33,24 +49,90 @@
             <div class="form-group">
                 <label class="col-md-3 control-label ui-sortable">Street</label>
                 <div class="col-md-9 ui-sortable">
-                    <input type="text" ng-model="newSupplier.street" class="form-control" placeholder="Street">
+                    <input type="text" ng-model="supplier.street" class="form-control" placeholder="Street">
                 </div>
             </div>          
             
             <div class="form-group">
                 <label class="col-md-3 control-label ui-sortable">City</label>
                 <div class="col-md-9 ui-sortable">
-                    <input type="text" ng-model="newSupplier.city" class="form-control" placeholder="City">
+                    <input type="text" ng-model="supplier.city" class="form-control" placeholder="City">
                 </div>
             </div>          
 
             <div class="form-group">
                 <label class="col-md-3 control-label ui-sortable">Zip</label>
                 <div class="col-md-9 ui-sortable">
-                    <input type="text" ng-model="newSupplier.zip" class="form-control" placeholder="Zip">
+                    <input type="text" ng-model="supplier.zip" class="form-control" placeholder="Zip">
                 </div>
             </div>     
-            </fieldset>     
+            </fieldset>  
+
+            <fieldset>
+              <legend style="font-size:13px"> Address 2  </legend>
+            <div class="form-group">
+                <label class="col-md-3 control-label ui-sortable">Street</label>
+                <div class="col-md-9 ui-sortable">
+                    <input type="text" ng-model="supplier.street1" class="form-control" placeholder="Street">
+                </div>
+            </div>          
+            
+            <div class="form-group">
+                <label class="col-md-3 control-label ui-sortable">City</label>
+                <div class="col-md-9 ui-sortable">
+                    <input type="text" ng-model="supplier.city1" class="form-control" placeholder="City">
+                </div>
+            </div>          
+
+            <div class="form-group">
+                <label class="col-md-3 control-label ui-sortable">Zip</label>
+                <div class="col-md-9 ui-sortable">
+                    <input type="text" ng-model="supplier.zip1" class="form-control" placeholder="Zip">
+                </div>
+            </div>     
+            </fieldset>   
+          
+
+            <fieldset>
+              <legend style="font-size:13px"> Bank Accounts  </legend>
+              
+              <label class="col-md-3 control-label ui-sortable">&nbsp;</label>
+
+              <div class="col-sm-3">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>
+                      Number
+                    </th>
+                    <th>
+                      Code
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <input/>
+                    </td>
+                    <td>
+                      <input/>
+                    </td>
+                    <td>
+                      <a href="">remove</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              <a href="">
+                add account
+              </a>
+
+              </div>
+
+
+            </fieldset>   
 
           </form>
 
