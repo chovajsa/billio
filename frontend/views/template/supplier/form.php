@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" ng-click="$hide()">&times;</button>
-        <h4 class="modal-title"> Create Supplier </h4>
+        <h4 class="modal-title"> {{supplier.id ? 'Update' : 'Create'}} Supplier </h4>
       </div>
       <div class="modal-body">
           
@@ -17,7 +17,7 @@
               <div class="form-group">
                   <label class="col-md-3 control-label ui-sortable">Company Name</label>
                   <div class="col-md-9 ui-sortable">
-                      <input type="text" ng-model="supplier.customerName" class="form-control" placeholder="Name">
+                      <input type="text" ng-model="supplier.companyName" class="form-control" placeholder="Name">
                   </div>
               </div>            
 
@@ -139,7 +139,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" ng-click="createSupplier()">Save</button>
+        <button type="button" class="btn btn-primary" ng-click="updateSupplier()">Save</button>
         <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
       </div>
     </div>

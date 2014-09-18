@@ -1,6 +1,6 @@
 app.factory('Supplier', function ($resource) {
-    var data =  $resource(yiiApp.url + '/api/supplier/:number', {
-        number: '@number'
+    var data =  $resource(yiiApp.url + '/api/supplier/:id', {
+        id: '@id'
     }, {
         query: {
             isArray:false
@@ -8,12 +8,16 @@ app.factory('Supplier', function ($resource) {
         getSupplier: {
             method: 'GET',
             params: {
-                number: 0
+            }
+        },
+        updateSupplier: {
+            method: 'PUT',
+            params: {
+
             }
         },
         createSupplier: {
             method: 'POST',
-            params: 0
         },
     });
     return data;

@@ -29,7 +29,6 @@ $depends = [
 
 			<h1 class="page-header"> Suppliers <!-- <small>header small text goes here...</small> --></h1>
 
-
 			<div class="alert alert-success fade in m-b-15" id="notify-success" style="display:none">
 				<span class="msg"></span>
 				<span data-dismiss="alert" class="close">×</span>

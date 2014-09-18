@@ -27,12 +27,12 @@ class SupplierController extends ActiveRestController
                 'modelClass' => $this->modelClass,
                 'checkAccess' => [$this, 'checkAccess'],
             ],
-            'update' => [
-                'class' => 'yii\rest\UpdateAction',
-                'modelClass' => $this->modelClass,
-                'checkAccess' => [$this, 'checkAccess'],
-                'scenario' => $this->updateScenario,
-            ],
+            // 'update' => [
+            //     'class' => 'yii\rest\UpdateAction',
+            //     'modelClass' => $this->modelClass,
+            //     'checkAccess' => [$this, 'checkAccess'],
+            //     'scenario' => $this->updateScenario,
+            // ],
             'delete' => [
                 'class' => 'yii\rest\DeleteAction',
                 'modelClass' => $this->modelClass,
@@ -69,6 +69,28 @@ class SupplierController extends ActiveRestController
         return $supplier;
     }
 
+    public function actionUpdate($id) {
+        $supplier = \common\models\Supplier::findOne($id);
+        return $this->update($supplier);
+    }
+
+    public function update($supplier) {
+        $p = Yii::$app->getRequest()->getBodyParams();
+        
+        $supplier->load($p, '');
+        $supplier->save();
+
+        if (!($address = $supplier->address)) {
+            $address = new \common\models\Address;
+            $address->load($p, '');
+            $address->save();
+            $supplier->addressId = $address->id;
+            $supplier->save();
+        }
+
+        return $supplier;
+    }
+
     public function actionIndex() {
         return $dataProvider = $this->prepareDataProvider();
     }
@@ -80,7 +102,7 @@ class SupplierController extends ActiveRestController
             $andWhere = "supplier.id IN (
                 SELECT s1.id FROM supplier s1 
                 LEFT JOIN address a ON a.id = s1.addressId 
-                WHERE a.name LIKE '%{$_GET['fulltext']}%'
+                WHERE s1.name LIKE '%{$_GET['fulltext']}%' OR s1.surname LIKE '%{$_GET['fulltext']}%' OR s1.companyName LIKE '%{$_GET['fulltext']}%'
             )";    
         }
 
