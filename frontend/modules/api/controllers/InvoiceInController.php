@@ -161,7 +161,19 @@ class InvoiceInController extends ActiveRestController
         return $invoiceIn;
     }
 
+     protected function getFulltextCondition($modelClass) {
     
+        $andWhere = parent::getFulltextCondition($modelClass);
+                    
+        $fulltext = $_GET['fulltext'];
+        $andWhere .= " AND t.id IN (
+            SELECT id FROM invoiceIn
+            LEFT JOIN supplier ON supplier.id = invoiceIn.supplierId 
+            WHERE supplier.name LIKE '%$fulltext%'
+        )";
+
+        return $andWhere;
+    }
 
 	public function actionIndex() {
     	

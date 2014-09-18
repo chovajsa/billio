@@ -4,7 +4,8 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
     
     scope.toDelete = [];
 
-        
+    scope.filtextText = false;
+
     invoiceList = [];
     invoiceListState = 'open';
     invoiceListSort = 'id';
@@ -99,6 +100,7 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
             direction: scope.invoiceListDirection,
             filters:angular.toJson(filters),
 			page: scope.invoiceListPage,
+            fulltext:scope.filterText
         }, function (data) {
             scope.invoiceList = data.items;
 			scope.invoiceListLinks = data._links;
