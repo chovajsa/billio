@@ -35,6 +35,12 @@ app.filter('preciseRound', function() {
 	};
 });
 
+app.filter('num', function() {
+    return function(input) {
+      return parseInt(input, 10);
+    }
+});
+
 function convertDateFromDb(d) {
     if (d == null) return '';
     var from = d.split("-");

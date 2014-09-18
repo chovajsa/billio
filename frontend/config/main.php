@@ -68,6 +68,14 @@ return [
                 'GET,HEAD api/supplier' => 'api/supplier/index',
                 'api/supplier/<id>' => 'api/supplier/options',
                 'api/supplier' => 'api/supplier/options',
+				
+				'PUT,PATCH api/cost-centre/<id>'   => 'api/cost-centre/update',
+                'DELETE api/cost-centre/<id>'  => 'api/cost-centre/delete',
+                'GET,HEAD api/cost-centre/<id>' => 'api/cost-centre/view',
+                'POST api/cost-centre' => 'api/cost-centre/create',
+                'GET,HEAD api/cost-centre' => 'api/cost-centre/index',
+                'api/cost-centre/<id>' => 'api/cost-centre/options',
+                'api/cost-centre' => 'api/cost-centre/options',
 
                 'PUT,PATCH api/order-in/<id>' => 'api/order-in/update',
                 'DELETE api/order-in/<id>'    => 'api/order-in/delete',

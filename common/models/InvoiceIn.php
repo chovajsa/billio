@@ -28,6 +28,10 @@ class InvoiceIn extends AppActiveRecord
     public function getUser() {
         return $this->hasOne(User::className(), ['id' => 'createdBy']);
     }
+	
+	public function getCostCentre() {
+        return $this->hasOne(CostCentre::className(), ['id' => 'costCentreId']);
+    }
 
     /**
       * @inheritdoc
@@ -38,6 +42,10 @@ class InvoiceIn extends AppActiveRecord
            [$this->safeAttributes(), 'safe'],
            [['supplierId'], 'number'],
         ];
+    }
+
+    public function safeAttributes() {
+        return ['supplierId', 'date', 'number', 'dueDate', 'referenceNumber', 'costCentreId'];
     }
 
     public function isApprovedBy() {
@@ -82,10 +90,6 @@ class InvoiceIn extends AppActiveRecord
         return false;
     }
 
-    public function safeAttributes() {
-        return ['supplierId', 'date', 'number', 'dueDate', 'referenceNumber'];
-    }
-
 
     public function getAttachments() {
         $entries = [];
@@ -112,6 +116,9 @@ class InvoiceIn extends AppActiveRecord
 
         $return['approved'] = $this->isApproved();
         $return['approvedBy'] = $this->isApprovedBy();
+		
+		//$return['costCentreName'] = $this->costCentre->name;
+		$return['costCentre'] = ($this->costCentre instanceof CostCentre) ? $this->costCentre : [];
 
         $rows = $this->getRows()->all();
         $return['rows'] = [];

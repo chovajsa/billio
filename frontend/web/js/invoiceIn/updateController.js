@@ -1,15 +1,18 @@
-app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeParams', '$modal', '$location', '$controller', function (scope, AI, SI, routeParams, modal, location, $controller) {
+app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCentre', '$routeParams', '$modal', '$location', '$controller', function (scope, AI, SI, costCentres, routeParams, modal, location, $controller) {
 
     $controller('ListController', {$scope:scope});
 
     scope.mode = 'update';
     scope.supplier = {};
     scope.counter = 0;
+	scope.costCentres = [];
 
     scope.currentInvoice = {
         rows:[],
         supplier:false
     };
+	
+	//scope.currentInvoice.costCentreId = parseInt(scope.currentInvoice.costCentreId, 10); 
 
     scope.addRow = function() {
         if (scope.currentInvoice.rows === undefined) scope.currentInvoice.rows = [];
@@ -44,7 +47,8 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
             }
         }
         
-        params.supplierId = parseInt(params.supplier.id);
+        params.supplierId = parseInt(params.supplier.id,10);
+		params.costCentreId = parseInt(params.costCentreId,10);
 
         if (scope.mode == 'create') {
             AI.createInvoice(params, function (data) {
@@ -75,37 +79,45 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
 
 
     scope.setCurrentInvoice = function (id) {
-        scope.mode = 'update';
-        AI.getInvoice({
-            id: id  
-        }, function (data) {
-            var dateFields = ['date', 'dueDate'];
+      
+// potalto stary kod
+		scope.mode = 'update';
+		
+		costCentres.get({}, function(costCentreData) {
+			
+			scope.costCentres = costCentreData.items;
+			
+			AI.getInvoice({
+				id: id  
+			}, function (data) {
+				var dateFields = ['date', 'dueDate'];
 
-            for (var i in data) {
-                for (var x in dateFields) {
-                    // if (dateFields[x] == )
-                    if (i == dateFields[x]) {
-                        data[i] = convertDateFromDb(data[i]);
-                    }
-                }
-            }
+				for (var i in data) {
+					for (var x in dateFields) {
+						// if (dateFields[x] == )
+						if (i == dateFields[x]) {
+							data[i] = convertDateFromDb(data[i]);
+						}
+					}
+				}
 
-            scope.currentInvoice = data;
-            scope.currentInvoice.number = parseInt(scope.currentInvoice.number);
-            scope.currentInvoice.referenceNumber = parseInt(scope.currentInvoice.referenceNumber);
+				scope.currentInvoice = data;
+				scope.currentInvoice.number = parseInt(scope.currentInvoice.number);
+				scope.currentInvoice.referenceNumber = parseInt(scope.currentInvoice.referenceNumber);
 
-            scope.currentInvoice.supplierId = parseInt(data.supplierId);
+				scope.currentInvoice.supplierId = parseInt(data.supplierId);
+				scope.currentInvoice.costCentreId = parseInt(data.costCentreId);
 
-            if (scope.currentInvoice.supplierId)
-            scope.currentInvoice.supplier = {
-                id: data.supplierId,
-                name: data.supplier.name,
-                text: data.supplier.name + " " + data.supplier.surname
-            }
+				if (scope.currentInvoice.supplierId)
+				scope.currentInvoice.supplier = {
+					id: data.supplierId,
+					name: data.supplier.name,
+					text: data.supplier.name + data.supplier.surname
+				}
 
-            angular.element('#attachmentsFrame').attr('src', yiiApp.url+'/invoice-in/attachments?invoiceInId='+data.id);
-
-        });
+				angular.element('#attachmentsFrame').attr('src', yiiApp.url+'/invoice-in/attachments?invoiceInId='+data.id);
+			});
+		});
     };
 
     scope.updateSupplier = function() {
@@ -175,11 +187,5 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', '$routeP
 		return total;
 	
 	};
-	
-	scope.preciseRound = function(num,decimals) {
-	   var x = (Math.round(num * Math.pow(10, decimals)) / Math.pow(10, decimals)).toFixed(decimals);
-       if (isNaN(x)) return "0.00";
-	   return x;
-    }
 
 }]);

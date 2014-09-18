@@ -149,6 +149,19 @@
 
 					</div>
 				</div>
+				
+				<div class="form-group">
+					<label for="date" class="col-sm-2 control-label">Cost Centre</label>
+					
+					<div class="col-sm-10">
+						
+						<select class="form-control" ng-model="currentInvoice.costCentreId">
+							<option ng-repeat="costCentre in costCentres" value="{{costCentre.id}}">{{costCentre.name}}</option>
+						</select>
+						
+						
+					</div>
+				</div>
 
 				<div class="form-group">
 					<label for="date" class="col-sm-2 control-label">Date</label>

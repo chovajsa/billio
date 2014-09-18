@@ -15,7 +15,9 @@
 						<th>
 							Supplier
 						</th>
-						
+						<th>
+							Cost Centre
+						</th>
 						<th>
 							Date
 						</th>
@@ -41,6 +43,9 @@
 		                </td>
 		                <td ng-click="showInvoice(invoice.id)">
 							{{invoice.supplier.address.name}}
+						</td>
+						<td ng-click="showInvoice(invoice.id)">
+							{{invoice.costCentre.name}}
 						</td>
 		                <td ng-click="showInvoice(invoice.id)">
 		                    {{invoice.date | dateFromDb}}
