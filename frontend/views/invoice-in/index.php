@@ -46,7 +46,7 @@ $depends = [
 				<div class="col-md-4 ui-sortable">
 					<form>
 			            <div class="input-group m-b-15">
-			                <input type="text" class="form-control input-sm input-white" placeholder="Search Invoices">
+			                <input type="text" class="form-control input-sm input-white" ng-model="filterText" placeholder="Search Invoices">
 			                <span class="input-group-btn">
 			                    <button class="btn btn-sm btn-inverse" type="button"><i class="fa fa-search"></i></button>
 			                </span>
