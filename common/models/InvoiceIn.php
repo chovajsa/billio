@@ -108,6 +108,10 @@ class InvoiceIn extends AppActiveRecord
         return $entries;
     }
 
+    public static function getFulltextAttributes() {
+        return array('number', 'referenceNumber');
+    }
+
     public function toArray(array $fields = [], array $expand = [], $recursive = true) {
         $return = $this->attributes;
 
