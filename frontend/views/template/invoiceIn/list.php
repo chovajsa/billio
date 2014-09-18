@@ -37,7 +37,7 @@
 					</tr>
 				</thead>
 				<tbody>
-		            <tr ng-repeat="invoice in invoiceList | filter:filterText">
+		            <tr ng-repeat="invoice in invoiceList">
 		                <td ng-click="showInvoice(invoice.id)">
 							<a href="#update/{{invoice.id}}">{{invoice.number}}</a>
 		                </td>

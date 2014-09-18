@@ -24,7 +24,7 @@
 					</tr>
 				</thead>
 				<tbody>
-		            <tr ng-repeat="invoice in invoiceList | filter:filterText">
+		            <tr ng-repeat="invoice in invoiceList">
 		                <td>
 							<a href="#update/{{invoice.id}}">{{invoice.number}}</a>
 		                </td>
