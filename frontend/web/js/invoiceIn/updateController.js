@@ -3,7 +3,7 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCen
     $controller('ListController', {$scope:scope});
 
     scope.mode = 'update';
-    scope.newSupplier = {};
+    scope.supplier = {};
     scope.counter = 0;
 	scope.costCentres = [];
 
@@ -79,7 +79,8 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCen
 
 
     scope.setCurrentInvoice = function (id) {
-        
+      
+// potalto stary kod
 		scope.mode = 'update';
 		
 		costCentres.get({}, function(costCentreData) {
@@ -100,19 +101,6 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCen
 					}
 				}
 
-				// if (id) {
-				//     var found = false;
-				//     for (var i in scope.suppliers) {
-				//         if (scope.suppliers[i].id == data.supplierId) {
-				//             found = true;
-				//         }
-				//     }
-
-				//     if (!found) {
-				//         scope.suppliers.push({ id: data.supplierId, address: {name:data.supplier.address.name}}); 
-				//     }
-				// }
-
 				scope.currentInvoice = data;
 				scope.currentInvoice.number = parseInt(scope.currentInvoice.number);
 				scope.currentInvoice.referenceNumber = parseInt(scope.currentInvoice.referenceNumber);
@@ -124,7 +112,7 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCen
 				scope.currentInvoice.supplier = {
 					id: data.supplierId,
 					name: data.supplier.name,
-					text: data.supplier.name
+					text: data.supplier.name + data.supplier.surname
 				}
 
 				angular.element('#attachmentsFrame').attr('src', yiiApp.url+'/invoice-in/attachments?invoiceInId='+data.id);
@@ -132,7 +120,7 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCen
 		});
     };
 
-    scope.createSupplier = function() {
+    scope.updateSupplier = function() {
         params = scope.supplier;
         SI.createSupplier(params, function (data) {
             scope.setSuppliers();
@@ -148,7 +136,7 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCen
     }
 
     // supplier modal
-    var turl = yiiApp.url+'/template?route=supplier/create';
+    var turl = yiiApp.url+'/template?route=supplier/form';
 
     var supplierModal = modal({scope: scope, template: turl, show: false});
 

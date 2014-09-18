@@ -20,7 +20,12 @@ class Supplier extends AppActiveRecord
     public function rules()
     {
         return [
+           [$this->safeAttributes(), 'safe'],
         ];
+    }
+
+    public function safeAttributes() {
+        return ['name', 'surname', 'companyName', 'vat'];
     }
 
     public function getBankAccounts() {

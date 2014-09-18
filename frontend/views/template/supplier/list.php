@@ -30,7 +30,7 @@
 							{{supplier.name}} {{supplier.surname}}
 						</td>
 						<td>
-							<a ng-show="1" ng-href="#/update/{{supplier.id}}" class="btn btn-sm btn-info">update</a>
+							<a ng-show="1" href="javascript:void(0)" ng-click="update(supplier.id)" class="btn btn-sm btn-info">update</a>
 						</td>
 					</tr>
 				</tbody>

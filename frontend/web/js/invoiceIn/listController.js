@@ -31,7 +31,7 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
                 for (var i in items) {
                     newData.push({
                         id: items[i].id,
-                        text: items[i].address.name + " " + items[i].address.surname
+                        text: items[i].name + " " + items[i].surname
                     });
                 }
                 
@@ -72,15 +72,17 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
     scope.approve = function(id) {
         AI.approveInvoice({
             id:id
+        }, function(d){
+            scope.setInvoiceList();
         });
-        scope.setInvoiceList();
     } 
 
     scope.unapprove = function(id) {
         AI.unapproveInvoice({
             id:id
+        }, function(d) {
+            scope.setInvoiceList(); 
         }); 
-        scope.setInvoiceList(); 
     }
 
     scope.setInvoiceList = function () {
