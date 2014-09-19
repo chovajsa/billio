@@ -10,23 +10,6 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
     invoiceListDirection = 'desc';
     invoiceListPage = 1;
 	
-	// doSearch=false;
-    
-	// scope.$watch('searchText', function(newValue, oldValue) {
-		// if(newValue != oldValue && typeof newValue !== 'undefined') {
-			// //console.log(newValue);
-			// scope.setInvoiceList();
-		// }
-	// });
-	
-	// scope.$watch('doSearch', function(newValue, oldValue) {
-		// if(newValue != oldValue && newValue == true) {
-			// console.log(scope.doSearch);
-			// scope.setInvoiceList();
-			// //scope.doSearch = false;
-		// }
-	// });
-	
 	if (routeParams.fulltext) {
         scope.searchText = routeParams.fulltext;
     }

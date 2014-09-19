@@ -38,10 +38,12 @@ $depends = [
 				<div class="col-md-4 ui-sortable">
 					<form>
 			            <div class="input-group m-b-15">
-			                <input type="text" class="form-control input-sm input-white" placeholder="Search suppliers">
-			                <span class="input-group-btn">
-			                    <button class="btn btn-sm btn-inverse" type="button"><i class="fa fa-search"></i></button>
-			                </span>
+			                <input type="text" class="form-control input-sm input-white" ng-model="searchText" placeholder="Search Invoices" value="{{searchText}}">
+			                <a class="input-group-btn" href="#/search/{{searchText}}">
+								<span>
+									<button class="btn btn-sm btn-inverse" type="submit"><i class="fa fa-search"></i></button>
+								</span>
+							</a>
 			            </div>
 			        </form>
 				</div>

@@ -3,6 +3,10 @@ app.controller('ListController', ['$scope', 'Supplier', '$routeParams', '$modal'
 	scope.supplierList = [];
     scope.supplier = {};
 	
+	if (routeParams.fulltext) {
+        scope.searchText = routeParams.fulltext;
+    }
+	
 	scope.setSupplierList = function () {
 
         var filters = {};
@@ -14,6 +18,7 @@ app.controller('ListController', ['$scope', 'Supplier', '$routeParams', '$modal'
             direction: scope.supplierListDirection,
             filters:angular.toJson(filters),
 			page: scope.supplierListPage,
+			fulltext: scope.searchText,
         }, function (data) {
             scope.supplierList = data.items;
 			scope.supplierListLinks = data._links;

@@ -161,7 +161,7 @@ class InvoiceInController extends ActiveRestController
         return $invoiceIn;
     }
 
-     protected function getFulltextCondition($modelClass) {
+    protected function getFulltextCondition($modelClass) {
     
         $andWhere = parent::getFulltextCondition($modelClass);
                     
