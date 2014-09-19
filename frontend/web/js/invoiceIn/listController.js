@@ -4,14 +4,32 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
     
     scope.toDelete = [];
 
-    scope.filtextText = false;
-
     invoiceList = [];
     invoiceListState = 'open';
     invoiceListSort = 'id';
     invoiceListDirection = 'desc';
     invoiceListPage = 1;
-        
+	
+	// doSearch=false;
+    
+	// scope.$watch('searchText', function(newValue, oldValue) {
+		// if(newValue != oldValue && typeof newValue !== 'undefined') {
+			// //console.log(newValue);
+			// scope.setInvoiceList();
+		// }
+	// });
+	
+	// scope.$watch('doSearch', function(newValue, oldValue) {
+		// if(newValue != oldValue && newValue == true) {
+			// console.log(scope.doSearch);
+			// scope.setInvoiceList();
+			// //scope.doSearch = false;
+		// }
+	// });
+	
+	if (routeParams.fulltext) {
+        scope.searchText = routeParams.fulltext;
+    }
 
     scope.select2Options = 
      {
@@ -88,7 +106,7 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
 
     scope.setInvoiceList = function () {
 
-        var filters = {};
+		var filters = {};
         if (location.path() == '/mine') {
            filters.createdBy = yiiApp.userId;
         }
@@ -98,13 +116,16 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
             //labels: scope.labels,
             sort: scope.invoiceListSort,
             direction: scope.invoiceListDirection,
-            filters:angular.toJson(filters),
+            // filters:angular.toJson(filters),
 			page: scope.invoiceListPage,
-            fulltext:scope.filterText
+            fulltext:scope.searchText
         }, function (data) {
             scope.invoiceList = data.items;
 			scope.invoiceListLinks = data._links;
 			scope.invoiceListPaging = data._meta;
+			
+			// if(scope.doSearch == true) scope.doSearch = false;
+			// console.log(scope.doSearch);
         });
     };
 

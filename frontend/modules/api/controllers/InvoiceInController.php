@@ -165,12 +165,22 @@ class InvoiceInController extends ActiveRestController
     
         $andWhere = parent::getFulltextCondition($modelClass);
                     
-        $fulltext = $_GET['fulltext'];
-        $andWhere .= " AND t.id IN (
-            SELECT id FROM invoiceIn
-            LEFT JOIN supplier ON supplier.id = invoiceIn.supplierId 
-            WHERE supplier.name LIKE '%$fulltext%'
-        )";
+        if (isset($_GET['fulltext'])) {
+			
+			$fulltext = $_GET['fulltext'];
+			
+			$andWhere .= " OR invoiceIn.id IN (
+				SELECT invoiceIn.id FROM invoiceIn 
+				LEFT JOIN supplier ON supplier.id = invoiceIn.supplierId 
+				LEFT JOIN costCentre ON costCentre.id = invoiceIn.costCentreId 
+				WHERE 
+					supplier.name LIKE '%$fulltext%' OR 
+					supplier.surname LIKE '%$fulltext%' OR 
+					supplier.companyName LIKE '%$fulltext%' OR 
+					costCentre.name LIKE '%$fulltext%' 
+			)";
+		
+		}
 
         return $andWhere;
     }

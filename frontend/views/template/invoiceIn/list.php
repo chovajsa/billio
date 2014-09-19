@@ -42,7 +42,7 @@
 							<a href="#update/{{invoice.id}}">{{invoice.number}}</a>
 		                </td>
 		                <td ng-click="showInvoice(invoice.id)">
-							{{invoice.supplier.address.name}}
+							{{invoice.supplier.name}}
 						</td>
 						<td ng-click="showInvoice(invoice.id)">
 							{{invoice.costCentre.name}}

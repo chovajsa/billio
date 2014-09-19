@@ -14,6 +14,11 @@ $routeProvider.
     templateUrl : yiiApp.url + '/template/?route=invoiceIn/list',
     animation: 'slide'
   }).
+   when('/search/:fulltext', {
+    controller: 'ListController',
+    templateUrl : yiiApp.url + '/template/?route=invoiceIn/list',
+    animation: 'slide'
+  }).
 
 
   // actions
