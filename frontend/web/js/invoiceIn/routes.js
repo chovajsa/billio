@@ -24,6 +24,11 @@ $routeProvider.
     templateUrl : yiiApp.url + '/template/?route=invoiceIn/list',
     animation: 'slide'
   }).
+  when('/filter/:filters', {
+    controller: 'ListController',
+    templateUrl : yiiApp.url + '/template/?route=invoiceIn/list',
+    animation: 'slide'
+  }).
 
 
   // actions

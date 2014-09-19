@@ -46,7 +46,7 @@ $depends = [
 				<div class="col-md-4 ui-sortable">
 					<form>
 						<div class="input-group m-b-15">
-			                <input type="text" class="form-control input-sm input-white" ng-model="searchText" placeholder="Search Invoices" value="{{searchText}}">
+			                <input type="text" class="form-control input-sm input-white" ng-model="searchText" placeholder="Search Invoices" value="{{routeParams.fulltext}}">
 			                <a class="input-group-btn" href="#/search/{{searchText}}">
 								<span>
 									<button class="btn btn-sm btn-inverse" type="submit"><i class="fa fa-search"></i></button>
@@ -65,6 +65,8 @@ $depends = [
 			    	    <a href="#/mine" class="btn btn-sm btn-inverse"><i class="fa m-r-5"></i> Mine </a>
 			    	    <a href="#/paid" class="btn btn-sm btn-inverse"><i class="fa m-r-5"></i> Paid </a>
 			    	    <a href="#/paidNot" class="btn btn-sm btn-inverse"><i class="fa m-r-5"></i> Paid not </a>
+						
+						<a href="javascript:;" class="btn btn-sm btn-success" ng-click="advanceSearch=!advanceSearch"><i class="fa fa-search"></i> Advance Search </a>
 
 			    	</div>
 				</div>

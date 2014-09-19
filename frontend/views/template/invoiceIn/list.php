@@ -1,4 +1,69 @@
-<div class="col-md-12 ui-sortable" ng-show="currentInvoice == null">
+<!-- Advance Search -->
+<div class="col-md-12" ng-show="advanceSearch == true">
+	
+	<div class="panel panel-success">
+	
+		<div class="panel-heading">
+			<h4 class="panel-title">Advance Search</h4>
+		</div>
+		
+		<form class="form-horizontal">
+			<div class="panel-body">
+				
+				<div class="col-md-6">
+					<div class="form-group">
+						<label class="col-md-4 control-label ui-sortable">Invoice Number</label>
+						<div class="col-md-8 ui-sortable">
+							<input type="text" class="form-control" placeholder="Invoice Number" ng-model="filters.number">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label ui-sortable">Amount</label>
+						<div class="col-md-8 ui-sortable">
+							<input type="text" class="form-control" placeholder="Amount" ng-model="filters.amount">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label ui-sortable">Date</label>
+						<div class="col-md-8 ui-sortable">
+							<input class="form-control datepicker" ng-model="filters.date" type="text" placeholder="Date">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label ui-sortable">Due Date</label>
+						<div class="col-md-8 ui-sortable">
+							<input class="form-control datepicker" ng-model="filters.dueDate" type="text" placeholder="Due Date">
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-md-6">
+					<div class="form-group">
+						<label class="col-md-4 control-label ui-sortable">???</label>
+						<div class="col-md-8 ui-sortable">
+							<input type="text" class="form-control" placeholder="???">
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-md-12">
+					<p class="text-right m-b-0">
+						<button type="submit" class="btn btn-sm btn-success text-right" ng-click="filter()">
+							<i class="fa fa-search"></i> Search 
+						</button>
+					</p>
+				</div>
+			</div>
+			
+			
+		</form>
+		
+	</div>
+	
+</div>
+
+<!-- Invoice List -->
+<div class="col-md-12" ng-show="currentInvoice == null">
 
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
@@ -96,4 +161,15 @@
 			</ul>
 		</div>
 	</div>
-</div> 
+</div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+	$('.datepicker').datepicker({
+		format:"dd.mm.yyyy"
+	});
+
+	// $('#supplierId').select2();
+
+})
+</script>

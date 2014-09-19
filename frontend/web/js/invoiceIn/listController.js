@@ -11,38 +11,11 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
     invoiceListPage = 1;
 	
 	if (routeParams.fulltext) {
-        scope.searchText = routeParams.fulltext;
-    }
-
-    scope.select2Options = 
-     {
-        placeholder: "Search for a supplier",
-        minimumInputLength: 1,
-        ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
-            url: yiiApp.url + '/api/supplier/',
-            dataType: 'json',
-            data: function (term, page) {
-                return {
-                    fulltext: term, // search term
-                };
-            },
-            results: function(data, page ) {
-                var newData = [];
-                var items = data.items;
-
-                for (var i in items) {
-                    newData.push({
-                        id: items[i].id,
-                        text: items[i].name + " " + items[i].surname
-                    });
-                }
-                
-                return {results: newData};
-            }
-           
-        }, 
-      
-    }
+		scope.searchText = routeParams.fulltext;
+	}
+	
+	if (typeof filters == 'undefined') scope.filters = {};
+	
 
     scope.setSuppliers = function () {
         SI.query({
@@ -86,29 +59,46 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
             scope.setInvoiceList(); 
         }); 
     }
+	
+	scope.filter = function() {
+       location.url('filter/'+angular.toJson(scope.filters));
+    }
 
     scope.setInvoiceList = function () {
-
-		var filters = {};
-        if (location.path() == '/mine') {
-           filters.createdBy = yiiApp.userId;
+		
+		if (routeParams.filters && angular.equals({}, scope.filters)) {
+			//console.log(routeParams.filters);
+			scope.filters = JSON.parse(routeParams.filters);
+			//console.log(JSON.stringify(filters));
+		}
+		
+		if (location.path() == '/mine') {
+           scope.filters.createdBy = yiiApp.userId;
         }
+		
+		if(typeof scope.filters.date != 'undefined' && filters.date != '') convertDateToDb(filters.date);
+		if(typeof scope.filters.dueDate != 'undefined' && filters.dueDate != '') convertDateToDb(filters.dueDate);
+		
+		console.log(JSON.stringify(scope.filters));
+		//$location.hash(angular.toJson(scope.filters));
+		//location.hash(angular.toJson(scope.filters));
+		//console.log(location.url());
+		
+		//location.url('filter/'+angular.toJson(scope.filters))
 
         AI.query({
             // state: scope.invoiceListState,
             //labels: scope.labels,
             sort: scope.invoiceListSort,
             direction: scope.invoiceListDirection,
-            // filters:angular.toJson(filters),
+            filters:angular.toJson(scope.filters),
 			page: scope.invoiceListPage,
             fulltext:scope.searchText
         }, function (data) {
             scope.invoiceList = data.items;
 			scope.invoiceListLinks = data._links;
 			scope.invoiceListPaging = data._meta;
-			
-			// if(scope.doSearch == true) scope.doSearch = false;
-			// console.log(scope.doSearch);
+			//location.url('filter/'+angular.toJson(scope.filters))
         });
     };
 

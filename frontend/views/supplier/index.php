@@ -38,7 +38,7 @@ $depends = [
 				<div class="col-md-4 ui-sortable">
 					<form>
 			            <div class="input-group m-b-15">
-			                <input type="text" class="form-control input-sm input-white" ng-model="searchText" placeholder="Search Invoices" value="{{searchText}}">
+			                <input type="text" class="form-control input-sm input-white" ng-model="searchText" placeholder="Search Invoices" value="{{routeParams.fulltext}}">
 			                <a class="input-group-btn" href="#/search/{{searchText}}">
 								<span>
 									<button class="btn btn-sm btn-inverse" type="submit"><i class="fa fa-search"></i></button>
