@@ -160,6 +160,16 @@ class InvoiceInController extends ActiveRestController
 
         return $invoiceIn;
     }
+	
+	protected function prepareDataProvider($with = []) {
+       	
+        $dataProvider = parent::prepareDataProvider($with);
+		
+		$dataProvider->query->leftJoin("supplier","supplier.id = invoiceIn.supplierId");
+		$dataProvider->query->leftJoin("costCentre","costCentre.id = invoiceIn.costCentreId");
+		
+        return $dataProvider;
+    }
 
     protected function getFulltextCondition($modelClass) {
     
@@ -169,17 +179,12 @@ class InvoiceInController extends ActiveRestController
 			
 			$fulltext = $_GET['fulltext'];
 			
-			$andWhere .= " OR invoiceIn.id IN (
-				SELECT invoiceIn.id FROM invoiceIn 
-				LEFT JOIN supplier ON supplier.id = invoiceIn.supplierId 
-				LEFT JOIN costCentre ON costCentre.id = invoiceIn.costCentreId 
-				WHERE 
-					supplier.name LIKE '%$fulltext%' OR 
-					supplier.surname LIKE '%$fulltext%' OR 
-					supplier.companyName LIKE '%$fulltext%' OR 
-					costCentre.name LIKE '%$fulltext%' 
-			)";
-		
+			if(isset($_GET['fulltext'])) {
+				$andWhere .= " OR supplier.name LIKE '%{$fulltext}%'";
+				$andWhere .= " OR supplier.surname LIKE '%{$fulltext}%'";
+				$andWhere .= " OR supplier.companyName LIKE '%{$fulltext}%'";
+				$andWhere .= " OR costCentre.name LIKE '%{$fulltext}%'";
+			}
 		}
 
         return $andWhere;

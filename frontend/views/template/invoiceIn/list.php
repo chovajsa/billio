@@ -1,5 +1,5 @@
 <!-- Advance Search -->
-<div class="col-md-12" ng-show="showAdvanceSearch == true">
+<div class="col-md-12 animate-show" ng-show="$rootScope.showAdvanceSearch == true">
 	
 	<div class="panel panel-success">
 	
@@ -39,9 +39,27 @@
 				
 				<div class="col-md-6">
 					<div class="form-group">
-						<label class="col-md-4 control-label ui-sortable">???</label>
+						<label class="col-md-4 control-label ui-sortable">Cost Centre</label>
 						<div class="col-md-8 ui-sortable">
-							<input type="text" class="form-control" placeholder="???">
+							<input type="text" class="form-control" placeholder="Cost Centre" ng-model="filters.costCentre.name">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label ui-sortable">Supplier's Name</label>
+						<div class="col-md-8 ui-sortable">
+							<input type="text" class="form-control" placeholder="Supplier's Name" ng-model="filters.supplier.name">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label ui-sortable">Supplier's Surname</label>
+						<div class="col-md-8 ui-sortable">
+							<input type="text" class="form-control" placeholder="Supplier's Surname" ng-model="filters.supplier.surname">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label ui-sortable">Supplier's Company Name</label>
+						<div class="col-md-8 ui-sortable">
+							<input type="text" class="form-control" placeholder="Supplier's Company Name" ng-model="filters.supplier.companyName">
 						</div>
 					</div>
 				</div>

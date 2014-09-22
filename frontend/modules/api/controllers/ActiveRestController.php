@@ -62,9 +62,17 @@ class ActiveRestController extends ActiveController {
 
         if (isset($_GET['filters'])) {
             $filters = json_decode($_GET['filters']);
+			// var_dump($filters);die;
             if (!empty($filters)) {
                 foreach ($filters as $key=>$value) {
-                    $dataProvider->query->andWhere($key. " = '{$value}'");
+                    if (is_object($value)) {
+						foreach ($value as $key1=>$value1) {
+							$dataProvider->query->andWhere($key. ".". $key1. " = '{$value1}'");
+						}
+					}
+					else { 
+						$dataProvider->query->andWhere($key. " = '{$value}'");
+					}
                 }
             }
         }
@@ -76,10 +84,12 @@ class ActiveRestController extends ActiveController {
         $andWhere = '';
         if (isset($_GET['fulltext']) && !empty($modelClass::getFulltextAttributes())) {
             $andWhere = '(';
+			
+			//var_dump($modelClass::);die;
 
             $fulltextAttributes = $modelClass::getFulltextAttributes();
             foreach ($fulltextAttributes as $n=>$attribute) {
-                $andWhere .= "$attribute LIKE '%{$_GET['fulltext']}%'";
+                $andWhere .= "{$attribute} LIKE '%{$_GET['fulltext']}%'";
 
                 if ($n+1 < count($fulltextAttributes)) $andWhere .= ' OR ';
             }

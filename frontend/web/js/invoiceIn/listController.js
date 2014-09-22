@@ -111,7 +111,6 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
 		
 		if (routeParams.filters && angular.equals({}, scope.filters)) {
 			scope.filters = JSON.parse(routeParams.filters);
-			scope.showAdvanceSearch = true;
 		}
 		
 		if (location.path() == '/mine') {
