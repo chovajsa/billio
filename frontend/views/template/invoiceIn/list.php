@@ -1,5 +1,5 @@
 <!-- Advance Search -->
-<div class="col-md-12" ng-show="advanceSearch == true">
+<div class="col-md-12" ng-show="showAdvanceSearch == true">
 	
 	<div class="panel panel-success">
 	

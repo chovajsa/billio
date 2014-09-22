@@ -43,13 +43,15 @@ app.filter('num', function() {
 
 function convertDateFromDb(d) {
     if (d == null) return '';
-    var from = d.split("-");
+    //if (d.match("[0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2}")) return d;
+	var from = d.split("-");
     // var dateObject = new Date(from[2], from[1] - 1, from[0]);
     return from[2]+'.'+from[1]+'.'+from[0];
 }
 
 function convertDateToDb(d) {
     if (d == null) return '';
+	if (d.match("[0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2}")) return d;
     var from = d.split(".");
     // var dateObject = new Date(from[2], from[1] - 1, from[0]);
     return from[2]+'-'+from[1]+'-'+from[0];

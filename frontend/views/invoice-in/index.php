@@ -66,7 +66,7 @@ $depends = [
 			    	    <a href="#/paid" class="btn btn-sm btn-inverse"><i class="fa m-r-5"></i> Paid </a>
 			    	    <a href="#/paidNot" class="btn btn-sm btn-inverse"><i class="fa m-r-5"></i> Paid not </a>
 						
-						<a href="javascript:;" class="btn btn-sm btn-success" ng-click="advanceSearch=!advanceSearch"><i class="fa fa-search"></i> Advance Search </a>
+						<a href="javascript:;" class="btn btn-sm btn-success" ng-click="showAdvanceSearch=!showAdvanceSearch"><i class="fa fa-search"></i> Advance Search </a>
 
 			    	</div>
 				</div>

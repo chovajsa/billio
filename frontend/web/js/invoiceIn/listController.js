@@ -15,7 +15,6 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
 	}
 	
 	if (typeof filters == 'undefined') scope.filters = {};
-	
 
     scope.setSuppliers = function () {
         SI.query({
@@ -26,6 +25,35 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
         }, function (data) {
             scope.suppliers = data.items;
         });
+    }
+	
+	scope.select2Options = {
+        placeholder: "Search for a supplier",
+        minimumInputLength: 1,
+        ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+            url: yiiApp.url + '/api/supplier/',
+            dataType: 'json',
+            data: function (term, page) {
+                return {
+                    fulltext: term, // search term
+                };
+            },
+            results: function(data, page ) {
+                var newData = [];
+                var items = data.items;
+
+                for (var i in items) {
+                    newData.push({
+                        id: items[i].id,
+                        text: items[i].name + " " + items[i].surname
+                    });
+                }
+
+                return {results: newData};
+            }
+
+        },
+
     }
 
     scope.setSort = function(sort) {
@@ -60,31 +88,39 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
         }); 
     }
 	
+	scope.creanUpFilters = function() {
+		var dateFields = ['date', 'dueDate'];
+		
+		for(var name in scope.filters) {
+			if(scope.filters[name] == '') {
+				delete scope.filters[name];
+			} else if(dateFields.indexOf(name) >= 0) {
+				scope.filters[name] = convertDateToDb(scope.filters[name]);
+			}
+		}
+	}
+	
 	scope.filter = function() {
-       location.url('filter/'+angular.toJson(scope.filters));
+		
+		scope.creanUpFilters();
+		
+        location.url('filter/'+angular.toJson(scope.filters));
     }
 
     scope.setInvoiceList = function () {
 		
 		if (routeParams.filters && angular.equals({}, scope.filters)) {
-			//console.log(routeParams.filters);
 			scope.filters = JSON.parse(routeParams.filters);
-			//console.log(JSON.stringify(filters));
+			scope.showAdvanceSearch = true;
 		}
 		
 		if (location.path() == '/mine') {
            scope.filters.createdBy = yiiApp.userId;
         }
 		
-		if(typeof scope.filters.date != 'undefined' && filters.date != '') convertDateToDb(filters.date);
-		if(typeof scope.filters.dueDate != 'undefined' && filters.dueDate != '') convertDateToDb(filters.dueDate);
+		scope.creanUpFilters();
 		
-		console.log(JSON.stringify(scope.filters));
-		//$location.hash(angular.toJson(scope.filters));
-		//location.hash(angular.toJson(scope.filters));
-		//console.log(location.url());
-		
-		//location.url('filter/'+angular.toJson(scope.filters))
+		console.log(scope.filters);
 
         AI.query({
             // state: scope.invoiceListState,
@@ -98,7 +134,8 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
             scope.invoiceList = data.items;
 			scope.invoiceListLinks = data._links;
 			scope.invoiceListPaging = data._meta;
-			//location.url('filter/'+angular.toJson(scope.filters))
+			scope.filters.date = convertDateFromDb(scope.filters.date);
+			scope.filters.dueDate = convertDateFromDb(scope.filters.dueDate);
         });
     };
 
@@ -148,6 +185,7 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
 
     scope.setInvoiceList();
     scope.setSuppliers();
+
 
     // returns number of elements in parameter for ng-repeat
 	scope.numberOfRepeats = function(n) {
