@@ -1,4 +1,7 @@
-	
+<?php
+use common\components\helpers
+?>
+
 <link href="<?=\yii\Helpers\Url::base();?>/css/invoice-print.min.css" rel="stylesheet" />
 
 <!-- begin #page-loader 
@@ -23,39 +26,34 @@
 		<!-- begin invoice -->
 		<div class="invoice">
 			<div class="invoice-company">
-				<!--<span class="pull-right hidden-print">
-				<a href="javascript:;" class="btn btn-sm btn-success m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a>
+				<span class="pull-right hidden-print">
+				<!-- <a href="javascript:;" class="btn btn-sm btn-success m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a> -->
 				<a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print m-r-5"></i> Print</a>
-				</span>-->
-				Company Name, Inc
+				</span>
+				<?=$invoiceIn->supplier->companyName;?>
 			</div>
 			<div class="invoice-header">
 				<div class="invoice-from">
 					<small>from</small>
 					<address class="m-t-5 m-b-5">
-						<strong>Twitter, Inc.</strong><br />
-						Street Address<br />
-						City, Zip Code<br />
-						Phone: (123) 456-7890<br />
-						Fax: (123) 456-7890
+						<strong><?=$invoiceIn->supplier->companyName;?></strong><br />
+						<?=$invoiceIn->supplier->address->street;?><br />
+						<?=$invoiceIn->supplier->address->city;?> <?=$invoiceIn->supplier->address->zip;?>
 					</address>
 				</div>
 				<div class="invoice-to">
 					<small>to</small>
 					<address class="m-t-5 m-b-5">
-						<strong>Company Name</strong><br />
-						Street Address<br />
-						City, Zip Code<br />
-						Phone: (123) 456-7890<br />
-						Fax: (123) 456-7890
-					</address>
+						<strong>TRILA Finance s.r.o.</strong><br />
+						Vajnorská 8/A<br />
+						Bratislava 831 04
 				</div>
 				<div class="invoice-date">
-					<small>Invoice / July period</small>
-					<div class="date m-t-5">August 3,2012</div>
+					<small><!-- Invoice / July period --></small>
+					<div class="date m-t-5"><?=Helpers::formatDateFromDb($invoiceIn->date);?></div>
 					<div class="invoice-detail">
-						#0000123DSS<br />
-						Services Product
+						#<?=$invoiceIn->number;?><br />
+						<?=$invoiceIn->costCentre->name;?>
 					</div>
 				</div>
 			</div>
@@ -65,39 +63,28 @@
 						<thead>
 							<tr>
 								<th>TASK DESCRIPTION</th>
-								<th>RATE</th>
-								<th>HOURS</th>
+								<th>AMOUNT</th>
+								<th>PCS</th>
+								<th>VAT</th>
 								<th>LINE TOTAL</th>
+								<th>LINE TOTAL + VAT</th>
 							</tr>
 						</thead>
 						<tbody>
+							
+							<?php foreach($invoiceIn->rows as $row) { ?>
 							<tr>
 								<td>
-									Website design &amp; development<br />
-									<small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sagittis arcu.</small>
+									<?=$row->description;?>
 								</td>
-								<td>$50.00</td>
-								<td>50</td>
-								<td>$2,500.00</td>
+								<td><?=$row->amount;?></td>
+								<td><?=$row->pcs;?></td>
+								<td><?=$row->vat;?>%</td>
+								<td><?=$row->amountTotal;?>€</td>
+								<td><?=$row->amountTotalVat;?>€</td>
 							</tr>
-							<tr>
-								<td>
-									Branding<br />
-									<small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sagittis arcu.</small>
-								</td>
-								<td>$50.00</td>
-								<td>40</td>
-								<td>$2,000.00</td>
-							</tr>
-							<tr>
-								<td>
-									Redesign Service<br />
-									<small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sagittis arcu.</small>
-								</td>
-								<td>$50.00</td>
-								<td>50</td>
-								<td>$2,500.00</td>
-							</tr>
+							<?php } ?>
+							
 						</tbody>
 					</table>
 				</div>
@@ -106,35 +93,33 @@
 						<div class="invoice-price-row">
 							<div class="sub-price">
 								<small>SUBTOTAL</small>
-								$4,500.00
+								<?=$invoiceIn->amount;?>€
 							</div>
 							<div class="sub-price">
 								<i class="fa fa-plus"></i>
 							</div>
 							<div class="sub-price">
-								<small>PAYPAL FEE (5.4%)</small>
-								$108.00
+								<small>VAT</small>
+								<?=$invoiceIn->vat;?>€
 							</div>
 						</div>
 					</div>
 					<div class="invoice-price-right">
-						<small>TOTAL</small> $4508.00
+						<small>TOTAL</small> <?=$invoiceIn->amountVat;?>€
 					</div>
 				</div>
 			</div>
 			<div class="invoice-note">
-				* Make all cheques payable to [Your Company Name]<br />
-				* Payment is due within 30 days<br />
-				* If you have any questions concerning this invoice, contact  [Name, Phone Number, Email]
+				
 			</div>
 			<div class="invoice-footer text-muted">
 				<p class="text-center m-b-5">
 					THANK YOU FOR YOUR BUSINESS
 				</p>
 				<p class="text-center">
-					<span class="m-r-10"><i class="fa fa-globe"></i> matiasgallipoli.com</span>
-					<span class="m-r-10"><i class="fa fa-phone"></i> T:016-18192302</span>
-					<span class="m-r-10"><i class="fa fa-envelope"></i> rtiemps@gmail.com</span>
+					<span class="m-r-10"><i class="fa fa-globe"></i> trila.sk</span>
+					<span class="m-r-10"><i class="fa fa-phone"></i> T: 02/321 868 68</span>
+					<span class="m-r-10"><i class="fa fa-envelope"></i> info@trila.sk</span>
 				</p>
 			</div>
 		</div>

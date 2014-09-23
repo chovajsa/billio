@@ -7,6 +7,7 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\helpers\VarDumper;
 
 /**
  * Invoice In controller
@@ -90,8 +91,21 @@ class InvoiceInController extends Controller
     }
 	
 	public function actionPrint() {
+		
+		if (isset($_GET['invoiceInId'])) { 
+            $invoiceIn = \common\models\InvoiceIn::findOne($_GET['invoiceInId']);
+			// $supplier = \common\models\Supplier::findOne($invoiceIn->supplierId);
+			// $invoiceInRows = \common\models\InvoiceInRow::findAll(['invoiceInId' => $invoiceIn->id]);
+        }
+		
+		// VarDumper::dump($invoiceIn->supplier->address,6,1);die;
+		
 		$this->layout = 'print';
-    	return $this->render('print');
+    	return $this->render('print',[
+			'invoiceIn' => $invoiceIn,
+			// 'supplier' => $supplier,
+			// 'invoiceInRows' => $invoiceInRows,
+		]);
     }
  
 }
