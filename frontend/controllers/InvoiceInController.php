@@ -28,7 +28,7 @@ class InvoiceInController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index', 'attachments'],
+                        'actions' => ['logout', 'index', 'attachments', 'get-attachment', 'getAttachment'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -48,6 +48,11 @@ class InvoiceInController extends Controller
                 'class' => 'yii\web\ErrorAction',
             ],
         ];
+    }
+
+    public function actionGetAttachment($id, $fileName) {
+        echo "$id $fileName";
+        die();
     }
 
     public function actionAttachments() {
