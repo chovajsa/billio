@@ -24,7 +24,7 @@ class InvoiceInController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
+                        'actions' => ['login', 'error', 'print'],
                         'allow' => true,
                     ],
                     [
@@ -82,6 +82,11 @@ class InvoiceInController extends Controller
 
     public function actionIndex() {
     	return $this->render('index');
+    }
+	
+	public function actionPrint() {
+		$this->layout = 'print';
+    	return $this->render('print');
     }
  
 }
