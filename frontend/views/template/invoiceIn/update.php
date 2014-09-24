@@ -94,7 +94,9 @@
 				</div>
 					<div class="col-sm-6 text-right" style="padding-right:5px">
 						<p>
-							<a href="javascript:;" ng-click="delete(currentInvoice.id)" class="btn btn-sm btn-danger">Delete</a>
+							<a target="_blank" href="<?=Url::base();?>/invoice-in/print/?invoiceInId={{currentInvoice.id}}" class="btn btn-sm btn-inverse"><i class="fa fa-print"></i> Print </a>
+							<a href="javascript:;" ng-click="" class="btn btn-sm btn-primary"><i class="fa fa-file-text-o"></i> Export PDF </a>
+							<a href="javascript:;" ng-click="delete(currentInvoice.id)" class="btn btn-sm btn-danger"><i class="fa fa-minus-circle"></i> Delete </a>
 					  		
 					        <!-- <a href="javascript:;" class="btn btn-sm btn-primary m-r-5">Approve</a> -->
 					        <!-- <a href="javascript:;" class="btn btn-sm btn-danger">Reject</a> -->

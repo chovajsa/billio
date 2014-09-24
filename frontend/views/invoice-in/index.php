@@ -60,10 +60,10 @@ $depends = ['depends'=>[
 
 			    	    <a href="#/new" class="btn btn-sm btn-primary"><i class="fa fa-plus m-r-5"></i> New</a>
 
-			    	    <a href="#/" class="btn btn-sm btn-inverse"><i class="fa m-r-5"></i> All </a>
-			    	    <a href="#/mine" class="btn btn-sm btn-inverse"><i class="fa m-r-5"></i> Mine </a>
-			    	    <a href="#/paid" class="btn btn-sm btn-inverse"><i class="fa m-r-5"></i> Paid </a>
-			    	    <a href="#/paidNot" class="btn btn-sm btn-inverse"><i class="fa m-r-5"></i> Paid not </a>
+			    	    <a href="#/" class="btn btn-sm btn-inverse"> All </a>
+			    	    <a href="#/mine" class="btn btn-sm btn-inverse"> Mine </a>
+			    	    <a href="#/paid" class="btn btn-sm btn-inverse"> Paid </a>
+			    	    <a href="#/paidNot" class="btn btn-sm btn-inverse"> Paid not </a>
 						
 						<a href="javascript:;" class="btn btn-sm btn-success" ng-click="$rootScope.showAdvanceSearch=!$rootScope.showAdvanceSearch"><i class="fa fa-search"></i> Advance Search </a>
 
