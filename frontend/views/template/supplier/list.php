@@ -23,10 +23,10 @@
 				</thead>
 				<tbody>
 		            <tr ng-repeat="supplier in supplierList | filter:filterText">
-						<td>
+						<td ng-click="update(supplier.id)">
 							{{supplier.companyName}}
 						</td>
-						<td>
+						<td ng-click="update(supplier.id)">
 							{{supplier.name}} {{supplier.surname}}
 						</td>
 						<td>

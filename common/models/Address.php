@@ -35,7 +35,7 @@ class Address extends ActiveRecord
      }
 
     public function safeAttributes() {
-        return ['name', 'surname', 'street', 'city', 'zip'];
+        return ['name', 'surname', 'street', 'city', 'zip', 'street1', 'city1', 'zip1'];
     }
 
     /**

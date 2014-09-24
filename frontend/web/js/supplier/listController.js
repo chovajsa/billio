@@ -2,6 +2,7 @@ app.controller('ListController', ['$scope', 'Supplier', '$routeParams', '$modal'
 
 	scope.supplierList = [];
     scope.supplier = {};
+    scope.toDelete = [];
 	
 	if (routeParams.fulltext) {
         scope.searchText = routeParams.fulltext;
@@ -36,11 +37,27 @@ app.controller('ListController', ['$scope', 'Supplier', '$routeParams', '$modal'
         });
     }
 
+    scope.addRow = function() {
+        if (scope.supplier.bankAccounts === undefined) scope.supplier.bankAccounts = [];
+        scope.supplier.bankAccounts.push({ id: null, bankAccount:'', bankAccountCode:'' });
+    }
+
+    scope.unsetRow = function(i) {
+        
+        if (scope.supplier.bankAccounts[i].id) {
+            scope.toDelete.push({id:scope.supplier.bankAccounts[i].id});
+        }
+
+        scope.supplier.bankAccounts.splice(i, 1);
+    }
+
     scope.updateSupplier = function() {
         params = scope.supplier;
+        params.toDelete = scope.toDelete;
         SI.updateSupplier(params, function (data) {
             scope.setSupplierList();
             scope.closeModal();
+            scope.toDelete = [];
             notify('success', 'Supplier updated');
         });
     }

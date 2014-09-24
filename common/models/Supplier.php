@@ -49,7 +49,7 @@ class Supplier extends AppActiveRecord
    public function toArray(array $fields = [], array $expand = [], $recursive = true) {
         $return = $this->attributes;
         
-        $return['address'] = $this->address->attributes;
+        $return['address'] = $this->address ? $this->address->attributes : [];
         $return['bankAccounts'] = $this->bankAccounts;
 
         return $return;

@@ -49,21 +49,21 @@
             <div class="form-group">
                 <label class="col-md-3 control-label ui-sortable">Street</label>
                 <div class="col-md-9 ui-sortable">
-                    <input type="text" ng-model="supplier.street" class="form-control" placeholder="Street">
+                    <input type="text" ng-model="supplier.address.street" class="form-control" placeholder="Street">
                 </div>
             </div>          
             
             <div class="form-group">
                 <label class="col-md-3 control-label ui-sortable">City</label>
                 <div class="col-md-9 ui-sortable">
-                    <input type="text" ng-model="supplier.city" class="form-control" placeholder="City">
+                    <input type="text" ng-model="supplier.address.city" class="form-control" placeholder="City">
                 </div>
             </div>          
 
             <div class="form-group">
                 <label class="col-md-3 control-label ui-sortable">Zip</label>
                 <div class="col-md-9 ui-sortable">
-                    <input type="text" ng-model="supplier.zip" class="form-control" placeholder="Zip">
+                    <input type="text" ng-model="supplier.address.zip" class="form-control" placeholder="Zip">
                 </div>
             </div>     
             </fieldset>  
@@ -73,21 +73,21 @@
             <div class="form-group">
                 <label class="col-md-3 control-label ui-sortable">Street</label>
                 <div class="col-md-9 ui-sortable">
-                    <input type="text" ng-model="supplier.street1" class="form-control" placeholder="Street">
+                    <input type="text" ng-model="supplier.address.street1" class="form-control" placeholder="Street">
                 </div>
             </div>          
             
             <div class="form-group">
                 <label class="col-md-3 control-label ui-sortable">City</label>
                 <div class="col-md-9 ui-sortable">
-                    <input type="text" ng-model="supplier.city1" class="form-control" placeholder="City">
+                    <input type="text" ng-model="supplier.address.city1" class="form-control" placeholder="City">
                 </div>
             </div>          
 
             <div class="form-group">
                 <label class="col-md-3 control-label ui-sortable">Zip</label>
                 <div class="col-md-9 ui-sortable">
-                    <input type="text" ng-model="supplier.zip1" class="form-control" placeholder="Zip">
+                    <input type="text" ng-model="supplier.address.zip1" class="form-control" placeholder="Zip">
                 </div>
             </div>     
             </fieldset>   
@@ -108,24 +108,28 @@
                     <th>
                       Code
                     </th>
+                    <th>
+                      &nbsp;
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr ng-repeat="bankAccont in supplier.bankAccounts">
                     <td>
-                      <input/>
+                      <input type="hidden" ng-model="supplier.bankAccounts[$index].id">
+                      <input type="text" ng-model="supplier.bankAccounts[$index].bankAccount"/>
                     </td>
                     <td>
-                      <input/>
+                      <input type="text" ng-model="supplier.bankAccounts[$index].bankAccountCode"/>
                     </td>
                     <td>
-                      <a href="">remove</a>
+                      <a href="javascript:;" ng-click="unsetRow($index)">remove</a>
                     </td>
                   </tr>
                 </tbody>
               </table>
               
-              <a href="">
+              <a href="javascript:;" ng-click="addRow()">
                 add account
               </a>
 

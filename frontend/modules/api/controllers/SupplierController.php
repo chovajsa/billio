@@ -55,7 +55,7 @@ class SupplierController extends ActiveRestController
         $supplier->load($p, '');
 
         $address = new \common\models\Address;
-        $address->load($p, '');
+        $address->load($p['address'], '');
         $address->save();
         $supplier->addressId = $address->id;
 
@@ -82,11 +82,44 @@ class SupplierController extends ActiveRestController
 
         if (!($address = $supplier->address)) {
             $address = new \common\models\Address;
-            $address->load($p, '');
             $address->save();
             $supplier->addressId = $address->id;
             $supplier->save();
         }
+
+/*  8==========================================================D   */
+
+        if (isset($p['bankAccounts']) && !empty($p['bankAccounts'])) {
+            foreach ($p['bankAccounts'] as $prow) {
+                if (!isset($prow['id']) || !$prow['id']) {
+                    $row = new \common\models\BankAccount();
+                    $row->supplierId = $supplier->id;
+                    $row->setAttributes($prow, '');
+                    $row->save();
+                } else 
+
+                foreach ($supplier->bankAccounts as $row) {
+                    if ($prow['id'] == $row->id) {
+                        $row->setAttributes($prow, '');
+                        $row->save();
+                    }
+                }
+            }
+        }
+
+        if (!empty($p['toDelete'])) {
+            foreach ($p['toDelete'] as $x) {
+                $r = \common\models\BankAccount::findOne($x['id']);
+                $r->delete();
+            }
+        }
+/*  8==========================================================D   */
+    
+        // print_r($p);
+        // print_r($address->attributes);
+
+        $address->load($p['address'], '');
+        $address->save();
 
         return $supplier;
     }

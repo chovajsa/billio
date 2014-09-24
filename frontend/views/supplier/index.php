@@ -1,12 +1,12 @@
 <?php 
 use vendor\angular;
 
-$depends = [
+$depends = ['depends' => [
         'yii\bootstrap\BootstrapAsset',
         '\frontend\assets\admintemplate\AdminAsset',
         '\frontend\assets\angular\AngularAsset',
         '\frontend\assets\angularstrap\AngularstrapAsset',
-    ];
+    ]];
 
 ?>
 
