@@ -1,4 +1,9 @@
 <?php
+function is(&$a = null) {
+    if (isset($a) && $a) return $a;
+    return false;
+}
+
 return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'extensions' => require(__DIR__ . '/../../vendor/yiisoft/extensions.php'),

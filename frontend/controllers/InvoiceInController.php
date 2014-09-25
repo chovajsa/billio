@@ -91,7 +91,7 @@ class InvoiceInController extends Controller
     }
 	
 	public function actionPrint() {
-		
+
 		if (isset($_GET['invoiceInId'])) { 
             $invoiceIn = \common\models\InvoiceIn::findOne($_GET['invoiceInId']);
 			// $supplier = \common\models\Supplier::findOne($invoiceIn->supplierId);
