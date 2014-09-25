@@ -2,7 +2,7 @@
 use common\components\helpers;
 ?>
 
-<link href="<?=\yii\Helpers\Url::base();?>/css/invoice-print.min.css" rel="stylesheet" />
+<link href="<?=\yii\helpers\Url::base();?>/css/invoice-print.min.css" rel="stylesheet" />
 
 <!-- begin #page-container -->
 <div id="page-container">
