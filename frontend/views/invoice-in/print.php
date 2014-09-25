@@ -1,5 +1,5 @@
 <?php
-use common\components\helpers;
+use common\components\Helpers;
 ?>
 
 <link href="<?=\yii\helpers\Url::base();?>/css/invoice-print.min.css" rel="stylesheet" />
