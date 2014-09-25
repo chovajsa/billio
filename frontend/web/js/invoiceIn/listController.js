@@ -119,7 +119,7 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
 		
 		scope.creanUpFilters();
 		
-		console.log(scope.filters);
+		// console.log(scope.filters);
 
         AI.query({
             // state: scope.invoiceListState,

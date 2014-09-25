@@ -4,41 +4,28 @@ use common\components\helpers;
 
 <link href="<?=\yii\Helpers\Url::base();?>/css/invoice-print.min.css" rel="stylesheet" />
 
-<!-- begin #page-loader 
-<div id="page-loader" class="fade in"><span class="spinner"></span></div>
-<!-- end #page-loader -->
-
 <!-- begin #page-container -->
 <div id="page-container">
 	
 	<!-- begin #content -->
 	<div id="content" class="content">
-		<!-- begin breadcrumb -->
-		<!--<ol class="breadcrumb hidden-print pull-right">
-			<li><a href="javascript:;">Home</a></li>
-			<li class="active">Invoice</li>
-		</ol>-->
-		<!-- end breadcrumb -->
-		<!-- begin page-header -->
-		<!--<h1 class="page-header hidden-print">Invoice <small>header small text goes here...</small></h1>
-		<!-- end page-header -->
 		
 		<!-- begin invoice -->
 		<div class="invoice">
 			<div class="invoice-company">
 				<span class="pull-right hidden-print">
 				<!-- <a href="javascript:;" class="btn btn-sm btn-success m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a> -->
-				<a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print m-r-5"></i> Print</a>
+				<!-- <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print m-r-5"></i> Print</a> -->
 				</span>
-				<?=$invoiceIn->supplier->companyName;?>
+				<?=isset($invoiceIn->supplier->companyName) ? $invoiceIn->supplier->companyName : '';?>
 			</div>
 			<div class="invoice-header">
 				<div class="invoice-from">
 					<small>from</small>
 					<address class="m-t-5 m-b-5">
-						<strong><?=$invoiceIn->supplier->companyName;?></strong><br />
-						<?=$invoiceIn->supplier->address->street;?><br />
-						<?=$invoiceIn->supplier->address->city;?> <?=$invoiceIn->supplier->address->zip;?>
+						<strong><?=isset($invoiceIn->supplier->companyName) ? $invoiceIn->supplier->companyName : '';?></strong><br />
+						<?=isset($invoiceIn->supplier->address->street) ? $invoiceIn->supplier->address->street : '';?><br />
+						<?=isset($invoiceIn->supplier->address->city) ? $invoiceIn->supplier->address->city : '';?> <?=isset($invoiceIn->supplier->address->zip) ? $invoiceIn->supplier->address->zip : '';?>
 					</address>
 				</div>
 				<div class="invoice-to">
@@ -50,10 +37,10 @@ use common\components\helpers;
 				</div>
 				<div class="invoice-date">
 					<small><!-- Invoice / July period --></small>
-					<div class="date m-t-5"><?=Helpers::formatDateFromDb($invoiceIn->date);?></div>
+					<div class="date m-t-5"><?=isset($invoiceIn->date) ? Helpers::formatDateFromDb($invoiceIn->date) : '';?></div>
 					<div class="invoice-detail">
-						#<?=$invoiceIn->number;?><br />
-						<?=$invoiceIn->costCentre->name;?>
+						#<?=isset($invoiceIn->number) ? $invoiceIn->number : '';?><br />
+						<?=isset($invoiceIn->costCentre->name) ? $invoiceIn->costCentre->name : '';?>
 					</div>
 				</div>
 			</div>
@@ -75,13 +62,13 @@ use common\components\helpers;
 							<?php foreach($invoiceIn->rows as $row) { ?>
 							<tr>
 								<td>
-									<?=$row->description;?>
+									<?=isset($row->description) ? $row->description : '';?>
 								</td>
-								<td><?=$row->amount;?></td>
-								<td><?=$row->pcs;?></td>
-								<td><?=$row->vat;?>%</td>
-								<td><?=$row->amountTotal;?>€</td>
-								<td><?=$row->amountTotalVat;?>€</td>
+								<td><?=isset($row->amount) ? $row->amount : '';?></td>
+								<td><?=isset($row->pcs) ? $row->pcs : '';?></td>
+								<td><?=isset($row->vat) ? $row->vat : '';?>%</td>
+								<td><?=isset($row->amountTotal) ? $row->amountTotal : '';?>€</td>
+								<td><?=isset($row->amountTotalVat) ? $row->amountTotalVat : '';?>€</td>
 							</tr>
 							<?php } ?>
 							
@@ -93,19 +80,19 @@ use common\components\helpers;
 						<div class="invoice-price-row">
 							<div class="sub-price">
 								<small>SUBTOTAL</small>
-								<?=$invoiceIn->amount;?>€
+								<?=isset($invoiceIn->amount) ? $invoiceIn->amount : '';?>€
 							</div>
 							<div class="sub-price">
 								<i class="fa fa-plus"></i>
 							</div>
 							<div class="sub-price">
 								<small>VAT</small>
-								<?=$invoiceIn->vat;?>€
+								<?=isset($invoiceIn->vat) ? $invoiceIn->vat : '';?>€
 							</div>
 						</div>
 					</div>
 					<div class="invoice-price-right">
-						<small>TOTAL</small> <?=$invoiceIn->amountVat;?>€
+						<small>TOTAL</small> <?=isset($invoiceIn->amountVat) ? $invoiceIn->amountVat : '';?>€
 					</div>
 				</div>
 			</div>
@@ -205,3 +192,9 @@ use common\components\helpers;
 		width: 100% !important;
 	}
 </style>
+
+<script>
+	
+	window.onload = function() { window.print(); }
+
+</script>
