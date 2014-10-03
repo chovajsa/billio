@@ -37,6 +37,10 @@ app.controller('ListController', ['$scope', 'Supplier', '$routeParams', '$modal'
         });
     }
 
+    scope.showCreateModal = function () {
+        scope.showModal();
+    }
+
     scope.addRow = function() {
         if (scope.supplier.bankAccounts === undefined) scope.supplier.bankAccounts = [];
         scope.supplier.bankAccounts.push({ id: null, bankAccount:'', bankAccountCode:'' });
@@ -53,13 +57,23 @@ app.controller('ListController', ['$scope', 'Supplier', '$routeParams', '$modal'
 
     scope.updateSupplier = function() {
         params = scope.supplier;
+        if (params.address == undefined) params.address = {};
         params.toDelete = scope.toDelete;
-        SI.updateSupplier(params, function (data) {
-            scope.setSupplierList();
-            scope.closeModal();
-            scope.toDelete = [];
-            notify('success', 'Supplier updated');
-        });
+        if (params.id) {
+            SI.updateSupplier(params, function (data) {
+                scope.setSupplierList();
+                scope.closeModal();
+                scope.toDelete = [];
+                notify('success', 'Supplier updated');
+            });
+        } else {
+            SI.createSupplier(params, function (data) {
+                scope.setSupplierList();
+                scope.closeModal();
+                scope.toDelete = [];
+                notify('success', 'Supplier created'); 
+            });
+        }
     }
 
         // supplier modal

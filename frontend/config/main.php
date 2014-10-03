@@ -95,7 +95,7 @@ return [
                 'PUT api/order-out/<id>/approve' => 'api/order-out/approve',
                 'PUT api/order-out/<id>/unapprove' => 'api/order-out/unapprove',
                 
-                // ['class' => 'yii\rest\UrlRule', 'controller' => ['invoice-in' => 'invoice-in']] ,
+                ['class' => 'yii\rest\UrlRule', 'controller' => ['invoice-in' => 'invoice-in']] ,
             ],
         ]
     ],

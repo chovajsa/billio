@@ -25,51 +25,9 @@ $depends = ['depends' => [
 			echo frontend\widgets\SideBar::widget([]);
 		?>
 
-			<div id="content" class="content">
+			<div id="content" class="content" ng-view>
 
-			<h1 class="page-header"> Suppliers <!-- <small>header small text goes here...</small> --></h1>
-
-			<div class="alert alert-success fade in m-b-15" id="notify-success" style="display:none">
-				<span class="msg"></span>
-				<span data-dismiss="alert" class="close">×</span>
-			</div>
-
-			<div class="row">
-				<div class="col-md-4 ui-sortable">
-					<form>
-			            <div class="input-group m-b-15">
-			                <input type="text" class="form-control input-sm input-white" ng-model="searchText" placeholder="Search Invoices" value="{{routeParams.fulltext}}">
-			                <a class="input-group-btn" href="#/search/{{searchText}}">
-								<span>
-									<button class="btn btn-sm btn-inverse" type="submit"><i class="fa fa-search"></i></button>
-								</span>
-							</a>
-			            </div>
-			        </form>
-				</div>
-
-				<div class="col-md-8 ui-sortable">
-					<div class="email-btn-row hidden-xs">
-
-			    	    <a href="#/new" class="btn btn-sm btn-primary"><i class="fa fa-plus m-r-5"></i> New</a>
-
-			    	</div>
-				</div>
-			</div>
-
-		  
-		  	<div class="alert alert-success fade in m-b-15" id="notify-success" style="display:none">
-				<span class="msg"></span>
-				<span data-dismiss="alert" class="close">×</span>
-			</div>
-
-			<div class="row">
-			<div ng-view>
 			
-			</div>
-				
-
-			</div>
 			</div>
 
 
