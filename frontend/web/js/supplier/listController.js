@@ -3,6 +3,8 @@ app.controller('ListController', ['$scope', 'Supplier', '$routeParams', '$modal'
 	scope.supplierList = [];
     scope.supplier = {};
     scope.toDelete = [];
+
+    scope.paymentTotalAmount = 0;
 	
 	if (routeParams.fulltext) {
         scope.searchText = routeParams.fulltext;
@@ -88,7 +90,6 @@ app.controller('ListController', ['$scope', 'Supplier', '$routeParams', '$modal'
     scope.closeModal = function () {
         supplierModal.$promise.then(supplierModal.hide);   
     }
-
 
     scope.setSupplierList();
 

@@ -9,6 +9,9 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
     invoiceListSort = 'id';
     invoiceListDirection = 'desc';
     invoiceListPage = 1;
+
+    scope.toPayAmount = '0';
+
 	
 	if (routeParams.fulltext) {
 		scope.searchText = routeParams.fulltext;
@@ -186,9 +189,29 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
     scope.setSuppliers();
 
 
+    scope.getToPayAmount = function() {
+        var amount = 0;
+        for (var i in scope.invoiceList) {
+            if (scope.invoiceList[i].toPay) {
+                amount += scope.invoiceList[i].amountVat;
+            }
+        }
+        return amount;
+    }
+
+    scope.$watch(function(scope) {
+        scope.toPayAmount = scope.getToPayAmount();
+    });
+
+    scope.generatePaymentFile = function () {
+        AI.
+    }
+
+
     // returns number of elements in parameter for ng-repeat
-	scope.numberOfRepeats = function(n) {
+    scope.numberOfRepeats = function(n) {
         return new Array(n);
     };
-	
+
+
 }]);

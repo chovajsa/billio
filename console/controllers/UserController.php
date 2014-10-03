@@ -3,7 +3,7 @@ namespace console\controllers;
 
 class UserController extends \yii\console\Controller
 {
-  
+ 
     public function actionManage($name, $email, $password, $groups) {
 
     	$user = \common\models\User::findOne(['username' => $name]);

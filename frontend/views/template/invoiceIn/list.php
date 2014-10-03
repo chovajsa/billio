@@ -115,6 +115,9 @@
 							Approved
 						</th>
 						<th>
+							Pay
+						</th>
+						<th>
 							&nbsp;
 						</th>
 					</tr>
@@ -137,7 +140,7 @@
 							{{invoice.dueDate | dateFromDb}}
 						</td>
 						<td ng-click="showInvoice(invoice.id)">
-		                    {{invoice.amount | preciseRound}}
+		                    {{invoice.amountVat | preciseRound}}
 						</td>
 						<td ng-click="showInvoice(invoice.id)">
 							{{invoice.approvedBy ? '' : 'pending'}}
@@ -146,11 +149,11 @@
 							</span>
 						</td>
 						<td>
-							
 							<?php if (Yii::$app->user->identity->canDo('pay')|| Yii::$app->user->identity->canDo('admin')) { ?>
-								<button ng-show="invoice.approved" ng-click="approve(invoice.id)" class="btn btn-sm btn-info">pay</button>
+								<input type="checkbox" ng-model="invoiceList[$index].toPay">
 							<?php } ?>
-
+						</td>
+						<td>
 							<?php if (Yii::$app->user->identity->canDo('strongApprove') || Yii::$app->user->identity->canDo('lightApprove') || Yii::$app->user->identity->canDo('admin')) { ?>
 								<button ng-show="!invoiceApprovedByUser(invoice,'<?=Yii::$app->user->identity->username;?>')" ng-click="approve(invoice.id)" class="btn btn-sm btn-success">approve</button>
 								<button ng-show="invoiceApprovedByUser(invoice,'<?=Yii::$app->user->identity->username;?>')" ng-click="unapprove(invoice.id)" class="btn btn-sm btn-warning">unapprove</button>
@@ -162,7 +165,26 @@
 						</td>
 					</tr>
 				</tbody>
+				<tfoot>
+					<tr>
+						<td style="border-top:0" colspan="12">&nbsp;</td>
+					</tr>
+					<tr>
+						<th colspan="6">
+						</th>
+						<th style="padding-top:15px">
+							Payments total amount:		
+						</th>
+						<th style="padding-top:15px">
+							{{toPayAmount | preciseRound}} 
+						</th>
+						<th>
+							<button ng-click="generatePaymentsFile()" class="btn btn-sm btn-info">Generate payment file</button> 
+						</th>
+					</tr>
+				</tfoot>
 			</table>
+			
 			<ul class="pagination m-t-0 m-b-10">
 				<li>
 					<a href="javascript:;" ng-click="updateIncoiceList(1)">«</a>

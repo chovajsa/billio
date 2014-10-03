@@ -115,7 +115,7 @@ class InvoiceInController extends ActiveRestController
                     $row->setAttributes($prow, '');
 
                     $row->amountTotal = $row->pcs * $row->amount;
-                    $row->amountTotalVat = $row->amountTotal + $row->vat * $row->pcs;
+                    $row->amountTotalVat = ($row->amountTotal * (1+$row->vat/100));
 
                     $row->save();
                 } else 
@@ -124,7 +124,7 @@ class InvoiceInController extends ActiveRestController
                         $row->setAttributes($prow, '');
                    
                         $row->amountTotal = $row->pcs * $row->amount;
-                        $row->amountTotalVat = $row->amountTotal + $row->vat * $row->pcs;
+                        $row->amountTotalVat = ($row->amountTotal * (1+$row->vat/100));
                         $row->save();
 
                         $row->save();
