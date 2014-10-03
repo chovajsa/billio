@@ -3,7 +3,7 @@ namespace common\models;
 
 use yii\base\NotSupportedException;
 use yii\db\ActiveRecord;
-
+use Yii;
 
 /**
  * Supplier model
@@ -27,7 +27,7 @@ class Settings extends ActiveRecord
     }
 
     public static function getFileStoragePath() {
-        return '/data/web/develop/ipt/files';
+		return Yii::$app->params['fileStoragePath'];
     }
 
     /**

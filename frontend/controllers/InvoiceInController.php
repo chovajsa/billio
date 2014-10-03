@@ -96,16 +96,18 @@ class InvoiceInController extends Controller
             $invoiceIn = \common\models\InvoiceIn::findOne($_GET['invoiceInId']);
 			// $supplier = \common\models\Supplier::findOne($invoiceIn->supplierId);
 			// $invoiceInRows = \common\models\InvoiceInRow::findAll(['invoiceInId' => $invoiceIn->id]);
-        }
+        
+			$this->layout = 'print';
+			return $this->render('print',[
+				'invoiceIn' => $invoiceIn,
+				// 'supplier' => $supplier,
+				// 'invoiceInRows' => $invoiceInRows,
+			]);
 		
-		// VarDumper::dump($invoiceIn->supplier->address,6,1);die;
+		} else {
+			throw new Exception("no invoiceInId");
+		}
 		
-		$this->layout = 'print';
-    	return $this->render('print',[
-			'invoiceIn' => $invoiceIn,
-			// 'supplier' => $supplier,
-			// 'invoiceInRows' => $invoiceInRows,
-		]);
     }
  
 }
