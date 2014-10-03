@@ -12,6 +12,8 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCen
         supplier:false
     };
 	
+	console.log(location.path());
+	
 	//scope.currentInvoice.costCentreId = parseInt(scope.currentInvoice.costCentreId, 10); 
 
     scope.addRow = function() {
