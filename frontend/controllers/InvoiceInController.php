@@ -58,52 +58,38 @@ class InvoiceInController extends Controller
 		
 		$fileDestination = $fileStoragePath.'/'.$id;
 		
-		// if (!mkdir($fileDestination, 0777, true)) {
-			// throw new Exception('cannot create folder');
-		// }
+		if (!file_exists($fileDestination)) {
+			if (!mkdir($fileDestination)) {
+				throw new Exception('cannot create folder');
+			}
+		}
 		
 		if(substr($fileName,-13) == 'invoiceIn.pdf') {
 			
-			// echo "je to faktura";die();
 			$file = $fileDestination.'/'.$id.'-invoiceIn.pdf';
-			
-			if(file_exists($file)) {
-
-				header("Pragma: public");
-				header("Expires: 0");
-				header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-				header("Cache-Control: private",false);
-				header("Content-Type: application/pdf");
-				header("Content-Disposition: attachment; filename=".basename($file));
-				header("Content-Transfer-Encoding: binary");
-				header("Content-Length: ".filesize($file));
-				
-				readfile($file);
-				exit();
-				
-			} else {
-				if (Document::createInvoice($id)) {
-					
-					header("Pragma: public");
-					header("Expires: 0");
-					header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-					header("Cache-Control: private",false);
-					header("Content-Type: application/pdf");
-					header("Content-Disposition: attachment; filename=".basename($file));
-					header("Content-Transfer-Encoding: binary");
-					header("Content-Length: ".filesize($file));
-					
-					readfile($file);
-					exit();
-					
-				}
-			}
-			
-		}
 		
-		echo "$id $fileName";
-        die();
+			Document::createInvoice($id);
+			
+			$this->sendFile($file);	
+			
+		} else {
+			$this->sendFile($file);	
+		}
     }
+	
+	private function sendFile($file) {
+		header("Pragma: public");
+		header("Expires: 0");
+		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+		header("Cache-Control: private",false);
+		header("Content-Type: application/".pathinfo($file, PATHINFO_EXTENSION));
+		header("Content-Disposition: attachment; filename=".basename($file));
+		header("Content-Transfer-Encoding: binary");
+		header("Content-Length: ".filesize($file));
+		
+		readfile($file);
+		exit();
+	}
 
     public function actionAttachments() {
         $this->layout = 'clean';

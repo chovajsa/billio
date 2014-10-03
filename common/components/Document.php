@@ -12,8 +12,6 @@ class Document
 		
 		$url = Url::toRoute(['invoice-in/print', 'invoiceInId' => $id,]);
 
-		// echo $url;
-		
 		// $user = Yii::$app->params['self_http_user'];
 		// $password = Yii::$app->params['self_http_passwrod'];
 
