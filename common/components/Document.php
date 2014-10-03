@@ -38,7 +38,7 @@ class Document
 
 		$fileName = $id.'-invoiceIn.pdf';
 
-		$command = '/bin/wkhtmltopdf-amd64 --orientation portrait --dpi 300 --zoom 0.75  --page-size A4 --margin-top 0mm --margin-left 0mm --margin-right 0mm --margin-bottom 0mm --quiet --use-xserver "'.$url.'" "'.$outputFolder.'/'.$fileName.'"';
+		$command = '/bin/wkhtmltopdf-amd64 --orientation portrait --dpi 300 --zoom 0.75  --page-size A4 --margin-top 0mm --margin-left 0mm --margin-right 0mm --margin-bottom 0mm --quiet "'.$url.'" "'.$outputFolder.'/'.$fileName.'"';
 		
 		return shell_exec($command);
 	}
