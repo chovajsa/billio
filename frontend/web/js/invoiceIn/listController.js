@@ -203,9 +203,9 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
         scope.toPayAmount = scope.getToPayAmount();
     });
 
-    scope.generatePaymentFile = function () {
-        AI.
-    }
+    // scope.generatePaymentFile = function () {
+    //     AI.
+    // }
 
 
     // returns number of elements in parameter for ng-repeat
