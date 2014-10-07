@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\helpers\VarDumper;
+use common\components\Document;
 
 /**
  * Invoice In controller
@@ -52,9 +53,43 @@ class InvoiceInController extends Controller
     }
 
     public function actionGetAttachment($id, $fileName) {
-        echo "$id $fileName";
-        die();
+       
+	    $fileStoragePath = \common\models\Settings::getFileStoragePath();
+		
+		$fileDestination = $fileStoragePath.'/'.$id;
+		
+		if (!file_exists($fileDestination)) {
+			if (!mkdir($fileDestination)) {
+				throw new Exception('cannot create folder');
+			}
+		}
+		
+		if(substr($fileName,-13) == 'invoiceIn.pdf') {
+			
+			$file = $fileDestination.'/'.$id.'-invoiceIn.pdf';
+		
+			Document::createInvoice($id);
+			
+			$this->sendFile($file);	
+			
+		} else {
+			$this->sendFile($file);	
+		}
     }
+	
+	private function sendFile($file) {
+		header("Pragma: public");
+		header("Expires: 0");
+		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+		header("Cache-Control: private",false);
+		header("Content-Type: application/".pathinfo($file, PATHINFO_EXTENSION));
+		header("Content-Disposition: attachment; filename=".basename($file));
+		header("Content-Transfer-Encoding: binary");
+		header("Content-Length: ".filesize($file));
+		
+		readfile($file);
+		exit();
+	}
 
     public function actionAttachments() {
         $this->layout = 'clean';
