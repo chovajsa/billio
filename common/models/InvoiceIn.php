@@ -45,7 +45,7 @@ class InvoiceIn extends AppActiveRecord
     }
 
     public function safeAttributes() {
-        return ['supplierId', 'date', 'number', 'dueDate', 'referenceNumber', 'costCentreId'];
+        return ['supplierId', 'date', 'number', 'dueDate', 'referenceNumber', 'costCentreId', 'costPeriod'];
     }
 
     public function isApprovedBy() {

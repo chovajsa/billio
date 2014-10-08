@@ -1,6 +1,9 @@
 <?php 
 	use yii\helpers\Url;
 ?>
+
+<script src="<?=Url::base();?>/../assets/admintemplate/assets/plugins/masked-input/masked-input.min.js"></script>
+
 <!-- small list -->
 <div class="col-md-4 ui-sortable smallList">
 
@@ -191,6 +194,15 @@
 					  <!-- </p> -->
 					</div>
 				</div>
+				
+				<div class="form-group">
+					<label for="referenceNumber" class="col-sm-2 control-label">Cost Period</label>
+					<div class="col-sm-10">
+						
+						<input type="month" ng-model="currentInvoice.costPeriod" class="form-control" id="masked-input-month" placeholder="yyyy-mm"></input>
+					  
+					</div>
+				</div>
 
 			</form>
 		</div>
@@ -345,6 +357,9 @@ $(document).ready(function () {
 	});
 
 	// $('#supplierId').select2();
+
+	$("#masked-input-month").mask("9999-99");
+	alert
 
 })
 </script>
