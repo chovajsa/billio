@@ -77,23 +77,6 @@ return [
                 'api/cost-centre/<id>' => 'api/cost-centre/options',
                 'api/cost-centre' => 'api/cost-centre/options',
 
-                'PUT,PATCH api/order-in/<id>' => 'api/order-in/update',
-                'DELETE api/order-in/<id>'    => 'api/order-in/delete',
-                'GET,HEAD api/order-in/<id>'  => 'api/order-in/view',
-                'POST api/order-in'           => 'api/order-in/create',
-                'GET,HEAD api/order-in'       => 'api/order-in/index',
-                'api/order-in/<id>'           => 'api/order-in/options',
-                'api/order-in'                => 'api/order-in/options',
-
-                'PUT,PATCH api/order-out/<id>' => 'api/order-out/update',
-                'DELETE api/order-out/<id>'    => 'api/order-out/delete',
-                'GET,HEAD api/order-out/<id>'  => 'api/order-out/view',
-                'POST api/order-out'           => 'api/order-out/create',
-                'GET,HEAD api/order-out'       => 'api/order-out/index',
-                'api/order-out/<id>'           => 'api/order-out/options',
-                'api/order-out'                => 'api/order-out/options',
-                'PUT api/order-out/<id>/approve' => 'api/order-out/approve',
-                'PUT api/order-out/<id>/unapprove' => 'api/order-out/unapprove',
                 
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['invoice-in' => 'invoice-in']] ,
             ],

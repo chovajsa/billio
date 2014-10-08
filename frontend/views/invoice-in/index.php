@@ -1,5 +1,7 @@
 <?php 
 
+$this->title .=' - Invoices';
+
 use vendor\angular;
 
 $depends = ['depends'=>[

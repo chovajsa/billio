@@ -179,7 +179,7 @@
 							{{toPayAmount | preciseRound}} 
 						</th>
 						<th>
-							<button ng-click="generatePaymentsFile()" class="btn btn-sm btn-info">Generate payment file</button> 
+							<button ng-disabled="!toPayAmount" ng-click="showPaymentsModal()" class="btn btn-sm btn-info">Generate payment file</button> 
 						</th>
 					</tr>
 				</tfoot>

@@ -14,6 +14,8 @@ use yii\helpers\Url;
  * @var string $content
  */
 AppAsset::register($this);
+
+$this->title = 'IPT';
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
