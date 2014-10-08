@@ -199,6 +199,8 @@
 					<label for="referenceNumber" class="col-sm-2 control-label">Cost Period</label>
 					<div class="col-sm-10">
 						
+						 <!-- <input type="month" ng-model="currentInvoice.costPeriod" class="form-control" id="masked-input-month" placeholder="yyyy-mm" value="{{(currentInvoice.costPeriod == '' || currentInvoice.costPeriod == null) ? function(){a=new Date();return(agetUTCFullYear()+'-'+a.getUTCMonth());} : currentInvoice.costPeriod}}"></input> -->
+						
 						<input type="month" ng-model="currentInvoice.costPeriod" class="form-control" id="masked-input-month" placeholder="yyyy-mm"></input>
 					  
 					</div>

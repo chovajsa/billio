@@ -12,8 +12,6 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCen
         supplier:false
     };
 	
-	console.log(location.path());
-	
 	//scope.currentInvoice.costCentreId = parseInt(scope.currentInvoice.costCentreId, 10); 
 
     scope.addRow = function() {
@@ -106,6 +104,11 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCen
 				scope.currentInvoice = data;
 				scope.currentInvoice.number = parseInt(scope.currentInvoice.number);
 				scope.currentInvoice.referenceNumber = parseInt(scope.currentInvoice.referenceNumber);
+				
+				if (scope.currentInvoice.costPeriod == null || scope.currentInvoice.costPeriod == '') {
+					costPeriod = new Date();
+					scope.currentInvoice.costPeriod = costPeriod.getUTCFullYear()+'-'+(costPeriod.getUTCMonth()+1);
+				}
 
 				scope.currentInvoice.supplierId = parseInt(data.supplierId);
 				scope.currentInvoice.costCentreId = parseInt(data.costCentreId);
