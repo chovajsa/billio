@@ -203,25 +203,26 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
         scope.toPayAmount = scope.getToPayAmount();
     });
 
-    scope.generatePaymentsFile = function () {
-        var invoices = [];
+
+// delete modal
+    var paymentModal = modal({scope: scope, template: yiiApp.url+'/template?route=invoiceIn/payments', show: false});
+    scope.showPaymentsModal  = function() {
+        paymentModal.$promise.then(paymentModal.show);
+    }
+    scope.closePaymentsModal = function () {
+        paymentModal.$promise.then(paymentModal.hide);   
+    }
+
+    scope.getPaymentList = function () {
         var list = [];
 
         for (var i in scope.invoiceList) {
             if (scope.invoiceList[i].toPay) {
-                list.push(scope.invoiceList[i].id);
+                list.push(scope.invoiceList[i]);
             }
         }
-
-        var url;
-        url = yiiApp.url+'/invoice-in/generate-payment-file/?list='+angular.toJson(list);
-
-        console.log(url);
-
-        window.location.href = url;
-        
+        return list;
     }
-
 
     // returns number of elements in parameter for ng-repeat
     scope.numberOfRepeats = function(n) {

@@ -122,21 +122,62 @@ class InvoiceInController extends Controller
     }
 
     public function actionGeneratePaymentFile() {
-        $fileName = time().".csv";
 
+        $paymentRows = array();
+
+        foreach ($_POST['Invoice'] as $id=>$attributes) {
+            $invoice = \common\models\InvoiceIn::findOne($id);
+
+            /*
+
+            $this->currency,
+            $this->amount,
+            '4150047806',
+            $this->date,
+            $this->dueDate,
+            $this->bankAccount,
+            $this->bankAccountPrefix,
+            $this->bankAccountCode,
+            $this->ks,
+            $this->ss,
+            1,
+            $this->note1,
+            $this->note2,
+            $this->note3,
+            $this->note4
+
+            */
+
+            $row = new \common\components\BankRow;
+            $row->amount = $attributes['amount'];
+
+            if (isset($attributes['account'])) {
+                $bankAccount = explode('/',$attributes['account']);
+                $row->bankAccount = $bankAccount[0];
+                $row->bankAccountCode = $bankAccount[1];            
+            } else {
+            }
+
+            $row->bankAccountPrefix = '0';
+            $row->vs = $invoice->referenceNumber;
+
+            $paymentRows[] = $row;
+               
+        }
+
+        $content = \common\components\Sberbank::createFile($paymentRows);
         header("Pragma: public");
         header("Expires: 0");
         header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
         header("Cache-Control: private",false);
         header("Content-Type: application/csv");
-        header("Content-Disposition: attachment; filename=".$fileName);
+        header("Content-Disposition: attachment; filename=".time().".dlm");
         header("Content-Transfer-Encoding: binary");
         // header("Content-Length: ".filesize($file));
-        
-        $content = Sberbank::createFile($data);
+
         echo $content;
+
         die();
-       
     }
 
     public function actionIndex() {

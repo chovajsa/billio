@@ -140,7 +140,6 @@
 
           </form>
 
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" ng-click="updateSupplier()">Save</button>

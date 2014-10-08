@@ -117,12 +117,19 @@ class InvoiceIn extends AppActiveRecord
 
         $return['supplier'] = $this->supplier instanceof Supplier ? $this->supplier->attributes : [];
         $return['supplier']['address'] = $this->supplier && $this->supplier->address ? $this->supplier->address->attributes : [];
+        $return['supplier']['bankAccounts'] = [];
 
         $return['approved'] = $this->isApproved();
         $return['approvedBy'] = $this->isApprovedBy();
 		
 		//$return['costCentreName'] = $this->costCentre->name;
 		$return['costCentre'] = ($this->costCentre instanceof CostCentre) ? $this->costCentre : [];
+
+        if ($this->supplier && $this->supplier->bankAccounts) {
+            foreach ($this->supplier->bankAccounts as $ba) {
+                $return['supplier']['bankAccounts'][] = $ba->toArray();
+            }
+        }
 
         $rows = $this->getRows()->all();
         $return['rows'] = [];
