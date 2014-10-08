@@ -197,5 +197,9 @@ class InvoiceInController extends ActiveRestController
         return $dataProvider;
     }
 
+    public function actionGeneratePaymentFile() {
+        
+    }
+
 
 }

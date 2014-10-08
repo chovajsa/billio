@@ -30,7 +30,7 @@ class InvoiceInController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index', 'attachments', 'get-attachment', 'getAttachment'],
+                        'actions' => ['logout', 'index', 'attachments', 'get-attachment', 'getAttachment', 'generate-payment-file'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -121,8 +121,26 @@ class InvoiceInController extends Controller
         ]);
     }
 
+    public function actionGeneratePaymentFile() {
+        $fileName = time().".csv";
+
+        header("Pragma: public");
+        header("Expires: 0");
+        header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+        header("Cache-Control: private",false);
+        header("Content-Type: application/csv");
+        header("Content-Disposition: attachment; filename=".$fileName);
+        header("Content-Transfer-Encoding: binary");
+        // header("Content-Length: ".filesize($file));
+        
+        $content = Sberbank::createFile($data);
+        echo $content;
+        die();
+       
+    }
+
     public function actionIndex() {
-    	return $this->render('index');
+        return $this->render('index');
     }
 	
 	public function actionPrint() {

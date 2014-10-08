@@ -193,7 +193,7 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
         var amount = 0;
         for (var i in scope.invoiceList) {
             if (scope.invoiceList[i].toPay) {
-                amount += scope.invoiceList[i].amountVat;
+                amount += parseFloat(scope.invoiceList[i].amountVat);
             }
         }
         return amount;
@@ -203,9 +203,24 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
         scope.toPayAmount = scope.getToPayAmount();
     });
 
-    // scope.generatePaymentFile = function () {
-    //     AI.
-    // }
+    scope.generatePaymentsFile = function () {
+        var invoices = [];
+        var list = [];
+
+        for (var i in scope.invoiceList) {
+            if (scope.invoiceList[i].toPay) {
+                list.push(scope.invoiceList[i].id);
+            }
+        }
+
+        var url;
+        url = yiiApp.url+'/invoice-in/generate-payment-file/?list='+angular.toJson(list);
+
+        console.log(url);
+
+        window.location.href = url;
+        
+    }
 
 
     // returns number of elements in parameter for ng-repeat
