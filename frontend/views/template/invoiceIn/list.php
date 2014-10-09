@@ -128,7 +128,7 @@
 							<a href="#update/{{invoice.id}}">{{invoice.number}}</a>
 		                </td>
 		                <td ng-click="showInvoice(invoice.id)">
-							{{invoice.supplier.name}}
+							{{invoice.getFullSupplierName()}}
 						</td>
 						<td ng-click="showInvoice(invoice.id)">
 							{{invoice.costCentre.name}}
@@ -150,9 +150,10 @@
 						</td>
 						<td>
 							<?php if (Yii::$app->user->identity->canDo('pay')|| Yii::$app->user->identity->canDo('admin')) { ?>
-								<input type="checkbox" ng-model="invoiceList[$index].toPay">
+								<input ng-show="invoiceList[$index].supplier.bankAccounts" type="checkbox" ng-model="invoiceList[$index].toPay">
 							<?php } ?>
 						</td>
+						
 						<td>
 							<?php if (Yii::$app->user->identity->canDo('strongApprove') || Yii::$app->user->identity->canDo('lightApprove') || Yii::$app->user->identity->canDo('admin')) { ?>
 								<button ng-show="!invoiceApprovedByUser(invoice,'<?=Yii::$app->user->identity->username;?>')" ng-click="approve(invoice.id)" class="btn btn-sm btn-success">approve</button>
@@ -163,6 +164,7 @@
 								<button ng-click="delete(invoice.id)" class="btn btn-sm btn-danger">delete</button>
 							<?php } ?>
 						</td>
+					
 					</tr>
 				</tbody>
 				<tfoot>

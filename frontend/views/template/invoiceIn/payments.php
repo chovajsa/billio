@@ -58,6 +58,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" id="paymentBtn">Download</button>
+        <button type="button" class="btn btn-warning" ng-click="markAsPaid()">Mark as paid</button>
         <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
       </div>
     </div>
