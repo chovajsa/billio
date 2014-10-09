@@ -1,3 +1,9 @@
+var invoicePrototype = {
+    getFullSupplierName: function() {
+        return this.supplier.companyName ? this.supplier.companyName : this.supplier.name + ' '+this.supplier.surname;
+    }    
+}
+
 app.factory('InvoicesIn', function ($resource) {
     var data = $resource(yiiApp.url + '/api/invoice-in/:id/:method', {
         id: '@id'
@@ -38,9 +44,19 @@ app.factory('InvoicesIn', function ($resource) {
             params: {
                 method:'unapprove'
             }
+        },
+
+        markAsPaid: {
+            method: 'PUT',
+            params: {
+                method:'markAsPaid'
+            }
         }
     });
 
+    angular.extend(data.prototype, invoicePrototype);
+
     return data;
+
 });
 

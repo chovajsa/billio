@@ -132,7 +132,14 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
             filters:angular.toJson(scope.filters),
 			page: scope.invoiceListPage,
             fulltext:scope.searchText
-        }, function (data) {
+        }).$promise.then(function (data) {   
+            
+            for (var i in data.items) {
+                angular.extend(data.items[i], invoicePrototype);
+            }
+
+            console.log(data.items);
+
             scope.invoiceList = data.items;
 			scope.invoiceListLinks = data._links;
 			scope.invoiceListPaging = data._meta;
@@ -224,10 +231,15 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
         return list;
     }
 
+    scope.markAsPaid = function () {
+        var list = scope.getPaymentList();
+    }
+
     // returns number of elements in parameter for ng-repeat
     scope.numberOfRepeats = function(n) {
         return new Array(n);
     };
+
 
 
 }]);

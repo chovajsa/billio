@@ -33,7 +33,7 @@ $this->title = 'IPT';
         var yiiApp = {
             url : '<?=Url::base();?>',
             userId : <?=Yii::$app->user->isGuest ? 'null' : Yii::$app->user->id;?>,
-			defaultVat: 20,
+			      defaultVat: 20,
         }
     </script>
 

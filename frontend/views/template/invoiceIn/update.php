@@ -42,7 +42,7 @@
 							{{invoice.date | dateFromDb}}
 						</td>
 		                <td>
-		                    {{invoice.supplier.address.name}}
+		                    {{invoice.getFullSupplierName()}}
 						</td>
 						<td>
 		                    {{invoice.amount}} &euro;
