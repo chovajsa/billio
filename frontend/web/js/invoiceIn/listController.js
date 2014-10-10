@@ -211,7 +211,7 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
     });
 
 
-// delete modal
+    // payments modal
     var paymentModal = modal({scope: scope, template: yiiApp.url+'/template?route=invoiceIn/payments', show: false});
     scope.showPaymentsModal  = function() {
         paymentModal.$promise.then(paymentModal.show);
@@ -232,7 +232,15 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
     }
 
     scope.markAsPaid = function () {
+     
+        if (!confirm('Really want to mark invoices as paid ?')) return;
+
         var list = scope.getPaymentList();
+
+        AI.markAsPaid({list:list}, function () {
+            
+        })
+
         
     }
 

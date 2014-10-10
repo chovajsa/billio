@@ -197,8 +197,14 @@ class InvoiceInController extends ActiveRestController
         return $dataProvider;
     }
 
-    public function actionGeneratePaymentFile() {
-        
+    public function actionMarkAsPaid() {
+        $p = Yii::$app->getRequest()->getBodyParams();
+        if (isset($p['list'])) foreach ($p['list'] as $n=>$invoiceAttributes) {
+            $invoice = \common\models\InvoiceIn::findOne($invoiceAttributes['id']);
+
+            $invoice->markAsPaid(date('Y-m-d'));
+
+        }   
     }
 
 

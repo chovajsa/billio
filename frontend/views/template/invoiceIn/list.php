@@ -115,6 +115,9 @@
 							Approved
 						</th>
 						<th>
+							Paid
+						</th>
+						<th>
 							Pay
 						</th>
 						<th>
@@ -142,15 +145,21 @@
 						<td ng-click="showInvoice(invoice.id)">
 		                    {{invoice.amountVat | preciseRound}}
 						</td>
+						
 						<td ng-click="showInvoice(invoice.id)">
 							{{invoice.approvedBy ? '' : 'pending'}}
 							<span ng-repeat="ab in invoice.approvedBy">
 								<span class="label label-success">{{ab.userName}}</span>&nbsp;
 							</span>
 						</td>
+						
+						<td>
+							{{invoice.paid ? 'yes' : 'no'}}
+						</td>
+						
 						<td>
 							<?php if (Yii::$app->user->identity->canDo('pay')|| Yii::$app->user->identity->canDo('admin')) { ?>
-								<input ng-show="invoiceList[$index].supplier.bankAccounts" type="checkbox" ng-model="invoiceList[$index].toPay">
+								<input ng-show="invoiceList[$index].supplier.bankAccounts && invoiceList[$index].approved && !invoiceList[$index].paid" type="checkbox" ng-model="invoiceList[$index].toPay">
 							<?php } ?>
 						</td>
 						

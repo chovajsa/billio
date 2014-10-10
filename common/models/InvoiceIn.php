@@ -45,7 +45,7 @@ class InvoiceIn extends AppActiveRecord
     }
 
     public function safeAttributes() {
-        return ['supplierId', 'date', 'number', 'dueDate', 'referenceNumber', 'costCentreId', 'costPeriod'];
+        return ['supplierId', 'date', 'number', 'dueDate', 'referenceNumber', 'costCentreId', 'costPeriod', 'paidDate', 'paidAmount'];
     }
 
     public function isApprovedBy() {
@@ -122,6 +122,8 @@ class InvoiceIn extends AppActiveRecord
         $return['approved'] = $this->isApproved();
         $return['approvedBy'] = $this->isApprovedBy();
 		
+        $return['paid'] = $this->isPaid();
+        
 		//$return['costCentreName'] = $this->costCentre->name;
 		$return['costCentre'] = ($this->costCentre instanceof CostCentre) ? $this->costCentre : [];
 
@@ -142,6 +144,16 @@ class InvoiceIn extends AppActiveRecord
         }
         
         return $return;
+    }
+
+    public function isPaid() {
+        return $this->paidAmount >= $this->amountVat;
+    }
+
+    public function markAsPaid($date) {
+        $this->paidAmount = $this->amountVat;
+        $this->paidDate = $date;
+        return $this->save(false);
     }
    
 }

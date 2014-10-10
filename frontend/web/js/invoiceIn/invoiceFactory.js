@@ -49,7 +49,7 @@ app.factory('InvoicesIn', function ($resource) {
         markAsPaid: {
             method: 'PUT',
             params: {
-                method:'markAsPaid'
+                method:'mark-as-paid'
             }
         }
     });
