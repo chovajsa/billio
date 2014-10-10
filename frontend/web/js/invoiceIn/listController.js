@@ -46,9 +46,10 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
                 var items = data.items;
 
                 for (var i in items) {
+                    var supname = items[i].companyName ? items[i].companyName : items[i].name + " " + items[i].surname;
                     newData.push({
                         id: items[i].id,
-                        text: items[i].name + " " + items[i].surname
+                        text: supname
                     });
                 }
 

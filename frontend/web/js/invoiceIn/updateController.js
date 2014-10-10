@@ -113,12 +113,14 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCen
 				scope.currentInvoice.supplierId = parseInt(data.supplierId);
 				scope.currentInvoice.costCentreId = parseInt(data.costCentreId);
 
-				if (scope.currentInvoice.supplierId)
-				scope.currentInvoice.supplier = {
-					id: data.supplierId,
-					name: data.supplier.name,
-					text: data.supplier.name + data.supplier.surname
-				}
+				if (scope.currentInvoice.supplierId) {
+                    var suppname = data.supplier.companyName ? data.supplier.companyName : data.supplier.name + ' ' + data.supplier.surname;
+    				scope.currentInvoice.supplier = {
+    					id: data.supplierId,
+    					name: data.supplier.name,
+    					text: suppname
+    				}
+                }
 
 				angular.element('#attachmentsFrame').attr('src', yiiApp.url+'/invoice-in/attachments?invoiceInId='+data.id);
 
