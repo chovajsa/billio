@@ -117,10 +117,10 @@
                   <tr ng-repeat="bankAccont in supplier.bankAccounts">
                     <td>
                       <input type="hidden" ng-model="supplier.bankAccounts[$index].id">
-                      <input type="text" ng-model="supplier.bankAccounts[$index].bankAccount"/>
+                      <input type="text" maxlength="10" ng-model="supplier.bankAccounts[$index].bankAccount"/>
                     </td>
                     <td>
-                      <input type="text" ng-model="supplier.bankAccounts[$index].bankAccountCode"/>
+                      <input type="text" maxlength="4" ng-model="supplier.bankAccounts[$index].bankAccountCode"/>
                     </td>
                     <td>
                       <a href="javascript:;" ng-click="unsetRow($index)">remove</a>

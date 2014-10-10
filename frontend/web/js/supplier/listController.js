@@ -40,7 +40,8 @@ app.controller('ListController', ['$scope', 'Supplier', '$routeParams', '$modal'
     }
 
     scope.showCreateModal = function () {
-        scope.showModal();
+        scope.supplier = {};
+		scope.showModal();
     }
 
     scope.addRow = function() {
@@ -58,7 +59,16 @@ app.controller('ListController', ['$scope', 'Supplier', '$routeParams', '$modal'
     }
 
     scope.updateSupplier = function() {
+		
+		// filters out a bankAccounts with empty values
+		for(var bankAccount in scope.supplier.bankAccounts) {
+			if (scope.supplier.bankAccounts[bankAccount].bankAccount == '' || scope.supplier.bankAccounts[bankAccount].bankAccountCode == '') {
+				scope.unsetRow(bankAccount);
+			}
+		}
+		
         params = scope.supplier;
+		
         if (params.address == undefined) params.address = {};
         params.toDelete = scope.toDelete;
         if (params.id) {
