@@ -107,7 +107,7 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCen
 				
 				if (scope.currentInvoice.costPeriod == null || scope.currentInvoice.costPeriod == '') {
 					costPeriod = new Date();
-					scope.currentInvoice.costPeriod = costPeriod.getUTCFullYear()+'-'+(costPeriod.getUTCMonth()+1);
+					scope.currentInvoice.costPeriod = costPeriod.getUTCFullYear()+'-'+(("0" + (costPeriod.getMonth() + 1)).slice(-2));
 				}
 
 				scope.currentInvoice.supplierId = parseInt(data.supplierId);
