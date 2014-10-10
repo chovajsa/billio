@@ -132,11 +132,8 @@ class SupplierController extends ActiveRestController
         $andWhere = '';
         
         if (isset($_GET['fulltext'])) {
-            $andWhere = "supplier.id IN (
-                SELECT s1.id FROM supplier s1 
-                LEFT JOIN address a ON a.id = s1.addressId 
-                WHERE s1.name LIKE '%{$_GET['fulltext']}%' OR s1.surname LIKE '%{$_GET['fulltext']}%' OR s1.companyName LIKE '%{$_GET['fulltext']}%'
-            )";    
+            $fulltext = $_GET['fulltext'];
+            $andWhere = "supplier.name LIKE '%$fulltext%' OR supplier.surname LIKE '%$fulltext%' OR supplier.companyName LIKE '%$fulltext%'";    
         }
 
         return $andWhere;
