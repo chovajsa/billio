@@ -233,6 +233,7 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
 
     scope.markAsPaid = function () {
         var list = scope.getPaymentList();
+        
     }
 
     // returns number of elements in parameter for ng-repeat
