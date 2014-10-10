@@ -5,7 +5,7 @@
 
 ?>
 
-<script src="<?=Url::base();?>/../assets/admintemplate/assets/plugins/masked-input/masked-input.min.js"></script>
+<script src="<?=Url::base();?>/js/masked-input.min.js"></script>
 
 <!-- small list -->
 <div class="col-md-4 ui-sortable smallList">
