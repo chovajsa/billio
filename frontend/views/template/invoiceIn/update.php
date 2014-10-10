@@ -45,7 +45,7 @@
 		                    {{invoice.getFullSupplierName()}}
 						</td>
 						<td>
-		                    {{invoice.amount}} &euro;
+		                    {{invoice.amountVat}} &euro;
 						</td>
 					</tr>
 				</tbody>
