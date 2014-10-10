@@ -45,7 +45,15 @@ $this->title = 'IPT';
 <div id="header" class="header navbar navbar-default navbar-fixed-top">
   <!-- begin container-fluid -->
   <div class="container-fluid">
-    <!-- begin mobile sidebar expand / collapse button -->
+    
+	<a href="<?=Url::base();?>" class="navbar-brand">
+		<span class="fa-stack fa-1x text-inverse">
+			<i class="fa fa-cloud fa-stack-2x"></i>
+			<i class="fa fa-share fa-stack-1x fa-inverse"></i>
+		</span>&nbsp;&nbsp;IPT
+	</a>
+    
+	<!-- begin mobile sidebar expand / collapse button -->
     <div class="navbar-header" style="width:200px">
       <!-- <a href="javascript:;" class="navbar-brand"><span class="markan-logo-mini"></span>  </a> -->
       
@@ -70,12 +78,12 @@ $this->title = 'IPT';
     <?php if (!Yii::$app->user->isGuest) { ?>
     <ul class="nav navbar-nav navbar-right">
       <li>
-        <form class="navbar-form full-width hidden-xs">
+         <!-- <form class="navbar-form full-width hidden-xs">
           <div class="form-group">
             <input type="text" class="form-control" placeholder="Enter keyword" />
             <button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
           </div>
-        </form>
+        </form> -->
       </li>
 <!--       <li class="dropdown">
         <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">
@@ -84,7 +92,7 @@ $this->title = 'IPT';
         </a>
       </li> -->
       <li class="dropdown navbar-user">
-        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+		<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
           <span class="hidden-xs">
             <?=Yii::$app->user->getIdentity()->email;?>
           </span> <b class="caret"></b>
