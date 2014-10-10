@@ -16,11 +16,9 @@ AppAsset::register($this);
     <?php $this->endBody() ?>
 
    <script>
-		$(document).ready(function() {
-			App.init();
-		});
-
-		
+		// $(document).ready(function() {
+		// 	App.init();
+		// });
 
 	</script>
 	

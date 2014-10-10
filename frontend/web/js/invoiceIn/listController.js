@@ -120,6 +120,13 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
            scope.filters.createdBy = yiiApp.userId;
         }
 		
+        if (location.path() == '/paid') {
+           scope.filters.paid = 'true';
+        }
+        if (location.path() == '/paid-not') {
+           scope.filters.paid = 'false';
+        }
+
 		scope.creanUpFilters();
 		
 		// console.log(scope.filters);
@@ -238,7 +245,7 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
         var list = scope.getPaymentList();
 
         AI.markAsPaid({list:list}, function () {
-            
+
         })
 
         
@@ -248,7 +255,6 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
     scope.numberOfRepeats = function(n) {
         return new Array(n);
     };
-
 
 
 }]);

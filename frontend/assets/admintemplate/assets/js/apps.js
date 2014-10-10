@@ -260,7 +260,6 @@ var App = function () {
 			handleSlimScroll();
 			
 			// sidebar
-			handleSidebarMenu();
 			handleMobileSidebarToggle();
 			handleSidebarMinify();
 			

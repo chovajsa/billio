@@ -121,6 +121,9 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCen
 				}
 
 				angular.element('#attachmentsFrame').attr('src', yiiApp.url+'/invoice-in/attachments?invoiceInId='+data.id);
+
+                // spinner hide
+
 			});
 		});
     };

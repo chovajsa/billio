@@ -173,19 +173,36 @@ class InvoiceInController extends ActiveRestController
 
     protected function getFulltextCondition($modelClass) {
     
+        if (isset($_GET['filters'])) {
+            $filters = json_decode($_GET['filters'], true);
+            if (isset($filters['paid'])) {
+                $paid = $filters['paid'];
+                unset($filters['paid']);
+                $_GET['filters'] = json_encode($filters);
+            }
+        }
+
         $andWhere = parent::getFulltextCondition($modelClass);
-                    
+
         if (isset($_GET['fulltext'])) {
-			
-			$fulltext = $_GET['fulltext'];
-			
-			if(isset($_GET['fulltext'])) {
-				$andWhere .= " OR supplier.name LIKE '%{$fulltext}%'";
-				$andWhere .= " OR supplier.surname LIKE '%{$fulltext}%'";
-				$andWhere .= " OR supplier.companyName LIKE '%{$fulltext}%'";
-				$andWhere .= " OR costCentre.name LIKE '%{$fulltext}%'";
-			}
+            $fulltext = $_GET['fulltext'];
+            if(isset($_GET['fulltext'])) {
+                $andWhere .= " OR supplier.name LIKE '%{$fulltext}%'";
+                $andWhere .= " OR supplier.surname LIKE '%{$fulltext}%'";
+                $andWhere .= " OR supplier.companyName LIKE '%{$fulltext}%'";
+                $andWhere .= " OR costCentre.name LIKE '%{$fulltext}%'";
+            }
 		}
+
+        if (isset($paid)) {
+            if ($paid == 'true') {
+                $andWhere .= 'IFNULL(paidAmount, 0) >= amountVat';
+            }
+
+            if ($paid == 'false') {
+                $andWhere .= 'IFNULL(paidAmount, 0) < amountVat';
+            }
+        }
 
         return $andWhere;
     }

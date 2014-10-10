@@ -56,9 +56,12 @@ class ActiveRestController extends ActiveController {
             ],
         ]);
 
+        $dataProvider->query->andWhere('1=1');
+        
         if ($andWhere = $this->getFulltextCondition($modelClass)) {
             $dataProvider->query->andWhere($andWhere);
         }        
+
 
         if (isset($_GET['filters'])) {
             $filters = json_decode($_GET['filters']);

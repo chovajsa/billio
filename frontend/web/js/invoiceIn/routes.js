@@ -14,6 +14,18 @@ $routeProvider.
     templateUrl : yiiApp.url + '/template/?route=invoiceIn/list',
     animation: 'slide'
   }).
+  
+  when('/paid', {
+    controller: 'ListController',
+    templateUrl : yiiApp.url + '/template/?route=invoiceIn/list',
+    animation: 'slide'
+  }).
+  when('/paid-not', {
+    controller: 'ListController',
+    templateUrl : yiiApp.url + '/template/?route=invoiceIn/list',
+    animation: 'slide'
+  }).
+
   when('/search/', {
     controller: 'ListController',
     templateUrl : yiiApp.url + '/template/?route=invoiceIn/list',

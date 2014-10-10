@@ -18,10 +18,25 @@
     <ul class="nav">
       <li class="nav-header">Navigation</li>
 
-      <li <?=$route == 'invoice-in/index' ? 'class="active"' : '';?>><a href="<?=Url::base();?>/invoice-in/index">Invoices</a></li>
+      <li class="has-sub<?=$route == 'invoice-in/index' ? ' active' : '';?>">
+        <a href="<?=$route == 'invoice-in/index' ? 'javascript:;' : Url::base()."/invoice-in/index";?>">Invoices
+          <b class="caret pull-right"></b>
+        </a>
+
+          <ul class="sub-menu">
+
+            <li><a href="#/"> All </a></li>
+            <li><a href="#/mine"> Mine </a></li>
+            <li><a href="#/paid"> Paid </a></li>
+            <li><a href="#/paid-not"> Paid not </a></li>
+
+          </ul>
+      </li>
+      
+
       <li <?=$route == 'supplier/index' ? 'class="active"' : '';?>><a href="<?=Url::base();?>/supplier/index">Suppliers</a></li>
 
-      <?php if (Yii::$app->user->identity->canDo('admin')) { ?>
+      <?php if (false && Yii::$app->user->identity->canDo('admin')) { ?>
        <li class="has-sub">
         <a href="javascript:;">
           <i class="fa fa-cogs"></i>
@@ -34,7 +49,7 @@
             <a href="javascript:void(0)">
               Create
             </a>
-          </li>
+          </li> 
 
           <li><a href="page_with_footer.html">All</a></li>
           <li><a href="page_without_sidebar.html">Pending</a></li>

@@ -4,7 +4,7 @@
 	<div class="panel panel-success">
 	
 		<div class="panel-heading">
-			<h4 class="panel-title">Advance Search</h4>
+			<h4 class="panel-title">Advanced Search</h4>
 		</div>
 		
 		<form class="form-horizontal">
