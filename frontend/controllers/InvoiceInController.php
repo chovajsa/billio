@@ -69,12 +69,11 @@ class InvoiceInController extends Controller
 			$file = $fileDestination.'/'.$id.'-invoiceIn.pdf';
 		
 			Document::createInvoice($id);
-			
 			$this->sendFile($file);	
 			
 		} else {
 		    $file = $fileDestination.'/'.$fileName;
-        	$this->sendFile($file);	
+        	    $this->sendFile($file);	
 		}
     }
 	
@@ -87,7 +86,6 @@ class InvoiceInController extends Controller
 		header("Content-Disposition: attachment; filename=".basename($file));
 		header("Content-Transfer-Encoding: binary");
 		header("Content-Length: ".filesize($file));
-		
 		readfile($file);
 		exit();
 	}
