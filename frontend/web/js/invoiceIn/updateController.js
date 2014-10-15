@@ -16,7 +16,12 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCen
 
     scope.addRow = function() {
         if (scope.currentInvoice.rows === undefined) scope.currentInvoice.rows = [];
-        scope.currentInvoice.rows.push({ id: null, amount:'0', pcs:'1', vat:yiiApp.defaultVat});
+        
+        var v;
+        if (scope.currentInvoice.supplier.vat) v = yiiApp.defaultVat;
+            else v = 0;
+
+        scope.currentInvoice.rows.push({ id: null, amount:'0', pcs:'1', vat:v});
     }
     
     scope.unsetRow = function(i) {

@@ -115,7 +115,18 @@ class InvoiceInController extends ActiveRestController
                     $row->setAttributes($prow, '');
 
                     $row->amountTotal = $row->pcs * $row->amount;
-                    $row->amountTotalVat = ($row->amountTotal * (1+$row->vat/100));
+
+                    $vat = 0;
+                    $supplier = \common\models\Supplier::findOne($row->supplierId);
+                    if ($supplier) {
+                        if ($supplier->vat) {
+                            $vat = $row->vat;
+                        } else {
+                            $vat = 0;
+                        }
+                    }
+
+                    $row->amountTotalVat = ($row->amountTotal * (1+$vat/100));
 
                     $row->save();
                 } else 
@@ -227,7 +238,7 @@ class InvoiceInController extends ActiveRestController
     public function actionGetIban() {
         $bankAccountPrefix = isset($_GET['bankAccountPrefix']) ? $_GET['bankAccountPrefix'] : '000000';
         if ($bankAccountPrefix) $bankAccountPrefix = '000000';
-        
+
         $bankAccount = $_GET['bankAccount'];
         $bankAccountCode = $_GET['bankAccountCode'];
 

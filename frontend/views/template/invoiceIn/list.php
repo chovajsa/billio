@@ -147,7 +147,7 @@
 							</span>
 						</td>
 						
-						<td>
+						<td ng-click="showInvoice(invoice.id)">
 							{{invoice.paid ? 'yes' : 'no'}}
 						</td>
 						
