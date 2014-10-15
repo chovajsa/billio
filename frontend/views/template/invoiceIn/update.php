@@ -186,7 +186,7 @@
 				</div>
 
 				<div class="form-group">
-					<label for="date" class="col-sm-2 control-label">Date</label>
+					<label for="date" class="col-sm-2 control-label">Issue Date</label>
 					
 					<div class="col-sm-10">
 						<input class="form-control datepicker" required  ng-model="currentInvoice.date" type="text" id="date" name="date"/>
