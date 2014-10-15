@@ -95,6 +95,12 @@
 						<th>
 							<a href="javascript:;" ng-click="setSort('number')">Invoice Number</a>
 						</th>
+						<td>
+							Reference Number
+						</td>
+						<td>
+							IBAN
+						</td>
 						<th>
 							Supplier
 						</th>
@@ -126,6 +132,14 @@
 		            <tr ng-repeat="invoice in invoiceList">
 		                <td ng-click="showInvoice(invoice.id)">
 							<a href="#update/{{invoice.id}}">{{invoice.number}}</a>
+		                </td>
+
+		                <td>
+		                	{{invoice.referenceNumber}}
+		                </td>
+
+		                <td>
+		                	{{invoice.supplier.bankAccounts[0].iban}}
 		                </td>
 		                <td ng-click="showInvoice(invoice.id)">
 							{{invoice.getFullSupplierName()}}

@@ -123,7 +123,7 @@
                 <tbody>
                   <tr ng-repeat="bankAccont in supplier.bankAccounts">
                     <td>
-                      <input ng-blur="ibanize($index)" id="bp{{$index}}" ng-model-onblur style="width:100px" type="text" class="ibanize" maxlength="10" ng-model="supplier.bankAccounts[$index].bankAccountPrefix"/>
+                      <input ng-blur="ibanize($index)" id="bp{{$index}}" ng-model-onblur style="width:100px" type="text" class="ibanize" maxlength="6" ng-model="supplier.bankAccounts[$index].bankAccountPrefix"/>
                     </td>
                     <td>
                       <input type="hidden" ng-model="supplier.bankAccounts[$index].id">
