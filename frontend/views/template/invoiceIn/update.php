@@ -102,8 +102,10 @@
 						<p>
 							<a target="_blank" href="<?=Url::base();?>/invoice-in/print/?invoiceInId={{currentInvoice.id}}" class="btn btn-sm btn-inverse"><i class="fa fa-print"></i> Print </a>
 							<a target="_blank" href="<?=Url::base();?>/invoice-in/get-attachment/?id={{currentInvoice.id}}&fileName={{currentInvoice.id}}-invoiceIn.pdf" ng-click="" class="btn btn-sm btn-primary"><i class="fa fa-download"></i> PDF </a>
+							
+							<?php if (Yii::$app->user->identity->canDo('admin')) { ?>
 							<a href="javascript:;" ng-click="delete(currentInvoice.id)" class="btn btn-sm btn-danger"><i class="fa fa-minus-circle"></i> Delete </a>
-					  		
+					  		<?php } ?>
 					        <!-- <a href="javascript:;" clas	s="btn btn-sm btn-primary m-r-5">Approve</a> -->
 					        <!-- <a href="javascript:;" class="btn btn-sm btn-danger">Reject</a> -->
 					    </p>
@@ -239,13 +241,15 @@
 						<th width="10%">
 							Amount Total
 						</th>
-						<th width="10%">
+						
+						<th ng-show="currentInvoice.supplier.vat" width="10%">
 							VAT (%)
 						</th>
-						<th width="15%">
+						<th ng-show="currentInvoice.supplier.vat" width="15%">
 							Amount Total + VAT
 						</th>
-						<th>
+						
+						<th width="5%">
 							&nbsp;
 						</th>
 					</tr>
@@ -268,13 +272,13 @@
 						<td>
 							{{(row.amount*row.pcs) | preciseRound}}
 						</td>
-						<td>
+						<td ng-show="currentInvoice.supplier.vat">
 							<input style="width:100%" ng-model="currentInvoice.rows[$index].vat" type="text">
 						</td>
-						<td>
+						<td ng-show="currentInvoice.supplier.vat">
 							{{(((row.amount*row.pcs)*(row.vat/100))+(row.amount*row.pcs)) | preciseRound}}
 						</td>
-						<td>
+						<td width="5%">
 							<a href="javascript:void(0)" ng-click="unsetRow($index)">
 							<span class="fa-stack fa-sm text-danger">
 								<i class="fa fa-circle fa-stack-2x"></i>
@@ -286,15 +290,15 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<th colspan="8">
+						<th colspan="{{currentInvoice.supplier.vat ? '8' : '6'}}">
 							&nbsp;
 						</th>
 					</tr>
 					<tr>
-						<th colspan="4">
+						<th colspan="{{currentInvoice.supplier.vat ? '4' : '2'}}">
 							&nbsp;
 						</th>
-						<th colspan="2">
+						<th colspan="{{currentInvoice.supplier.vat ? '2' : '2'}}">
 							Total amount
 						</th>
 						<th>
@@ -304,8 +308,8 @@
 							&nbsp;
 						</th>
 					</tr>
-					<tr>
-						<th colspan="4">
+					<tr ng-show="currentInvoice.supplier.vat">
+						<th colspan="{{currentInvoice.supplier.vat ? '4' : '2'}}">
 							&nbsp;
 						</th>
 						<th colspan="2">
@@ -318,8 +322,8 @@
 							&nbsp;
 						</th>
 					</tr>
-					<tr>
-						<th colspan="4">
+					<tr ng-show="currentInvoice.supplier.vat">
+						<th colspan="{{currentInvoice.supplier.vat ? '4' : '2'}}">
 							&nbsp;
 						</th>
 						<th colspan="2">

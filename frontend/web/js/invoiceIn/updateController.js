@@ -101,6 +101,8 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCen
 			scope.currentInvoice.number = parseInt(scope.currentInvoice.number);
 			scope.currentInvoice.referenceNumber = parseInt(scope.currentInvoice.referenceNumber);
 			
+            scope.currentInvoice.supplier.vat = parseInt(scope.currentInvoice.supplier.vat);
+
 			if (scope.currentInvoice.costPeriod == null || scope.currentInvoice.costPeriod == '') {
 				costPeriod = new Date();
 				scope.currentInvoice.costPeriod = costPeriod.getUTCFullYear()+'-'+(("0" + (costPeriod.getMonth() + 1)).slice(-2));
@@ -114,7 +116,8 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCen
 				scope.currentInvoice.supplier = {
 					id: data.supplierId,
 					name: data.supplier.name,
-					text: suppname
+					text: suppname,
+                    vat: data.supplier.vat
 				}
             }
 
