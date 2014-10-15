@@ -153,7 +153,7 @@
 						
 						<td>
 							<?php if (Yii::$app->user->identity->canDo('pay')|| Yii::$app->user->identity->canDo('admin')) { ?>
-								<input ng-show="invoiceList[$index].supplier.bankAccounts && invoiceList[$index].approved && !invoiceList[$index].paid" type="checkbox" ng-model="invoiceList[$index].toPay">
+								<input ng-show="canPay(invoiceList[$index])" type="checkbox" ng-model="invoiceList[$index].toPay">
 							<?php } ?>
 						</td>
 						

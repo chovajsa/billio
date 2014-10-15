@@ -55,7 +55,10 @@ class InvoiceIn extends AppActiveRecord
     public function isApproved() {
         $w1 = \common\models\Approved::findOne(['model'=>\common\components\Helpers::get_real_class($this), 'modelId'=>$this->id, 'weight'=>1]);
         $w2 = \common\models\Approved::findOne(['model'=>\common\components\Helpers::get_real_class($this), 'modelId'=>$this->id, 'weight'=>2]);
-        return $w1 && $w2;
+        
+        $w3 = \common\models\Approved::find()->where(['model'=>\common\components\Helpers::get_real_class($this), 'modelId'=>$this->id, 'weight'=>2])->count();
+
+        return ($w1 && $w2) || $w3 == 2;
     }   
 
     public function approve() {

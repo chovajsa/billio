@@ -77,6 +77,7 @@ app.controller('ListController', ['$scope', 'Supplier', '$routeParams', '$modal'
     }
 
 
+
     scope.updateSupplier = function() {
 		
 		// filters out a bankAccounts with empty values

@@ -71,6 +71,11 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
         }
     }
 
+    scope.canPay = function(i) {
+        return i.supplier.bankAccounts.length > 0 && i.approved && !i.paid;
+        // return true;
+    }
+
     scope.setDirection = function (direction) {
         scope.invoiceListDirection = direction;
         scope.setInvoiceList();
@@ -145,8 +150,6 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
             for (var i in data.items) {
                 angular.extend(data.items[i], invoicePrototype);
             }
-
-            console.log(data.items);
 
             scope.invoiceList = data.items;
 			scope.invoiceListLinks = data._links;
@@ -246,7 +249,9 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
         var list = scope.getPaymentList();
 
         AI.markAsPaid({list:list}, function () {
-
+            notify('success', 'Invoices are marked as paid');
+            scope.setInvoiceList();
+            scope.closePaymentsModal();
         })
 
         
