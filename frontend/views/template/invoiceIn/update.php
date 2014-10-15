@@ -8,7 +8,7 @@
 <script src="<?=Url::base();?>/js/masked-input.min.js"></script>
 
 <!-- small list -->
-<div class="col-md-4 ui-sortable smallList">
+<div ng-cloak class="col-md-4 ui-sortable smallList">
 
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
@@ -68,7 +68,7 @@
 	</div>
 </div> 
 <!-- /small list -->
-<div class="col-md-8 ui-sortable updateInvoice">
+<div ng-cloak class="col-md-8 ui-sortable updateInvoice">
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
 			<h4 class="panel-title" ng-show="mode == 'create'"> 
@@ -167,7 +167,6 @@
 							<option ng-repeat="costCentre in costCentres" value="{{costCentre.id}}">{{costCentre.name}}</option>
 						</select>
 						
-						
 					</div>
 				</div>
 
@@ -195,15 +194,6 @@
 					  	  <!-- <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button> -->
 					  	<!-- </span> -->
 					  <!-- </p> -->
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<label for="referenceNumber" class="col-sm-2 control-label">Cost Period</label>
-					<div class="col-sm-10">
-					
-						<input type="month" ng-model="currentInvoice.costPeriod" class="form-control" id="masked-input-month" placeholder="yyyy-mm"></input>
-					  
 					</div>
 				</div>
 

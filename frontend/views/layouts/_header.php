@@ -60,19 +60,24 @@ $this->title = 'IPT';
 <body>
 
 <?php $this->beginBody() ?>
+
+<!-- begin #page-loader -->
+<!-- end #page-loader -->
+
     <!-- begin #header -->
 <div id="header" class="header navbar navbar-default navbar-fixed-top">
   <!-- begin container-fluid -->
   <div class="container-fluid">
+  
     
-	<a href="<?=Url::base();?>" class="navbar-brand">
-		<span class="fa-stack fa-1x text-inverse">
-			<i class="fa fa-cloud fa-stack-2x"></i>
-			<i class="fa fa-share fa-stack-1x fa-inverse"></i>
-		</span>&nbsp;&nbsp;IPT
-	</a>
+  <a href="<?=Url::base();?>" class="navbar-brand">
+    <span class="fa-stack fa-1x text-inverse">
+      <i class="fa fa-cloud fa-stack-2x"></i>
+      <i class="fa fa-share fa-stack-1x fa-inverse"></i>
+    </span>&nbsp;&nbsp;IPT
+  </a>
     
-	<!-- begin mobile sidebar expand / collapse button -->
+  <!-- begin mobile sidebar expand / collapse button -->
     <div class="navbar-header" style="width:200px">
       <!-- <a href="javascript:;" class="navbar-brand"><span class="markan-logo-mini"></span>  </a> -->
       
@@ -111,7 +116,7 @@ $this->title = 'IPT';
         </a>
       </li> -->
       <li class="dropdown navbar-user">
-		<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
           <span class="hidden-xs">
             <?=Yii::$app->user->getIdentity()->email;?>
           </span> <b class="caret"></b>
@@ -134,4 +139,4 @@ $this->title = 'IPT';
 </div>
 <!-- end #header -->
 
-<div id="spinner" style="display:none" class="loading">Loading&#8230;</div>
+<div id="page-loader" class="fade in"><span class="spinner"></span></div>

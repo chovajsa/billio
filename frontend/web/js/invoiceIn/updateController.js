@@ -1,4 +1,4 @@
-app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCentre', '$routeParams', '$modal', '$location', '$controller', function (scope, AI, SI, costCentres, routeParams, modal, location, $controller) {
+app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCentre', '$routeParams', '$modal', '$location', '$controller', '$rootScope', function (scope, AI, SI, costCentres, routeParams, modal, location, $controller, $rootScope) {
 
     $controller('ListController', {$scope:scope});
 
@@ -77,56 +77,56 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCen
         }
     }
 
+    scope.setCostcentres = function() {
+		costCentres.get({}, function(costCentreData) {
+            scope.costCentres = costCentreData.items;
+        }); 
+    }
 
     scope.setCurrentInvoice = function (id) {
       
 // potalto stary kod
-		scope.mode = 'update';
+        scope.mode = 'update';
 		
-		costCentres.get({}, function(costCentreData) {
-			
-			scope.costCentres = costCentreData.items;
-			
-			AI.getInvoice({
-				id: id  
-			}, function (data) {
-				var dateFields = ['date', 'dueDate'];
+		AI.getInvoice({
+			id: id  
+		}, function (data) {
+			var dateFields = ['date', 'dueDate'];
 
-				for (var i in data) {
-					for (var x in dateFields) {
-						// if (dateFields[x] == )
-						if (i == dateFields[x]) {
-							data[i] = convertDateFromDb(data[i]);
-						}
+			for (var i in data) {
+				for (var x in dateFields) {
+					// if (dateFields[x] == )
+					if (i == dateFields[x]) {
+						data[i] = convertDateFromDb(data[i]);
 					}
 				}
+			}
 
-				scope.currentInvoice = data;
-				scope.currentInvoice.number = parseInt(scope.currentInvoice.number);
-				scope.currentInvoice.referenceNumber = parseInt(scope.currentInvoice.referenceNumber);
-				
-				if (scope.currentInvoice.costPeriod == null || scope.currentInvoice.costPeriod == '') {
-					costPeriod = new Date();
-					scope.currentInvoice.costPeriod = costPeriod.getUTCFullYear()+'-'+(("0" + (costPeriod.getMonth() + 1)).slice(-2));
+			scope.currentInvoice = data;
+			scope.currentInvoice.number = parseInt(scope.currentInvoice.number);
+			scope.currentInvoice.referenceNumber = parseInt(scope.currentInvoice.referenceNumber);
+			
+			if (scope.currentInvoice.costPeriod == null || scope.currentInvoice.costPeriod == '') {
+				costPeriod = new Date();
+				scope.currentInvoice.costPeriod = costPeriod.getUTCFullYear()+'-'+(("0" + (costPeriod.getMonth() + 1)).slice(-2));
+			}
+
+			scope.currentInvoice.supplierId = parseInt(data.supplierId);
+			scope.currentInvoice.costCentreId = parseInt(data.costCentreId);
+
+			if (scope.currentInvoice.supplierId) {
+                var suppname = data.supplier.companyName ? data.supplier.companyName : data.supplier.name + ' ' + data.supplier.surname;
+				scope.currentInvoice.supplier = {
+					id: data.supplierId,
+					name: data.supplier.name,
+					text: suppname
 				}
+            }
 
-				scope.currentInvoice.supplierId = parseInt(data.supplierId);
-				scope.currentInvoice.costCentreId = parseInt(data.costCentreId);
+			angular.element('#attachmentsFrame').attr('src', yiiApp.url+'/invoice-in/attachments?invoiceInId='+data.id);
 
-				if (scope.currentInvoice.supplierId) {
-                    var suppname = data.supplier.companyName ? data.supplier.companyName : data.supplier.name + ' ' + data.supplier.surname;
-    				scope.currentInvoice.supplier = {
-    					id: data.supplierId,
-    					name: data.supplier.name,
-    					text: suppname
-    				}
-                }
+            // spinner hide
 
-				angular.element('#attachmentsFrame').attr('src', yiiApp.url+'/invoice-in/attachments?invoiceInId='+data.id);
-
-                // spinner hide
-
-			});
 		});
     };
 
@@ -197,5 +197,8 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCen
 		return total;
 	
 	};
+
+    scope.setCostcentres();
+
 
 }]);

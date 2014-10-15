@@ -27,14 +27,14 @@ $depends = ['depends'=>[
 
 <div ng-app="invoiceIn">
 
-	<div>
+	<div ng-cloak>
 
 		<?php 
 			echo frontend\widgets\SideBar::widget([]);
 		?>
 
 		<!-- begin #content -->
-		<div id="content" class="content">
+		<div id="content" class="content fade">
 
 			<h1 class="page-header"> Incoming Invoices <!-- <small>header small text goes here...</small> --></h1>
 		  
@@ -62,7 +62,6 @@ $depends = ['depends'=>[
 
 			    	    <a href="#/new" class="btn btn-sm btn-primary"><i class="fa fa-plus m-r-5"></i> New</a>
 
-			    	   
 						
 						<a href="#/filter/" class="btn btn-sm btn-success" ng-click="$rootScope.showAdvanceSearch=!$rootScope.showAdvanceSearch"><i class="fa fa-search"></i> Advanced Search </a>
 

@@ -1,30 +1,37 @@
 var app = angular.module('invoiceIn', ['ngResource','mgcrea.ngStrap', 'ngRoute', 'ui.select2']);
 
+app.run(function() {
+  hideLoader();
+});
+
 function notify(type, msg) {
 	$('#notify-'
 		+type+' .msg').html(msg);
 	$('#notify-'+type).show();
 }
 
-app.config(function ($httpProvider) {
-  $httpProvider.responseInterceptors.push('myHttpInterceptor');
+loadingQueue = {
 
-  var spinnerFunction = function spinnerFunction(data, headersGetter) {
-    $("#spinner").show();
-    return data;
-  };
+  inQueue:0,
 
-  $httpProvider.defaults.transformRequest.push(spinnerFunction);
-});
+  push:function() {
+    this.inQueue++;
+    showLoader();
+  },
 
-app.factory('myHttpInterceptor', function ($q, $window) {
-  return function (promise) {
-    return promise.then(function (response) {
-      $("#spinner").hide();
-      return response;
-    }, function (response) {
-      $("#spinner").hide();
-      return $q.reject(response);
-    });
-  };
-});
+  remove:function() {
+    this.inQueue--;
+    if (this.inQueue == 0) hideLoader();
+  }
+
+}
+
+function showLoader() {
+  $('#content').addClass('fade');
+  $('#page-loader').show();
+}
+
+function hideLoader() {
+  $('#content').removeClass('fade');
+  $('#page-loader').hide();
+}
