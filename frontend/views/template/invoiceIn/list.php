@@ -93,7 +93,7 @@
 				<thead>
 					<tr>
 						<th>
-							<a href="javascript:;" ng-click="setSort('number')">Number</a>
+							<a href="javascript:;" ng-click="setSort('number')">Invoice Number</a>
 						</th>
 						<th>
 							Supplier

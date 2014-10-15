@@ -26,6 +26,30 @@ loadingQueue = {
 
 }
 
+app.config(function ($httpProvider) {
+  $httpProvider.responseInterceptors.push('myHttpInterceptor');
+
+  var spinnerFunction = function spinnerFunction(data, headersGetter) {
+    loadingQueue.push();
+    return data;
+  };
+
+  $httpProvider.defaults.transformRequest.push(spinnerFunction);
+});
+
+app.factory('myHttpInterceptor', function ($q, $window) {
+  return function (promise) {
+    return promise.then(function (response) {
+      loadingQueue.remove();
+      return response;
+    }, function (response) {
+   
+      return $q.reject(response);
+    });
+  };
+});
+
+
 function showLoader() {
   $('#content').addClass('fade');
   $('#page-loader').show();

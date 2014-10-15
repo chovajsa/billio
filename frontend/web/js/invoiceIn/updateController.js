@@ -77,11 +77,6 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCen
         }
     }
 
-    scope.setCostcentres = function() {
-		costCentres.get({}, function(costCentreData) {
-            scope.costCentres = costCentreData.items;
-        }); 
-    }
 
     scope.setCurrentInvoice = function (id) {
       
@@ -198,7 +193,6 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCen
 	
 	};
 
-    scope.setCostcentres();
 
 
 }]);
