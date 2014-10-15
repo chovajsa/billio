@@ -25,12 +25,8 @@ $depends = ['depends' => [
 			echo frontend\widgets\SideBar::widget([]);
 		?>
 
-			<div id="content" class="content" ng-view>
-
-			
+			<div id="content" class="content fade" ng-view>
 			</div>
-
-
 	
 	</div>
 </div>

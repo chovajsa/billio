@@ -8,7 +8,7 @@
 <script src="<?=Url::base();?>/js/masked-input.min.js"></script>
 
 <!-- small list -->
-<div class="col-md-4 ui-sortable smallList">
+<div ng-cloak class="col-md-4 ui-sortable smallList">
 
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
@@ -20,7 +20,7 @@
 				<thead>
 					<tr>
 						<th>
-							Number
+							Invoice Number
 						</th>
 						<th>
 							Date
@@ -68,7 +68,7 @@
 	</div>
 </div> 
 <!-- /small list -->
-<div class="col-md-8 ui-sortable updateInvoice">
+<div ng-cloak class="col-md-8 ui-sortable updateInvoice">
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
 			<h4 class="panel-title" ng-show="mode == 'create'"> 
@@ -104,7 +104,7 @@
 							<a target="_blank" href="<?=Url::base();?>/invoice-in/get-attachment/?id={{currentInvoice.id}}&fileName={{currentInvoice.id}}-invoiceIn.pdf" ng-click="" class="btn btn-sm btn-primary"><i class="fa fa-download"></i> PDF </a>
 							<a href="javascript:;" ng-click="delete(currentInvoice.id)" class="btn btn-sm btn-danger"><i class="fa fa-minus-circle"></i> Delete </a>
 					  		
-					        <!-- <a href="javascript:;" class="btn btn-sm btn-primary m-r-5">Approve</a> -->
+					        <!-- <a href="javascript:;" clas	s="btn btn-sm btn-primary m-r-5">Approve</a> -->
 					        <!-- <a href="javascript:;" class="btn btn-sm btn-danger">Reject</a> -->
 					    </p>
 					</div>
@@ -164,9 +164,23 @@
 					<div class="col-sm-10">
 						
 						<select class="form-control" ng-model="currentInvoice.costCentreId">
-							<option ng-repeat="costCentre in costCentres" value="{{costCentre.id}}">{{costCentre.name}}</option>
+							<?php 
+
+							$query = new \yii\db\Query();
+						   	$parents = $query->select('parent')->distinct()->from('costCentre')->all();
+
+							?>
+							<?php foreach ($parents as $parent) { ?>
+								<optgroup label="<?=$parent['parent'];?>"?>
+									<?php 
+										$children = (new \yii\db\Query())->select('id, name')->from(' costCentre')->where("parent = '{$parent['parent']}'")->all();
+									?>
+									<?php foreach ($children as $child) { ?>
+									<option value="<?=$child['id'];?>"><?=$child['name'];?></option>
+									<?php } ?>
+								</optgroup>
+							<?php } ?>
 						</select>
-						
 						
 					</div>
 				</div>
@@ -195,15 +209,6 @@
 					  	  <!-- <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button> -->
 					  	<!-- </span> -->
 					  <!-- </p> -->
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<label for="referenceNumber" class="col-sm-2 control-label">Cost Period</label>
-					<div class="col-sm-10">
-					
-						<input type="month" ng-model="currentInvoice.costPeriod" class="form-control" id="masked-input-month" placeholder="yyyy-mm"></input>
-					  
 					</div>
 				</div>
 
