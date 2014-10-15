@@ -95,12 +95,14 @@ class SupplierController extends ActiveRestController
                     $row = new \common\models\BankAccount();
                     $row->supplierId = $supplier->id;
                     $row->setAttributes($prow, '');
+                    $row->iban = \common\components\Helpers::getIbanFromBban($row->bankAccount, $row->bankAccountCode, $row->bankAccountPrefix);
                     $row->save();
                 } else 
 
                 foreach ($supplier->bankAccounts as $row) {
                     if ($prow['id'] == $row->id) {
                         $row->setAttributes($prow, '');
+                        $row->iban = \common\components\Helpers::getIbanFromBban($row->bankAccount, $row->bankAccountCode, $row->bankAccountPrefix);
                         $row->save();
                     }
                 }

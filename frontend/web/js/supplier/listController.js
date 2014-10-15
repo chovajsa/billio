@@ -68,8 +68,10 @@ app.controller('ListController', ['$scope', 'Supplier', '$routeParams', '$modal'
          , function(d) {
             if (!d.iban) {
                 scope.supplier.bankAccounts[i].iban = '';
+                $('#biban'+i).val('');
             } else {
                 scope.supplier.bankAccounts[i].iban = d.iban;
+                $('#biban'+i).val(d.iban);
             }
          }, 'json');
     }
