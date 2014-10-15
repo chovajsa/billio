@@ -99,9 +99,6 @@
 							Supplier
 						</th>
 						<th>
-							Cost Centre
-						</th>
-						<th>
 							Date
 						</th>
 						<th>
@@ -133,10 +130,7 @@
 		                <td ng-click="showInvoice(invoice.id)">
 							{{invoice.getFullSupplierName()}}
 						</td>
-						<td ng-click="showInvoice(invoice.id)">
-							{{invoice.costCentre.name}}
-						</td>
-		                <td ng-click="showInvoice(invoice.id)">
+				        <td ng-click="showInvoice(invoice.id)">
 		                    {{invoice.date | dateFromDb}}
 						</td ng-click="showInvoice(invoice.id)">
 						<td ng-click="showInvoice(invoice.id)"> 
