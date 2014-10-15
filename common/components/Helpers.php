@@ -49,7 +49,7 @@ class Helpers
 		}
 	}
 
-	public static function getIbanFromBban($bankAccount='',$bankAccountCode='') {
+	public static function getIbanFromBban($bankAccount='',$bankAccountCode='', $bankAccountPrefix = '000000') {
 
         if ($bankAccount=='' || $bankAccountCode=='') {
             return false;

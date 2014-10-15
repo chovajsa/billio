@@ -224,5 +224,15 @@ class InvoiceInController extends ActiveRestController
         }   
     }
 
+    public function actionGetIban() {
+        $bankAccountPrefix = isset($_GET['bankAccountPrefix']) ? $_GET['bankAccountPrefix'] : '000000';
+        $bankAccount = $_GET['bankAccount'];
+        $bankAccountCode = $_GET['bankAccountCode'];
+
+        $iban = \common\components\Helpers::getIbanFromBban($bankAccount, $bankAccountCode, $bankAccountPrefix);
+
+        return array('iban'=>$iban);
+    }
+
 
 }

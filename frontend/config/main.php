@@ -50,6 +50,7 @@ return [
             // 'enableStrictParsing'=>false,
             'rules' => [
 
+                'GET,HEAD api/invoice-in/get-iban'  => 'api/invoice-in/get-iban',
                 'PUT,PATCH api/invoice-in/mark-as-paid' => 'api/invoice-in/mark-as-paid',
                 'PUT,PATCH api/invoice-in/<id>' => 'api/invoice-in/update',
                 'DELETE api/invoice-in/<id>'    => 'api/invoice-in/delete',

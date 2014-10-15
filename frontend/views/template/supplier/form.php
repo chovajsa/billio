@@ -99,14 +99,21 @@
               <label class="col-md-3 control-label ui-sortable">&nbsp;</label>
 
               <div class="col-sm-3">
+
               <table class="table">
                 <thead>
                   <tr>
+                    <th>
+                      Prefix
+                    </th>
                     <th>
                       Number
                     </th>
                     <th>
                       Code
+                    </th>
+                    <th>
+                      Iban
                     </th>
                     <th>
                       &nbsp;
@@ -116,12 +123,51 @@
                 <tbody>
                   <tr ng-repeat="bankAccont in supplier.bankAccounts">
                     <td>
+                      <input type="text" maxlength="10" ng-model="supplier.bankAccounts[$index].bankAccountPrefix"/>
+                    </td>
+                    <td>
                       <input type="hidden" ng-model="supplier.bankAccounts[$index].id">
                       <input type="text" maxlength="10" ng-model="supplier.bankAccounts[$index].bankAccount"/>
                     </td>
                     <td>
-                      <input type="text" maxlength="4" ng-model="supplier.bankAccounts[$index].bankAccountCode"/>
+                      <select style="width:65px" ng-model="supplier.bankAccounts[$index].bankAccountCode">
+                        <option value="8400"> 8400 - Banco Mais, S.A., pobočka zahr. banky</option>
+                        <option value="8420"> 8420 - BKS BANK AG, pobočka zahr. banky</option>
+                        <option value="7500"> 7500 - Československá obchodná banka, a.s.</option>
+                        <option value="8130"> 8130 - Citibank Europe plc, pobočka zahr. banky</option>
+                        <option value="8050"> 8050 - COMMERZBANK Aktiengesellschaft, pobočka zahr. banky</option>
+                        <option value="8170"> 8170 - ČSOB stavebná sporiteľňa, a.s.</option>
+                        <option value="8160"> 8160 - EXIMBANKA SR</option>
+                        <option value="8330"> 8330 - Fio banka, a.s., pobočka zahr. banky</option>
+                        <option value="7300"> 7300 - ING Bank N.V., pobočka zahr. banky</option>
+                        <option value="8320"> 8320 - J&T BANKA, a.s., pobočka zahr. banky</option>
+                        <option value="8430"> 8430 - KDB Bank Europe Ltd, pobočka zahran. banky</option>
+                        <option value="8100"> 8100 - Komerční banka, a.s., pobočka zahr. banky</option>
+                        <option value="8360"> 8360 - mBank S.A., pobočka zahr. banky</option>
+                        <option value="0720"> 0720 - Národná banka Slovenska</option>
+                        <option value="8370"> 8370 - Oberbank AG, pobočka zahr. banky v SR</option>
+                        <option value="5200"> 5200 - OTP banka Slovensko, a.s.</option>
+                        <option value="6500"> 6500 - Poštová banka, a.s.</option>
+                        <option value="5600"> 5600 - Prima banka Slovensko, a.s. (DEXIA)</option>
+                        <option value="8120"> 8120 - Privatbanka, a.s.</option>
+                        <option value="5900"> 5900 - Prvá stavebná sporiteľňa, a.s.</option>
+                        <option value="1100"> 1100 - Raiffeisen BANK (Tatra banka a.s., odštepný závod)</option>
+                        <option value="3100"> 3100 - SBERBANK Slovensko, a.s.</option>
+                        <option value="0900"> 0900 - Slovenská sporiteľňa, a.s.</option>
+                        <option value="3000"> 3000 - Slovenská záručná a rozvojová banka, a.s.</option>
+                        <option value="8180"> 8180 - Štátna pokladnica</option>
+                        <option value="1100"> 1100 - Tatra banka, a.s.</option>
+                        <option value="8350"> 8350 - The Royal Bank of Scotland, pobočka zahr. banky</option>
+                        <option value="1111"> 1111 - UniCredit Bank Slovakia, a.s.</option>
+                        <option value="0200"> 0200 - VÚB banka, a.s.</option>
+                        <option value="7930"> 7930 - Wűstenrot stavebná sporiteľňa, a.s.</option>
+                        <option value="8410"> 8410 - ZUNO BANK AG, pobočka zahr. banky</option>
+                      </select>
                     </td>
+                    <td>
+                      <input type="text" maxlength="4" ng-model="supplier.bankAccounts[$index].iban"/>
+                    </td>
+                    
                     <td>
                       <a href="javascript:;" ng-click="unsetRow($index)">remove</a>
                     </td>
