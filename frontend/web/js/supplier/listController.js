@@ -1,4 +1,4 @@
-app.controller('ListController', ['$scope', 'Supplier', '$routeParams', '$modal', '$location', function (scope, SI, routeParams, modal, location) {
+app.controller('ListController', ['$scope', 'Supplier', '$routeParams', '$modal', '$location', '$http', function (scope, SI, routeParams, modal, location, $http) {
 
 	scope.supplierList = [];
     scope.supplier = {};
@@ -57,6 +57,23 @@ app.controller('ListController', ['$scope', 'Supplier', '$routeParams', '$modal'
 
         scope.supplier.bankAccounts.splice(i, 1);
     }
+
+    scope.ibanize = function(i) {
+        var bankAccount = scope.supplier.bankAccounts[i].bankAccount;
+        var bankAccountCode = scope.supplier.bankAccounts[i].bankAccountCode;
+        var bankAccountPrefix = scope.supplier.bankAccounts[i].bankAccountPrefix;
+
+        $.get(yiiApp.url+'/api/invoice-in/get-iban',
+            {bankAccount:bankAccount, bankAccountCode:bankAccountCode, bankAccountPrefix:bankAccountPrefix}
+         , function(d) {
+            if (!d.iban) {
+                scope.supplier.bankAccounts[i].iban = '';
+            } else {
+                scope.supplier.bankAccounts[i].iban = d.iban;
+            }
+         }, 'json');
+    }
+
 
     scope.updateSupplier = function() {
 		

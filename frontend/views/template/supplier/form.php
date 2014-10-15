@@ -123,14 +123,14 @@
                 <tbody>
                   <tr ng-repeat="bankAccont in supplier.bankAccounts">
                     <td>
-                      <input type="text" maxlength="10" ng-model="supplier.bankAccounts[$index].bankAccountPrefix"/>
+                      <input ng-change="ibanize($index)" ng-model-onblur style="width:100px" type="text" class="ibanize" maxlength="10" ng-model="supplier.bankAccounts[$index].bankAccountPrefix"/>
                     </td>
                     <td>
                       <input type="hidden" ng-model="supplier.bankAccounts[$index].id">
-                      <input type="text" maxlength="10" ng-model="supplier.bankAccounts[$index].bankAccount"/>
+                      <input ng-change="ibanize($index)" ng-model-onblur type="text" class="ibanize" maxlength="10" ng-model="supplier.bankAccounts[$index].bankAccount"/>
                     </td>
                     <td>
-                      <select style="width:65px" ng-model="supplier.bankAccounts[$index].bankAccountCode">
+                      <select ng-change="ibanize($index)" style="width:65px" class="ibanize" ng-model="supplier.bankAccounts[$index].bankAccountCode">
                         <option value="8400"> 8400 - Banco Mais, S.A., pobočka zahr. banky</option>
                         <option value="8420"> 8420 - BKS BANK AG, pobočka zahr. banky</option>
                         <option value="7500"> 7500 - Československá obchodná banka, a.s.</option>
@@ -165,7 +165,7 @@
                       </select>
                     </td>
                     <td>
-                      <input type="text" maxlength="4" ng-model="supplier.bankAccounts[$index].iban"/>
+                      <input style="width:200px" type="text" maxlength="4" ng-model="supplier.bankAccounts[$index].iban"/>
                     </td>
                     
                     <td>
@@ -194,22 +194,3 @@
     </div>
   </div>
 </div>
-
-<style>
-.modal-backdrop.am-fade {
-  opacity: .5;
-  transition: opacity .15s linear;
-  &.ng-enter {
-    opacity: 0;
-    &.ng-enter-active {
-      opacity: .5;
-    }
-  }
-  &.ng-leave {
-    opacity: .5;
-    &.ng-leave-active {
-      opacity: 0;
-    }
-  }
-}
-</style>

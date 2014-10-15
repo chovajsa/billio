@@ -1,4 +1,4 @@
-var app = angular.module('supplierapp', ['ngResource','mgcrea.ngStrap', 'ngRoute', 'ui.select2']);
+var app = angular.module('supplierapp', ['ngResource','mgcrea.ngStrap', 'ngRoute', 'ui.select2', 'ngModelOnBlur']);
 
 function notify(type, msg) {
 	$('#notify-'
@@ -43,6 +43,25 @@ app.factory('myHttpInterceptor', function ($q, $window) {
       return $q.reject(response);
     });
   };
+});
+
+// override the default input to update on blur
+angular.module('ngModelOnBlur', []).directive('ngModelOnblur', function() {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        priority: 1, // needed for angular 1.2.x
+        link: function(scope, elm, attr, ngModelCtrl) {
+            if (attr.type === 'radio' || attr.type === 'checkbox') return;
+
+            elm.unbind('input').unbind('keydown').unbind('change');
+            elm.bind('blur', function() {
+                scope.$apply(function() {
+                    ngModelCtrl.$setViewValue(elm.val());
+                });         
+            });
+        }
+    };
 });
 
 
