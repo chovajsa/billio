@@ -73,7 +73,8 @@ class InvoiceInController extends Controller
 			$this->sendFile($file);	
 			
 		} else {
-			$this->sendFile($file);	
+		    $file = $fileDestination.'/'.$fileName;
+        	$this->sendFile($file);	
 		}
     }
 	
