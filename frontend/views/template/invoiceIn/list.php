@@ -117,10 +117,10 @@
 						<th>
 							Approved
 						</th>
-						<th>
+						<th width="5%">
 							Paid
 						</th>
-						<th>
+						<th width="5%">
 							Pay
 						</th>
 						<th>
@@ -186,18 +186,18 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<td style="border-top:0" colspan="12">&nbsp;</td>
+						<td style="border-top:0" colspan="10">&nbsp;</td>
 					</tr>
 					<tr>
-						<th colspan="6">
+						<th colspan="4">
 						</th>
-						<th style="padding-top:15px">
+						<th colspan="3" style="padding-top:15px">
 							Payments total amount:		
 						</th>
 						<th style="padding-top:15px">
 							{{toPayAmount | preciseRound}} 
 						</th>
-						<th>
+						<th colspan="3">
 							<button ng-disabled="!toPayAmount" ng-click="showPaymentsModal()" class="btn btn-sm btn-info">Generate payment file</button> 
 						</th>
 					</tr>
