@@ -55,7 +55,7 @@ class Helpers
             return false;
         }
 		
-		$iban = 'SK00'.$bankAccountCode.'000000'.str_pad($bankAccount,10,'0',STR_PAD_LEFT);
+		$iban = 'SK00'.$bankAccountCode.$bankAccountPrefix.str_pad($bankAccount,10,'0',STR_PAD_LEFT);
 		
 		include_once(__DIR__.'/../extensions/iban/php-iban.php');
 
