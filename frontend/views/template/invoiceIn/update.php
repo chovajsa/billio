@@ -345,7 +345,7 @@
 		</div>
 	</div>
 
-	<div class="panel panel-inverse">
+	<div ng-show="currentInvoice.id" class="panel panel-inverse">
 		<div class="panel-heading">
 			<h4 class="panel-title"> Attachments </h4>
 		</div>

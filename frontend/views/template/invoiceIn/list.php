@@ -129,16 +129,16 @@
 					</tr>
 				</thead>
 				<tbody>
-		            <tr ng-repeat="invoice in invoiceList">
+		            <tr 	ng-repeat="invoice in invoiceList">
 		                <td ng-click="showInvoice(invoice.id)">
 							<a href="#update/{{invoice.id}}">{{invoice.number}}</a>
 		                </td>
 
-		                <td>
+		                <td ng-click="showInvoice(invoice.id)">
 		                	{{invoice.referenceNumber}}
 		                </td>
 
-		                <td>
+		                <td ng-click="showInvoice(invoice.id)">
 		                	{{invoice.supplier.bankAccounts[0].iban}}
 		                </td>
 		                <td ng-click="showInvoice(invoice.id)">
