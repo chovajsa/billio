@@ -169,13 +169,13 @@
                     </td>
                     
                     <td>
-                      <a href="javascript:;" ng-click="unsetRow($index)">remove</a>
+                      <a href="javascript:;" ng-click="unsetBankRow($index)">remove</a>
                     </td>
                   </tr>
                 </tbody>
               </table>
               
-              <a href="javascript:;" ng-click="addRow()">
+              <a href="javascript:;" ng-click="addBankRow()">
                 add account
               </a>
 

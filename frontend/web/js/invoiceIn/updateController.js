@@ -23,7 +23,21 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCen
 
         scope.currentInvoice.rows.push({ id: null, amount:'0', pcs:'1', vat:v});
     }
-    
+
+    scope.addBankRow = function() {
+        if (scope.supplier.bankAccounts === undefined) scope.supplier.bankAccounts = [];
+        scope.supplier.bankAccounts.push({ id: null, bankAccount:'', bankAccountCode:'' });
+    }
+ 
+    scope.unsetBankRow = function(i) {
+        
+        if (scope.supplier.bankAccounts[i].id) {
+            scope.toDelete.push({id:scope.supplier.bankAccounts[i].id});
+        }
+
+        scope.supplier.bankAccounts.splice(i, 1);
+    }
+       
     scope.unsetRow = function(i) {
         
         if (scope.currentInvoice.rows[i].id) {

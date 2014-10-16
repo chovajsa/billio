@@ -44,12 +44,12 @@ app.controller('ListController', ['$scope', 'Supplier', '$routeParams', '$modal'
 		scope.showModal();
     }
 
-    scope.addRow = function() {
+    scope.addBankRow = function() {
         if (scope.supplier.bankAccounts === undefined) scope.supplier.bankAccounts = [];
         scope.supplier.bankAccounts.push({ id: null, bankAccount:'', bankAccountCode:'' });
     }
 
-    scope.unsetRow = function(i) {
+    scope.unsetBankRow = function(i) {
         
         if (scope.supplier.bankAccounts[i].id) {
             scope.toDelete.push({id:scope.supplier.bankAccounts[i].id});
