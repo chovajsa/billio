@@ -126,6 +126,8 @@ class InvoiceIn extends AppActiveRecord
         $return['approvedBy'] = $this->isApprovedBy();
 		
         $return['paid'] = $this->isPaid();
+
+        $return['overdue'] = !$this->isPaid() && strtotime($this->dueDate) < time();
         
 		//$return['costCentreName'] = $this->costCentre->name;
 		$return['costCentre'] = ($this->costCentre instanceof CostCentre) ? $this->costCentre : [];

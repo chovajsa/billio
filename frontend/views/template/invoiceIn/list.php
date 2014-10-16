@@ -95,12 +95,12 @@
 						<th>
 							<a href="javascript:;" ng-click="setSort('number')">Invoice Number</a>
 						</th>
-						<td>
-							Reference Number
-						</td>
-						<td>
+						<th>
+							<a href="javascript:;" ng-click="setSort('referenceNumber')">Reference Number</a>
+						</th>
+						<th>
 							IBAN
-						</td>
+						</th>
 						<th>
 							Supplier
 						</th>
@@ -129,7 +129,7 @@
 					</tr>
 				</thead>
 				<tbody>
-		            <tr 	ng-repeat="invoice in invoiceList">
+		            <tr class="{{invoice.overdue ? 'text-danger' : ''}}" ng-repeat="invoice in invoiceList">
 		                <td ng-click="showInvoice(invoice.id)">
 							<a href="#update/{{invoice.id}}">{{invoice.number}}</a>
 		                </td>
@@ -149,6 +149,7 @@
 						</td ng-click="showInvoice(invoice.id)">
 						<td ng-click="showInvoice(invoice.id)"> 
 							{{invoice.dueDate | dateFromDb}}
+							<i ng-show="invoice.overdue" class="fa fa-warning text-danger"></i>
 						</td>
 						<td ng-click="showInvoice(invoice.id)">
 		                    {{invoice.amountVat | preciseRound}}
