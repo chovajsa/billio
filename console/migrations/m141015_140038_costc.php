@@ -11,6 +11,7 @@ class m141015_140038_costc extends Migration
     
     	$this->truncateTable('costCentre');
 
+
     $this->insert('costCentre', array('parent'=>'Direct cost', 'name'=> 'Scoring costs'));
 	$this->insert('costCentre', array('parent'=>'Direct cost', 'name'=> 'Courier costs'));
 	$this->insert('costCentre', array('parent'=>'Direct cost', 'name'=> 'Bank cost related to loanhandling'));
