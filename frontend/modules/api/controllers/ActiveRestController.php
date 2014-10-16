@@ -84,9 +84,9 @@ class ActiveRestController extends ActiveController {
     }
 
     protected function getFulltextCondition($modelClass) {
-        $andWhere = '';
+        $andWhere = '1=1 ';
         if (isset($_GET['fulltext']) && !empty($modelClass::getFulltextAttributes())) {
-            $andWhere = '(';
+            $andWhere .= ' AND (';
 			
 			//var_dump($modelClass::);die;
 

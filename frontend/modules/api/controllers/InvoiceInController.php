@@ -196,27 +196,30 @@ class InvoiceInController extends ActiveRestController
             }
         }
 
-        $andWhere = parent::getFulltextCondition($modelClass);
+        $andWhere = '('.parent::getFulltextCondition($modelClass);
 
         if (isset($_GET['fulltext'])) {
             $fulltext = $_GET['fulltext'];
             if(isset($_GET['fulltext'])) {
+
                 $andWhere .= " OR supplier.name LIKE '%{$fulltext}%'";
                 $andWhere .= " OR supplier.surname LIKE '%{$fulltext}%'";
                 $andWhere .= " OR supplier.companyName LIKE '%{$fulltext}%'";
-                $andWhere .= " OR costCentre.name LIKE '%{$fulltext}%'";
+                $andWhere .= " OR costCentre.name LIKE '%{$fulltext}%' ";
             }
-		}
+        }
+        $andWhere .=') ';
 
         if (isset($paid)) {
             if ($paid == 'true') {
-                $andWhere .= 'IFNULL(paidAmount, 0) >= amountVat';
+                $andWhere .= 'AND IFNULL(paidAmount, 0) >= amountVat';
             }
 
             if ($paid == 'false') {
-                $andWhere .= 'IFNULL(paidAmount, 0) < amountVat';
+                $andWhere .= 'AND IFNULL(paidAmount, 0) < amountVat';
             }
         }
+
 
         return $andWhere;
     }
