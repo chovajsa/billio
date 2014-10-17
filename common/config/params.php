@@ -6,5 +6,10 @@ return [
 
     'roles'=>[
     	'admin'=>['admin']
+    	'light'=>['lightApprove'],
+    	'lightApprove'=>['lightApprove'],
+    	'hardApprove'=>['hardApprove'],
+    	'strongApprove'=>['strongApprove'],
+    	'pay'=>['pay']
     ]
 ];
