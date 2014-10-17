@@ -128,7 +128,7 @@ $this->title = 'IPT';
           <!-- <li><a href="javascript:;">Calendar</a></li> -->
           <!-- <li><a href="javascript:;">Setting</a></li> -->
           <!-- <li class="divider"></li> -->
-          <li><a href="<?=Url::to('site/logout');?>">Log Out</a></li>
+          <li><a href="<?=Url::base();?>/site/logout">Log Out</a></li>
         </ul>
       </li>
     </ul>
