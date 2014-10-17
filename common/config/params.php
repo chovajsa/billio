@@ -5,7 +5,7 @@ return [
     'user.passwordResetTokenExpire' => 3600,
 
     'roles'=>[
-    	'admin'=>['admin']
+    	'admin'=>['admin'],
     	'light'=>['lightApprove'],
     	'lightApprove'=>['lightApprove'],
     	'hardApprove'=>['hardApprove'],
