@@ -19,7 +19,9 @@
       <li class="nav-header">Navigation</li>
 
       <li class="has-sub<?=$route == 'invoice-in/index' ? ' active' : '';?>">
-        <a href="<?=$route == 'invoice-in/index' ? 'javascript:;' : Url::base()."/invoice-in/index";?>">Invoices
+        <a href="<?=$route == 'invoice-in/index' ? 'javascript:;' : Url::base()."/invoice-in/index";?>">
+          <i class="fa fa-file-o"></i>
+          <span>Invoices</span>
           <b class="caret pull-right"></b>
         </a>
 
@@ -34,7 +36,12 @@
       </li>
       
 
-      <li <?=$route == 'supplier/index' ? 'class="active"' : '';?>><a href="<?=Url::base();?>/supplier/index">Suppliers</a></li>
+      <li <?=$route == 'supplier/index' ? 'class="active"' : '';?>>
+          <a href="<?=Url::base();?>/supplier/index">
+            <i class="fa fa-file-o"></i>
+            <span>Suppliers</span>
+          </a>
+      </li>
 
       <?php if (false && Yii::$app->user->identity->canDo('admin')) { ?>
        <li class="has-sub">

@@ -58,7 +58,7 @@ $depends = ['depends'=>[
 				</div>
 
 				<div class="col-md-8 ui-sortable">
-					<div class="email-btn-row hidden-xs">
+					<div class="email-btn-row">
 
 			    	    <a href="#/new" class="btn btn-sm btn-primary"><i class="fa fa-plus m-r-5"></i> New</a>
 
