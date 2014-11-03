@@ -157,6 +157,10 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCen
         });
     }
 
+    scope.$watch('currentInvoice.supplierId', function(newValue, oldValue) {
+        // alert(newValue + ' sa zmenila z '+oldValue);
+    });
+
 
     if (routeParams.id) {
         scope.setCurrentInvoice(routeParams.id);
@@ -201,7 +205,24 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCen
 		return total;
 	
 	};
-	
+	scope.ibanize = function(i) {
+        var bankAccount = scope.supplier.bankAccounts[i].bankAccount;
+        var bankAccountCode = scope.supplier.bankAccounts[i].bankAccountCode;
+        var bankAccountPrefix = scope.supplier.bankAccounts[i].bankAccountPrefix;
+
+        $.get(yiiApp.url+'/api/invoice-in/get-iban',
+            {bankAccount:bankAccount, bankAccountCode:bankAccountCode, bankAccountPrefix:bankAccountPrefix}
+         , function(d) {
+            if (!d.iban) {
+                scope.supplier.bankAccounts[i].iban = '';
+                $('#biban'+i).val('');
+            } else {
+                scope.supplier.bankAccounts[i].iban = d.iban;
+                $('#biban'+i).val(d.iban);
+            }
+         }, 'json');
+    }
+
 	scope.getTotalVatForInvoice = function() {
 	
 		var total = 0;

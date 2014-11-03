@@ -49,7 +49,8 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
                     var supname = items[i].companyName ? items[i].companyName : items[i].name + " " + items[i].surname;
                     newData.push({
                         id: items[i].id,
-                        text: supname
+                        text: supname,
+                        vat:items[i].vat
                     });
                 }
 
@@ -59,6 +60,8 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
         },
 
     }
+
+   
 
     scope.setSort = function(sort) {
         var oldSort = angular.copy(scope.invoiceListSort);
