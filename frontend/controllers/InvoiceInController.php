@@ -127,26 +127,6 @@ class InvoiceInController extends Controller
         foreach ($_POST['Invoice'] as $id=>$attributes) {
             $invoice = \common\models\InvoiceIn::findOne($id);
 
-            /*
-
-            $this->currency,
-            $this->amount,
-            '4150047806',
-            $this->date,
-            $this->dueDate,
-            $this->bankAccount,
-            $this->bankAccountPrefix,
-            $this->bankAccountCode,
-            $this->ks,
-            $this->ss,
-            1,
-            $this->note1,
-            $this->note2,
-            $this->note3,
-            $this->note4
-
-            */
-
             $row = new \common\components\BankRow;
             $row->amount = $attributes['amount'];
             $row->name = substr($invoice->supplier->getFullName(), 0, 19);

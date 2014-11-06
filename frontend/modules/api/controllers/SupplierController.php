@@ -60,6 +60,42 @@ class SupplierController extends ActiveRestController
         $supplier->addressId = $address->id;
 
         if ($supplier->save()) {
+
+
+        /*  8==========================================================D   */
+
+                if (isset($p['bankAccounts']) && !empty($p['bankAccounts'])) {
+                    foreach ($p['bankAccounts'] as $prow) {
+                        if (!isset($prow['id']) || !$prow['id']) {
+                            $row = new \common\models\BankAccount();
+                            $row->supplierId = $supplier->id;
+                            $row->setAttributes($prow, '');
+                            $row->iban = \common\components\Helpers::getIbanFromBban($row->bankAccount, $row->bankAccountCode, $row->bankAccountPrefix);
+                            $row->save();
+                        } else 
+
+                        foreach ($supplier->bankAccounts as $row) {
+                            if ($prow['id'] == $row->id) {
+                                $row->setAttributes($prow, '');
+                                $row->iban = \common\components\Helpers::getIbanFromBban($row->bankAccount, $row->bankAccountCode, $row->bankAccountPrefix);
+                                $row->save();
+                            }
+                        }
+                    }
+                }
+
+                if (!empty($p['toDelete'])) {
+                    foreach ($p['toDelete'] as $x) {
+                        $r = \common\models\BankAccount::findOne($x['id']);
+                        $r->delete();
+                    }
+                }
+        /*  8==========================================================D   */
+    
+        // print_r($p);
+        // print_r($address->attributes);
+
+
             $response = Yii::$app->getResponse();
             $response->setStatusCode(201);
             $id = implode(',', array_values($supplier->getPrimaryKey(true)));
