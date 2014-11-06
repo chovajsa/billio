@@ -149,7 +149,7 @@ class InvoiceInController extends Controller
 
             $row = new \common\components\BankRow;
             $row->amount = $attributes['amount'];
-            $row->name = $invoice->supplier->getFullName();
+            $row->name = substr($invoice->supplier->getFullName(), 0, 19);
             
             $date = date('Ymd');
             $row->date = $date;
