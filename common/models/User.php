@@ -23,10 +23,16 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+    // use \common\models\traits\UserMailer;
+
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
 
     const ROLE_USER = 10;
+
+    public $oldPassword;
+    public $newPassword;
+    public $newPasswordCheck;
 
     /**
      * @inheritdoc
@@ -206,5 +212,21 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    public function wantsNewInvoiceMessage() {
+        return true;
+    }
+
+    public function wantsUpdateInvoiceMessage() {
+        return true;
+    }
+
+    public function wantsPaidMessage() {
+        return true;
+    }
+
+    public function wantsApprovedMessage() {
+        return true;
     }
 }

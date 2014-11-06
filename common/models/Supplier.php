@@ -38,6 +38,10 @@ class Supplier extends AppActiveRecord
         return $this->hasOne(Address::className(), ['id' => 'addressId']);
     }
 
+    public function getFullName() {
+        return $this->companyName ? $this->companyName : $this->name.' '.$this->surname;
+    }
+
     /**
      * @inheritdoc
      */

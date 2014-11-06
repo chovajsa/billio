@@ -43,6 +43,14 @@
           </a>
       </li>
 
+      <li <?=$route == 'settings/index' ? 'class="active"' : '';?>>
+          <a href="<?=Url::base();?>/settings/index">
+            <i class="fa fa-file-o"></i>
+            <span>Settings</span>
+          </a>
+      </li>
+
+
       <?php if (false && Yii::$app->user->identity->canDo('admin')) { ?>
        <li class="has-sub">
         <a href="javascript:;">

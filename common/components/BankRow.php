@@ -24,6 +24,7 @@ class BankRow {
 			$this->bankAccount,
 			$this->bankAccountPrefix,
 			$this->bankAccountCode,
+			$this->name,
 			$this->ks,
 			$this->vs,
 			$this->ss,

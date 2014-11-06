@@ -64,10 +64,10 @@
 				<?php } ?>
 				<?php if (Yii::$app->user->identity->canDo('strongApprove') || Yii::$app->user->identity->canDo('lightApprove') || Yii::$app->user->identity->canDo('admin')) { ?>
 				<button style="width:100%; margin:0 0 5px 0;" ng-show="!invoiceApprovedByUser(invoice,'<?=Yii::$app->user->identity->username;?>')" ng-click="approve(invoice.id)" class="btn btn-sm btn-success">approve</button>
-				<button style="width:100%; margin:0 0 5px 0;" ng-show="invoiceApprovedByUser(invoice,'<?=Yii::$app->user->identity->username;?>')" ng-click="unapprove(invoice.id)" class="btn btn-sm btn-warning">unapprove</button>
 				<?php } ?>
 
 				<?php if (Yii::$app->user->identity->canDo('admin')) { ?>
+				<button style="width:100%; margin:0 0 5px 0;" ng-show="invoiceApprovedByUser(invoice,'<?=Yii::$app->user->identity->username;?>')" ng-click="unapprove(invoice.id)" class="btn btn-sm btn-warning">unapprove</button>
 				<button style="width:100%; margin:0 0 5px 0;" ng-click="delete(invoice.id)" class="btn btn-sm btn-danger">delete</button>
 				<?php } ?>
 

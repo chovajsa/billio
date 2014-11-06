@@ -297,8 +297,16 @@ var App = function () {
 		$(document).ready(function() {
 			App.init();
 		});
-	</script>
 	
+        $(document).ready(function () {
+            $('#password-indicator-default').passwordStrength();
+        })
+        
+    </script>
+	
+    <script type="text/javascript" src="<?=Url::base();?>/plugins/password-indicator/js/password-indicator.js"></script>
+    <link href="<?=Url::base();?>/plugins/password-indicator/css/password-indicator.css" rel="stylesheet" media="screen">
+
 </body>
 </html>
 <?php $this->endPage() ?>

@@ -54,6 +54,10 @@ class Helpers
         if ($bankAccount=='' || $bankAccountCode=='') {
             return false;
         }
+
+        if (trim($bankAccountPrefix) == '') {
+        	$bankAccountPrefix = '000000';
+        }
 		
 		$iban = 'SK00'.$bankAccountCode.$bankAccountPrefix.str_pad($bankAccount,10,'0',STR_PAD_LEFT);
 		

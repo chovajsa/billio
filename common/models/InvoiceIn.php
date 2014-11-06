@@ -33,6 +33,18 @@ class InvoiceIn extends AppActiveRecord
         return $this->hasOne(CostCentre::className(), ['id' => 'costCentreId']);
     }
 
+    public function afterSave($insert, $changedAttributes) {
+        if ($insert) {
+            \common\components\Notifier::notifyNewInvoice($this);
+        } else {
+            \common\components\Notifier::notifyUpdateInvoice($this);
+        }
+
+        return true;
+    }
+
+
+
     /**
       * @inheritdoc
       */
@@ -81,6 +93,9 @@ class InvoiceIn extends AppActiveRecord
             $approved->modelId = $this->id;
             $approved->userName = Yii::$app->user->identity->username;
             $approved->weight = $weight;
+         
+            \common\components\Notifier::notifyApproved($this);
+
             return $approved->save();
         }
 
@@ -158,6 +173,9 @@ class InvoiceIn extends AppActiveRecord
     public function markAsPaid($date) {
         $this->paidAmount = $this->amountVat;
         $this->paidDate = $date;
+
+        \common\components\Notifier::notifyPaid($this);
+
         return $this->save(false);
     }
    

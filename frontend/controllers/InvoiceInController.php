@@ -149,6 +149,12 @@ class InvoiceInController extends Controller
 
             $row = new \common\components\BankRow;
             $row->amount = $attributes['amount'];
+            $row->name = $invoice->supplier->getFullName();
+            
+            $date = date('Ymd');
+            $row->date = $date;
+            $row->dueDate = $date;
+
 
             if (isset($attributes['account'])) {
                 $bankAccount = explode('/',$attributes['account']);
