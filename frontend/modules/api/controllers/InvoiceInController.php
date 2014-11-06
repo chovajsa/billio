@@ -136,7 +136,7 @@ class InvoiceInController extends ActiveRestController
                    
                         $vat = 0;
                         $supplier = \common\models\Supplier::findOne($invoiceIn->supplierId);
-
+			if ($supplier && $supplier->vat) $vat=$row->vat; 
                         $row->amountTotal = $row->pcs * $row->amount;
                         $row->amountTotalVat = ($row->amountTotal * (1+$vat/100));
                         $row->save();

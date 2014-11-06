@@ -13,8 +13,8 @@ class Notifier {
 				\Yii::$app->mail->compose('newInvoice', ['invoice'=>$invoice])
 				->setFrom([\Yii::$app->params['supportEmail'] => 'Trila IPT - Notifications'])
 			    ->setTo($user->email)
-			    ->setSubject('New Invoice' )
-			    ->send();
+			    ->setSubject('New Invoice' );
+	//		    ->send();
 			}
 		}
 	}
@@ -27,8 +27,8 @@ class Notifier {
 				\Yii::$app->mail->compose('updateInvoice', ['invoice'=>$invoice])
 				->setFrom([\Yii::$app->params['supportEmail'] => 'Trila IPT - Notifications'])
 			    ->setTo($user->email)
-			    ->setSubject('Invoice Updated' )
-			    ->send();
+			    ->setSubject('Invoice Updated' );
+	//		    ->send();
 			}
 	    }
 	}
@@ -41,8 +41,8 @@ class Notifier {
 				\Yii::$app->mail->compose('paid', ['invoice'=>$invoice])
 				->setFrom([\Yii::$app->params['supportEmail'] => 'Trila IPT - Notifications'])
 			    ->setTo($user->email)
-			    ->setSubject('Invoice(s) paid' )
-			    ->send();
+			    ->setSubject('Invoice(s) paid' );
+//			    ->send();
 			}
 		}
 	}
@@ -56,8 +56,8 @@ class Notifier {
 				\Yii::$app->mail->compose('approved', ['invoice'=>$invoice])
 				->setFrom([\Yii::$app->params['supportEmail'] => 'Trila IPT - Notifications'])
 			    ->setTo($user->email)
-			    ->setSubject('Invoice Approved' )
-			    ->send();
+			    ->setSubject('Invoice Approved' );
+//			    ->send();
 			}
 		}
 	}
