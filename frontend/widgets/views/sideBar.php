@@ -20,7 +20,7 @@
 
       <li class="has-sub<?=$route == 'invoice-in/index' ? ' active' : '';?>">
         <a href="<?=$route == 'invoice-in/index' ? 'javascript:;' : Url::base()."/invoice-in/index";?>">
-          <i class="fa fa-file-o"></i>
+          <i class="fa fa-euro"></i>
           <span>Invoices</span>
           <b class="caret pull-right"></b>
         </a>
@@ -38,14 +38,14 @@
 
       <li <?=$route == 'supplier/index' ? 'class="active"' : '';?>>
           <a href="<?=Url::base();?>/supplier/index">
-            <i class="fa fa-file-o"></i>
+            <i class="fa fa-truck"></i>
             <span>Suppliers</span>
           </a>
       </li>
 
       <li <?=$route == 'settings/index' ? 'class="active"' : '';?>>
           <a href="<?=Url::base();?>/settings/index">
-            <i class="fa fa-file-o"></i>
+            <i class="fa fa-cogs"></i>
             <span>Settings</span>
           </a>
       </li>

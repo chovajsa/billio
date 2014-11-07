@@ -15,10 +15,10 @@
 					Supplier
 				</th>
 				<th>
-					Date
+					<a href="javascript:;" ng-click="setSort('date')">Date</a>
 				</th>
 				<th>
-					Due Date
+					<a href="javascript:;" ng-click="setSort('dueDate')">Due Date</a>
 				</th>
 
 				<th>

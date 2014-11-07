@@ -24,7 +24,23 @@ class SettingsController extends Controller
 
 		$user = new User;
 
-		return $this->render('index', ['user'=>$user]);
+		$notifications = Yii::$app->user->identity->getNotificationSettings();
+
+		return $this->render('index', ['user'=>$user, 'notifications'=>$notifications]);
+	}
+
+	public function actionSetNotifications() {
+		$types = array('paid', 'approved', 'overdue', 'updateInvoice', 'newInvoice');
+
+		foreach ($types as $type) {
+			if (isset($_POST['Notification'][$type]) && $_POST['Notification'][$type]) {
+				$v = 1;
+			}  else $v = 0;
+			Yii::$app->user->identity->setNotificationSettings($type, $v);
+		}
+
+		Yii::$app->session->setFlash('success', 'Settings are succesfully changed');	
+		return $this->redirect(['index']);
 	}
 
 	public function actionChangePassword() {
@@ -42,7 +58,7 @@ class SettingsController extends Controller
 		    
 
 			if (!$_POST['User']['newPassword']  || !$result = preg_match($re,  $_POST['User']['newPassword'])) {
-				Yii::$app->session->setFlash('danger', 'New password do not meet requirements');
+				Yii::$app->session->setFlash('danger', 'New password do not meet requirements (must have atleast one number, 8 characters long)');
 				return $this->redirect(['index']);
 			}
 

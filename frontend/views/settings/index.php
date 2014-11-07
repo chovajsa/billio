@@ -32,39 +32,45 @@ $this->title .=' - Settings';
 			<?php } ?>
 
 			<div class="row">
-				<!-- <div class="col-md-6">
+				<div class="col-md-6">
 					<div class="panel panel-inverse">
 						<div class="panel-heading">
 							<h4 class="panel-title">Notification settings</h4>
 						</div>
 
 						<div class="panel-body">
-							<form class="form-horizontal">
+							<form class="form-horizontal" method="post" action="<?=Url::base();?>/settings/set-notifications">
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Emails</label>
                                     <div class="col-md-9 ui-sortable">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" value="">
+                                                <input name="Notification[newInvoice]" type="checkbox" value="1" <?=isset($notifications['newInvoice']) && $notifications['newInvoice'] ? 'checked="checked"' : '';?>>
                                                 Receive email when Invoice is created
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" value="">
+                                                <input name="Notification[updateInvoice]" type="checkbox" value="1" <?=isset($notifications['updateInvoice']) && $notifications['updateInvoice'] ? 'checked="checked"' : '';?>>
                                                 Receive email when Invoice is updated
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" value="">
+                                                <input name="Notification[approved]" type="checkbox" value="1" <?=isset($notifications['approved']) && $notifications['approved'] ? 'checked="checked"' : '';?>>
       											Receive email when Invoice is approved
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" value="">
+                                                <input name="Notification[paid]" type="checkbox" value="1" <?=isset($notifications['paid']) && $notifications['paid'] ? 'checked="checked"' : '';?>>
       											Receive email when Invoice is paid
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input name="Notification[overdue]" type="checkbox" value="1" <?=isset($notifications['overdue']) && $notifications['overdue'] ? 'checked="checked"' : '';?>>
+                                                Receive email when Invoice is overdue
                                             </label>
                                         </div>
                                     </div>
@@ -81,7 +87,7 @@ $this->title .=' - Settings';
 						</div>
 
 					</div>
-				</div> -->
+				</div>
 
 				<div class="col-md-6">
 					<div class="panel panel-inverse">

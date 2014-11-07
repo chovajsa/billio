@@ -145,6 +145,21 @@ class User extends ActiveRecord implements IdentityInterface
         return $meta['groups'];
     }
 
+    public function getNotificationSettings() {
+        $meta = json_decode($this->meta, true);
+        if (!isset($meta['notifications'])) return [];
+        return $meta['notifications'];   
+    }
+
+    public function setNotificationSettings($type, $value) {
+        $settings = $this->getNotificationSettings();
+        $settings[$type] = $value;
+        $meta = json_decode($this->meta,true);
+        $meta['notifications'] = $settings;
+        $this->meta = json_encode($meta);
+        $this->save(false);
+    }
+
     /**
      * @inheritdoc
      */
@@ -215,18 +230,22 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     public function wantsNewInvoiceMessage() {
-        return true;
+        $settings = $this->getNotificationSettings();
+        return isset($settings['newInvoice']) && $settings['newInvoice'] ? 1 : 0;
     }
 
     public function wantsUpdateInvoiceMessage() {
-        return true;
+        $settings = $this->getNotificationSettings();
+        return isset($settings['updateInvoice']) && $settings['updateInvoice'] ? 1 : 0;
     }
 
     public function wantsPaidMessage() {
-        return true;
+        $settings = $this->getNotificationSettings();
+        return isset($settings['paid']) && $settings['paid'] ? 1 : 0;
     }
 
     public function wantsApprovedMessage() {
-        return true;
+        $settings = $this->getNotificationSettings();
+        return isset($settings['approved']) && $settings['approved'] ? 1 : 0;
     }
 }
