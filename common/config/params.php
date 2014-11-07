@@ -1,7 +1,7 @@
 <?php
 return [
     'adminEmail' => 'admin@example.com',
-    'supportEmail' => 'support@example.com',
+    'supportEmail' => 'ipt@trila.sk',
     'user.passwordResetTokenExpire' => 3600,
 
     'roles'=>[
