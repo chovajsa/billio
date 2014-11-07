@@ -37,7 +37,7 @@ class InvoiceIn extends AppActiveRecord
         if ($insert) {
             \common\components\Notifier::notifyNewInvoice($this);
         } else {
-            \common\components\Notifier::notifyUpdateInvoice($this);
+            // \common\components\Notifier::notifyUpdateInvoice($this);
         }
 
         return true;
