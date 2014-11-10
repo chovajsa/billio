@@ -73,7 +73,8 @@
 				</td>
 				
 				<td ng-click="showInvoice(invoice.id)">
-					{{invoice.paid ? 'yes' : 'no'}}
+					<span ng-show="invoice.paid"> {{invoice.paidDate | dateFromDb}} </span>
+					<span ng-show="!invoice.paid"> no </span>
 				</td>
 				
 				<td>

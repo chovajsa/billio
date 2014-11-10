@@ -57,7 +57,7 @@ class InvoiceIn extends AppActiveRecord
     }
 
     public function safeAttributes() {
-        return ['supplierId', 'date', 'number', 'dueDate', 'referenceNumber', 'costCentreId', 'costPeriod', 'paidDate', 'paidAmount'];
+        return ['supplierId', 'date', 'number', 'dueDate', 'referenceNumber', 'costCentreId', 'costPeriod', 'paidDate', 'ss', 'ks', 'paidAmount'];
     }
 
     public function isApprovedBy() {
@@ -152,6 +152,8 @@ class InvoiceIn extends AppActiveRecord
                 $return['supplier']['bankAccounts'][] = $ba->toArray();
             }
         }
+
+        if (!$this->ks) $return['ks'] = '0308';
 
         $rows = $this->getRows()->all();
         $return['rows'] = [];

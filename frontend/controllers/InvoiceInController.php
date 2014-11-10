@@ -135,12 +135,22 @@ class InvoiceInController extends Controller
             $row->date = $date;
             $row->dueDate = $date;
 
+            $row->ks = $invoice->ks;
+            $row->ss = $invoice->ss;
 
             if (isset($attributes['account'])) {
                 $bankAccount = explode('/',$attributes['account']);
                 $row->bankAccount = $bankAccount[0];
                 $row->bankAccountCode = $bankAccount[1];            
             } else {
+            }
+
+            if (isset($attributes['ks'])) {
+                $row->ks = $attributes['ks'];
+            }
+
+            if (isset($attributes['ss'])) {
+                $row->ss = $attributes['ss'];
             }
 
             $row->bankAccountPrefix = '0';
