@@ -35,7 +35,7 @@ class InvoiceIn extends AppActiveRecord
 
     public function afterSave($insert, $changedAttributes) {
         if ($insert) {
-            \common\components\Notifier::notifyNewInvoice($this);
+        
         } else {
             // \common\components\Notifier::notifyUpdateInvoice($this);
         }

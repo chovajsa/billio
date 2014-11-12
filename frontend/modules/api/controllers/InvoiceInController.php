@@ -93,7 +93,9 @@ class InvoiceInController extends ActiveRestController
         $invoiceIn->createdDate = date('Y-m-d H:i:s');
         
         $invoiceIn->save();
-        return $this->update($invoiceIn);
+        $result = $this->update($invoiceIn);
+        \common\components\Notifier::notifyNewInvoice($invoiceIn);
+        return $result;
     }
 
     public function actionUpdate($id) {
