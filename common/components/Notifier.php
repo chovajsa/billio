@@ -12,7 +12,7 @@ class Notifier {
 
 			$message = \Yii::$app->mail->compose('newInvoice', ['invoice'=>$invoice])
 			->setFrom([\Yii::$app->params['supportEmail'] => 'Trila IPT - Notifications'])
-		    ->setSubject('New Invoice' )
+		    ->setSubject('New Invoice' );
 		    
 			$emails = array();
 
