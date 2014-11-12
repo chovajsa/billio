@@ -10,15 +10,22 @@ class Notifier {
 		try {
 			$users = \common\models\User::find()->all();
 
+			$message = \Yii::$app->mail->compose('newInvoice', ['invoice'=>$invoice])
+			->setFrom([\Yii::$app->params['supportEmail'] => 'Trila IPT - Notifications'])
+		    ->setSubject('New Invoice' )
+		    
+			$emails = array();
+
 			foreach ($users as $user) {
 				if ($user->wantsNewInvoiceMessage()) {
-					\Yii::$app->mail->compose('newInvoice', ['invoice'=>$invoice])
-					->setFrom([\Yii::$app->params['supportEmail'] => 'Trila IPT - Notifications'])
-				    ->setTo($user->email)
-				    ->setSubject('New Invoice' )
-				    ->send();
+					$emails[] = $user->email;
 				}
 			}
+
+			if ($emails) {
+				$message->setTo($emails);
+		   		$message->send();
+			}	
 		} catch(Exception $e) {
 
 		}
@@ -64,17 +71,24 @@ class Notifier {
 		try {
 			$users = \common\models\User::find()->all();
 
+			$message = \Yii::$app->mail->compose('approved', ['invoice'=>$invoice])
+				->setFrom([\Yii::$app->params['supportEmail'] => 'Trila IPT - Notifications'])
+			    ->setSubject('Invoice Approved' );
+			
+			$emails = array();
+
 			foreach ($users as $user) {
 				if ($user->wantsApprovedMessage()) {
-					\Yii::$app->mail->compose('approved', ['invoice'=>$invoice])
-					->setFrom([\Yii::$app->params['supportEmail'] => 'Trila IPT - Notifications'])
-				    ->setTo($user->email)
-				    ->setSubject('Invoice Approved' )
-				    ->send();
+					$emails[] = $user->email;
 				}
 			}
+
+			if ($emails) {
+				$message->setTo($emails);
+			    $message->send();
+			}
 		} catch (Exception $e) {
-			
+
 		}
 	}
 
