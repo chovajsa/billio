@@ -237,5 +237,4 @@ app.controller('UpdateController', ['$scope', 'InvoicesIn', 'Supplier', 'CostCen
 	};
 
 
-
 }]);

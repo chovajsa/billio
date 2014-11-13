@@ -207,8 +207,11 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
     }
 
     scope.setInvoiceList();
-    scope.setSuppliers();
 
+    if (scope.mode !== 'update') {
+        scope.setSuppliers();
+    }
+    else console.log(scope.mode);
 
     scope.getToPayAmount = function() {
         var amount = 0;
