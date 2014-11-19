@@ -25,7 +25,7 @@ $depends = ['depends'=>[
 
 
 
-<div ng-app="invoiceIn">
+<div id="content" class="content fade" ng-app="invoiceIn">
 
 	<div ng-cloak>
 
@@ -34,7 +34,7 @@ $depends = ['depends'=>[
 		?>
 
 		<!-- begin #content -->
-		<div id="content" class="content fade">
+		<div>
 
 			<h1 class="page-header"> Incoming Invoices <!-- <small>header small text goes here...</small> --></h1>
 		  

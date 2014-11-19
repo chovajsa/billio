@@ -53,13 +53,13 @@ app.filter('startFrom', function () {
 
 function showLoader() {
   $('#page-container').addClass('fade');
-  $('#content').addClass('fade');
+  $('.content').addClass('fade');
   $('#page-loader').removeClass('hide');
   $('#page-loader').show();
 }
 
 function hideLoader() {
   $('#page-container').removeClass('fade');
-  $('#content').removeClass('fade');
+  $('.content').removeClass('fade');
   $('#page-loader').hide();
 }
