@@ -53,7 +53,7 @@ app.filter('startFrom', function () {
 
 function showLoader() {
   $('#page-container').addClass('fade');
-
+  $('#content').addClass('fade');
   $('#page-loader').removeClass('hide');
   $('#page-loader').show();
 }
