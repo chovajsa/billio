@@ -1,6 +1,6 @@
 <div class="panel-body visible-sm visible-xs">
 	<div class="panel-body" style="margin:5px 0 0 0; padding-top:5px" ng-repeat="invoice in invoiceList">
-		<div class="row">
+		<div class="row" ng-click="showInvoice(invoice.id)">
 			<div class="col-xs-7">
 			<h4 class="title"><a href="javascript:;">{{invoice.number}} {{invoice.getFullSupplierName()}}</a></h4>
 

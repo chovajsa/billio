@@ -1,8 +1,5 @@
 <?php 
 	use yii\helpers\Url;
-
-	
-
 ?>
 
 <script src="<?=Url::base();?>/js/masked-input.min.js"></script>
@@ -121,7 +118,7 @@
 								<option value=""> Please select </option>
 							</select> -->
 
-							<input ui-select2="select2Options" ng-model="currentInvoice.supplier" required class="form-control selectpicker bigdrop" data-style="btn-white" type="hidden" id="supplierId"/>
+							<input ng-disabled="currentInvoice.approvedBy.length > 0" ui-select2="select2Options" ng-model="currentInvoice.supplier" required class="form-control selectpicker bigdrop" data-style="btn-white" type="hidden" id="supplierId"/>
 
 							<span class="input-group-btn add-on">
 				  	  			<button type="button" class="btn btn-primary" ng-click="showModal()"><i class="fa fa-plus"></i></button>
@@ -133,7 +130,7 @@
 				<div class="form-group">
 					<label for="number" class="col-sm-2 control-label">Number</label>
 					<div class="col-sm-10">
-					  	<input id="number" name="number" required ng-model="currentInvoice.number" class="form-control" type="number">
+					  	<input ng-disabled="currentInvoice.approvedBy.length > 0" id="number" name="number" required ng-model="currentInvoice.number" class="form-control" type="number">
 					  	
 					  	<ul class="error-list" ng-show="(form.submitted || form.number.$dirty) && form.number.$invalid" style="display: block;">
 					  		
@@ -149,7 +146,7 @@
 					<label for="referenceNumber" class="col-sm-2 control-label">Reference Number</label>
 					<div class="col-sm-10">
 
-					  <input id="referenceNumber" name="referenceNumber" ng-model="currentInvoice.referenceNumber" required class="form-control" type="number">
+					  <input ng-disabled="currentInvoice.approvedBy.length > 0" id="referenceNumber" name="referenceNumber" ng-model="currentInvoice.referenceNumber" required class="form-control" type="number">
 
 					  	<ul class="error-list" ng-show="(form.submitted || form.referenceNumber.$dirty) && form.referenceNumber.$invalid" style="display: block;">
 				  			<li ng-show="form.referenceNumber.$error.required" class="required"  style="display: list-item;">
@@ -164,7 +161,7 @@
 					<label for="ss" class="col-sm-2 control-label">SS</label>
 					<div class="col-sm-10">
 
-					  <input ng-model="currentInvoice.ss" name="ss" class="form-control">
+					  <input ng-disabled="currentInvoice.approvedBy.length > 0" ng-model="currentInvoice.ss" name="ss" class="form-control">
 
 					</div>
 				</div>
@@ -173,7 +170,7 @@
 					<label for="ks" class="col-sm-2 control-label">KS</label>
 					<div class="col-sm-10">
 
-					  <select ui-select2="select2Option" class="form-control selectpicker" ng-model="currentInvoice.ks">
+					  <select ng-disabled="currentInvoice.approvedBy.length > 0" ui-select2="select2Option" class="form-control selectpicker" ng-model="currentInvoice.ks">
 					  	<option value=""></option>
 					  	<option value="0008"> 0008 - Platby za tovar (okrem platieb pod symbolmi 010x)</option>
 						<option value="0028"> 0028 - Platby za dodávky investičnej povahy</option>
@@ -263,7 +260,7 @@
 					
 					<div class="col-sm-10">
 						
-						<select class="form-control" ng-model="currentInvoice.costCentreId">
+						<select ng-disabled="currentInvoice.approvedBy.length > 0" class="form-control" ng-model="currentInvoice.costCentreId">
 							<?php 
 
 							$query = new \yii\db\Query();
@@ -289,7 +286,7 @@
 					<label for="date" class="col-sm-2 control-label">Issue Date</label>
 					
 					<div class="col-sm-10">
-						<input class="form-control datepicker" required  ng-model="currentInvoice.date" type="text" id="date" name="date"/>
+						<input ng-disabled="currentInvoice.approvedBy.length > 0" class="form-control datepicker" required  ng-model="currentInvoice.date" type="text" id="date" name="date"/>
 
 						<ul class="error-list" ng-show="(form.submitted || form.date.$dirty) && form.date.$invalid" style="display: block;">
 					  		
@@ -304,7 +301,7 @@
 					<label for="dueDate" class="col-sm-2 control-label">Due Date</label>
 					<div class="col-sm-10 input-append">
 					  <!-- <p class="input-group"> -->
-					  	<input class="form-control datepicker" required ng-model="currentInvoice.dueDate" type="text" id="dueDate" name="dueDate">
+					  	<input ng-disabled="currentInvoice.approvedBy.length > 0" class="form-control datepicker" required ng-model="currentInvoice.dueDate" type="text" id="dueDate" name="dueDate">
 					  	<!-- <span class="input-group-btn add-on"> -->
 					  	  <!-- <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button> -->
 					  	<!-- </span> -->
@@ -359,25 +356,25 @@
 							<input type="hidden" ng-model="currentInvoice.rows[$index].id">
 						</td> 
 						<td>
-							<input style="width:100%" ng-model="currentInvoice.rows[$index].description" type="text">
+							<input ng-disabled="currentInvoice.approvedBy.length > 0" style="width:100%" ng-model="currentInvoice.rows[$index].description" type="text">
 						</td>
 						<td>
-							<input style="width:100%" ng-model="currentInvoice.rows[$index].pcs" type="text">
+							<input ng-disabled="currentInvoice.approvedBy.length > 0" style="width:100%" ng-model="currentInvoice.rows[$index].pcs" type="text">
 						</td>
 						<td>
-							<input style="width:100%" ng-model="currentInvoice.rows[$index].amount" type="text">
+							<input ng-disabled="currentInvoice.approvedBy.length > 0" style="width:100%" ng-model="currentInvoice.rows[$index].amount" type="text">
 						</td>
 						<td>
 							{{(row.amount*row.pcs) | preciseRound}}
 						</td>
 						<td ng-show="currentInvoice.supplier.vat">
-							<input style="width:100%" ng-model="currentInvoice.rows[$index].vat" type="text">
+							<input ng-disabled="currentInvoice.approvedBy.length > 0" style="width:100%" ng-model="currentInvoice.rows[$index].vat" type="text">
 						</td>
 						<td ng-show="currentInvoice.supplier.vat">
 							{{(((row.amount*row.pcs)*(row.vat/100))+(row.amount*row.pcs)) | preciseRound}}
 						</td>
 						<td width="5%">
-							<a href="javascript:void(0)" ng-click="unsetRow($index)">
+							<a ng-show="currentInvoice.approvedBy.length == 0" href="javascript:void(0)" ng-click="unsetRow($index)">
 							<span class="fa-stack fa-sm text-danger">
 								<i class="fa fa-circle fa-stack-2x"></i>
 								<i class="fa fa-minus fa-stack-1x fa-inverse"></i>
@@ -438,7 +435,7 @@
 			</table>
 
 			<p>
-		        <a href="javascript:;" ng-click="addRow()" class="btn btn-sm btn-primary m-r-5"> <i class="fa fa-plus-circle"></i> Add row </a>
+		        <a ng-show="currentInvoice.approvedBy.length == 0" href="javascript:;" ng-click="addRow()" class="btn btn-sm btn-primary m-r-5"> <i class="fa fa-plus-circle"></i> Add row </a>
 		    </p>
 		</div>
 	</div>

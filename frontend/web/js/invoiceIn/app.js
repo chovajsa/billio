@@ -10,52 +10,56 @@ function notify(type, msg) {
 	$('#notify-'+type).show();
 }
 
-loadingQueue = {
+app.config(['$httpProvider', function ($httpProvider) {
+    var $http,
+        interceptor = ['$q', '$injector', function ($q, $injector) {
+            var error;
 
-  inQueue:0,
+            function success(response) {
+                // get $http via $injector because of circular dependency problem
+                $http = $http || $injector.get('$http');
+                if($http.pendingRequests.length < 1) {
+                    hideLoader();
+                }
+                return response;
+            }
 
-  push:function() {
-    this.inQueue++;
-    showLoader();
-  },
+            function error(response) {
+                // get $http via $injector because of circular dependency problem
+                $http = $http || $injector.get('$http');
+                if($http.pendingRequests.length < 1) {
+                    hideLoader();
+                }
+                return $q.reject(response);
+            }
 
-  remove:function() {
-    this.inQueue--;
-    if (this.inQueue == 0) hideLoader();
-  }
+            return function (promise) {
+                showLoader();
+                return promise.then(success, error);
+            }
+        }];
 
-}
+    $httpProvider.responseInterceptors.push(interceptor);
+}]);
 
-app.config(function ($httpProvider) {
-  $httpProvider.responseInterceptors.push('myHttpInterceptor');
-
-  var spinnerFunction = function spinnerFunction(data, headersGetter) {
-    loadingQueue.push();
-    return data;
-  };
-
-  $httpProvider.defaults.transformRequest.push(spinnerFunction);
+app.filter('startFrom', function () {
+    return function (input, start) {
+        start = +start; //parse to int
+        return input.slice(start);
+    }
 });
 
-app.factory('myHttpInterceptor', function ($q, $window) {
-  return function (promise) {
-    return promise.then(function (response) {
-      loadingQueue.remove();
-      return response;
-    }, function (response) {
-   
-      return $q.reject(response);
-    });
-  };
-});
 
 
 function showLoader() {
-  $('#content').addClass('fade');
+  $('#page-container').addClass('fade');
+
+  $('#page-loader').removeClass('hide');
   $('#page-loader').show();
 }
 
 function hideLoader() {
+  $('#page-container').removeClass('fade');
   $('#content').removeClass('fade');
   $('#page-loader').hide();
 }
