@@ -92,6 +92,14 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
         });
     } 
 
+     scope.decline = function(id) {
+        AI.declineInvoice({
+            id:id
+        }, function(d){
+            scope.setInvoiceList();
+        });
+    } 
+
     scope.unapprove = function(id) {
         AI.unapproveInvoice({
             id:id

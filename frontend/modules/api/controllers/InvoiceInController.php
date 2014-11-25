@@ -84,6 +84,13 @@ class InvoiceInController extends ActiveRestController
         return $invoiceIn;
     }
 
+    public function actionDecline($id) {
+        $invoiceIn = \common\models\InvoiceIn::findOne($id);
+        $declined = $invoiceIn->decline();
+       
+        return $invoiceIn;
+    }
+
     public function actionCreate() {
         $invoiceIn = new \common\models\InvoiceIn;
         $p = Yii::$app->getRequest()->getBodyParams();

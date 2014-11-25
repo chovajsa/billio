@@ -86,11 +86,12 @@
 				<td>
 					<?php if (Yii::$app->user->identity->canDo('strongApprove') || Yii::$app->user->identity->canDo('lightApprove') || Yii::$app->user->identity->canDo('admin')) { ?>
 						<button ng-show="!invoiceApprovedByUser(invoice,'<?=Yii::$app->user->identity->username;?>')" ng-click="approve(invoice.id)" class="btn btn-sm btn-success">approve</button>
+						<button ng-show="!invoiceDeclinedByUser(invoice,'<?=Yii::$app->user->identity->username;?>')" ng-click="decline(invoice.id)" class="btn btn-sm btn-danger">decline</button>
 					<?php } ?>
 					
 					<?php if (Yii::$app->user->identity->canDo('admin')) { ?>
 						<button ng-show="invoiceApprovedByUser(invoice,'<?=Yii::$app->user->identity->username;?>')" ng-click="unapprove(invoice.id)" class="btn btn-sm btn-warning">unapprove</button>
-						<button ng-click="delete(invoice.id)" class="btn btn-sm btn-danger">delete</button>
+						<button style="margin-left:5px" ng-click="delete(invoice.id)" class="btn btn-sm btn-danger">delete</button>
 					<?php } ?>
 				</td>
 			

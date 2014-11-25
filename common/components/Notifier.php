@@ -92,4 +92,30 @@ class Notifier {
 		}
 	}
 
+	public static function notifyDeclined($invoice) {
+		return;
+		try {
+			$users = \common\models\User::find()->all();
+
+			$message = \Yii::$app->mail->compose('approved', ['invoice'=>$invoice])
+				->setFrom([\Yii::$app->params['supportEmail'] => 'Trila IPT - Notifications'])
+			    ->setSubject('Invoice Approved' );
+			
+			$emails = array();
+
+			foreach ($users as $user) {
+				if ($user->wantsApprovedMessage()) {
+					$emails[] = $user->email;
+				}
+			}
+
+			if ($emails) {
+				$message->setTo($emails);
+			    $message->send();
+			}
+		} catch (Exception $e) {
+
+		}
+	}
+
 }

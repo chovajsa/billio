@@ -39,6 +39,13 @@ app.factory('InvoicesIn', function ($resource) {
             }
         },
 
+        declineInvoice: {
+            method: 'PUT',
+            params: {
+                method:'decline'
+            }
+        },
+
         unapproveInvoice: {
             method: 'PUT',
             params: {

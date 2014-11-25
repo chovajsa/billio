@@ -67,11 +67,45 @@ class InvoiceIn extends AppActiveRecord
     public function isApproved() {
         $w1 = \common\models\Approved::findOne(['model'=>\common\components\Helpers::get_real_class($this), 'modelId'=>$this->id, 'weight'=>1]);
         $w2 = \common\models\Approved::findOne(['model'=>\common\components\Helpers::get_real_class($this), 'modelId'=>$this->id, 'weight'=>2]);
-        
         $w3 = \common\models\Approved::find()->where(['model'=>\common\components\Helpers::get_real_class($this), 'modelId'=>$this->id, 'weight'=>2])->count();
 
+        $d1 = \common\models\Declined::find()->where(['model'=>\common\components\Helpers::get_real_class($this), 'modelId'=>$this->id])->count();
+
+        if ($d1) return false;
         return ($w1 && $w2) || $w3 == 2;
     }   
+
+    public function isDeclinedBy() {
+        return \common\models\Declined::findAll(['model'=>\common\components\Helpers::get_real_class($this), 'modelId'=>$this->id]);
+    }
+
+    public function decline() {
+        $weight = 0;
+
+        if (Yii::$app->user->identity->canDo('admin')) $weight = 2;
+        if (Yii::$app->user->identity->canDo('strongApprove')) $weight = 2;
+        if (Yii::$app->user->identity->canDo('lightApprove')) $weight = 1;
+
+        if (!$weight) {
+            throw new \yii\web\ForbiddenHttpException('Not allowed');
+        }
+
+        $declined = \common\models\Declined::findOne(['model'=>\common\components\Helpers::get_real_class($this), 'modelId'=>$this->id, 'userName'=>Yii::$app->user->identity->username]);
+
+        if (!$declined) {
+            $declined = new \common\models\Declined;
+            $declined->model = \common\components\Helpers::get_real_class($this);
+            $declined->modelId = $this->id;
+            $declined->userName = Yii::$app->user->identity->username;
+            $declined->weight = $weight;
+         
+            \common\components\Notifier::notifyDeclined($this);
+
+            return $declined->save();
+        }
+
+        return true;
+    }
 
     public function approve() {
         
@@ -140,6 +174,10 @@ class InvoiceIn extends AppActiveRecord
         $return['approved'] = $this->isApproved();
         $return['approvedBy'] = $this->isApprovedBy();
 		
+        $return['approved'] = $this->isApproved();
+        $return['approvedBy'] = $this->isApprovedBy();
+        
+        
         $return['paid'] = $this->isPaid();
 
         $return['overdue'] = !$this->isPaid() && strtotime($this->dueDate) < time();

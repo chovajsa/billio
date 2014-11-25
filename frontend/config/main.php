@@ -60,6 +60,7 @@ return [
                 'api/invoice-in/<id>'           => 'api/invoice-in/options',
                 'api/invoice-in'                => 'api/invoice-in/options',
                 'PUT api/invoice-in/<id>/approve' => 'api/invoice-in/approve',
+                'PUT api/invoice-in/<id>/decline' => 'api/invoice-in/decline',
                 'PUT api/invoice-in/<id>/unapprove' => 'api/invoice-in/unapprove',
                                
 
