@@ -85,7 +85,8 @@ class ActiveRestController extends ActiveController {
 
     protected function getFulltextCondition($modelClass) {
         $andWhere = '1=1 ';
-        if (isset($_GET['fulltext']) && !empty($modelClass::getFulltextAttributes())) {
+        $fattributes = $modelClass::getFulltextAttributes();
+        if (isset($_GET['fulltext']) && !empty($fattributes)) {
             $andWhere .= ' AND (';
 			
 			//var_dump($modelClass::);die;
