@@ -8,9 +8,9 @@
 				<th>
 					<a href="javascript:;" ng-click="setSort('referenceNumber')">Reference Number</a>
 				</th>
-				<th>
+				<!-- <th>
 					IBAN
-				</th>
+				</th> -->
 				<th>
 					Supplier
 				</th>
@@ -48,9 +48,9 @@
                 	{{invoice.referenceNumber}}
                 </td>
 
-                <td ng-click="showInvoice(invoice.id)">
+               <!--  <td ng-click="showInvoice(invoice.id)">
                 	{{invoice.supplier.bankAccounts[0].iban}}
-                </td>
+                </td> -->
                 <td ng-click="showInvoice(invoice.id)">
 					{{invoice.getFullSupplierName()}}
 				</td>
