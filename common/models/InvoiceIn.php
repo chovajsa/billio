@@ -79,6 +79,10 @@ class InvoiceIn extends AppActiveRecord
         return \common\models\Declined::findAll(['model'=>\common\components\Helpers::get_real_class($this), 'modelId'=>$this->id]);
     }
 
+    public function isDeclined() {
+        return !!$this->isDeclinedBy();
+    }
+
     public function decline() {
         $weight = 0;
 
@@ -103,6 +107,10 @@ class InvoiceIn extends AppActiveRecord
 
             return $declined->save();
         }
+
+        $approved = \common\models\Approved::findOne(['model'=>\common\components\Helpers::get_real_class($this), 'modelId'=>$this->id, 'userName'=>Yii::$app->user->identity->username]);
+        $approved->delete();
+
 
         return true;
     }
@@ -132,6 +140,9 @@ class InvoiceIn extends AppActiveRecord
 
             return $approved->save();
         }
+
+        $declined = \common\models\Declined::findOne(['model'=>\common\components\Helpers::get_real_class($this), 'modelId'=>$this->id, 'userName'=>Yii::$app->user->identity->username]);
+        $declined->delete();
 
         return true;
     }
@@ -174,8 +185,8 @@ class InvoiceIn extends AppActiveRecord
         $return['approved'] = $this->isApproved();
         $return['approvedBy'] = $this->isApprovedBy();
 		
-        $return['approved'] = $this->isApproved();
-        $return['approvedBy'] = $this->isApprovedBy();
+        $return['declined'] = $this->isDeclined();
+        $return['declinedBy'] = $this->isDeclinedBy();
         
         
         $return['paid'] = $this->isPaid();
@@ -213,6 +224,7 @@ class InvoiceIn extends AppActiveRecord
     public function markAsPaid($date) {
         $this->paidAmount = $this->amountVat;
         $this->paidDate = $date;
+        $this->paidUser = $date;
 
         \common\components\Notifier::notifyPaid($this);
 
