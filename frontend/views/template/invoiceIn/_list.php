@@ -27,7 +27,7 @@
 				<th>
 					Approved
 				</th>
-				<th width="5%">
+				<th width="10%">
 					Paid
 				</th>
 				<th width="5%">
@@ -39,7 +39,7 @@
 			</tr>
 		</thead>
 		<tbody>
-            <tr class="{{invoice.overdue ? 'text-danger' : ''}}" ng-repeat="invoice in invoiceList">
+            <tr class="{{invoice.overdue ? 'text-danger' : ''}} {{invoice.paid ? 'text-success' : ''}}" ng-repeat="invoice in invoiceList">
                 <td ng-click="showInvoice(invoice.id)">
 					<a href="#update/{{invoice.id}}">{{invoice.number}}</a>
                 </td>
@@ -74,6 +74,8 @@
 				
 				<td ng-click="showInvoice(invoice.id)">
 					<span ng-show="invoice.paid"> {{invoice.paidDate | dateFromDb}} </span>
+					<span ng-show="invoice.paid && invoice.paymentType=='B'"> <i class="fa fa-bank"></i> </span>
+					<span ng-show="invoice.paid && invoice.paymentType=='C'"> <i class="fa fa-money"></i> </span>
 					<span ng-show="!invoice.paid"> no </span>
 				</td>
 				
@@ -111,6 +113,7 @@
 				</th>
 				<th colspan="3">
 					<button ng-disabled="!toPayAmount" ng-click="showPaymentsModal()" class="btn btn-sm btn-info">Generate payment file</button> 
+					<button ng-disabled="!toPayAmount" ng-click="doCashPayment()" class="btn btn-sm btn-info">Pay with cash</button> 
 				</th>
 			</tr>
 		</tfoot>

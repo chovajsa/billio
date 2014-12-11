@@ -57,7 +57,7 @@ class InvoiceIn extends AppActiveRecord
     }
 
     public function safeAttributes() {
-        return ['supplierId', 'date', 'number', 'dueDate', 'referenceNumber', 'costCentreId', 'costPeriod', 'paidDate', 'ss', 'ks', 'paidAmount'];
+        return ['supplierId', 'date', 'number', 'dueDate', 'referenceNumber', 'costCentreId', 'costPeriod', 'paidDate', 'ss', 'ks', 'paidAmount', 'paymentType'];
     }
 
     public function isApprovedBy() {
@@ -72,6 +72,7 @@ class InvoiceIn extends AppActiveRecord
         $d1 = \common\models\Declined::find()->where(['model'=>\common\components\Helpers::get_real_class($this), 'modelId'=>$this->id])->count();
 
         if ($d1) return false;
+
         return ($w1 && $w2) || $w3 == 2;
     }   
 
@@ -105,12 +106,11 @@ class InvoiceIn extends AppActiveRecord
          
             \common\components\Notifier::notifyDeclined($this);
 
-            return $declined->save();
+            $declined->save();
         }
 
         $approved = \common\models\Approved::findOne(['model'=>\common\components\Helpers::get_real_class($this), 'modelId'=>$this->id, 'userName'=>Yii::$app->user->identity->username]);
-        $approved->delete();
-
+        if ($approved) $approved->delete();
 
         return true;
     }
@@ -138,11 +138,12 @@ class InvoiceIn extends AppActiveRecord
          
             \common\components\Notifier::notifyApproved($this);
 
-            return $approved->save();
+            $approved->save();
         }
 
         $declined = \common\models\Declined::findOne(['model'=>\common\components\Helpers::get_real_class($this), 'modelId'=>$this->id, 'userName'=>Yii::$app->user->identity->username]);
-        $declined->delete();
+        if ($declined)
+            $declined->delete();
 
         return true;
     }
@@ -221,10 +222,11 @@ class InvoiceIn extends AppActiveRecord
         return $this->paidAmount >= $this->amountVat;
     }
 
-    public function markAsPaid($date) {
+    public function markAsPaid($date, $type = 'B') {
         $this->paidAmount = $this->amountVat;
         $this->paidDate = $date;
         $this->paidUser = $date;
+        $this->paymentType = $type;
 
         \common\components\Notifier::notifyPaid($this);
 
