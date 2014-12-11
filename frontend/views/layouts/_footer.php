@@ -5,7 +5,10 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use frontend\widgets\Alert;
+<<<<<<< HEAD
 use yii\helpers\Url;
+=======
+>>>>>>> 5214b3a... initial commit with a little structure
 /**
  * @var \yii\web\View $this
  * @var string $content
@@ -13,6 +16,7 @@ use yii\helpers\Url;
 AppAsset::register($this);
 ?>
 
+<<<<<<< HEAD
     <?php $this->endBody() ?>
 
 </div>
@@ -307,6 +311,19 @@ var App = function () {
     <script type="text/javascript" src="<?=Url::base();?>/plugins/password-indicator/js/password-indicator.js"></script>
     <link href="<?=Url::base();?>/plugins/password-indicator/css/password-indicator.css" rel="stylesheet" media="screen">
 
+=======
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-right"><?= Yii::powered() ?></p>
+        </div>
+    </footer>
+
+    <?php $this->endBody() ?>
+>>>>>>> 5214b3a... initial commit with a little structure
 </body>
 </html>
 <?php $this->endPage() ?>
