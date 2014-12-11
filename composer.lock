@@ -1,6 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
+<<<<<<< HEAD
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
@@ -208,6 +209,13 @@
             }
         },
         {
+=======
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "310c2b3cafb9f8d3160b12f01ceaf63e",
+    "packages": [
+        {
+>>>>>>> 5214b3a... initial commit with a little structure
             "name": "cebe/markdown",
             "version": "0.9.x-dev",
             "source": {
@@ -252,7 +260,11 @@
                     "name": "Carsten Brandt",
                     "email": "mail@cebe.cc",
                     "homepage": "http://cebe.cc/",
+<<<<<<< HEAD
                     "role": "Core framework development"
+=======
+                    "role": "Creator"
+>>>>>>> 5214b3a... initial commit with a little structure
                 }
             ],
             "description": "A super fast highly extensible markdown parser for PHP",
@@ -317,6 +329,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
+<<<<<<< HEAD
                 "reference": "52797f2246f4f784d9699beff03ef5c8bd51df7a"
             },
             "dist": {
@@ -327,6 +340,18 @@
             },
             "require": {
                 "php": ">=5.3.3"
+=======
+                "reference": "46d55baab96f943061de6712b38011db354eed78"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/46d55baab96f943061de6712b38011db354eed78",
+                "reference": "46d55baab96f943061de6712b38011db354eed78",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.4"
+>>>>>>> 5214b3a... initial commit with a little structure
             },
             "require-dev": {
                 "mockery/mockery": "~0.9.1"
@@ -334,7 +359,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
                     "dev-master": "5.3-dev"
+=======
+                    "dev-master": "5.2-dev"
+>>>>>>> 5214b3a... initial commit with a little structure
                 }
             },
             "autoload": {
@@ -348,11 +377,21 @@
             ],
             "authors": [
                 {
+<<<<<<< HEAD
                     "name": "Chris Corbyn"
                 },
                 {
                     "name": "Fabien Potencier",
                     "email": "fabien@symfony.com"
+=======
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Chris Corbyn"
+>>>>>>> 5214b3a... initial commit with a little structure
                 }
             ],
             "description": "Swiftmailer, free feature-rich PHP mailer",
@@ -361,7 +400,108 @@
                 "mail",
                 "mailer"
             ],
+<<<<<<< HEAD
             "time": "2014-09-24 15:42:54"
+=======
+            "time": "2014-05-08 08:35:11"
+        },
+        {
+            "name": "twbs/bootstrap",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twbs/bootstrap.git",
+                "reference": "e9b99d475cdc635d6e1435b5101500b84e0ef615"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/e9b99d475cdc635d6e1435b5101500b84e0ef615",
+                "reference": "e9b99d475cdc635d6e1435b5101500b84e0ef615",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jacob Thornton",
+                    "email": "jacobthornton@gmail.com"
+                },
+                {
+                    "name": "Mark Otto",
+                    "email": "markdotto@gmail.com"
+                }
+            ],
+            "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
+            "homepage": "http://getbootstrap.com",
+            "keywords": [
+                "JS",
+                "css",
+                "framework",
+                "front-end",
+                "less",
+                "mobile-first",
+                "responsive",
+                "web"
+            ],
+            "time": "2014-05-19 07:47:06"
+        },
+        {
+            "name": "yiisoft/jquery",
+            "version": "2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/jquery.git",
+                "reference": "bc09bbbc8b40cf89812036188b6f94ae7627c73c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/jquery/zipball/bc09bbbc8b40cf89812036188b6f94ae7627c73c",
+                "reference": "bc09bbbc8b40cf89812036188b6f94ae7627c73c",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "jQuery JavaScript Library",
+            "homepage": "http://jquery.com",
+            "time": "2014-05-07 05:00:09"
+        },
+        {
+            "name": "yiisoft/jquery-pjax",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/jquery-pjax.git",
+                "reference": "520f8c12b5a417e21d2cd0df499fa2a4e4e9a9d6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/jquery-pjax/zipball/520f8c12b5a417e21d2cd0df499fa2a4e4e9a9d6",
+                "reference": "520f8c12b5a417e21d2cd0df499fa2a4e4e9a9d6",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/jquery": ">=1.8"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "pushState + ajax = pjax, a forked maintainted by the Yii Framework core developers",
+            "homepage": "https://github.com/yiisoft/jquery-pjax#readme",
+            "time": "2014-03-20 17:20:33"
+>>>>>>> 5214b3a... initial commit with a little structure
         },
         {
             "name": "yiisoft/yii2",
@@ -369,6 +509,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
+<<<<<<< HEAD
                 "reference": "dc2352c6164c27a4f8ea93e93262f48276fea313"
             },
             "dist": {
@@ -382,11 +523,23 @@
                 "bower-asset/jquery.inputmask": "3.1.* | ~3.1",
                 "bower-asset/punycode": "1.3.* | ~1.3",
                 "bower-asset/yii2-pjax": "2.0.* | ~2.0",
+=======
+                "reference": "c5715f309c1cbbb1b5ac0144ad1145afab79f887"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/c5715f309c1cbbb1b5ac0144ad1145afab79f887",
+                "reference": "c5715f309c1cbbb1b5ac0144ad1145afab79f887",
+                "shasum": ""
+            },
+            "require": {
+>>>>>>> 5214b3a... initial commit with a little structure
                 "cebe/markdown": "0.9.*",
                 "ext-mbstring": "*",
                 "ezyang/htmlpurifier": "4.6.*",
                 "lib-pcre": "*",
                 "php": ">=5.4.0",
+<<<<<<< HEAD
                 "yiisoft/yii2-composer": "*"
             },
             "bin": [
@@ -398,6 +551,13 @@
                     "dev-master": "2.0.x-dev"
                 }
             },
+=======
+                "yiisoft/jquery": "~2.0 | ~1.10",
+                "yiisoft/jquery-pjax": "*",
+                "yiisoft/yii2-composer": "*"
+            },
+            "type": "library",
+>>>>>>> 5214b3a... initial commit with a little structure
             "autoload": {
                 "psr-4": {
                     "yii\\": ""
@@ -449,7 +609,11 @@
                 "framework",
                 "yii2"
             ],
+<<<<<<< HEAD
             "time": "2014-09-24 19:55:55"
+=======
+            "time": "2014-05-19 10:37:43"
+>>>>>>> 5214b3a... initial commit with a little structure
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -457,6 +621,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-bootstrap.git",
+<<<<<<< HEAD
                 "reference": "f295f15c6f64836f8a2a00ffa20d9c447a64040f"
             },
             "dist": {
@@ -475,6 +640,21 @@
                     "dev-master": "2.0.x-dev"
                 }
             },
+=======
+                "reference": "86e22d908151de4fb93f898562afc3cc36ec96c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/86e22d908151de4fb93f898562afc3cc36ec96c1",
+                "reference": "86e22d908151de4fb93f898562afc3cc36ec96c1",
+                "shasum": ""
+            },
+            "require": {
+                "twbs/bootstrap": "3.1.* | 3.0.*",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+>>>>>>> 5214b3a... initial commit with a little structure
             "autoload": {
                 "psr-4": {
                     "yii\\bootstrap\\": ""
@@ -487,7 +667,13 @@
             "authors": [
                 {
                     "name": "Qiang Xue",
+<<<<<<< HEAD
                     "email": "qiang.xue@gmail.com"
+=======
+                    "email": "qiang.xue@gmail.com",
+                    "homepage": "http://www.yiiframework.com/",
+                    "role": "Founder and project lead"
+>>>>>>> 5214b3a... initial commit with a little structure
                 }
             ],
             "description": "The Twitter Bootstrap extension for the Yii framework",
@@ -495,7 +681,11 @@
                 "bootstrap",
                 "yii2"
             ],
+<<<<<<< HEAD
             "time": "2014-09-23 12:05:45"
+=======
+            "time": "2014-05-05 12:12:21"
+>>>>>>> 5214b3a... initial commit with a little structure
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -503,12 +693,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-composer.git",
+<<<<<<< HEAD
                 "reference": "0128e4a4bfd2647dc70c487da8c6c7d1ecc354fa"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/0128e4a4bfd2647dc70c487da8c6c7d1ecc354fa",
                 "reference": "0128e4a4bfd2647dc70c487da8c6c7d1ecc354fa",
+=======
+                "reference": "139c4522429cf2bf0717ead3e4759d4c70cab817"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/139c4522429cf2bf0717ead3e4759d4c70cab817",
+                "reference": "139c4522429cf2bf0717ead3e4759d4c70cab817",
+>>>>>>> 5214b3a... initial commit with a little structure
                 "shasum": ""
             },
             "require": {
@@ -516,10 +715,14 @@
             },
             "type": "composer-plugin",
             "extra": {
+<<<<<<< HEAD
                 "class": "yii\\composer\\Plugin",
                 "branch-alias": {
                     "dev-master": "2.0.x-dev"
                 }
+=======
+                "class": "yii\\composer\\Plugin"
+>>>>>>> 5214b3a... initial commit with a little structure
             },
             "autoload": {
                 "psr-4": {
@@ -533,7 +736,13 @@
             "authors": [
                 {
                     "name": "Qiang Xue",
+<<<<<<< HEAD
                     "email": "qiang.xue@gmail.com"
+=======
+                    "email": "qiang.xue@gmail.com",
+                    "homepage": "http://www.yiiframework.com/",
+                    "role": "Founder and project lead"
+>>>>>>> 5214b3a... initial commit with a little structure
                 }
             ],
             "description": "The composer plugin for Yii extension installer",
@@ -542,7 +751,11 @@
                 "extension installer",
                 "yii2"
             ],
+<<<<<<< HEAD
             "time": "2014-09-22 15:37:19"
+=======
+            "time": "2014-05-14 22:27:39"
+>>>>>>> 5214b3a... initial commit with a little structure
         },
         {
             "name": "yiisoft/yii2-swiftmailer",
@@ -550,12 +763,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-swiftmailer.git",
+<<<<<<< HEAD
                 "reference": "610f1dd98c0e59f0bc438d5457fbdeec3a7da731"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/610f1dd98c0e59f0bc438d5457fbdeec3a7da731",
                 "reference": "610f1dd98c0e59f0bc438d5457fbdeec3a7da731",
+=======
+                "reference": "ca6cfbd4c51f81269b97b6bf068bf35c22f2a6de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/ca6cfbd4c51f81269b97b6bf068bf35c22f2a6de",
+                "reference": "ca6cfbd4c51f81269b97b6bf068bf35c22f2a6de",
+>>>>>>> 5214b3a... initial commit with a little structure
                 "shasum": ""
             },
             "require": {
@@ -563,11 +785,14 @@
                 "yiisoft/yii2": "*"
             },
             "type": "yii2-extension",
+<<<<<<< HEAD
             "extra": {
                 "branch-alias": {
                     "dev-master": "2.0.x-dev"
                 }
             },
+=======
+>>>>>>> 5214b3a... initial commit with a little structure
             "autoload": {
                 "psr-4": {
                     "yii\\swiftmailer\\": ""
@@ -580,7 +805,12 @@
             "authors": [
                 {
                     "name": "Paul Klimov",
+<<<<<<< HEAD
                     "email": "klimov.paul@gmail.com"
+=======
+                    "email": "klimov.paul@gmail.com",
+                    "role": "Core framework development"
+>>>>>>> 5214b3a... initial commit with a little structure
                 }
             ],
             "description": "The SwiftMailer integration for the Yii framework",
@@ -592,11 +822,16 @@
                 "swiftmailer",
                 "yii2"
             ],
+<<<<<<< HEAD
             "time": "2014-09-22 15:37:19"
+=======
+            "time": "2014-04-23 01:25:11"
+>>>>>>> 5214b3a... initial commit with a little structure
         }
     ],
     "packages-dev": [
         {
+<<<<<<< HEAD
             "name": "bower-asset/typeahead.js",
             "version": "v0.10.5",
             "source": {
@@ -674,6 +909,8 @@
             "time": "2014-09-23 09:07:05"
         },
         {
+=======
+>>>>>>> 5214b3a... initial commit with a little structure
             "name": "phpspec/php-diff",
             "version": "dev-master",
             "source": {
@@ -700,8 +937,12 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
+<<<<<<< HEAD
                     "homepage": "http://github.com/chrisboulton",
                     "role": "Original developer"
+=======
+                    "homepage": "http://github.com/chrisboulton"
+>>>>>>> 5214b3a... initial commit with a little structure
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
@@ -713,23 +954,35 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-codeception.git",
+<<<<<<< HEAD
                 "reference": "2f7a70fe10b299cd5d64411e692b865760c2280b"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/yiisoft/yii2-codeception/zipball/2f7a70fe10b299cd5d64411e692b865760c2280b",
                 "reference": "2f7a70fe10b299cd5d64411e692b865760c2280b",
+=======
+                "reference": "979101cf3d1e5446e7a4f09eb0d813d24eb0e860"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-codeception/zipball/979101cf3d1e5446e7a4f09eb0d813d24eb0e860",
+                "reference": "979101cf3d1e5446e7a4f09eb0d813d24eb0e860",
+>>>>>>> 5214b3a... initial commit with a little structure
                 "shasum": ""
             },
             "require": {
                 "yiisoft/yii2": "*"
             },
             "type": "yii2-extension",
+<<<<<<< HEAD
             "extra": {
                 "branch-alias": {
                     "dev-master": "2.0.x-dev"
                 }
             },
+=======
+>>>>>>> 5214b3a... initial commit with a little structure
             "autoload": {
                 "psr-4": {
                     "yii\\codeception\\": ""
@@ -750,7 +1003,11 @@
                 "codeception",
                 "yii2"
             ],
+<<<<<<< HEAD
             "time": "2014-09-22 15:37:19"
+=======
+            "time": "2014-04-23 01:25:11"
+>>>>>>> 5214b3a... initial commit with a little structure
         },
         {
             "name": "yiisoft/yii2-debug",
@@ -758,12 +1015,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-debug.git",
+<<<<<<< HEAD
                 "reference": "ae57c5052f3594020bad17117013dbd285b69f82"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/ae57c5052f3594020bad17117013dbd285b69f82",
                 "reference": "ae57c5052f3594020bad17117013dbd285b69f82",
+=======
+                "reference": "63e360841e250f8b76e2df5301628cb695a32bee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/63e360841e250f8b76e2df5301628cb695a32bee",
+                "reference": "63e360841e250f8b76e2df5301628cb695a32bee",
+>>>>>>> 5214b3a... initial commit with a little structure
                 "shasum": ""
             },
             "require": {
@@ -771,11 +1037,14 @@
                 "yiisoft/yii2-bootstrap": "*"
             },
             "type": "yii2-extension",
+<<<<<<< HEAD
             "extra": {
                 "branch-alias": {
                     "dev-master": "2.0.x-dev"
                 }
             },
+=======
+>>>>>>> 5214b3a... initial commit with a little structure
             "autoload": {
                 "psr-4": {
                     "yii\\debug\\": ""
@@ -788,7 +1057,13 @@
             "authors": [
                 {
                     "name": "Qiang Xue",
+<<<<<<< HEAD
                     "email": "qiang.xue@gmail.com"
+=======
+                    "email": "qiang.xue@gmail.com",
+                    "homepage": "http://www.yiiframework.com/",
+                    "role": "Founder and project lead"
+>>>>>>> 5214b3a... initial commit with a little structure
                 }
             ],
             "description": "The debugger extension for the Yii framework",
@@ -797,6 +1072,7 @@
                 "debugger",
                 "yii2"
             ],
+<<<<<<< HEAD
             "time": "2014-09-22 15:41:30"
         },
         {
@@ -845,6 +1121,9 @@
                 "yii2"
             ],
             "time": "2014-09-22 15:37:19"
+=======
+            "time": "2014-05-17 12:43:47"
+>>>>>>> 5214b3a... initial commit with a little structure
         },
         {
             "name": "yiisoft/yii2-gii",
@@ -852,6 +1131,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-gii.git",
+<<<<<<< HEAD
                 "reference": "7858501be5b2b68f8ef95592f5594f05a14866aa"
             },
             "dist": {
@@ -862,16 +1142,30 @@
             },
             "require": {
                 "bower-asset/typeahead.js": "0.10.* | ~0.10",
+=======
+                "reference": "3bdd568316589ed6065711c98580a4844ec6d55a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/3bdd568316589ed6065711c98580a4844ec6d55a",
+                "reference": "3bdd568316589ed6065711c98580a4844ec6d55a",
+                "shasum": ""
+            },
+            "require": {
+>>>>>>> 5214b3a... initial commit with a little structure
                 "phpspec/php-diff": ">=1.0.2",
                 "yiisoft/yii2": "*",
                 "yiisoft/yii2-bootstrap": "*"
             },
             "type": "yii2-extension",
+<<<<<<< HEAD
             "extra": {
                 "branch-alias": {
                     "dev-master": "2.0.x-dev"
                 }
             },
+=======
+>>>>>>> 5214b3a... initial commit with a little structure
             "autoload": {
                 "psr-4": {
                     "yii\\gii\\": ""
@@ -884,7 +1178,13 @@
             "authors": [
                 {
                     "name": "Qiang Xue",
+<<<<<<< HEAD
                     "email": "qiang.xue@gmail.com"
+=======
+                    "email": "qiang.xue@gmail.com",
+                    "homepage": "http://www.yiiframework.com/",
+                    "role": "Founder and project lead"
+>>>>>>> 5214b3a... initial commit with a little structure
                 }
             ],
             "description": "The Gii extension for the Yii framework",
@@ -893,6 +1193,7 @@
                 "gii",
                 "yii2"
             ],
+<<<<<<< HEAD
             "time": "2014-09-22 15:34:18"
         }
     ],
@@ -904,4 +1205,22 @@
         "php": ">=5.4.0"
     },
     "platform-dev": []
+=======
+            "time": "2014-05-14 23:44:20"
+        }
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "dev",
+    "stability-flags": [
+
+    ],
+    "platform": {
+        "php": ">=5.4.0"
+    },
+    "platform-dev": [
+
+    ]
+>>>>>>> 5214b3a... initial commit with a little structure
 }

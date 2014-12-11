@@ -43,7 +43,11 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
+<<<<<<< HEAD
                     // 'logout' => ['post'],
+=======
+                    'logout' => ['post'],
+>>>>>>> 5214b3a... initial commit with a little structure
                 ],
             ],
         ];
@@ -67,7 +71,11 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+<<<<<<< HEAD
        $this->redirect('invoice-in/index');
+=======
+        return $this->render('index');
+>>>>>>> 5214b3a... initial commit with a little structure
     }
 
     public function actionLogin()
@@ -76,8 +84,11 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
+<<<<<<< HEAD
         $this->layout = 'clean';
 
+=======
+>>>>>>> 5214b3a... initial commit with a little structure
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();

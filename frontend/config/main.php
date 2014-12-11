@@ -11,6 +11,7 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+<<<<<<< HEAD
     
     'modules' => [
         'api' => [
@@ -18,17 +19,22 @@ return [
         ]
     ],
 
+=======
+>>>>>>> 5214b3a... initial commit with a little structure
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
         ],
+<<<<<<< HEAD
 
         'request'=> [
             'enableCsrfValidation' => false,
             'cookieValidationKey' => 'xxx'
         ],
 
+=======
+>>>>>>> 5214b3a... initial commit with a little structure
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -41,6 +47,7 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+<<<<<<< HEAD
 
     
         'urlManager' => [
@@ -84,6 +91,8 @@ return [
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['invoice-in' => 'invoice-in']] ,
             ],
         ]
+=======
+>>>>>>> 5214b3a... initial commit with a little structure
     ],
     'params' => $params,
 ];

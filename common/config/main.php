@@ -1,5 +1,8 @@
 <?php
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5214b3a... initial commit with a little structure
 return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'extensions' => require(__DIR__ . '/../../vendor/yiisoft/extensions.php'),
@@ -7,6 +10,7 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+<<<<<<< HEAD
 
         'urlManager' => [
 			'class'=>'common\components\UrlManager',
@@ -33,5 +37,7 @@ return [
             //     'encryption' => 'tls',
             // ],
         ],
+=======
+>>>>>>> 5214b3a... initial commit with a little structure
     ],
 ];
