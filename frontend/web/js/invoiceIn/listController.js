@@ -267,17 +267,31 @@ app.controller('ListController', ['$scope', 'InvoicesIn', 'Supplier', '$routePar
 
     scope.markAsPaid = function () {
      
-        if (!confirm('Really want to mark invoices as paid ?')) return;
+        if (!confirm('Really want to mark invoices as paid from bank account?')) return;
 
         var list = scope.getPaymentList();
+        var type = 'B';
 
-        AI.markAsPaid({list:list}, function () {
+        AI.markAsPaid({list:list, type:type}, function () {
             notify('success', 'Invoices are marked as paid');
             scope.setInvoiceList();
             scope.closePaymentsModal();
         })
 
         
+    }
+
+    scope.doCashPayment = function () {
+        if (!confirm('Really want to mark invoices as paid from cash ?')) return;
+
+        var list = scope.getPaymentList();
+        var type = 'C';
+
+        AI.markAsPaid({list:list, type:type}, function () {
+            notify('success', 'Invoices are marked as paid');
+            scope.setInvoiceList();
+            scope.closePaymentsModal();
+        })
     }
 
     // returns number of elements in parameter for ng-repeat
