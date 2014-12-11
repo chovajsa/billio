@@ -22,7 +22,11 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
+<<<<<<< HEAD
+                        'actions' => ['login', 'error', 'logout'],
+=======
                         'actions' => ['login', 'error'],
+>>>>>>> 5214b3a... initial commit with a little structure
                         'allow' => true,
                     ],
                     [

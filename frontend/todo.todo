@@ -1,0 +1,31 @@
+todo
+
+#global
+
+ - jazykove mutacie
+ - refaktoring
+ - api security
+
+# InvoiceIn 
+
+filtre all, paid, ..
+- number neni id
+- delete neni delete ale mark as deleted
+- subjectId pri vytvoreni
+
+- vat (vat types)
+- pay, paid amount
+
+# Users
+
+meno, heslo, session, role
+
+# Outgoing orders
+
+# Incoming orders
+
+# Outgoing invoices
+  - emailovanie
+  - tlac a generovanie pdf
+  - 
+

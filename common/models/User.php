@@ -3,7 +3,11 @@ namespace common\models;
 
 use yii\base\NotSupportedException;
 use yii\db\ActiveRecord;
+<<<<<<< HEAD
+use Yii;
+=======
 use yii\helpers\Security;
+>>>>>>> 5214b3a... initial commit with a little structure
 use yii\web\IdentityInterface;
 
 /**
@@ -23,11 +27,31 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+<<<<<<< HEAD
+    // use \common\models\traits\UserMailer;
+
+=======
+>>>>>>> 5214b3a... initial commit with a little structure
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
 
     const ROLE_USER = 10;
 
+<<<<<<< HEAD
+    public $oldPassword;
+    public $newPassword;
+    public $newPasswordCheck;
+
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return '{{%user}}';
+    }
+
+=======
+>>>>>>> 5214b3a... initial commit with a little structure
     /**
      * @inheritdoc
      */
@@ -50,11 +74,19 @@ class User extends ActiveRecord implements IdentityInterface
      public function rules()
      {
          return [
+<<<<<<< HEAD
+             // ['status', 'default', 'value' => self::STATUS_ACTIVE],
+             // ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+
+             // ['role', 'default', 'value' => self::ROLE_USER],
+             // ['role', 'in', 'range' => [self::ROLE_USER]],
+=======
              ['status', 'default', 'value' => self::STATUS_ACTIVE],
              ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
 
              ['role', 'default', 'value' => self::ROLE_USER],
              ['role', 'in', 'range' => [self::ROLE_USER]],
+>>>>>>> 5214b3a... initial commit with a little structure
          ];
      }
 
@@ -107,6 +139,48 @@ class User extends ActiveRecord implements IdentityInterface
         ]);
     }
 
+<<<<<<< HEAD
+    public function canDo($action) {
+      if (isset(Yii::$app->params['roles'][$action])) {
+            
+            $roles = $this->getGroups();
+            // if (!is_array($roles)) {
+                // Yii::app()->request->redirect(Yii::app()->createUrl('site/index'));
+            // }
+
+            foreach ($roles as $role) {
+                if (in_array($role, Yii::$app->params['roles'][$action])) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public function getGroups() {
+        $meta = json_decode($this->meta, true);
+        if (!isset($meta['groups'])) return [];
+        return $meta['groups'];
+    }
+
+    public function getNotificationSettings() {
+        $meta = json_decode($this->meta, true);
+        if (!isset($meta['notifications'])) return [];
+        return $meta['notifications'];   
+    }
+
+    public function setNotificationSettings($type, $value) {
+        $settings = $this->getNotificationSettings();
+        $settings[$type] = $value;
+        $meta = json_decode($this->meta,true);
+        $meta['notifications'] = $settings;
+        $this->meta = json_encode($meta);
+        $this->save(false);
+    }
+
+=======
+>>>>>>> 5214b3a... initial commit with a little structure
     /**
      * @inheritdoc
      */
@@ -139,7 +213,11 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function validatePassword($password)
     {
+<<<<<<< HEAD
+        return Yii::$app->getSecurity()->validatePassword($password, $this->password_hash);
+=======
         return Security::validatePassword($password, $this->password_hash);
+>>>>>>> 5214b3a... initial commit with a little structure
     }
 
     /**
@@ -149,7 +227,11 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function setPassword($password)
     {
+<<<<<<< HEAD
+        $this->password_hash = Yii::$app->getSecurity()->generatePasswordHash($password);
+=======
         $this->password_hash = Security::generatePasswordHash($password);
+>>>>>>> 5214b3a... initial commit with a little structure
     }
 
     /**
@@ -157,7 +239,11 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function generateAuthKey()
     {
+<<<<<<< HEAD
+        $this->auth_key = Yii::$app->getSecurity()->generateRandomKey();
+=======
         $this->auth_key = Security::generateRandomKey();
+>>>>>>> 5214b3a... initial commit with a little structure
     }
 
     /**
@@ -165,7 +251,11 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function generatePasswordResetToken()
     {
+<<<<<<< HEAD
+        $this->password_reset_token = Yii::$app->getSecurity()->generateRandomKey() . '_' . time();
+=======
         $this->password_reset_token = Security::generateRandomKey() . '_' . time();
+>>>>>>> 5214b3a... initial commit with a little structure
     }
 
     /**
@@ -175,4 +265,28 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+<<<<<<< HEAD
+
+    public function wantsNewInvoiceMessage() {
+        $settings = $this->getNotificationSettings();
+        return isset($settings['newInvoice']) && $settings['newInvoice'] ? 1 : 0;
+    }
+
+    public function wantsUpdateInvoiceMessage() {
+        $settings = $this->getNotificationSettings();
+        return isset($settings['updateInvoice']) && $settings['updateInvoice'] ? 1 : 0;
+    }
+
+    public function wantsPaidMessage() {
+        $settings = $this->getNotificationSettings();
+        return isset($settings['paid']) && $settings['paid'] ? 1 : 0;
+    }
+
+    public function wantsApprovedMessage() {
+        $settings = $this->getNotificationSettings();
+        return isset($settings['approved']) && $settings['approved'] ? 1 : 0;
+    }
 }
+=======
+}
+>>>>>>> 5214b3a... initial commit with a little structure

@@ -16,7 +16,12 @@ nbproject
 Thumbs.db
 
 # composer vendor dir
+<<<<<<< HEAD
+/vendor/.git
+/vendor/*
+=======
 /vendor
+>>>>>>> 5214b3a... initial commit with a little structure
 
 # composer itself is not needed
 composer.phar
@@ -26,6 +31,11 @@ composer.phar
 
 common/config/main-local.php
 
+<<<<<<< HEAD
+files/*
+
+=======
+>>>>>>> 5214b3a... initial commit with a little structure
 # phpunit itself is not needed
 phpunit.phar
 # local phpunit config
