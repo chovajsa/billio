@@ -29,6 +29,10 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+<<<<<<< HEAD
+        
+=======
+>>>>>>> 5214b3a... initial commit with a little structure
     ],
     'params' => $params,
 ];

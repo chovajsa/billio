@@ -12,6 +12,14 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'console\controllers',
     'modules' => [],
+<<<<<<< HEAD
+    'controllerMap' => [
+        'fixture' => [
+            'class' => 'yii\faker\FixtureController',
+        ],
+    ],
+=======
+>>>>>>> 5214b3a... initial commit with a little structure
     'components' => [
         'log' => [
             'targets' => [
