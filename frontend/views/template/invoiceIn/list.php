@@ -23,12 +23,14 @@
 							<input type="text" class="form-control" placeholder="Amount" ng-model="filters.amount">
 						</div>
 					</div>
+					
 					<div class="form-group">
 						<label class="col-md-4 control-label ui-sortable">Date</label>
 						<div class="col-md-8 ui-sortable">
 							<input class="form-control datepicker" ng-model="filters.date" type="text" placeholder="Date">
 						</div>
 					</div>
+
 					<div class="form-group">
 						<label class="col-md-4 control-label ui-sortable">Due Date</label>
 						<div class="col-md-8 ui-sortable">
